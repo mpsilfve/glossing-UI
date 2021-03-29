@@ -1,0 +1,11 @@
+version: "3.7"
+services: 
+  backend_server:
+    build: ./backend_server
+    volumes: 
+     - ./backend_server:/backend_server
+    ports:
+      - 5000:5000
+    
+  
+# run with --build if you change Dockerfile
