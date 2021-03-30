@@ -12,32 +12,52 @@
     </form>
     <button id=button onclick="button()">Press Me</button>
 
+    <h1>Get status of request</h1>
+    <p>Enter job id:</p>
+    <form>
+        <input type="number" id="input_job_id">
+    </form>
+    <button id=button_2 onclick="checkStatus()">Press Me</button>
+
     <script>
-    function button() {
-        const inputText = document.getElementById("input_text").value;
-        postData('/api/job', {text:inputText});
+    async function checkStatus() {
+        const jobId = document.getElementById("input_job_id").value;
+        const status = await requestData(`/api/job/${jobId}`);
+        // alert(jobId);
+        if (status.status) {
+            alert("Your job has been received. Rest assured you will be notified when it will get processed.");
+        } else {
+            alert("no job found");
+        }
     }
 
-    async function postData(url = '', data = {}) {
+    async function button() {
+        const inputText = document.getElementById("input_text").value;
+        const jobData = await requestData('/api/job', {text:inputText}, 'POST');
+        document.getElementById("input_job_id").value = jobData.job_id;
+    }
+
+    async function requestData(url = '', data = {}, method = 'GET') {
         // Default options are marked with *
+        let response;
         try {
-            const response = await fetch(url, {
-                method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            response = await fetch(url, {
+                method: method, // *GET, POST, PUT, DELETE, etc.
                 credentials: 'include', // include, *same-origin, omit
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data) // body data type must match "Content-Type" header
+                body: method==='POST'? JSON.stringify(data) : undefined, // body data type must match "Content-Type" header
             });
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
         } catch(err) {
             alert("Could not submit a request")
-            return;
+            throw err;
         }
-        alert("Everything worked.")
-        return response.json(); // parses JSON response into native JavaScript objects
+        const job_data = await response.json();
+        return job_data;
     }
     </script>
   </body>

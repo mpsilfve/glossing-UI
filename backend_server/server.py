@@ -1,6 +1,7 @@
 import flask, sys, json
 from datetime import datetime
 from flask import request, jsonify
+from os import path
 
 
 app = flask.Flask(__name__) # create the Flask application object 
@@ -22,7 +23,14 @@ def api_job():
     with open(f'/data/{request_id}.txt', 'w') as outfile:
         json.dump(data, outfile)
 
-    return "<h1>Post request</h1>"
+    return jsonify({"job_id":request_id})
+
+@app.route('/api/job/<int:job_id>')
+def get_job_status(job_id):
+    if path.isfile(f'/data/{job_id}.txt'):
+        return jsonify({"status": True})
+    else:
+        return jsonify({"status": False})
 
 if __name__ == '__main__': # distinguish between running directly vs flask
     app.run() # one of methods of app object, runs the application server
