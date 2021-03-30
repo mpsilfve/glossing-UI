@@ -1,4 +1,4 @@
-import flask, sys
+import flask, sys, json
 from flask import request, jsonify
 
 
@@ -79,21 +79,33 @@ def api_job():
 
             async function postData(url = '', data = {}) {
                 // Default options are marked with *
-                const response = await fetch(url, {
-                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-                    credentials: 'include', // include, *same-origin, omit
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data) // body data type must match "Content-Type" header
-                });
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                        credentials: 'include', // include, *same-origin, omit
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data) // body data type must match "Content-Type" header
+                    });
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                } catch(err) {
+                    alert("Could not submit a request")
+                    return;
+                }
+                alert("Everything worked.")
                 return response.json(); // parses JSON response into native JavaScript objects
             }
             </script>
         """
     else:
-        json_data = request.json
-        print(json_data["text"], file=sys.stderr)
+        data = request.json
+        print(data["text"], file=sys.stderr)
+        with open('/data/data.txt', 'w') as outfile:
+            json.dump(data, outfile)
+
         return "<h1>Post request</h1>"
 
 if __name__ == '__main__': # distinguish between running directly vs flask
