@@ -1,4 +1,4 @@
-import flask
+import flask, sys
 from flask import request, jsonify
 
 
@@ -58,6 +58,43 @@ def api_id():
     # Use the jsonify function from Flask to convert our list of
     # Python dictionaries to the JSON format.
     return jsonify(results)
+
+@app.route('/api/job', methods=['POST', 'GET'])
+def api_job():
+    # receive 
+    if request.method == 'GET':
+        return """
+            <h1>Get request</h1>
+            <p>Please enter the text you wish to submit:</p>
+            <form>
+                <textarea id=input_text></textarea>
+            </form>
+            <button id=button onclick="button()">Press Me</button>
+
+            <script>
+            function button() {
+                const inputText = document.getElementById("input_text").value;
+                postData('/api/job', {text:inputText});
+            }
+
+            async function postData(url = '', data = {}) {
+                // Default options are marked with *
+                const response = await fetch(url, {
+                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                    credentials: 'include', // include, *same-origin, omit
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data) // body data type must match "Content-Type" header
+                });
+                return response.json(); // parses JSON response into native JavaScript objects
+            }
+            </script>
+        """
+    else:
+        json_data = request.json
+        print(json_data["text"], file=sys.stderr)
+        return "<h1>Post request</h1>"
 
 if __name__ == '__main__': # distinguish between running directly vs flask
     app.run() # one of methods of app object, runs the application server
