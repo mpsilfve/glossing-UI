@@ -1,13 +1,12 @@
-# file watch 
-# dynet_seed = 42  # Load that from the JSON
-# run_command([
-#     "python", "run_transducer.py",
-#     "--dynet-seed", dynet_seed,
-#     "--dynet-mem", "1000"
-# ])
-import time
+
+import time, shutil, json, model_inference
+from sortedcontainers import SortedList
 from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
+
+# make a sorted list of jobs 
+job_list = SortedList()
+
 
 if __name__ == "__main__":
     patterns = "*"
@@ -16,12 +15,22 @@ if __name__ == "__main__":
     case_sensitive = True
     my_event_handler = PatternMatchingEventHandler(patterns, ignore_patterns, ignore_directories, case_sensitive)
 
-# I need 
 def on_created(event):
-    print "on created"
-    # print(f"hey, {event.src_path} has been created!")
-    # add it to the sorted list 
-    # act on the first item in the list 
+    print("on created")
+    print("hey, {} has been created!".format(event.src_path))
+
+    path = str(event.src_path)
+    path_components = path.split("_")
+
+    if path_components[0] == "/data/coling":
+        newPath = shutil.copy(path, "./jobs")
+        further_path_components = path_components[1].split(".")
+        job_id = further_path_components[0]
+        job_list.add(job_id)
+        # pass this new_job_data dicitonary to the unwrap.py script
+        # add it to the sorted list 
+        # act on the first item in the list 
+
 
 def on_deleted(event):
     print "on_deleted"
@@ -49,6 +58,9 @@ my_observer.start()
 try:
     while True:
         time.sleep(1)
+        while job_list.__len__() > 0:
+            #  pass job from job list into model_inference.py
+            model_inference.process_file(job_list.pop(0))
 except KeyboardInterrupt:
     my_observer.stop()
     my_observer.join()

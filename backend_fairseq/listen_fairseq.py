@@ -18,8 +18,18 @@ if __name__ == "__main__":
 
 # I need 
 def on_created(event):
-    print(f"hey, {event.src_path} has been created!")
-    newPath = shutil.copy(f"{event.src_path}", ".")
+    print(f"hey, {event.src_path} has been brought to life!")
+    path = str(event.src_path)
+    path_components = path.split("_")
+    # path_components = path.split("/")
+
+    if path_components[0] == "/data/fairseq":
+        newPath = shutil.copy(f"{event.src_path}", ".")
+        #  then remove the file from /data/fairseq
+        #  then make a list of current jobs
+        #  feed the next in line job 
+        #  pass the next job into a script  
+    
     # add it to the sorted list 
     # act on the first item in the list 
 

@@ -9,8 +9,18 @@
     <p>Please enter the text you wish to submit:</p>
     <form>
         <textarea id=input_text></textarea>
+        <div>
+            <input type="radio" id="fairseq"
+                   name="model" value="fairseq" checked>
+            <label for="fairseq">fairseq</label>
+            <input type="radio" id="coling"
+                   name="model" value="coling">
+            <label for="coling">coling</label>
+        </div>
     </form>
     <button id=button onclick="button()">Press Me</button>
+
+
 
     <h1>Get status of request</h1>
     <p>Enter job id:</p>
@@ -33,7 +43,15 @@
 
     async function button() {
         const inputText = document.getElementById("input_text").value;
-        const jobData = await requestData('/api/job', {text:inputText}, 'POST');
+        const isFairseq = document.getElementById("fairseq").checked;
+        const isColing = document.getElementById("coling").checked;
+        let data;
+        if (isFairseq) {
+            data = {text:inputText, model:'fairseq'};
+        } else {
+            data = {text:inputText, model:'coling'};
+        }
+        const jobData = await requestData('/api/job', data, 'POST');
         document.getElementById("input_job_id").value = jobData.job_id;
     }
 
