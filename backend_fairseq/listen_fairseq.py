@@ -5,7 +5,7 @@
 #     "--dynet-seed", dynet_seed,
 #     "--dynet-mem", "1000"
 # ])
-import time
+import time, shutil
 from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
 
@@ -18,22 +18,19 @@ if __name__ == "__main__":
 
 # I need 
 def on_created(event):
-    print "on created"
-    # print(f"hey, {event.src_path} has been created!")
+    print(f"hey, {event.src_path} has been created!")
+    newPath = shutil.copy(f"{event.src_path}", ".")
     # add it to the sorted list 
     # act on the first item in the list 
 
 def on_deleted(event):
-    print "on_deleted"
-    # print(f"what the f**k! Someone deleted {event.src_path}!")
+    print(f"what the f**k! Someone deleted {event.src_path}!")
 
 def on_modified(event):
-    print "on_modified"
-    # print(f"hey buddy, {event.src_path} has been modified")
+    print(f"hey buddy, {event.src_path} has been modified")
 
 def on_moved(event):
-    print "on_moved"
-    # print(f"ok ok ok, someone moved {event.src_path} to {event.dest_path}")
+    print(f"ok ok ok, someone moved {event.src_path} to {event.dest_path}")
 
 my_event_handler.on_created = on_created
 my_event_handler.on_deleted = on_deleted

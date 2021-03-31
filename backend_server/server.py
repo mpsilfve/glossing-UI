@@ -1,6 +1,7 @@
 import flask, sys, json
 from datetime import datetime
 from flask import request, jsonify
+import os
 from os import path
 
 
@@ -16,9 +17,11 @@ def home():
 def api_job():
     # receive 
     data = request.json
+    # is data a JSON object? 
     now = datetime.now()
     request_id = int(datetime.timestamp(now))
     data["id"] = request_id
+    # can access other dicitonary values. data is a dicitonary object
     print(data["text"], file=sys.stderr)
     with open(f'/data/{request_id}.txt', 'w') as outfile:
         json.dump(data, outfile)
