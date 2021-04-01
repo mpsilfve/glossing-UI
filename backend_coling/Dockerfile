@@ -8,4 +8,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 # COPY coling2018-neural-transition-based-morphology .
-CMD tail -f /dev/null
+# CMD tail -f /dev/null
+# RUN cd /coling2018-neural-transition-based-morphology/lib && make
+# CMD ["python","listen.py"]
+CMD /backend_coling/entrypoint.sh
