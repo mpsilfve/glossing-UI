@@ -10,7 +10,9 @@
 #     "--dynet-seed", dynet_seed,
 #     "--dynet-mem", "1000"
 # ])
-import json, os
+import json, os, string, re
+
+punctuation = re.compile('[%s]' % re.escape(string.punctuation))
 
 def process_file(job_id): 
     # look up the file in jobs folder
@@ -22,9 +24,19 @@ def process_file(job_id):
 
     # extract the text into a dev file and store it in model_inputs
     text_input = new_job_data["text"]
+    # split text into words 
+    word_list_input = text_input.split()
+    # remove punctuation
+    word_list_clean = []
+    for word in word_list_input:
+        word_list_clean.append(punctuation.sub('', word))
+    # add two dummy variables to each word using tab separated format
+    processed_input = ""
+    for word in word_list_clean:
+        processed_input += word + "\t" + word + "\t" + "TRANS" + "\n" 
     # text_input = process_text(text_input)
     with open('./model_inputs/{}.dev'.format(job_id), 'w') as outfile:
-        outfile.write(text_input.encode('utf-8'))
+        outfile.write(processed_input.encode('utf-8'))
     # determine the python command 
     train_path = "../data_Ming/trainFiles/gitksan.train"
     input_path = "/backend_coling/model_inputs/{}.dev".format(job_id)
