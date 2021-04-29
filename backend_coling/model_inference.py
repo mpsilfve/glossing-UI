@@ -49,15 +49,19 @@ def process_file(job_id):
     output_path = "/backend_coling/results/output_inference-{}.std.out".format(job_id)
 
 
-    python_script = """cd /backend_coling/coling2018-neural-transition-based-morphology/lib && python2.7 
-        run_transducer.py --dynet-seed 47 --dynet-mem 1000 --dynet-autobatch 0  --transducer=haem --sigm2017format  
-        --input=100 --feat-input=20 --action-input=100 --pos-emb  --enc-hidden=200 --dec-hidden=200 --enc-layers=1 
-        --dec-layers=1   --mlp=0 --nonlin=ReLU --alpha=1   --dropout=0.5 --optimization=ADADELTA --batch-size=1 
-        --decbatch-size=25  --patience=10 --epochs=60   --align-dumb --iterations=150 --mode=eval --beam-width=8 
-        --beam-widths=10,10  --pretrain-epochs=0 --sample-size=20 --scale-negative=1  
-        {} {} {} 2>&1 > {} """.format(train_path, input_path, model_path, output_path) 
+
+
+    python_script = ("cd /backend_coling/coling2018-neural-transition-based-morphology/lib && python2.7 "
+        "run_transducer.py --dynet-seed 47 --dynet-mem 1000 --dynet-autobatch 0  --transducer=haem --sigm2017format "
+        "--input=100 --feat-input=20 --action-input=100 --pos-emb  --enc-hidden=200 --dec-hidden=200 --enc-layers=1 "
+        "--dec-layers=1   --mlp=0 --nonlin=ReLU --alpha=1   --dropout=0.5 --optimization=ADADELTA --batch-size=1 "
+        "--decbatch-size=25  --patience=10 --epochs=60   --align-dumb --iterations=150 --mode=eval --beam-width=8 "
+        "--beam-widths=10,10  --pretrain-epochs=0 --sample-size=20 --scale-negative=1  "
+        "{trainpath} {devpath} {resultspath} 2>&1 > {outpath}").format(trainpath=train_path, devpath=input_path, resultspath=model_path, outpath=output_path)
 
     # run the command 
     os.system(python_script)
+
+    # now, we need to move the results to results folder.
     
 

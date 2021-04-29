@@ -42,12 +42,28 @@ def api_job():
 
     return jsonify({"job_id":request_id})
 
+# for status check requests
 @app.route('/api/job/<int:job_id>')
 def get_job_status(job_id):
-    if path.isfile(f'/data/fairseq_{job_id}.txt') or path.isfile(f'/data/coling_{job_id}.txt'):
-        return jsonify({"status": True})
+    if path.isfile(f'/data/fairseq_{job_id}.txt'):
+        # TODO add for fairseq when fairseq exists
+        return jsonify({"status": False, "model" : "fairseq"})
+    elif path.isfile(f'/data/coling_{job_id}.txt'):
+        completed = path.isfile(f'/data/results/output_inference_json-{job_id}.std.out')
+        return jsonify({"status": completed, "model" : "coling"})
     else:
-        return jsonify({"status": False})
+        flask.abort(404)
+
+@app.route('/api/job/<int:job_id>/download')
+def download_job_result(job_id):
+    result_path =  f'/data/results/output_inference_json-{job_id}.std.out'
+    if path.isfile(result_path):
+        with open(result_path, 'r') as outfile:
+            result = json.load(outfile)
+        return jsonify(result)
+    else:
+        flask.abort(404)
+    
 
 if __name__ == '__main__': # distinguish between running directly vs flask
     

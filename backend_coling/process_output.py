@@ -17,8 +17,9 @@ from os import path
 #     }
 # ]
 
-def process_output():
+def process_output(current_job):
     # read the results document into a string 
+    # NOTE: the file to read as output can be changed. 
     results_path = 'coling2018-neural-transition-based-morphology/results_inference/Both/Word_dumb/f.beam10.dev.predictions'
     with open(results_path, "r") as new_result:
         new_result_contents = new_result.read()
@@ -49,7 +50,7 @@ def process_output():
     result_json = json.dumps(result_by_line_split, indent = 4)
 
     # write JSON object into a file and save 
-    with open('/backend_coling/results/output_inference_json.std.out', 'w') as outfile:
+    with open('/data/results/output_inference_json-{}.std.out'.format(current_job), 'w') as outfile:
         outfile.write(result_json)
 
 

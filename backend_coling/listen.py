@@ -35,6 +35,7 @@ def on_created(event):
 
     if path_components[0] == "/data/coling":
         newPath = shutil.copy(path, "./jobs")
+
         further_path_components = path_components[1].split(".")
         job_id = further_path_components[0]
         job_list.add(job_id)
@@ -64,6 +65,7 @@ my_event_handler.on_moved = on_moved
 
 # CREATE WATCHDOG OBSERVER
 # path to be monitores
+# TODO as users add files into this folder, we need to delete them as well
 path = "/data"
 # whether or not to monitor subdirectories
 go_recursively = True
@@ -79,9 +81,10 @@ try:
         time.sleep(1)
         while job_list.__len__() > 0:
             #  pass job from job list into model_inference.py
-            model_inference.process_file(job_list.pop(0))
-            # 
-            # process_output.process_output()
+            current_job = job_list.pop(0)
+            model_inference.process_file(current_job)
+            # process the output into a JSON file
+            process_output.process_output(current_job)
 except KeyboardInterrupt:
     my_observer.stop()
     my_observer.join()
