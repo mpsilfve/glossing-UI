@@ -49,7 +49,8 @@ def process_file(job_id):
     output_path = "/backend_coling/results/output_inference-{}.std.out".format(job_id)
 
 
-
+    # also: implement bridging code between coling and my code that loads all data structures. 
+    # swap the system calls to something else. we want to run it continuosly like a server. 
 
     python_script = ("cd /backend_coling/coling2018-neural-transition-based-morphology/lib && python2.7 "
         "run_transducer.py --dynet-seed 47 --dynet-mem 1000 --dynet-autobatch 0  --transducer=haem --sigm2017format "
@@ -59,9 +60,9 @@ def process_file(job_id):
         "--beam-widths=10,10  --pretrain-epochs=0 --sample-size=20 --scale-negative=1  "
         "{trainpath} {devpath} {resultspath} 2>&1 > {outpath}").format(trainpath=train_path, devpath=input_path, resultspath=model_path, outpath=output_path)
 
-    # run the command 
+
+    # run the command
     os.system(python_script)
 
-    # now, we need to move the results to results folder.
     
 

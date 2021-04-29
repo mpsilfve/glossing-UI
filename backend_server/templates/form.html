@@ -6,7 +6,7 @@
   </head>
   <body>
     <h1>Get request</h1>
-    <p>Please enter the text you wish to submit:</p>
+    <p>Please enter the text you wish to submit:</p>       
     <form>
         <textarea id=input_text></textarea>
         <div>
@@ -34,9 +34,43 @@
     <div id = "completed_message" style = "display:none">
         <p>Here is your completed job.</p>
         <textarea id="completed_job"></textarea>
+        <table id="results_table">
+            <!-- here will be the results table -->
+            <!-- the table is from here https://stackoverflow.com/questions/30695074/how-to-get-dropdownlist-value-on-html-table-cell-in-a-row-using-javascript/30695143 -->
+                <!-- <tr>
+                  <td>
+                      This is cell 1 <br>
+                    <select id="select1" onchange="getValue(this)">
+                      <option value="$">--Please Select--</option>
+                      <option value="val1">value 1</option>
+                      <option value="val2">value 2</option>
+                      <option value="val3">value 3</option>
+                </select>
+                </td>
+                 <td id="select1-value"></td>
+                </tr>
+                <tr>
+                 <td>
+                     This is cell 2 <br>
+                   <select id="select2" onchange="getValue(this)">
+                      <option value="$">--Please Select--</option>
+                      <option value="val1">value 1</option>
+                      <option value="val2">value 2</option>
+                      <option value="val3">value 3</option>
+                </select>
+                </td>
+                 <td id="select2-value"></td>
+                </tr> -->
+        </table>
     </div>
 
     <script>
+    function getValue(data)
+    {
+        // this function will allow to choose the correct or new segmentation from drop down menu
+        var myDiv = document.getElementById( data.id + '-value' );
+        myDiv.innerHTML = data.value;
+    }
     async function checkStatus() {
         const jobId = document.getElementById("input_job_id").value;
         const status = await requestData(`/api/job/${jobId}`);
@@ -52,11 +86,68 @@
             const result = await requestData(`/api/job/${jobId}/download`);
             const result_string = JSON.stringify(result);
             completed_job.value = result_string;
+            displayTable(result_string);
         } else {
             // alert("The job has submitted, but not completed yet. It is running. Rest assured you will be notified when it will get processed.");
             completed_message.style.display = "none";
             running_message.style.display = "block";
         }
+    }
+
+    function displayTable(json_string) {
+        let results_table = document.getElementById("results_table");
+        // convert JSON to list of JS objects
+        let token_list = JSON.parse(json_string);
+        const token_number = token_list.length;
+        const column_number = (token_number >= 10) ? 10 : token_number;
+        const row_number = Math.ceil(token_number/10);
+        let current_index = 0;
+        results_table.innerHTML = "";
+        // the table willl contain at most 10 columns and at most 10 rows. 
+        // the outer loop will count up to ten, and break if there is less
+        for (i = 0; i < row_number; i++) {
+            let row = results_table.insertRow();
+            for (j = 0; j < column_number; j++) {
+                if (current_index < token_number) {
+                    let cell = row.insertCell();
+                    let text = document.createTextNode(token_list[current_index]["input"]);
+                    let break_line = document.createElement("br");
+                    cell.appendChild(text);
+                    cell.appendChild(break_line);
+
+                    // this drop down list selection is from https://stackoverflow.com/questions/17001961/how-to-add-drop-down-list-select-programmatically
+                    //Create array of options to be added to the drop-down list
+                    let array = token_list[current_index]["segmentation"];
+
+                    //Create and append select list
+                    let selectList = document.createElement("select");
+                    selectList.id = "segmentation";
+                    cell.appendChild(selectList);
+
+                    let option = document.createElement("option");
+                    option.value = array;
+                    option.text = array;
+                    selectList.appendChild(option);
+
+                    //Create and append the options - add this when you have multiple segmentations 
+                    // TODO make segmentations into a list
+                    // for (var i = 0; i < array.length; i++) {
+                    //     let option = document.createElement("option");
+                    //     option.value = array[i];
+                    //     option.text = array[i];
+                    //     selectList.appendChild(option);
+                    // }
+                    current_index++;
+                } else {
+                    break;
+                }
+
+            }
+        }
+        // the inner loop will count up to ten token per row, and break if there is less
+        // each cell will contain the input and a drop down menu with possible tokens
+        // for this, we need to set a default value.
+
     }
 
     async function button() {
