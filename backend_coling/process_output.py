@@ -39,11 +39,18 @@ def process_output(current_job):
         # split each line into tokens
         line_list = line.split()
         # remove the TRANS dummy variable
-        line_list.pop()
+        # TODO add the line below back when needed
+        # line_list.pop()
         # make a python dictionary
         line_dict = {}
         line_dict["input"] = line_list[0]
-        line_dict["segmentation"] = line_list[1]
+        # TODO modify, when we are able to add n-best number of segmentations
+        segmentation_list = []
+        for x in range(1,len(line_list)):
+            segmentation_list.append(line_list[x])
+        line_dict["segmentation"] = segmentation_list
+        # TODO set preferred segmentation by default to be the first n-best. Users would be able to change the preferred segmentation.
+   
         result_by_line_split.append(line_dict)
 
     # create a JSON object, add indents for JSON readability

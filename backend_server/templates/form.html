@@ -27,40 +27,15 @@
     <form>
         <input type="number" id="input_job_id">
     </form>
-    <button id=button_2 onclick="checkStatus()">Check if the job is submitted</button>
+    <button id=button_2 onclick="checkStatus(document.getElementById('input_job_id').value)">Check if the job is submitted</button>
     <div id="running_message" style="display:none">
         <p>Your job is running. This will automatically update, when your job is complete.</p>
     </div>
     <div id = "completed_message" style = "display:none">
         <p>Here is your completed job.</p>
-        <textarea id="completed_job"></textarea>
+        <!-- <textarea id="completed_job"></textarea> -->
         <table id="results_table">
             <!-- here will be the results table -->
-            <!-- the table is from here https://stackoverflow.com/questions/30695074/how-to-get-dropdownlist-value-on-html-table-cell-in-a-row-using-javascript/30695143 -->
-                <!-- <tr>
-                  <td>
-                      This is cell 1 <br>
-                    <select id="select1" onchange="getValue(this)">
-                      <option value="$">--Please Select--</option>
-                      <option value="val1">value 1</option>
-                      <option value="val2">value 2</option>
-                      <option value="val3">value 3</option>
-                </select>
-                </td>
-                 <td id="select1-value"></td>
-                </tr>
-                <tr>
-                 <td>
-                     This is cell 2 <br>
-                   <select id="select2" onchange="getValue(this)">
-                      <option value="$">--Please Select--</option>
-                      <option value="val1">value 1</option>
-                      <option value="val2">value 2</option>
-                      <option value="val3">value 3</option>
-                </select>
-                </td>
-                 <td id="select2-value"></td>
-                </tr> -->
         </table>
     </div>
 
@@ -71,26 +46,32 @@
         var myDiv = document.getElementById( data.id + '-value' );
         myDiv.innerHTML = data.value;
     }
-    async function checkStatus() {
-        const jobId = document.getElementById("input_job_id").value;
+    let timeout_result;
+
+    async function checkStatus(jobId) {
+        // if we are waiting for a different job, we do not need to keep waiting for the previous one
+        clearTimeout(timeout_result);
+        // const jobId = document.getElementById("input_job_id").value;
         const status = await requestData(`/api/job/${jobId}`);
         const running_message = document.getElementById("running_message");
         const completed_message = document.getElementById("completed_message");
-        const completed_job = document.getElementById("completed_job");
+        // const completed_job = document.getElementById("completed_job");
 
         if (status.status) {
             // alert("Your job has completed.");
             running_message.style.display = "none";
             completed_message.style.display = "block";
-            completed_job.value = "loading result";
+            // completed_job.value = "loading result";
             const result = await requestData(`/api/job/${jobId}/download`);
             const result_string = JSON.stringify(result);
-            completed_job.value = result_string;
+            // completed_job.value = result_string;
             displayTable(result_string);
         } else {
             // alert("The job has submitted, but not completed yet. It is running. Rest assured you will be notified when it will get processed.");
             completed_message.style.display = "none";
             running_message.style.display = "block";
+            // wait 2 s and run checkStatus again
+            timeout_result = setTimeout(checkStatus, 2000, jobId);
         }
     }
 
@@ -115,28 +96,68 @@
                     cell.appendChild(text);
                     cell.appendChild(break_line);
 
+                    // make this appear only if Custom option is selected in the drop down list.
+                    let input_for_list = document.createElement("input");
+                    input_for_list.setAttribute("type", "text");
+                    // set as default in drop-down menu's input window to be the firstsegmentation
+                    input_for_list.style.display = "none";
+
+                    cell.appendChild(input_for_list);
+   
                     // this drop down list selection is from https://stackoverflow.com/questions/17001961/how-to-add-drop-down-list-select-programmatically
                     //Create array of options to be added to the drop-down list
-                    let array = token_list[current_index]["segmentation"];
+                    let segmentation_list = token_list[current_index]["segmentation"];
 
-                    //Create and append select list
+
+                    // Create and append select list
                     let selectList = document.createElement("select");
                     selectList.id = "segmentation";
                     cell.appendChild(selectList);
 
-                    let option = document.createElement("option");
-                    option.value = array;
-                    option.text = array;
-                    selectList.appendChild(option);
+                    // Create and append the options - add this when you have multiple segmentations 
+                    for (var i = 0; i < segmentation_list.length; i++) {
+                        let option = document.createElement("option");
+                        option.value = segmentation_list[i];
+                        option.text = segmentation_list[i];
+                        selectList.appendChild(option);
+                    }
 
-                    //Create and append the options - add this when you have multiple segmentations 
-                    // TODO make segmentations into a list
-                    // for (var i = 0; i < array.length; i++) {
+                    let custom_option = document.createElement("option");
+                    custom_option.value = "Custom"
+                    custom_option.text = "Custom"
+                    selectList.appendChild(custom_option);
+
+                    selectList.onchange = () => {
+                        if (selectList.options[selectList.selectedIndex].value === custom_option.value) {
+                            selectList.style.display = "none";
+                            input_for_list.style.display = "block";
+                        }
+                    }
+
+                    input_for_list.onchange = () => {
+                        // TODO add preferred_segmentation to the JSON object, the default value of which will be the first segmentation
+                    }
+ 
+                    // let input_for_list = document.createElement("input");
+                    // input_for_list.setAttribute("type", "text");
+                    // // set as default in drop-down menu's input window to be the firstsegmentation
+                    // const first_segmentation = segmentation_list[0];
+                    // input_for_list.setAttribute("value", first_segmentation);
+                    // input_for_list.setAttribute("list", "segmentationList");
+
+                    // let segmentation_drop_down = document.createElement("datalist");
+                    // segmentation_drop_down.id = "segmentationList";
+
+                    // for (var i = 0; i < segmentation_list.length; i++) {
                     //     let option = document.createElement("option");
-                    //     option.value = array[i];
-                    //     option.text = array[i];
-                    //     selectList.appendChild(option);
+                    //     option.value = segmentation_list[i];
+                    //     option.text = segmentation_list[i];
+                    //     segmentation_drop_down.appendChild(option);
                     // }
+
+                    // cell.appendChild(input_for_list);
+                    // cell.appendChild(segmentation_drop_down);
+
                     current_index++;
                 } else {
                     break;
@@ -144,10 +165,6 @@
 
             }
         }
-        // the inner loop will count up to ten token per row, and break if there is less
-        // each cell will contain the input and a drop down menu with possible tokens
-        // for this, we need to set a default value.
-
     }
 
     async function button() {
