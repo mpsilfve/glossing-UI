@@ -49,8 +49,8 @@ def process_output(current_job):
         for x in range(1,len(line_list)):
             segmentation_list.append(line_list[x])
         line_dict["segmentation"] = segmentation_list
-        # TODO set preferred segmentation by default to be the first n-best. Users would be able to change the preferred segmentation.
-   
+        # set preferred segmentation by default to be the first n-best. Users would be able to change the preferred segmentation.
+        line_dict["preferred_segmentation"] = line_list[1]
         result_by_line_split.append(line_dict)
 
     # create a JSON object, add indents for JSON readability
