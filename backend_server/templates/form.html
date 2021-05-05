@@ -33,7 +33,7 @@
     </div>
     <div id = "completed_message" style = "display:none">
         <p>Here is your completed job.</p>
-        <!-- <textarea id="completed_job"></textarea> -->
+        <textarea id="completed_job"></textarea>
         <table id="results_table">
             <!-- here will be the results table -->
         </table>
@@ -43,6 +43,8 @@
     </div>
 
     <script>
+    // to get the last job id used in the browser
+    document.getElementById("input_job_id").value = localStorage.getItem("last_job_id") || "";
     function getValue(data)
     {
         // this function will allow to choose the correct or new segmentation from drop down menu
@@ -52,6 +54,7 @@
     let timeout_result;
 
     async function checkStatus(jobId) {
+        localStorage.setItem("last_job_id", String(jobId));
         // if we are waiting for a different job, we do not need to keep waiting for the previous one
         clearTimeout(timeout_result);
         // const jobId = document.getElementById("input_job_id").value;
@@ -64,12 +67,12 @@
             // alert("Your job has completed.");
             running_message.style.display = "none";
             completed_message.style.display = "block";
-            // completed_job.value = "loading result";
+            completed_job.value = "loading result";
             const result = await requestData(`/api/job/${jobId}/download`);
             const result_string = JSON.stringify(result);
-            // completed_job.value = result_string;
-            displayOutputRangeTable(result_string);
-            displayTable(result_string, 0, 100);
+            completed_job.value = result_string;
+            displayOutputRangeTable(result_string, jobId);
+            displayTable(result_string, 0, 100, jobId);
         } else {
             // alert("The job has submitted, but not completed yet. It is running. Rest assured you will be notified when it will get processed.");
             completed_message.style.display = "none";
@@ -79,33 +82,42 @@
         }
     }
 
-    function displayOutputRangeTable(json_string) {
+    function displayOutputRangeTable(json_string, jobId) {
         let range_table = document.getElementById("range_table");
         const token_list = JSON.parse(json_string);
         const token_number = token_list.length;
         const range_rows = Math.ceil(token_number/100);
+        const tokens_per_view = 100;
         let current_index = 0;
         range_table.innerHTML = "";
         for (i = 0; i < range_rows; i++) {
             let row = range_table.insertRow();
             let cell = row.insertCell();
             const range_button = document.createElement("button");
-            range_button.value = `${i*100} - ${(i+1)*100}`;
+            const lower_bound = i*tokens_per_view;
+            const upper_bound = i != range_rows - 1? (i+1)*tokens_per_view : token_number;
+            range_button.value = `${lower_bound} - ${upper_bound}`;
             range_button.innerText = range_button.value;
             cell.appendChild(range_button);
+            const current_i = i;
+            range_button.onclick = () => {
+                displayTable(json_string, lower_bound, upper_bound, jobId);
+            }
         }
         // add an onclick function 
         // add appropriate display
     }
 
-    function displayTable(json_string, start, end) {
+    // assumes that token_list contains tokens startingfrom index start 
+    // and ending at index end exclusive
+    function displayTable(json_string, start, end, jobId) {
         // TODO add functionality to display appropriate table
         let results_table = document.getElementById("results_table");
         // convert JSON to list of JS objects
         const token_list = JSON.parse(json_string);
-        const token_number = token_list.length;
-        const column_number = (token_number >= 10) ? 10 : token_number;
-        const row_number = Math.ceil(token_number/10);
+        const tokens_included = end - start;
+        const column_number = (tokens_included >= 10) ? 10 : tokens_included;
+        const row_number = Math.ceil(tokens_included/10);
         let current_index = 0;
         results_table.innerHTML = "";
         // the table will contain at most 10 columns and at most 10 rows. 
@@ -113,9 +125,10 @@
         for (i = 0; i < row_number; i++) {
             let row = results_table.insertRow();
             for (j = 0; j < column_number; j++) {
-                if (current_index < token_number) {
+                const current_token = current_index + start;
+                if (current_token < end) {
                     let cell = row.insertCell();
-                    let text = document.createTextNode(token_list[current_index]["input"]);
+                    let text = document.createTextNode(token_list[current_token]["input"]);
                     let break_line = document.createElement("br");
                     cell.appendChild(text);
                     cell.appendChild(break_line);
@@ -131,7 +144,7 @@
    
                     // this drop down list selection is from https://stackoverflow.com/questions/17001961/how-to-add-drop-down-list-select-programmatically
                     //Create array of options to be added to the drop-down list
-                    let segmentation_list = token_list[current_index]["segmentation"];
+                    let segmentation_list = token_list[current_token]["segmentation"];
 
 
                     // Create and append select list
@@ -154,11 +167,10 @@
 
                     // display the preferred segmentation
                     let preferredSegmentation = document.createElement("p");
-                    preferredSegmentation.innerText = token_list[current_index]["preferred_segmentation"];
+                    preferredSegmentation.innerText = token_list[current_token]["preferred_segmentation"];
                     cell.appendChild(preferredSegmentation);
 
                     // set the preferred segmentation
-                    const current_current_index = current_index;
                     selectList.onchange = () => {
                         const selectedOption = selectList.options[selectList.selectedIndex].value;
                         if ( selectedOption === custom_option.value) {
@@ -167,17 +179,17 @@
                             // input_for_list.onchange allows for setting of preferred segmentation to 
                             // user inputs and reverts to the list view, with
                         } else {
-                            token_list[current_current_index]["preferred_segmentation"] = selectedOption;
+                            token_list[current_token]["preferred_segmentation"] = selectedOption;
                         }
-                        preferredSegmentation.innerText = token_list[current_current_index]["preferred_segmentation"];
+                        preferredSegmentation.innerText = token_list[current_token]["preferred_segmentation"];
                     }
 
                     input_for_list.onchange = () => {
                      // TODO add preferred_segmentation to the JSON object, the default value of which will be the first segmentation
-                        token_list[current_current_index]["preferred_segmentation"] = input_for_list.value;
+                        token_list[current_token]["preferred_segmentation"] = input_for_list.value;
                         input_for_list.style.display = "none";
                         selectList.style.display = "block";
-                        preferredSegmentation.innerText = token_list[current_current_index]["preferred_segmentation"];
+                        preferredSegmentation.innerText = token_list[current_token]["preferred_segmentation"];
                     }
  
                     // let input_for_list = document.createElement("input");
@@ -206,6 +218,15 @@
                 }
 
             }
+        }
+
+        const submit_button = document.createElement("button");
+        submit_button.innerText = "Save changes";
+        results_table.appendChild(submit_button);
+
+        submit_button.onclick = async () => {
+            const saveRequestResult = await requestData(`/api/job/${jobId}/save`, token_list, 'POST');
+            alert("you save was successful");
         }
     }
 

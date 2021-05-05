@@ -29,7 +29,7 @@ def home():
 def api_job():
     # receive 
     data = request.json
-    # is data a JSON object? 
+    # is data a JSON object? NO
     now = datetime.now()
     request_id = int(datetime.timestamp(now))
     data["id"] = request_id
@@ -61,6 +61,18 @@ def download_job_result(job_id):
         with open(result_path, 'r') as outfile:
             result = json.load(outfile)
         return jsonify(result)
+    else:
+        flask.abort(404)
+
+# the request to save the data that the users might have changed
+@app.route('/api/job/<int:job_id>/save', methods=['POST'])
+def save_job_result(job_id):
+    result_path =  f'/data/results/output_inference_json-{job_id}.std.out'
+    data = request.json
+    if path.isfile(result_path):
+        with open(result_path, 'w') as outfile:
+            json.dump(data,outfile, indent = 4)
+        return {"output": True}
     else:
         flask.abort(404)
     
