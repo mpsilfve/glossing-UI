@@ -3,44 +3,72 @@
   <head>
     <meta charset="utf-8">
     <title>Form</title>
+    <link href='{{ url_for('static',filename='styles/style.css') }}' rel='stylesheet' type="text/css">
   </head>
   <body>
-    <h1>Get request</h1>
-    <p>Please enter the text you wish to submit:</p>       
-    <form>
-        <textarea id=input_text></textarea>
-        <div>
-            <input type="radio" id="fairseq"
-                   name="model" value="fairseq" checked>
-            <label for="fairseq">fairseq</label>
-            <input type="radio" id="coling"
-                   name="model" value="coling">
-            <label for="coling">coling</label>
+    <header>
+        <h1>The name of the project</h1>
+        <p>Silfverberg Lab</p>
+
+    </header>
+    <article>
+        <div class="form">
+            <h2>Submit data</h2>
+            <p>Please enter the text you wish to submit:</p>       
+            <form>
+                <textarea id=input_text></textarea>
+                <p>Choose the model that you wish to use:</p>
+                <div id="model_buttons">
+                    <input type="radio" id="fairseq" 
+                           name="model" value="fairseq" checked>
+                    <label for="fairseq" class="model_button">fairseq</label>
+                    <input type="radio" id="coling" 
+                           name="model" value="coling">
+                    <label for="coling" class="model_button">coling</label>
+                </div>
+            </form>
+            <button id=button class=job_buttons onclick="button()">Submit</button>    
         </div>
-    </form>
-    <button id=button onclick="button()">Press Me</button>
+    
+        <div class="form">
+            <h2>Get status of request</h2>
+            <p>Enter job id:</p>
+            <form id="input_job_id_form">
+                <input type="number" id="input_job_id">
+            </form>
+            <button id=button_2 class=job_buttons onclick="checkStatus(document.getElementById('input_job_id').value)">Check if the job is submitted</button>
+            <div id="running_message" style="display:none">
+                <p>Your job is running. This will automatically update, when your job is complete.</p>
+            </div>
+            <div id = "completed_message" style = "display:none">
+                <h2>Request Results</h2>
+                <!-- <textarea id="completed_job"></textarea> -->
+                <div class=results_wrapper>
+                    <table id="results_table">
+                        <!-- here will be the results table -->
+                    </table>
+                </div>
 
+                <div class="range_and_save">
+                    <p>Choose displayed token range</p>
+                    <table id="range_table">
+                        <!-- range table will be here -->
+                    </table>
+                    <button id=submit_button class=job_buttons>Save changes</button>
+                    <div id=legend>
+                        <h3>Table Legend</h3>
+                        <p class=input_token>Input token</p>
+                        <p>List of n-best segmentations</p>
+                        <p> Preferred segmentation</p>
+                    </div>
+                </div>
 
+            </div>
+        </div>
+    </article>
+    <footer>
 
-    <h1>Get status of request</h1>
-    <p>Enter job id:</p>
-    <form>
-        <input type="number" id="input_job_id">
-    </form>
-    <button id=button_2 onclick="checkStatus(document.getElementById('input_job_id').value)">Check if the job is submitted</button>
-    <div id="running_message" style="display:none">
-        <p>Your job is running. This will automatically update, when your job is complete.</p>
-    </div>
-    <div id = "completed_message" style = "display:none">
-        <p>Here is your completed job.</p>
-        <textarea id="completed_job"></textarea>
-        <table id="results_table">
-            <!-- here will be the results table -->
-        </table>
-        <table id="range_table">
-            <!-- range table will be here -->
-        </table>
-    </div>
+    </footer>
 
     <script>
     // to get the last job id used in the browser
@@ -66,13 +94,15 @@
         if (status.status) {
             // alert("Your job has completed.");
             running_message.style.display = "none";
-            completed_message.style.display = "block";
-            completed_job.value = "loading result";
+            completed_message.style.display = "flex";
+            // completed_job.value = "loading result";
             const result = await requestData(`/api/job/${jobId}/download`);
             const result_string = JSON.stringify(result);
-            completed_job.value = result_string;
+            // completed_job.value = result_string;
             displayOutputRangeTable(result_string, jobId);
             displayTable(result_string, 0, 100, jobId);
+            // scroll to the results
+            completed_message.scrollIntoView(true);
         } else {
             // alert("The job has submitted, but not completed yet. It is running. Rest assured you will be notified when it will get processed.");
             completed_message.style.display = "none";
@@ -128,7 +158,10 @@
                 const current_token = current_index + start;
                 if (current_token < end) {
                     let cell = row.insertCell();
-                    let text = document.createTextNode(token_list[current_token]["input"]);
+                    // let text = document.createTextNode(token_list[current_token]["input"]);
+                    let text = document.createElement("p");
+                    text.innerText = token_list[current_token]["input"];
+                    text.setAttribute('class', 'input_token');
                     let break_line = document.createElement("br");
                     cell.appendChild(text);
                     cell.appendChild(break_line);
@@ -150,7 +183,12 @@
                     // Create and append select list
                     let selectList = document.createElement("select");
                     selectList.id = "segmentation";
-                    cell.appendChild(selectList);
+
+                    // create custom select element
+                    let custom_select = document.createElement("div");
+                    custom_select.setAttribute('class', 'custom-select');
+                    custom_select.appendChild(selectList);
+                    cell.appendChild(custom_select);
 
                     // Create and append the options - add this when you have multiple segmentations 
                     for (var i = 0; i < segmentation_list.length; i++) {
@@ -220,9 +258,11 @@
             }
         }
 
-        const submit_button = document.createElement("button");
-        submit_button.innerText = "Save changes";
-        results_table.appendChild(submit_button);
+
+        const submit_button = document.getElementById("submit_button");
+        submit_button.id = "save_button";
+        // const table_div = document.getElementById("completed_message");
+        // table_div.appendChild(submit_button);
 
         submit_button.onclick = async () => {
             const saveRequestResult = await requestData(`/api/job/${jobId}/save`, token_list, 'POST');

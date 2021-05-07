@@ -1,0 +1,174 @@
+body {
+  background: linear-gradient(-45deg, #84ceeb, #c1c8e4);
+
+  /* background: #FFF; */
+  background-repeat: no-reapeat;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  padding: 60px;
+  text-align: center;
+  background: #268fcc;
+  color: white;
+  font-size: 30px;
+  line-height: 2vw;
+}
+
+footer {
+  clear: both; /* do not overlap with floated elements*/
+  padding: 60px;
+  text-align: center;
+  /* background: #268fcc; */
+  color: white;
+  font-size: 30px;
+  line-height: 4vw;
+}
+
+h2 {
+  color: #FFF !important;
+  font-size: 2em;
+  padding-top: 100px;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+h3 {
+  color: #FFF !important;
+  font-size: 1.5em;
+  padding-top: 100px;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+p {
+  font-family:Arial, Helvetica, sans-serif;
+  text-align: center;
+  color: #FFF;
+  font-size: 1.2em;
+}
+
+.form {
+  text-align: center;
+}
+
+#input_text {
+  width: 30%;
+  border: 2px solid #5680e9;
+  padding: 1zdkjem 2em; 
+  height: 10em;
+  font-size: 1em;
+  font-family:Arial, Helvetica, sans-serif;
+  color: #5680e9;
+}
+
+#input_job_id_form {
+  padding: 0.8em 1em;
+}
+
+#input_job_id {
+  border: 2px solid #5680e9;
+  padding: 10px 10px; 
+  font-size: 1em; 
+  font-family:Arial, Helvetica, sans-serif;
+  color: #5680e9;
+}
+
+.job_buttons {
+  /* background-color: #31b4b0e1;  */
+  background: linear-gradient(-45deg, #31b4b0e1, #8860d0);
+  border: none;
+  color: #fff;
+  font-size: 1em;
+  padding: 0.8em 1.5em;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+.model_button {
+  color: #8860d0;
+  font-size: 1.5em;
+}
+
+#model_buttons {
+  padding: 0.8em 1.5em;
+}
+
+.input_token {
+  color: #8860d0;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  /* border: 2px solid #5680e9; */
+}
+
+#results_table tbody tr {
+  /* background: linear-gradient(to bottom, #c1c8e4, #8860d0); */
+  border: 3px solid #5680e9;
+}
+
+#completed_message {
+  /*defines flex container*/
+  display: flex;
+  width: 100%;
+  /* defines the direction of the main axis */
+  flex-direction: row;
+  /* allows to wrap to multiple lines */
+  flex-wrap: wrap;
+  /* defines alignmnet along the main axis */
+  justify-content: center safe;
+  /* defines how flex items are aligned across the cross axis */
+  /* flex-start - alignes at the start of the cross axis */
+  align-items: flex-start safe;
+  /* space distribution for multiline flrex containers */
+  align-content: center safe;
+}
+
+#completed_message h2 {
+  /* flex: 0 0 100%; */
+}
+
+.range_and_save {
+  max-width: 20%;
+  flex: 1 1 20%;
+  /* order of appearance of flex containers */
+  order: 0;
+  padding: 2vw;
+}
+
+#range_table {
+  /* width: 60%;
+  margin-left: auto;
+  margin-right: auto; */
+}
+
+#save_button {
+  margin:auto;
+  margin: 1vw;
+}
+
+.results_wrapper {
+  max-width: 70%;
+  flex: 1 1 70%;
+  order: 1;
+  padding: 2vw;
+}
+
+#results_table {
+  border: 2px solid #5680e9;
+}
+
+/* below is styling for custom select menus */
+.custom-select {
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 8vw;
+}
+
