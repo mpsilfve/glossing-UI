@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Form</title>
+    <title>Project name</title>
     <link href='{{ url_for('static',filename='styles/style.css') }}' rel='stylesheet' type="text/css">
   </head>
   <body>
@@ -36,7 +36,9 @@
             <form id="input_job_id_form">
                 <input type="number" id="input_job_id">
             </form>
-            <button id=button_2 class=job_buttons onclick="checkStatus(document.getElementById('input_job_id').value)">Check if the job is submitted</button>
+            <button id=button_2 class=job_buttons onclick="checkStatus(document.getElementById('input_job_id').value)">
+                Request job status
+            </button>
             <div id="running_message" style="display:none">
                 <p>Your job is running. This will automatically update, when your job is complete.</p>
             </div>
@@ -50,17 +52,21 @@
                 </div>
 
                 <div class="range_and_save">
-                    <p>Choose displayed token range</p>
-                    <table id="range_table">
-                        <!-- range table will be here -->
-                    </table>
-                    <button id=submit_button class=job_buttons>Save changes</button>
                     <div id=legend>
                         <h3>Table Legend</h3>
                         <p class=input_token>Input token</p>
-                        <p>List of n-best segmentations</p>
+                        <p id=segmentation_list_legend>List of n-best segmentations</p>
                         <p> Preferred segmentation</p>
                     </div>
+
+                    <p>Choose displayed token range:</p>
+                    <div id=range_table_wrapper>
+                        <table id="range_table">
+                            <!-- range table will be here -->
+                        </table>
+                    </div>
+                    <button id=submit_button class=job_buttons>Save changes</button>
+
                 </div>
 
             </div>
@@ -124,6 +130,7 @@
             let row = range_table.insertRow();
             let cell = row.insertCell();
             const range_button = document.createElement("button");
+            range_button.setAttribute('class', 'range_button');
             const lower_bound = i*tokens_per_view;
             const upper_bound = i != range_rows - 1? (i+1)*tokens_per_view : token_number;
             range_button.value = `${lower_bound} - ${upper_bound}`;
@@ -212,7 +219,7 @@
                     selectList.onchange = () => {
                         const selectedOption = selectList.options[selectList.selectedIndex].value;
                         if ( selectedOption === custom_option.value) {
-                            selectList.style.display = "none";
+                            custom_select.style.display = "none";
                             input_for_list.style.display = "block";
                             // input_for_list.onchange allows for setting of preferred segmentation to 
                             // user inputs and reverts to the list view, with
@@ -226,7 +233,7 @@
                      // TODO add preferred_segmentation to the JSON object, the default value of which will be the first segmentation
                         token_list[current_token]["preferred_segmentation"] = input_for_list.value;
                         input_for_list.style.display = "none";
-                        selectList.style.display = "block";
+                        custom_select.style.display = "block";
                         preferredSegmentation.innerText = token_list[current_token]["preferred_segmentation"];
                     }
  
