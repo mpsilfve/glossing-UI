@@ -1,4 +1,12 @@
+""" File listener for model input data
 
+Listens to data folder for new job requests. If a 
+new file is detected in the folder, then it adds it to a list
+of jobs. For each job in the job list, it passes it through
+inference using model_inference module and creates an output 
+using process_output module. Jobs are processed in order based
+on their time id which is a time stamp.
+"""
 import time, shutil, json, model_inference, process_output
 from sortedcontainers import SortedList
 from watchdog.observers import Observer
@@ -11,7 +19,7 @@ job_list = SortedList()
 
 if __name__ == "__main__":
     # CREATE WATCHDOG EVENT HANDLER
-    # Some variables for the warchdog observer
+    # Some variables for the watchdog observer:
     # defines which file patterns to observe
     patterns = "*"
     # defines which file patterns to ignore
@@ -26,6 +34,15 @@ if __name__ == "__main__":
 # FILESYSTEM WATCHDOG EVENT FUNCTIONS
 # the following are functiosn that are run when my_event_handler receives an event
 def on_created(event):
+    """ adds new job to job list for coling model
+    Fires when a new file is creaeted in the watched directory.
+    Adds the new job to job list if the new job's model is coling
+
+    Parameters
+    ----------
+    event: event object 
+        the event object containing information about the newly created file
+    """
     print("on created")
     print("hey, {} has been created!".format(event.src_path))
 
@@ -39,22 +56,17 @@ def on_created(event):
         further_path_components = path_components[1].split(".")
         job_id = further_path_components[0]
         job_list.add(job_id)
-        # pass this new_job_data dicitonary to the unwrap.py script
-        # add it to the sorted list 
-        # act on the first item in the list 
+
 
 
 def on_deleted(event):
     print "on_deleted"
-    # print(f"what the f**k! Someone deleted {event.src_path}!")
 
 def on_modified(event):
     print "on_modified"
-    # print(f"hey buddy, {event.src_path} has been modified")
 
 def on_moved(event):
     print "on_moved"
-    # print(f"ok ok ok, someone moved {event.src_path} to {event.dest_path}")
 
 
 # attach the functions defined above to specific handler events
@@ -64,7 +76,7 @@ my_event_handler.on_modified = on_modified
 my_event_handler.on_moved = on_moved
 
 # CREATE WATCHDOG OBSERVER
-# path to be monitores
+# path to be monitored
 # TODO as users add files into this folder, we need to delete them as well
 path = "/data"
 # whether or not to monitor subdirectories
@@ -79,6 +91,7 @@ try:
     while True:
         # add sleep time to avoid running continuosly
         time.sleep(1)
+        # process jobs in the job list:
         while job_list.__len__() > 0:
             #  pass job from job list into model_inference.py
             current_job = job_list.pop(0)

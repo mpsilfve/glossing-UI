@@ -1,3 +1,7 @@
+# docker compose file
+# each container shares a Docker volume backend_volume
+# for each container, we have bind mounts for the
+# corresponding code for development stage
 version: "3.7"
 services: 
   backend_server:
