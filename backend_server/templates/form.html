@@ -55,8 +55,8 @@
                     <div id=legend>
                         <h3>Table Legend</h3>
                         <p class=input_token>Input token</p>
-                        <p id=segmentation_list_legend>List of n-best segmentations</p>
                         <p> Preferred segmentation</p>
+                        <p id=segmentation_list_legend>List of n-best segmentations</p>
                     </div>
 
                     <p>Choose displayed token range:</p>
@@ -184,6 +184,11 @@
 
                     cell.appendChild(input_for_list);
    
+                    // display the preferred segmentation
+                    let preferredSegmentation = document.createElement("p");
+                    preferredSegmentation.innerText = token_list[current_token]["preferred_segmentation"];
+                    cell.appendChild(preferredSegmentation);
+                    
                     // this drop down list selection is from https://stackoverflow.com/questions/17001961/how-to-add-drop-down-list-select-programmatically
                     //Create array of options to be added to the drop-down list
                     let segmentation_list = token_list[current_token]["segmentation"];
@@ -212,10 +217,6 @@
                     custom_option.text = "Custom"
                     selectList.appendChild(custom_option);
 
-                    // display the preferred segmentation
-                    let preferredSegmentation = document.createElement("p");
-                    preferredSegmentation.innerText = token_list[current_token]["preferred_segmentation"];
-                    cell.appendChild(preferredSegmentation);
 
                     // set the preferred segmentation
                     selectList.onchange = () => {
@@ -263,50 +264,41 @@
 
     window.onkeydown = (event) => {
         if (event.key === "ArrowRight") {
-            //  first figure out if a cell is selected
-            let current_cell = document.querySelector("td:focus");
-            const all_cells = document.querySelectorAll("#results_table td");
-            let index_next;
-            if (!current_cell) {
-                index_next = 0;
-            } else {
-                index_next = Array.from(all_cells).indexOf(current_cell) + 1;
-            }
-
-            all_cells[index_next].focus();
-            all_cells[index_next].scrollIntoView({block:"center"});
+            changeCellFocus(1);
         } else if (event.key === "ArrowLeft") {
-            //  first figure out if a cell is selected
-            let current_cell = document.querySelector("td:focus");
+            changeCellFocus(-1);
+        } else if (event.key === "ArrowDown") {
+            changeSelectedInList(1);
+        } else if (event.key === "ArrowUp") {
+            changeSelectedInList(-1);
+        }
+    }
+
+    function changeCellFocus(direction) {
+        //  first figure out if a cell is selected
+        let current_cell = document.querySelector("td:focus");
             const all_cells = document.querySelectorAll("#results_table td");
             let index_next;
             if (!current_cell) {
                 index_next = 0;
             } else {
-                index_next = Array.from(all_cells).indexOf(current_cell) - 1;
+                index_next = Array.from(all_cells).indexOf(current_cell) + direction;
             }
 
             all_cells[index_next].focus();
             all_cells[index_next].scrollIntoView({block:"center"});
-        } else if (event.key === "ArrowDown") {
-            let current_cell = document.querySelector("td:focus");
+    }
+
+    function changeSelectedInList(direction) {
+        let current_cell = document.querySelector("td:focus");
             if (!current_cell) {
                 return
             } else {
                 let select_list = current_cell.querySelector("select");
-                select_list.selectedIndex++;
+                //  from MDN: to obtain modulo from remainder operator use ((a % n ) + n ) % n.
+                select_list.selectedIndex = (((select_list.selectedIndex + direction) % select_list.length) + select_list.length) % select_list.length;
                 event.preventDefault();
             }
-        } else if (event.key === "ArrowUp") {
-            let current_cell = document.querySelector("td:focus");
-            if (!current_cell) {
-                return
-            } else {
-                let select_list = current_cell.querySelector("select");
-                select_list.selectedIndex--;
-                event.preventDefault();
-            } 
-        }
     }
 
     async function button() {
