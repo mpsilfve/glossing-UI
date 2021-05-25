@@ -165,6 +165,8 @@
                 const current_token = current_index + start;
                 if (current_token < end) {
                     let cell = row.insertCell();
+                    // allows users to select the whole cell with TAB
+                    cell.setAttribute('tabindex','0');
                     // let text = document.createTextNode(token_list[current_token]["input"]);
                     let text = document.createElement("p");
                     text.innerText = token_list[current_token]["input"];
@@ -236,26 +238,6 @@
                         custom_select.style.display = "block";
                         preferredSegmentation.innerText = token_list[current_token]["preferred_segmentation"];
                     }
- 
-                    // let input_for_list = document.createElement("input");
-                    // input_for_list.setAttribute("type", "text");
-                    // // set as default in drop-down menu's input window to be the firstsegmentation
-                    // const first_segmentation = segmentation_list[0];
-                    // input_for_list.setAttribute("value", first_segmentation);
-                    // input_for_list.setAttribute("list", "segmentationList");
-
-                    // let segmentation_drop_down = document.createElement("datalist");
-                    // segmentation_drop_down.id = "segmentationList";
-
-                    // for (var i = 0; i < segmentation_list.length; i++) {
-                    //     let option = document.createElement("option");
-                    //     option.value = segmentation_list[i];
-                    //     option.text = segmentation_list[i];
-                    //     segmentation_drop_down.appendChild(option);
-                    // }
-
-                    // cell.appendChild(input_for_list);
-                    // cell.appendChild(segmentation_drop_down);
 
                     current_index++;
                 } else {
@@ -266,6 +248,8 @@
         }
 
 
+
+
         const submit_button = document.getElementById("submit_button");
         submit_button.id = "save_button";
         // const table_div = document.getElementById("completed_message");
@@ -274,6 +258,54 @@
         submit_button.onclick = async () => {
             const saveRequestResult = await requestData(`/api/job/${jobId}/save`, token_list, 'POST');
             alert("you save was successful");
+        }
+    }
+
+    window.onkeydown = (event) => {
+        if (event.key === "ArrowRight") {
+            //  first figure out if a cell is selected
+            let current_cell = document.querySelector("td:focus");
+            const all_cells = document.querySelectorAll("#results_table td");
+            let index_next;
+            if (!current_cell) {
+                index_next = 0;
+            } else {
+                index_next = Array.from(all_cells).indexOf(current_cell) + 1;
+            }
+
+            all_cells[index_next].focus();
+            all_cells[index_next].scrollIntoView({block:"center"});
+        } else if (event.key === "ArrowLeft") {
+            //  first figure out if a cell is selected
+            let current_cell = document.querySelector("td:focus");
+            const all_cells = document.querySelectorAll("#results_table td");
+            let index_next;
+            if (!current_cell) {
+                index_next = 0;
+            } else {
+                index_next = Array.from(all_cells).indexOf(current_cell) - 1;
+            }
+
+            all_cells[index_next].focus();
+            all_cells[index_next].scrollIntoView({block:"center"});
+        } else if (event.key === "ArrowDown") {
+            let current_cell = document.querySelector("td:focus");
+            if (!current_cell) {
+                return
+            } else {
+                let select_list = current_cell.querySelector("select");
+                select_list.selectedIndex++;
+                event.preventDefault();
+            }
+        } else if (event.key === "ArrowUp") {
+            let current_cell = document.querySelector("td:focus");
+            if (!current_cell) {
+                return
+            } else {
+                let select_list = current_cell.querySelector("select");
+                select_list.selectedIndex--;
+                event.preventDefault();
+            } 
         }
     }
 

@@ -4,4 +4,5 @@ pwd
 ls
 cd coling2018-neural-transition-based-morphology/lib && make
 pwd
-cd ../.. && python listen.py
+#  -u is for unnbuffered binary stdout and stder
+cd ../.. && python -u listen.py

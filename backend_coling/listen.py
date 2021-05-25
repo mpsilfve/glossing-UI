@@ -11,6 +11,8 @@ import time, shutil, json, model_inference, process_output
 from sortedcontainers import SortedList
 from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
+import time, sys 
+print("I am here\n")
 
 # make a sorted list of jobs 
 # job id is based on time stamp, so sorted list of jobs is effectively a queue.
@@ -94,8 +96,12 @@ try:
         # process jobs in the job list:
         while job_list.__len__() > 0:
             #  pass job from job list into model_inference.py
+            tic = time.time()
             current_job = job_list.pop(0)
             model_inference.process_file(current_job)
+            toc = time.time()
+            net = toc - tic
+            print("Inference completed in {} seconds\n".format(net))
             # process the output into a JSON file
             process_output.process_output(current_job)
 except KeyboardInterrupt:
