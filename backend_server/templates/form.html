@@ -27,7 +27,7 @@
                     <label for="coling" class="model_button">coling</label>
                 </div>
             </form>
-            <button id=button class=job_buttons onclick="button()">Submit</button>    
+            <button class=job_buttons onclick="submit_job()">Submit</button>    
         </div>
     
         <div class="form">
@@ -36,7 +36,7 @@
             <form id="input_job_id_form">
                 <input type="number" id="input_job_id">
             </form>
-            <button id=button_2 class=job_buttons onclick="checkStatus(document.getElementById('input_job_id').value)">
+            <button class=job_buttons onclick="checkStatus(document.getElementById('input_job_id').value)">
                 Request job status
             </button>
             <div id="running_message" style="display:none">
@@ -44,7 +44,6 @@
             </div>
             <div id = "completed_message" style = "display:none">
                 <h2>Request Results</h2>
-                <!-- <textarea id="completed_job"></textarea> -->
                 <div class=results_wrapper>
                     <table id="results_table">
                         <!-- here will be the results table -->
@@ -65,7 +64,7 @@
                             <!-- range table will be here -->
                         </table>
                     </div>
-                    <button id=submit_button class=job_buttons>Save changes</button>
+                    <button id=save_changes_button class=job_buttons>Save changes</button>
 
                 </div>
 
@@ -77,16 +76,19 @@
     </footer>
 
     <script>
-    // to get the last job id used in the browser
+    // retrieve stored job id value from the browser. This makes it easy to see the result from the 
+    // last job the user ran.
     document.getElementById("input_job_id").value = localStorage.getItem("last_job_id") || "";
-    function getValue(data)
-    {
-        // this function will allow to choose the correct or new segmentation from drop down menu
-        var myDiv = document.getElementById( data.id + '-value' );
-        myDiv.innerHTML = data.value;
-    }
+    
+    // This variable stores the timer that is used to automatically refresh the job status
+    // while it is running.
     let timeout_result;
 
+    /**
+     * Checks the status of the job with jobId. If the job is complete, a table with 
+     * results will appear. If the job is not complete, the function will check
+     * again after a short interval.
+     */
     async function checkStatus(jobId) {
         localStorage.setItem("last_job_id", String(jobId));
         // if we are waiting for a different job, we do not need to keep waiting for the previous one
@@ -105,7 +107,7 @@
             const result = await requestData(`/api/job/${jobId}/download`);
             const result_string = JSON.stringify(result);
             // completed_job.value = result_string;
-            displayOutputRangeTable(result_string, jobId);
+            displayResultsPageTable(result_string, jobId);
             displayTable(result_string, 0, 100, jobId);
             // scroll to the results
             completed_message.scrollIntoView(true);
@@ -118,7 +120,12 @@
         }
     }
 
-    function displayOutputRangeTable(json_string, jobId) {
+
+    /**
+     * Displays the results page table that allows to navigate between 
+     * results pages (token ranges). 
+     */
+    function displayResultsPageTable(json_string, jobId) {
         let range_table = document.getElementById("range_table");
         const token_list = JSON.parse(json_string);
         const token_number = token_list.length;
@@ -141,14 +148,20 @@
                 displayTable(json_string, lower_bound, upper_bound, jobId);
             }
         }
-        // add an onclick function 
-        // add appropriate display
     }
 
-    // assumes that token_list contains tokens startingfrom index start 
-    // and ending at index end exclusive
+
+    /**
+     * Displays the results table.
+     * 
+     * Shows a subset of results starting from "start" token and
+     * and ending at index "end" exclusive. Eg. start = 10, end = 20
+     * will show tokens from 10 to 19. 
+     * 
+     * The table will contain at most 10 columns and at most 10 rows.
+     */
+
     function displayTable(json_string, start, end, jobId) {
-        // TODO add functionality to display appropriate table
         let results_table = document.getElementById("results_table");
         // convert JSON to list of JS objects
         const token_list = JSON.parse(json_string);
@@ -156,112 +169,107 @@
         const column_number = (tokens_included >= 10) ? 10 : tokens_included;
         const row_number = Math.ceil(tokens_included/10);
         let current_index = 0;
-        results_table.innerHTML = "";
-        // the table will contain at most 10 columns and at most 10 rows. 
+        results_table.innerHTML = ""; 
         // the outer loop will count up to ten, and break if there is less
         for (i = 0; i < row_number; i++) {
-            let row = results_table.insertRow();
+            const row = results_table.insertRow();
             for (j = 0; j < column_number; j++) {
                 const current_token = current_index + start;
-                if (current_token < end) {
-                    let cell = row.insertCell();
-                    // allows users to select the whole cell with TAB
-                    cell.setAttribute('tabindex','0');
-                    // let text = document.createTextNode(token_list[current_token]["input"]);
-                    let text = document.createElement("p");
-                    text.innerText = token_list[current_token]["input"];
-                    text.setAttribute('class', 'input_token');
-                    let break_line = document.createElement("br");
-                    cell.appendChild(text);
-                    cell.appendChild(break_line);
-
-                    // make this appear only if Custom option is selected in the drop down list.
-                    let input_for_list = document.createElement("input");
-                    input_for_list.setAttribute("type", "text");
-                    input_for_list.minlength = 1;
-                    // set as default in drop-down menu's input window to be the firstsegmentation
-                    input_for_list.style.display = "none";
-
-                    cell.appendChild(input_for_list);
-   
-                    // display the preferred segmentation
-                    let preferredSegmentation = document.createElement("p");
-                    preferredSegmentation.innerText = token_list[current_token]["preferred_segmentation"];
-                    cell.appendChild(preferredSegmentation);
-                    
-                    // this drop down list selection is from https://stackoverflow.com/questions/17001961/how-to-add-drop-down-list-select-programmatically
-                    //Create array of options to be added to the drop-down list
-                    let segmentation_list = token_list[current_token]["segmentation"];
-
-
-                    // Create and append select list
-                    let selectList = document.createElement("select");
-                    selectList.id = "segmentation";
-
-                    // create custom select element
-                    let custom_select = document.createElement("div");
-                    custom_select.setAttribute('class', 'custom-select');
-                    custom_select.appendChild(selectList);
-                    cell.appendChild(custom_select);
-
-                    // Create and append the options - add this when you have multiple segmentations 
-                    for (var i = 0; i < segmentation_list.length; i++) {
-                        let option = document.createElement("option");
-                        option.value = segmentation_list[i];
-                        option.text = segmentation_list[i];
-                        selectList.appendChild(option);
-                    }
-
-                    let custom_option = document.createElement("option");
-                    custom_option.value = "Custom"
-                    custom_option.text = "Custom"
-                    selectList.appendChild(custom_option);
-
-
-                    // set the preferred segmentation
-                    selectList.onchange = () => {
-                        const selectedOption = selectList.options[selectList.selectedIndex].value;
-                        if ( selectedOption === custom_option.value) {
-                            custom_select.style.display = "none";
-                            input_for_list.style.display = "block";
-                            // input_for_list.onchange allows for setting of preferred segmentation to 
-                            // user inputs and reverts to the list view, with
-                        } else {
-                            token_list[current_token]["preferred_segmentation"] = selectedOption;
-                        }
-                        preferredSegmentation.innerText = token_list[current_token]["preferred_segmentation"];
-                    }
-
-                    input_for_list.onchange = () => {
-                     // TODO add preferred_segmentation to the JSON object, the default value of which will be the first segmentation
-                        token_list[current_token]["preferred_segmentation"] = input_for_list.value;
-                        input_for_list.style.display = "none";
-                        custom_select.style.display = "block";
-                        preferredSegmentation.innerText = token_list[current_token]["preferred_segmentation"];
-                    }
-
-                    current_index++;
-                } else {
+                if (current_token >= end) {
                     break;
                 }
 
+                const cell = row.insertCell();
+                // allows users to select the whole cell with TAB
+                cell.setAttribute('tabindex','0');
+
+                // display input token in table cell
+                const text = document.createElement("p");
+                text.innerText = token_list[current_token]["input"];
+                text.setAttribute('class', 'input_token');
+                const break_line = document.createElement("br");
+                cell.appendChild(text);
+                cell.appendChild(break_line);
+
+                // create input box for entering Custom option in 
+                // segmentation list
+                const custom_seg_input_field = document.createElement("input");
+                custom_seg_input_field.setAttribute("type", "text");
+                custom_seg_input_field.minlength = 1;
+                // make this appear only if Custom option is selected in the drop down list.
+                custom_seg_input_field.style.display = "none";
+                cell.appendChild(custom_seg_input_field);
+
+                // display the preferred segmentation
+                const preferredSegmentation = document.createElement("p");
+                preferredSegmentation.innerText = token_list[current_token]["preferred_segmentation"];
+                cell.appendChild(preferredSegmentation);
+
+                // Create custom select element with select list in it
+                const custom_select = document.createElement("div");
+                custom_select.setAttribute('class', 'custom-select');
+                const selectList = document.createElement("select");
+                selectList.id = "segmentation";
+                custom_select.appendChild(selectList);
+                cell.appendChild(custom_select);
+
+                //Create array of options and add to the drop-down list
+                const segmentation_list = token_list[current_token]["segmentation"];
+                for (var i = 0; i < segmentation_list.length; i++) {
+                    const option = document.createElement("option");
+                    option.value = segmentation_list[i];
+                    option.text = segmentation_list[i];
+                    selectList.appendChild(option);
+                }
+                const custom_option = document.createElement("option");
+                custom_option.value = "Custom"
+                custom_option.text = "Custom"
+                selectList.appendChild(custom_option);
+
+
+                // Handlers
+
+                // Handle choice from select list and display custom input box if Custom
+                // option was thereby selected.
+                selectList.onchange = () => {
+                    const selectedOption = selectList.options[selectList.selectedIndex].value;
+                    if ( selectedOption === custom_option.value) {
+                        custom_select.style.display = "none";
+                        custom_seg_input_field.style.display = "block";
+                    } else {
+                        token_list[current_token]["preferred_segmentation"] = selectedOption;
+                    }
+                    preferredSegmentation.innerText = token_list[current_token]["preferred_segmentation"];
+                }
+
+                // Sets the preferred segmentation based on 
+                // user inputs and reverts to the list view
+                custom_seg_input_field.onchange = () => {
+                    token_list[current_token]["preferred_segmentation"] = custom_seg_input_field.value;
+                    custom_seg_input_field.style.display = "none";
+                    custom_select.style.display = "block";
+                    preferredSegmentation.innerText = token_list[current_token]["preferred_segmentation"];
+                }
+                current_index++;
             }
         }
 
+        const save_changes_button = document.getElementById("save_changes_button");
 
-
-
-        const submit_button = document.getElementById("submit_button");
-        submit_button.id = "save_button";
-        // const table_div = document.getElementById("completed_message");
-        // table_div.appendChild(submit_button);
-
-        submit_button.onclick = async () => {
-            const saveRequestResult = await requestData(`/api/job/${jobId}/save`, token_list, 'POST');
-            alert("you save was successful");
+        save_changes_button.onclick = async () => {
+            try {
+                const saveRequestResult = await requestData(`/api/job/${jobId}/save`, token_list, 'POST');
+                alert("Your save was successful");
+            } catch (error) {
+                alert("save was not successful");
+            }
         }
     }
 
+
+    /**
+     * Keyboard controls for results table
+     */ 
     window.onkeydown = (event) => {
         if (event.key === "ArrowRight") {
             changeCellFocus(1);
@@ -277,31 +285,35 @@
     function changeCellFocus(direction) {
         //  first figure out if a cell is selected
         let current_cell = document.querySelector("td:focus");
-            const all_cells = document.querySelectorAll("#results_table td");
-            let index_next;
-            if (!current_cell) {
-                index_next = 0;
-            } else {
-                index_next = Array.from(all_cells).indexOf(current_cell) + direction;
-            }
+        const all_cells = document.querySelectorAll("#results_table td");
+        let index_next;
+        if (!current_cell) {
+            index_next = 0;
+        } else {
+            index_next = Array.from(all_cells).indexOf(current_cell) + direction;
+        }
 
-            all_cells[index_next].focus();
-            all_cells[index_next].scrollIntoView({block:"center"});
+        all_cells[index_next].focus();
+        all_cells[index_next].scrollIntoView({block:"center"});
     }
 
     function changeSelectedInList(direction) {
         let current_cell = document.querySelector("td:focus");
-            if (!current_cell) {
-                return
-            } else {
-                let select_list = current_cell.querySelector("select");
-                //  from MDN: to obtain modulo from remainder operator use ((a % n ) + n ) % n.
-                select_list.selectedIndex = (((select_list.selectedIndex + direction) % select_list.length) + select_list.length) % select_list.length;
-                event.preventDefault();
-            }
+        if (!current_cell) {
+            return
+        } else {
+            let select_list = current_cell.querySelector("select");
+            //  from MDN: to obtain modulo from remainder operator use ((a % n ) + n ) % n.
+            select_list.selectedIndex = (((select_list.selectedIndex + direction) % select_list.length) + select_list.length) % select_list.length;
+            event.preventDefault();
+        }
     }
 
-    async function button() {
+    /**
+     * Submits a new job by making a POST request to the API
+     * This will also prefill the job id in the get status form.
+     **/
+    async function submit_job() {
         const inputText = document.getElementById("input_text").value;
         const isFairseq = document.getElementById("fairseq").checked;
         const isColing = document.getElementById("coling").checked;
@@ -313,8 +325,13 @@
         }
         const jobData = await requestData('/api/job', data, 'POST');
         document.getElementById("input_job_id").value = jobData.job_id;
+        checkStatus(jobData.job_id);
     }
 
+
+    /**
+     * Helper function for a REST API request.
+     */ 
     async function requestData(url = '', data = {}, method = 'GET') {
         // Default options are marked with *
         let response;
@@ -325,7 +342,8 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: method==='POST'? JSON.stringify(data) : undefined, // body data type must match "Content-Type" header
+                body: method==='POST'? JSON.stringify(data) : undefined, 
+                // body data type must match "Content-Type" header
             });
             if (!response.ok) {
                 throw new Error('Network response was not ok');
