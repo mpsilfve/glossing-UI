@@ -45,9 +45,11 @@
                 <div id = "completed_message" style = "display:none">
                     <!-- below is React -->
                     <div id="ui_container"></div>
+                    <!-- above is React -->
                 </div>
             </div>
             
+            <!-- Enable JSX -->
             <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
             <!-- Load React. -->
             <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
@@ -81,21 +83,12 @@
                     // const completed_job = document.getElementById("completed_job");
             
                     if (status.status) {
-                        // alert("Your job has completed.");
                         running_message.style.display = "none";
                         completed_message.style.display = "flex";
-                        // completed_job.value = "loading result";
                         const result = await requestData(`/api/job/${jobId}/download`);
 
                         const domContainer = document.querySelector('#ui_container');
                         ReactDOM.render( <ResultsSection data={result} jobId={jobId}/>, domContainer);
-                        // completed_job.value = result_string;
-
-                        // TODO display react
-                        // ^^^^^^^^
-                        // ||||||||
-                        // displayResultsPageTable(result_string, jobId);
-                        // displayTable(result_string, 0, 100, jobId);
                         // scroll to the results
                         completed_message.scrollIntoView(true);
                     } else {
