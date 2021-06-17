@@ -56,7 +56,7 @@
 
             <!-- Load our React component. -->
             <script type="text/babel" src="{{ url_for('static',filename='ui.js') }}"></script>
-            <script>
+            <script type="text/babel">
                 // retrieve stored job id value from the browser. This makes it easy to see the result from the 
                 // last job the user ran.
                 document.getElementById("input_job_id").value = localStorage.getItem("last_job_id") || "";
@@ -86,9 +86,10 @@
                         completed_message.style.display = "flex";
                         // completed_job.value = "loading result";
                         const result = await requestData(`/api/job/${jobId}/download`);
-                        const result_string = JSON.stringify(result);
-                        // completed_job.value = result_string;
 
+                        const domContainer = document.querySelector('#ui_container');
+                        ReactDOM.render( <ResultsSection data={result} jobId={jobId}/>, domContainer);
+                        // completed_job.value = result_string;
 
                         // TODO display react
                         // ^^^^^^^^
