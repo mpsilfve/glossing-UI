@@ -66,6 +66,7 @@ def process_output(current_job):
         # Set preferred segmentation by default to be the first n-best.
         # Users would be able to change the preferred segmentation.
         line_dict["preferred_segmentation"] = line_list[1]
+        line_dict["custom_segmentation"] = []
         result_by_line_split.append(line_dict)
 
     # create a JSON object, add indents for JSON readability

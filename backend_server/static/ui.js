@@ -4,6 +4,14 @@ class Cell extends React.Component {
     constructor(props){
         super(props);
 
+        const dropdown_list = this.initilizeList();
+
+        this.state = {
+          location: dropdown_list
+        }
+    }
+
+    initilizeList() {
         const segmentation_list = this.props.token["segmentation"];
         let dropdown_list = [];
         for (let i = 0; i < segmentation_list.length; i++) {
@@ -24,10 +32,14 @@ class Cell extends React.Component {
         };
         dropdown_list.push(option);
 
+        return dropdown_list;
+    }
 
-        this.state = {
-          location: dropdown_list
-        }
+    changeList(newPreferred, isCustom, update_mode) {
+        this.props.updatePreferredSegmentation(this.props.index, newPreferred, isCustom, update_mode);
+        this.setState({
+            location: this.initilizeList(),
+        });
     }
 
     resetThenSet = (id, key) => {
@@ -44,11 +56,13 @@ class Cell extends React.Component {
     render() {
         return (
             <div>
+                <p>{this.props.token["input"]}</p>
                 <p>{this.props.token["preferred_segmentation"]}</p>
                 <Dropdown  
-                    title="Select location"
+                    title={this.props.token["segmentation"][0]}
                     list={this.state.location}
                     resetThenSet={this.resetThenSet}
+                    changeList = {(newPreferred, isCustom) => this.changeList(newPreferred, isCustom)}
                 />
             </div>
         )
@@ -60,8 +74,36 @@ class Dropdown extends React.Component {
         super(props)
         this.state = {
           isListOpen: false,
-          headerTitle: this.props.title
+          headerTitle: this.props.title,
+          isCustom: false,
+          value: '',
+        //   set update_mode to default checked radio button value
+          selected_update_mode: "only_this",
+        };
+        // from https://stackoverflow.com/questions/53846717/this-handlechange-this-handlechange-bindthis
+        // In JavaScript, class methods are not bound by default. If you forget to bind this.handleClick and 
+        // pass it to onClick, this will be undefined when the function is actually called.
+
+        // This is not React-specific behavior; it is a part of how functions work in JavaScript. 
+        // Generally, if you refer to a method without () after it, such as onClick={this.handleClick}, you should bind that method.
+        
+        // If calling bind annoys you, there are two ways you can get around this. you can use 
+        // the experimental public class fields syntax or arrow functions in the callback
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleRadioChange = this.handleRadioChange.bind(this);
+    }
+
+    static getDerivedStateFromProps(nextProps) {
+        const { list, title } = nextProps;
+        const selectedItem = list.filter((item) => item.selected);
+      
+        if (selectedItem.length) {
+          return {
+            headerTitle: selectedItem[0].title,
+          };
         }
+        return { headerTitle: title };
     }
 
     toggleList = () => {
@@ -78,6 +120,53 @@ class Dropdown extends React.Component {
           headerTitle: title,
           isListOpen: false,
         }, () => resetThenSet(id, key));
+
+        // perform update of segmentations
+        if (item.title != "Custom") {
+            this.props.changeList(item.title, false);
+            this.setState(
+                {
+                    isCustom: false,
+                }
+            );
+        } else {
+            this.setState(
+                {
+                    isCustom: true,
+                }
+            );
+        }
+    }
+
+    handleChange(event) {
+        this.setState({
+            value: event.target.value,
+        });
+    }
+
+    handleSubmit(event) {
+        this.props.changeList(this.state.value, true, this.state.selected_update_mode);
+        this.setState({
+            value: '',
+            isCustom: false,
+        });
+        event.preventDefault();
+    }
+
+    handleRadioChange(event) {
+        let update_mode = "all";
+        if (event.target.value == "only_this") {
+            update_mode = "only_this";
+            alert("Only this option is chosen");
+        } else if (event.target.value == "all_before") {
+            update_mode = "all_before";
+            alert("All before option is chosen");
+        } else {
+            alert("All option is chosen");
+        }
+        this.setState({
+            selected_update_mode: update_mode,
+        });
     }
 
     render() {
@@ -114,11 +203,50 @@ class Dropdown extends React.Component {
                   </button>
                 ))}
               </div>
+              // add custom option if chosen
+            )}
+            {this.state.isCustom && (
+                <form onSubmit={this.handleSubmit}>
+                    <input 
+                        type="text" 
+                        value={this.state.value} 
+                        onChange={this.handleChange} 
+                        required>
+                    </input>
+                    <div id="mode_buttons" >
+                        <input  type="radio" 
+                                id="only_this" 
+                                name="update_mode" 
+                                value="only_this" 
+                                checked={this.state.selected_update_mode === "only_this"}
+                                onChange={this.handleRadioChange}
+                        />
+                        <label htmlFor="only_this" className="mode_button">only this</label>
+                        <input  type="radio" 
+                                id="all_before" 
+                                name="update_mode" 
+                                value="all" 
+                                checked={this.state.selected_update_mode === "all_before"}
+                                onChange={this.handleRadioChange}
+                        />
+                        <label htmlFor="all_before" className="mode_button">all</label>
+                        <input  type="radio" 
+                                id="all" 
+                                name="update_mode" 
+                                value="all"
+                                checked={this.state.selected_update_mode === "all"}
+                                onChange={this.handleRadioChange}
+                        />
+                        <label htmlFor="all" className="mode_button">all</label>
+                    </div>
+                    <input type="submit"></input>
+                </form>
             )}
           </div>
         )
       }
 }
+
 
 class ResultsTable extends React.Component {
     render() {
@@ -137,7 +265,14 @@ class ResultsTable extends React.Component {
                 }
                 row.push(
                     <td key={j}>
-                        <Cell token={this.props.data[current_token]}/>
+                        <Cell 
+                            token={this.props.data[current_token]}
+                            index={current_index + this.props.lower_bound}
+                            updatePreferredSegmentation = {
+                                (index, newPreferred, isCustom, update_mode) => 
+                                this.props.updatePreferredSegmentation(index, newPreferred, isCustom, update_mode)
+                            }
+                        />
                     </td>
                 )
                 current_index++;
@@ -256,6 +391,8 @@ class ResultsSection extends React.Component {
         this.state = {
             lower_bound: 0,
             upper_bound: 100,
+            // below is a copy of input data
+            data: [...props.data],
         }
     }
 
@@ -266,18 +403,36 @@ class ResultsSection extends React.Component {
         });
     }
 
+    updatePreferredSegmentation(index, newPreferred, isCustom, update_mode) {
+        // TODO do something with the update mode
+        const newData = [...this.state.data];
+        newData[index]["preferred_segmentation"] = newPreferred;
+
+        if (isCustom === true) {
+            newData[index]["segmentation"].push(newPreferred);
+        }
+
+        this.setState({
+            data: newData,
+        });
+    }
+
     render() {
         return (
             <div>
                 JobId is {this.props.jobId}
                 <SideMenu 
-                    data={this.props.data} 
+                    data={this.state.data} 
                     onClick={(lower_b, upper_b) => this.handleClick(lower_b, upper_b)}
                 />
                 <ResultsTable 
-                    data={this.props.data} 
+                    data={this.state.data} 
                     lower_bound={this.state.lower_bound} 
                     upper_bound={this.state.upper_bound}
+                    updatePreferredSegmentation = {
+                        (index, newPreferred, isCustom, update_mode) => 
+                            this.updatePreferredSegmentation(index, newPreferred, isCustom, update_mode)
+                    }
                 />
             </div>
         )
