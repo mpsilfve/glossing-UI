@@ -8,10 +8,12 @@ Example of a part of JSON output:
     {
         "input": "isolated", 
         "segmentation": "i*sekw-t"
+        "custom_segmentation: "i?sekw?t"
     }, 
     {
         "input": "networks", 
         "segmentation": "networks"
+        "custom_segmentation: "net-works"
     }
 ]
 """

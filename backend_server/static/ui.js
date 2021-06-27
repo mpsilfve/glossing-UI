@@ -12,6 +12,7 @@ class Cell extends React.Component {
     }
 
     initilizeList() {
+        console.log(`this: ${this} props: `, this.props);
         const segmentation_list = this.props.token["segmentation"];
         let dropdown_list = [];
         for (let i = 0; i < segmentation_list.length; i++) {
@@ -213,7 +214,7 @@ class Dropdown extends React.Component {
                         onChange={this.handleChange} 
                         required>
                     </input>
-                    <div id="mode_buttons" >
+                    <div id="mode_buttons">
                         <input  type="radio" 
                                 id="only_this" 
                                 name="update_mode" 
@@ -250,8 +251,10 @@ class Dropdown extends React.Component {
 
 class ResultsTable extends React.Component {
     render() {
+        const token_list_length = this.props.data.length;
         let rows = [];
-        const tokens_included = this.props.upper_bound - this.props.lower_bound;
+        const upper_bound = token_list_length < 100 ? token_list_length : this.props.upper_bound;
+        const tokens_included = upper_bound - this.props.lower_bound;
         const column_number = (tokens_included >= 10) ? 10 : tokens_included;
         const row_number = Math.ceil(tokens_included/10);
         let current_index = 0;
@@ -260,7 +263,7 @@ class ResultsTable extends React.Component {
             let row = [];
             for (let j = 0; j < column_number; j++) {
                 const current_token = current_index + this.props.lower_bound;
-                if (current_token >= this.props.upper_bound) {
+                if (current_token >= upper_bound) {
                     break;
                 }
                 row.push(
@@ -409,7 +412,7 @@ class ResultsSection extends React.Component {
         newData[index]["preferred_segmentation"] = newPreferred;
 
         if (isCustom === true) {
-            newData[index]["segmentation"].push(newPreferred);
+            newData[index]["custom_segmentation"].push(newPreferred);
         }
 
         this.setState({
@@ -439,3 +442,14 @@ class ResultsSection extends React.Component {
     }
 }
 
+// add sentence indexing
+// page table - show number of sentences that fit into 100 tokens
+// and do not cut sentence in the middle
+// below page add buttons for sentences
+// when you hove over these buttons, the sentence cells will
+// will highlight.
+// when you click on sentence edit button, a window with input sentence will show up
+// above the results table with "resubmit" button
+// the whole table will then refresh
+// how should i hold the data in a JSON object then?
+// as token id, you can use sentence id and index within a sentence

@@ -6,12 +6,6 @@ throug the model. Then, it runs the model against the dev file.
 """
 import json, os, string, re
 
-
-
-# create a list of punctuation marks 
-# (used to clean words from punctuation below)
-punctuation = re.compile('[%s]' % re.escape(string.punctuation))
-
 def process_file(job_id): 
     """ parses the input file into appropriate format 
     and passes the data through the model
@@ -32,16 +26,13 @@ def process_file(job_id):
     # extract the text into a dev file and store it in model_inputs
     text_input = new_job_data["text"]
     # make word list - split text into words 
-    word_list_input = text_input.split()
-    # remove punctuation from each word in worl_list_input
-    word_list_clean = []
-    for word in word_list_input:
-        word_list_clean.append(punctuation.sub('', word))
-
-    # create input string by appending each words with 
-    # two dummy variables and new line characters
+    # TODO define a defininte list of punctuation to separate
+    # TODO think - maybe to separate by spaces first, and then using a regex
+    # from https://stackoverflow.com/questions/367155/splitting-a-string-into-words-and-punctuation
+    word_list_input = re.findall(r"[\w']+|[!#$%&()*+, -./:;<=>?@]", text_input)
+  
     processed_input = ""
-    for word in word_list_clean:
+    for word in word_list_input:
         # add two dummy variables to each word using tab separated format
         # first dummy variable is the word itself, the second one is TRANS
         processed_input += word + "\t" + word + "\t" + "TRANS" + "\n" 
