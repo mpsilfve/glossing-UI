@@ -46,7 +46,13 @@ def process_output(current_job):
     # TODO consider splitting in the case where there is more than one n-best result
     result_by_line_split = []
 
-    for line in result_by_line:
+    # sentence_id to mark each sentence
+    # word_id to mark a word index relative to a given sentence
+    sentence_id = 0
+    word_id = 0
+
+    for i in range(len(result_by_line)):
+        line = result_by_line[i]
         #ignore blank lines
         if not line:
             # the word 'continue' finishes current iteration 
@@ -69,6 +75,19 @@ def process_output(current_job):
         # Users would be able to change the preferred segmentation.
         line_dict["preferred_segmentation"] = line_list[1]
         line_dict["custom_segmentation"] = []
+
+
+        # assign sentence and word id
+        line_dict["sentence_id"] = sentence_id
+        line_dict["word_id"] = word_id
+        
+        # upadate sentence and word id
+        word_id = word_id + 1
+        # TODO determine a set of sentence-ending symbols
+        if line_dict["input"] in [".", "!", "?"]:
+            sentence_id = sentence_id + 1
+            word_id = 0
+
         result_by_line_split.append(line_dict)
 
     # create a JSON object, add indents for JSON readability

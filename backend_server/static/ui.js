@@ -12,7 +12,7 @@ class Cell extends React.Component {
     }
 
     initilizeList() {
-        console.log(`this: ${this} props: `, this.props);
+        // console.log(`this: ${this} props: `, this.props);
         const segmentation_list = this.props.token["segmentation"];
         let dropdown_list = [];
         for (let i = 0; i < segmentation_list.length; i++) {
@@ -251,19 +251,18 @@ class Dropdown extends React.Component {
 
 class ResultsTable extends React.Component {
     render() {
-        const token_list_length = this.props.data.length;
         let rows = [];
-        const upper_bound = token_list_length < 100 ? token_list_length : this.props.upper_bound;
-        const tokens_included = upper_bound - this.props.lower_bound;
+        const tokens_included = this.props.upper_bound - this.props.lower_bound + 1;
         const column_number = (tokens_included >= 10) ? 10 : tokens_included;
         const row_number = Math.ceil(tokens_included/10);
+
         let current_index = 0;
         // the outer loop will count up to ten, and break if there is less
         for (let i = 0; i < row_number; i++) {
             let row = [];
             for (let j = 0; j < column_number; j++) {
                 const current_token = current_index + this.props.lower_bound;
-                if (current_token >= upper_bound) {
+                if (current_token > this.props.upper_bound) {
                     break;
                 }
                 row.push(
@@ -336,28 +335,22 @@ class PageTable extends React.Component {
      */
 
     render() {
+        const rows_data = this.props.data;
         let rows = [];
-        const token_list = this.props.data;
-        const token_number = token_list.length;
-        const range_rows = Math.ceil(token_number/100);
-        const tokens_per_view = 100;
-        let current_index = 0;
-        for (let i = 0; i < range_rows; i++) {
-            const lower_bound = i*tokens_per_view;
-            const upper_bound = i != range_rows - 1? (i+1)*tokens_per_view : token_number;
-            
+        for (let i = 0; i < rows_data.length; i++) {
+            rows.push(
+                <tr key={i}>
+                    <td>
+                        <PageTableCellButton 
+                            lower_bound={rows_data[i][0]} 
+                            upper_bound={rows_data[i][1]}
+                            onClick={(lower_b, upper_b) => this.props.onClick(lower_b, upper_b)}
+                        />
+                    </td>
+                </tr>
+            )
+        }
 
-        rows.push(
-            <tr key={i}>
-                <td>
-                    <PageTableCellButton 
-                        upper_bound={upper_bound} 
-                        lower_bound={lower_bound}
-                        onClick={(lower_b, upper_b) => this.props.onClick(lower_b, upper_b)}
-                    />
-                </td>
-            </tr>)
-    }
         return (
             <table>
                 <tbody>
@@ -391,12 +384,40 @@ class SideMenu extends React.Component {
 class ResultsSection extends React.Component {
     constructor(props) {
         super(props);
+        let rows = [];
+        const token_list = [...props.data];
+        const token_number = token_list.length;
+
+        let first_token = 0;
+        let last_sentence_end = 0;
+        let current_sentence_id = token_list[0].sentence_id;
+
+        const max_tokens_per_view = 50;
+        for (let i = 0; i < token_number; i++) {
+            // when you exceed max tokens, make a row
+            if (current_sentence_id != token_list[i].sentence_id) {
+                last_sentence_end = i - 1;
+                current_sentence_id = token_list[i]["sentence_id"];
+            }
+
+            if (i == token_number - 1) {
+                last_sentence_end = i;
+            }
+
+            if (i - first_token + 1 >= max_tokens_per_view || i == token_number - 1) {
+                last_sentence_end = first_token >= last_sentence_end ? i : last_sentence_end;
+                rows.push([first_token, last_sentence_end]);
+                first_token = last_sentence_end + 1;
+            }
+        }
+        
         this.state = {
-            lower_bound: 0,
-            upper_bound: 100,
+            lower_bound: rows[0][0],
+            upper_bound: rows[0][1],
+            rows: rows,
             // below is a copy of input data
             data: [...props.data],
-        }
+        };
     }
 
     handleClick(lower_b, upper_b) {
@@ -425,7 +446,7 @@ class ResultsSection extends React.Component {
             <div>
                 JobId is {this.props.jobId}
                 <SideMenu 
-                    data={this.state.data} 
+                    data={this.state.rows} 
                     onClick={(lower_b, upper_b) => this.handleClick(lower_b, upper_b)}
                 />
                 <ResultsTable 
