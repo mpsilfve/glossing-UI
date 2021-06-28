@@ -7,6 +7,7 @@ throug the model. Then, it runs the model against the dev file.
 import json, os, string, re
 
 def process_file(job_id): 
+    # TODO figure out parsing of inputs.
     """ parses the input file into appropriate format 
     and passes the data through the model
     

@@ -320,7 +320,7 @@ class PageTableCellButton extends React.Component {
         return (
             <button 
                 className="range_button"
-                onClick={() => this.props.onClick(this.props.lower_bound, this.props.upper_bound)}
+                onClick={() => this.props.onClick(this.props.lower_bound, this.props.upper_bound, this.props.page_index)}
             >
                 {this.props.lower_bound} - {this.props.upper_bound}
             </button>
@@ -328,11 +328,42 @@ class PageTableCellButton extends React.Component {
     }
 }
 
+class PageTableSentenceButton extends React.Component {
+    render() {
+        return (
+            <button 
+                className="sentence_button"
+                onClick={() => {this.props.onClick(this.props.sentence_id)}}
+            >
+                Modify sentence {this.props.sentence_id}
+            </button>
+        )
+    }
+}
+
+
 class PageTable extends React.Component {
     /**
      * Displays the results page table that allows to navigate between 
      * results pages (token ranges). 
      */
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            sentences_included: this.props.data[0][2],
+        };
+    }
+
+    onClick(lower_b, upper_b, i) {
+        this.setState({
+            sentences_included: this.props.data[i][2],
+        });
+        this.props.onClick(lower_b, upper_b);
+    }
+
+
 
     render() {
         const rows_data = this.props.data;
@@ -344,19 +375,41 @@ class PageTable extends React.Component {
                         <PageTableCellButton 
                             lower_bound={rows_data[i][0]} 
                             upper_bound={rows_data[i][1]}
-                            onClick={(lower_b, upper_b) => this.props.onClick(lower_b, upper_b)}
+                            page_index = {i}
+                            onClick={(lower_b, upper_b, i) => this.onClick(lower_b, upper_b, i)}
                         />
                     </td>
                 </tr>
-            )
+            );
+        }
+
+        let sentence_rows = [];
+        for (let j = 0; j < this.state.sentences_included.length; j++) {
+            sentence_rows.push(
+                <tr key={j}>
+                    <td>
+                        <PageTableSentenceButton 
+                            sentence_id={this.state.sentences_included[j]}
+                            onClick={(sentence_id) => {this.props.onRetrieveSentence(sentence_id)}}
+                        />
+                    </td>
+                </tr>
+            );
         }
 
         return (
-            <table>
+            <div>
+             <table>
                 <tbody>
                     {rows}
                 </tbody>
             </table>
+            <table>
+                <tbody>
+                    {sentence_rows}
+                </tbody>
+            </table>
+            </div>
         )
     }
 }
@@ -371,6 +424,7 @@ class SideMenu extends React.Component {
                 <PageTable 
                     data={this.props.data}
                     onClick={(lower_b, upper_b) => this.props.onClick(lower_b, upper_b)}
+                    onRetrieveSentence={(sentence_id) => {this.props.onRetrieveSentence(sentence_id)}}
                 />
                 <button id="save_changes_button" className="job_buttons">
                     Save changes
@@ -380,6 +434,52 @@ class SideMenu extends React.Component {
         );
     }
 };
+
+class ResubmitSentenceSection extends React.Component {
+    // TODO add controlled component
+    constructor(props){
+        super(props)
+        this.state = {
+          value: this.props.sentence,
+        //   set update_mode to default checked radio button value
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({
+            value: event.target.value,
+        });
+    }
+
+    handleSubmit(event) {
+        this.props.onSubmit(this.state.value);
+        this.setState({
+            value: '',
+        });
+        event.preventDefault();
+    }
+
+    render() {
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <input 
+                    type="text" 
+                    value={this.state.value}
+                    onChange={this.handleChange} 
+                    required>
+                </input>
+                <input type="submit" 
+                        className="job_buttons"
+                        value="Re-submit sentence">
+                </input>
+            </form>
+        );
+
+    }
+}
 
 class ResultsSection extends React.Component {
     constructor(props) {
@@ -392,12 +492,16 @@ class ResultsSection extends React.Component {
         let last_sentence_end = 0;
         let current_sentence_id = token_list[0].sentence_id;
 
-        const max_tokens_per_view = 50;
+        let sentence_start = {}
+        sentence_start[token_list[0].sentence_id] = 0;
+
+        const max_tokens_per_view = 10;
         for (let i = 0; i < token_number; i++) {
             // when you exceed max tokens, make a row
             if (current_sentence_id != token_list[i].sentence_id) {
                 last_sentence_end = i - 1;
                 current_sentence_id = token_list[i]["sentence_id"];
+                sentence_start[current_sentence_id] = i;
             }
 
             if (i == token_number - 1) {
@@ -406,7 +510,17 @@ class ResultsSection extends React.Component {
 
             if (i - first_token + 1 >= max_tokens_per_view || i == token_number - 1) {
                 last_sentence_end = first_token >= last_sentence_end ? i : last_sentence_end;
-                rows.push([first_token, last_sentence_end]);
+                // console.log(sentence_start);
+                // console.log(`Start: ${first_token} and end ${last_sentence_end}`);
+                let sentences_included = [];
+                sentences_included.push(token_list[first_token].sentence_id);
+                // console.log(sentences_included);
+                for (let key in sentence_start) {
+                    if (sentence_start[key] > first_token && sentence_start[key] <= last_sentence_end) {
+                        sentences_included.push(key);
+                    }           
+                }
+                rows.push([first_token, last_sentence_end, sentences_included]);
                 first_token = last_sentence_end + 1;
             }
         }
@@ -417,6 +531,9 @@ class ResultsSection extends React.Component {
             rows: rows,
             // below is a copy of input data
             data: [...props.data],
+            modify_sentence: false,
+            sentence_to_modify: "",
+            sentence_boundaries: sentence_start,
         };
     }
 
@@ -441,6 +558,37 @@ class ResultsSection extends React.Component {
         });
     }
 
+    retrieveSentenceToModify(sentence_id) {
+        console.log(sentence_id);
+        const sentence_start = this.state.sentence_boundaries[sentence_id];
+        let sentence_end;
+        if (this.state.sentence_boundaries[sentence_id + 1]) {
+            sentence_end = this.state.sentence_boundaries[sentence_id + 1] - 1;
+        } else {
+            sentence_end = this.state.data.length - 1;
+        }
+
+        console.log(`start ${sentence_start} and end ${sentence_end}`);
+        let sentence = ""
+        for (let i = sentence_start; i <= sentence_end; i++) {
+            console.log(this.state.data[i].input);
+            sentence = sentence.concat(this.state.data[i].input);
+            if (i != sentence_end) {
+                sentence = sentence.concat(" ");
+            }
+        }
+        console.log(sentence);
+        this.setState({
+            sentence_to_modify: sentence,
+            modify_sentence: true,
+        });
+    }
+
+    async resubmitSentence(new_sentence) {
+        // TODO implement handler
+        // const jobData = await requestData('/api/job', data, 'POST');
+    }
+
     render() {
         return (
             <div>
@@ -448,7 +596,12 @@ class ResultsSection extends React.Component {
                 <SideMenu 
                     data={this.state.rows} 
                     onClick={(lower_b, upper_b) => this.handleClick(lower_b, upper_b)}
+                    onRetrieveSentence={(sentence_id) => {this.retrieveSentenceToModify(sentence_id)}}
                 />
+                {this.state.modify_sentence && (<ResubmitSentenceSection 
+                        sentence={this.state.sentence_to_modify}
+                        onSubmit={(new_sentence) => {this.resubmitSentence(new_sentence)}}
+                    />)}
                 <ResultsTable 
                     data={this.state.data} 
                     lower_bound={this.state.lower_bound} 
@@ -474,3 +627,4 @@ class ResultsSection extends React.Component {
 // the whole table will then refresh
 // how should i hold the data in a JSON object then?
 // as token id, you can use sentence id and index within a sentence
+
