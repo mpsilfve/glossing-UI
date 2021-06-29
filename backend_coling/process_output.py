@@ -41,6 +41,7 @@ def process_output(current_job):
     # make the results into a list
     result_by_line = new_result_contents.split('\n')
     print(result_by_line)
+    print("outputs")
     # for each line, split by space (assumes there is only 
     # one n best result for now)
     # TODO consider splitting in the case where there is more than one n-best result
@@ -80,6 +81,8 @@ def process_output(current_job):
         # assign sentence and word id
         line_dict["sentence_id"] = sentence_id
         line_dict["word_id"] = word_id
+        # TODO change to a separate section on metadata
+        line_dict["model"] = "coling"
         
         # upadate sentence and word id
         word_id = word_id + 1

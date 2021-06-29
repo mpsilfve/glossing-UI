@@ -55,6 +55,7 @@ class Cell extends React.Component {
     }
 
     render() {
+        console.log(`This is here: ${this.props.token.input}`);
         return (
             <div>
                 <p>{this.props.token["input"]}</p>
@@ -532,7 +533,7 @@ class ResultsSection extends React.Component {
             // below is a copy of input data
             data: [...props.data],
             modify_sentence: false,
-            sentence_to_modify: "",
+            sentence_to_modify: {},
             sentence_boundaries: sentence_start,
         };
     }
@@ -558,8 +559,7 @@ class ResultsSection extends React.Component {
         });
     }
 
-    retrieveSentenceToModify(sentence_id) {
-        console.log(sentence_id);
+    determineSentenceBoundaries(sentence_id) {
         const sentence_start = this.state.sentence_boundaries[sentence_id];
         let sentence_end;
         if (this.state.sentence_boundaries[sentence_id + 1]) {
@@ -568,25 +568,136 @@ class ResultsSection extends React.Component {
             sentence_end = this.state.data.length - 1;
         }
 
+        return [sentence_start, sentence_end];
+    }
+
+    retrieveSentenceToModify(sentence_id) {
+        const sentence_boundary = this.determineSentenceBoundaries(sentence_id);
+        const sentence_start = sentence_boundary[0];
+        const sentence_end = sentence_boundary[1];
+
         console.log(`start ${sentence_start} and end ${sentence_end}`);
         let sentence = ""
         for (let i = sentence_start; i <= sentence_end; i++) {
-            console.log(this.state.data[i].input);
             sentence = sentence.concat(this.state.data[i].input);
             if (i != sentence_end) {
                 sentence = sentence.concat(" ");
             }
         }
-        console.log(sentence);
         this.setState({
-            sentence_to_modify: sentence,
+            sentence_to_modify: {sentence:sentence, id: sentence_id},
             modify_sentence: true,
         });
     }
 
     async resubmitSentence(new_sentence) {
         // TODO implement handler
-        // const jobData = await requestData('/api/job', data, 'POST');
+        const inputText = new_sentence;
+        // TODO expand on that if other models are here
+        const isColing = this.state.data[0].model === "coling";
+        let data;
+        if (isColing) {
+            data = {text:inputText, model:'coling'};
+        } else {
+            data = {text:inputText, model:'fairseq'};
+        }
+        //  submit a new job and get a new job id
+        const request = await requestData('/api/job', data, 'POST');
+
+        let status = {status:false};
+
+        while(!status.status) {
+            status = await requestData(`/api/job/${request.job_id}`);
+            await new Promise(resolve => setTimeout(resolve, 1000));
+        }
+        const modified_sentence = await requestData(`/api/job/${request.job_id}/download`);
+
+        // exchange the tokens in data
+        const sentence_id = this.state.sentence_to_modify.id;
+        const sentence_boundary = this.determineSentenceBoundaries(sentence_id);
+        const start = sentence_boundary[0];
+        const end = sentence_boundary[1];
+        // console.log(`start is ${start}, end is ${end}, modified sentence ${modified_sentence}`);
+
+        const before_modified = this.state.data.slice(0, start);
+        
+        let updated_data = before_modified.concat(modified_sentence);
+
+        if (end != this.state.data.length) {
+            const after_modified = this.state.data.slice(end + 1, this.state.data.length);
+            updated_data = updated_data.concat(after_modified);
+        }
+    
+        console.log(`new data length is ${updated_data.length}`)
+
+        // update the state
+
+        // need to update the state in such a way so that the results table
+        // shows at the panel with the updated sentence
+
+        let rows = [];
+        const token_list = updated_data;
+        const token_number = token_list.length;
+
+        let first_token = 0;
+        let last_sentence_end = 0;
+        let current_sentence_id = token_list[0].sentence_id;
+
+        let sentence_start = {}
+        sentence_start[token_list[0].sentence_id] = 0;
+
+        const max_tokens_per_view = 10;
+        for (let i = 0; i < token_number; i++) {
+            // when you exceed max tokens, make a row
+            if (current_sentence_id != token_list[i].sentence_id) {
+                last_sentence_end = i - 1;
+                current_sentence_id = token_list[i]["sentence_id"];
+                sentence_start[current_sentence_id] = i;
+            }
+
+            if (i == token_number - 1) {
+                last_sentence_end = i;
+            }
+
+            if (i - first_token + 1 >= max_tokens_per_view || i == token_number - 1) {
+                last_sentence_end = first_token >= last_sentence_end ? i : last_sentence_end;
+                // console.log(sentence_start);
+                // console.log(`Start: ${first_token} and end ${last_sentence_end}`);
+                let sentences_included = [];
+                sentences_included.push(token_list[first_token].sentence_id);
+                // console.log(sentences_included);
+                for (let key in sentence_start) {
+                    if (sentence_start[key] > first_token && sentence_start[key] <= last_sentence_end) {
+                        sentences_included.push(key);
+                    }           
+                }
+                rows.push([first_token, last_sentence_end, sentences_included]);
+                first_token = last_sentence_end + 1;
+            }
+        }
+        
+        let lower_bound;
+        let upper_bound;
+
+        for (let k = 0; k < rows.length; k++) {
+            if (sentence_id in rows[k][2]) {
+                lower_bound = rows[k][0];
+                upper_bound = rows[k][1];
+            }
+        }
+
+        this.setState({
+            lower_bound: lower_bound,
+            upper_bound: upper_bound,
+            rows: rows,
+            data: updated_data,
+            modify_sentence: false,
+            sentence_to_modify: {},
+            sentence_boundaries: sentence_start,
+        });
+
+        // TODO make it more efficient so that you do not have to traverse the entire
+        // data again
     }
 
     render() {
@@ -599,7 +710,7 @@ class ResultsSection extends React.Component {
                     onRetrieveSentence={(sentence_id) => {this.retrieveSentenceToModify(sentence_id)}}
                 />
                 {this.state.modify_sentence && (<ResubmitSentenceSection 
-                        sentence={this.state.sentence_to_modify}
+                        sentence={this.state.sentence_to_modify.sentence}
                         onSubmit={(new_sentence) => {this.resubmitSentence(new_sentence)}}
                     />)}
                 <ResultsTable 

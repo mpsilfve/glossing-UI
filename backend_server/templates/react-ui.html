@@ -16,7 +16,7 @@
                 <h2>Submit data</h2>
                 <p>Please enter the text you wish to submit:</p>       
                 <form>
-                    <textarea id=input_text></textarea>
+                    <textarea id=input_text required></textarea>
                     <p>Choose the model that you wish to use:</p>
                     <div id="model_buttons">
                         <input type="radio" id="fairseq" 
@@ -56,54 +56,15 @@
             <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
             <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
 
+            <!-- Load our React component. -->
+            <script type="text/babel" src="{{ url_for('static',filename='ui.js') }}"></script>
+
             <script>
-                // retrieve stored job id value from the browser. This makes it easy to see the result from the 
-                // last job the user ran.
-                document.getElementById("input_job_id").value = localStorage.getItem("last_job_id") || "";
-                
-                // This variable stores the timer that is used to automatically refresh the job status
-                // while it is running.
-                let timeout_result;
-            
-                /**
-                 * Checks the status of the job with jobId. If the job is complete, a table with 
-                 * results will appear. If the job is not complete, the function will check
-                 * again after a short interval.
-                 */
-                async function checkStatus(jobId) {
-                    localStorage.setItem("last_job_id", String(jobId));
-                    // if we are waiting for a different job, we do not need to keep waiting for the previous one
-                    clearTimeout(timeout_result);
-                    // const jobId = document.getElementById("input_job_id").value;
-                    const status = await requestData(`/api/job/${jobId}`);
-                    const running_message = document.getElementById("running_message");
-                    const completed_message = document.getElementById("completed_message");
-                    // const completed_job = document.getElementById("completed_job");
-            
-                    if (status.status) {
-                        running_message.style.display = "none";
-                        completed_message.style.display = "flex";
-                        const result = await requestData(`/api/job/${jobId}/download`);
-
-                        const domContainer = document.querySelector('#ui_container');
-                        ReactDOM.render( <ResultsSection data={result} jobId={jobId}/>, domContainer);
-                        // scroll to the results
-                        completed_message.scrollIntoView(true);
-                    } else {
-                        // alert("The job has submitted, but not completed yet. It is running. Rest assured you will be notified when it will get processed.");
-                        completed_message.style.display = "none";
-                        running_message.style.display = "block";
-                        // wait 2 s and run checkStatus again
-                        timeout_result = setTimeout(checkStatus, 2000, jobId);
-                    }
-                }
-
-            
                 /**
                  * Submits a new job by making a POST request to the API
                  * This will also prefill the job id in the get status form.
                  **/
-                async function submit_job() {
+                 async function submit_job() {
                     const inputText = document.getElementById("input_text").value;
                     const isFairseq = document.getElementById("fairseq").checked;
                     const isColing = document.getElementById("coling").checked;
@@ -145,13 +106,50 @@
                     const job_data = await response.json();
                     return job_data;
                 }
+            </script> 
+            <script type="text/babel">
+                // retrieve stored job id value from the browser. This makes it easy to see the result from the 
+                // last job the user ran.
+                document.getElementById("input_job_id").value = localStorage.getItem("last_job_id") || "";
+                
+                // This variable stores the timer that is used to automatically refresh the job status
+                // while it is running.
+                let timeout_result;
+            
+                /**
+                 * Checks the status of the job with jobId. If the job is complete, a table with 
+                 * results will appear. If the job is not complete, the function will check
+                 * again after a short interval.
+                 */
+                async function checkStatus(jobId) {
+                    localStorage.setItem("last_job_id", String(jobId));
+                    // if we are waiting for a different job, we do not need to keep waiting for the previous one
+                    clearTimeout(timeout_result);
+                    // const jobId = document.getElementById("input_job_id").value;
+                    const status = await requestData(`/api/job/${jobId}`);
+                    const running_message = document.getElementById("running_message");
+                    const completed_message = document.getElementById("completed_message");
+                    // const completed_job = document.getElementById("completed_job");
+            
+                    if (status.status) {
+                        running_message.style.display = "none";
+                        completed_message.style.display = "flex";
+                        const result = await requestData(`/api/job/${jobId}/download`);
+
+                        const domContainer = document.querySelector('#ui_container');
+                        ReactDOM.render( <ResultsSection data={result} jobId={jobId}/>, domContainer);
+                        // scroll to the results
+                        completed_message.scrollIntoView(true);
+                    } else {
+                        // alert("The job has submitted, but not completed yet. It is running. Rest assured you will be notified when it will get processed.");
+                        completed_message.style.display = "none";
+                        running_message.style.display = "block";
+                        // wait 2 s and run checkStatus again
+                        timeout_result = setTimeout(checkStatus, 2000, jobId);
+                    }
+                }
                 </script>
-
-                <!-- Load our React component. -->
-                <script type="text/babel" src="{{ url_for('static',filename='ui.js') }}"></script>
         </article>
-
-
   </body>
 </html>
 

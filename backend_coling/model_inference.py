@@ -4,7 +4,7 @@ Parses the input file with a given job ID, extracts the dictionary
 and  makes a job_id.dev file, which will be the file to be passed 
 throug the model. Then, it runs the model against the dev file.
 """
-import json, os, string, re
+import json, os, string, re, sys
 
 def process_file(job_id): 
     # TODO figure out parsing of inputs.
@@ -30,7 +30,9 @@ def process_file(job_id):
     # TODO define a defininte list of punctuation to separate
     # TODO think - maybe to separate by spaces first, and then using a regex
     # from https://stackoverflow.com/questions/367155/splitting-a-string-into-words-and-punctuation
-    word_list_input = re.findall(r"[\w']+|[!#$%&()*+, -./:;<=>?@]", text_input)
+    word_list_input = re.findall(r"[\w']+|[!#$%&()*+,-./:;<=>?@]", text_input)
+    print(word_list_input)
+    print("inputs")
   
     processed_input = ""
     for word in word_list_input:
