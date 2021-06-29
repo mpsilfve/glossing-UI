@@ -16,9 +16,9 @@
                 <h2>Submit data</h2>
                 <p>Please enter the text you wish to submit:</p>       
                 <form>
-                    <textarea id=input_text required></textarea>
+                    <textarea id=input_text class=user_input required></textarea>
                     <p>Choose the model that you wish to use:</p>
-                    <div id="model_buttons">
+                    <div id="model_buttons" class="form">
                         <input type="radio" id="fairseq" 
                                name="model" value="fairseq" checked>
                         <label for="fairseq" class="model_button">fairseq</label>
@@ -33,8 +33,8 @@
             <div class="form">
                 <h2>Get status of request</h2>
                 <p>Enter job id:</p>
-                <form id="input_job_id_form">
-                    <input type="number" id="input_job_id">
+                <form id="input_job_id_form" class=form>
+                    <input type="number" id="input_job_id" class="user_input">
                 </form>
                 <button class=job_buttons onclick="checkStatus(document.getElementById('input_job_id').value)">
                     Request job status
@@ -150,6 +150,9 @@
                 }
                 </script>
         </article>
+        <footer>
+
+        </footer>
   </body>
 </html>
 

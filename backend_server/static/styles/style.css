@@ -60,28 +60,26 @@ p {
 
 .form {
   text-align: center;
-}
-
-#input_text {
-  width: 30%;
-  border: 2px solid #5680e9;
-  padding: 1zdkjem 2em; 
-  height: 10em;
-  font-size: 1em;
-  font-family:Arial, Helvetica, sans-serif;
-  color: #4d1794;
-}
-
-#input_job_id_form {
   padding: 0.8em 1em;
 }
 
-#input_job_id {
+.user_input {
   border: 2px solid #5680e9;
   padding: 10px 10px; 
   font-size: 1em; 
   font-family:Arial, Helvetica, sans-serif;
-  color: black;
+  color: #4d1794;
+  margin: 1em;
+}
+
+#input_text {
+  width: 30%;
+  height: 10em;
+}
+
+#modified_sentence_input {
+  width: 30%;
+  height: 4em;
 }
 
 .job_buttons {
@@ -98,10 +96,6 @@ p {
 .model_button {
   color: #4d1794;
   font-size: 1.5em;
-}
-
-#model_buttons {
-  padding: 0.8em 1.5em;
 }
 
 .input_token {
@@ -200,13 +194,17 @@ table {
   border: 2px solid #5680e9;
 }
 
+#custom_segmentation_input {
+  width: 75px;
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-select {
+.dd-wrapper button {
   /* // A reset of styles, including removing the default dropdown arrow */
   appearance: none;
   -webkit-appearance: none;
@@ -229,7 +227,7 @@ select {
   --select-arrow: var(--select-border);
 }
 
-.custom-select {
+.dd-wrapper {
   min-width: 1ch;
   max-width: 15ch;
   border: 1px solid var(--select-border);
@@ -245,6 +243,10 @@ select {
   grid-template-areas: "select";
   align-items: center;
   position: relative;
+}
+
+.dd-header {
+  border: 2px solid #5680e9 !important;
 }
 
 select, .custom-select:after {

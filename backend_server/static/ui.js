@@ -55,16 +55,15 @@ class Cell extends React.Component {
     }
 
     render() {
-        console.log(`This is here: ${this.props.token.input}`);
         return (
-            <div>
+            <div className="cell">
                 <p>{this.props.token["input"]}</p>
                 <p>{this.props.token["preferred_segmentation"]}</p>
                 <Dropdown  
                     title={this.props.token["segmentation"][0]}
                     list={this.state.location}
                     resetThenSet={this.resetThenSet}
-                    changeList = {(newPreferred, isCustom) => this.changeList(newPreferred, isCustom)}
+                    changeList = {(newPreferred, isCustom, mode) => this.changeList(newPreferred, isCustom, mode)}
                 />
             </div>
         )
@@ -213,6 +212,7 @@ class Dropdown extends React.Component {
                         type="text" 
                         value={this.state.value} 
                         onChange={this.handleChange} 
+                        id="custom_segmentation_input"
                         required>
                     </input>
                     <div id="mode_buttons">
@@ -266,13 +266,14 @@ class ResultsTable extends React.Component {
                 if (current_token > this.props.upper_bound) {
                     break;
                 }
+                console.log(`Lower bound is ${this.props.lower_bound} and current_index is ${current_index} and index is ${current_index + this.props.lower_bound}`)
                 row.push(
                     <td key={j}>
                         <Cell 
                             token={this.props.data[current_token]}
                             index={current_index + this.props.lower_bound}
                             updatePreferredSegmentation = {
-                                (index, newPreferred, isCustom, update_mode) => 
+                                ( index, newPreferred, isCustom, update_mode) => 
                                 this.props.updatePreferredSegmentation(index, newPreferred, isCustom, update_mode)
                             }
                         />
@@ -288,11 +289,13 @@ class ResultsTable extends React.Component {
         }
         
         return (
-            <table id="results_table">
-                <tbody>
-                    {rows}
-                </tbody>
-            </table>
+            <div className="results_wrapper">
+                <table id="results_table">
+                    <tbody>
+                        {rows}
+                    </tbody>
+                </table>
+            </div>
         )
     }
 }
@@ -335,6 +338,7 @@ class PageTableSentenceButton extends React.Component {
             <button 
                 className="sentence_button"
                 onClick={() => {this.props.onClick(this.props.sentence_id)}}
+                className="range_button"
             >
                 Modify sentence {this.props.sentence_id}
             </button>
@@ -399,12 +403,13 @@ class PageTable extends React.Component {
         }
 
         return (
-            <div>
+            <div id="range_table_wrapper">
              <table>
                 <tbody>
                     {rows}
                 </tbody>
             </table>
+            <p>Sentences in this window:</p>
             <table>
                 <tbody>
                     {sentence_rows}
@@ -420,7 +425,7 @@ class PageTable extends React.Component {
 class SideMenu extends React.Component {
     render() {
         return (
-            <div>
+            <div className="range_and_save">
                 <Legend />
                 <PageTable 
                     data={this.props.data}
@@ -465,11 +470,13 @@ class ResubmitSentenceSection extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} className="form">
                 <input 
                     type="text" 
                     value={this.state.value}
-                    onChange={this.handleChange} 
+                    onChange={this.handleChange}
+                    className="user_input" 
+                    id="modified_sentence_input"
                     required>
                 </input>
                 <input type="submit" 
@@ -496,7 +503,7 @@ class ResultsSection extends React.Component {
         let sentence_start = {}
         sentence_start[token_list[0].sentence_id] = 0;
 
-        const max_tokens_per_view = 10;
+        const max_tokens_per_view = 50;
         for (let i = 0; i < token_number; i++) {
             // when you exceed max tokens, make a row
             if (current_sentence_id != token_list[i].sentence_id) {
@@ -548,10 +555,11 @@ class ResultsSection extends React.Component {
     updatePreferredSegmentation(index, newPreferred, isCustom, update_mode) {
         // TODO do something with the update mode
         const newData = [...this.state.data];
+        console.log(`The index is ${index}`);
         newData[index]["preferred_segmentation"] = newPreferred;
 
         if (isCustom === true) {
-            newData[index]["custom_segmentation"].push(newPreferred);
+            newData[index]["segmentation"].push(newPreferred);
         }
 
         this.setState({
@@ -646,7 +654,7 @@ class ResultsSection extends React.Component {
         let sentence_start = {}
         sentence_start[token_list[0].sentence_id] = 0;
 
-        const max_tokens_per_view = 10;
+        const max_tokens_per_view = 50;
         for (let i = 0; i < token_number; i++) {
             // when you exceed max tokens, make a row
             if (current_sentence_id != token_list[i].sentence_id) {
@@ -703,25 +711,26 @@ class ResultsSection extends React.Component {
     render() {
         return (
             <div>
-                JobId is {this.props.jobId}
-                <SideMenu 
-                    data={this.state.rows} 
-                    onClick={(lower_b, upper_b) => this.handleClick(lower_b, upper_b)}
-                    onRetrieveSentence={(sentence_id) => {this.retrieveSentenceToModify(sentence_id)}}
-                />
                 {this.state.modify_sentence && (<ResubmitSentenceSection 
                         sentence={this.state.sentence_to_modify.sentence}
                         onSubmit={(new_sentence) => {this.resubmitSentence(new_sentence)}}
                     />)}
-                <ResultsTable 
-                    data={this.state.data} 
-                    lower_bound={this.state.lower_bound} 
-                    upper_bound={this.state.upper_bound}
-                    updatePreferredSegmentation = {
-                        (index, newPreferred, isCustom, update_mode) => 
-                            this.updatePreferredSegmentation(index, newPreferred, isCustom, update_mode)
-                    }
-                />
+                <div id="completed_message">
+                    <SideMenu 
+                        data={this.state.rows} 
+                        onClick={(lower_b, upper_b) => this.handleClick(lower_b, upper_b)}
+                        onRetrieveSentence={(sentence_id) => {this.retrieveSentenceToModify(sentence_id)}}
+                    />
+                    <ResultsTable 
+                        data={this.state.data} 
+                        lower_bound={this.state.lower_bound} 
+                        upper_bound={this.state.upper_bound}
+                        updatePreferredSegmentation = {
+                            (index, newPreferred, isCustom, update_mode) => 
+                                this.updatePreferredSegmentation(index, newPreferred, isCustom, update_mode)
+                        }
+                    />
+                </div>
             </div>
         )
     }
