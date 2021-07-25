@@ -93,6 +93,8 @@ class Dropdown extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleRadioChange = this.handleRadioChange.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
+
     }
 
     static getDerivedStateFromProps(nextProps) {
@@ -113,10 +115,13 @@ class Dropdown extends React.Component {
        }))
     }
 
+    // if custom option is selected, save the current title, so that
+    // if the custom option is cancelled, we can returned to selecting
+    // the previously selected item
     selectItem = (item) => {
         const { resetThenSet } = this.props;
         const { title, id, key } = item;
-      
+        const previousTitle = this.state.headerTitle;
         this.setState({
           headerTitle: title,
           isListOpen: false,
@@ -134,6 +139,7 @@ class Dropdown extends React.Component {
             this.setState(
                 {
                     isCustom: true,
+                    previousTitle: previousTitle,
                 }
             );
         }
@@ -152,6 +158,24 @@ class Dropdown extends React.Component {
             isCustom: false,
         });
         event.preventDefault();
+    }
+
+    // in case if custom option is cancelled, the state is returned to default values
+    // and the selection returns to the previous selected item, which title is stored
+    // in previousTitle
+    handleCancel(event) {
+        this.setState({
+            value: '',
+            isCustom: false,
+        });
+
+        for (let i = 0; i < this.props.list.length; i++) {
+            if (this.props.list[i].title === this.state.previousTitle) {
+                this.selectItem(this.props.list[i]);
+            }
+        }
+        event.preventDefault();
+
     }
 
     handleRadioChange(event) {
@@ -231,7 +255,7 @@ class Dropdown extends React.Component {
                                 checked={this.state.selected_update_mode === "all_before"}
                                 onChange={this.handleRadioChange}
                         />
-                        <label htmlFor="all_before" className="mode_button">all</label>
+                        <label htmlFor="all_before" className="mode_button">all after</label>
                         <input  type="radio" 
                                 id="all" 
                                 name="update_mode" 
@@ -241,7 +265,8 @@ class Dropdown extends React.Component {
                         />
                         <label htmlFor="all" className="mode_button">all</label>
                     </div>
-                    <input type="submit"></input>
+                    <input type="submit" value="Submit"></input>
+                    <button onClick={this.handleCancel}>Cancel</button>
                 </form>
             )}
           </div>
@@ -266,6 +291,7 @@ class ResultsTable extends React.Component {
                 if (current_token > this.props.upper_bound) {
                     break;
                 }
+                // TODO why does this render every time
                 console.log(`Lower bound is ${this.props.lower_bound} and current_index is ${current_index} and index is ${current_index + this.props.lower_bound}`)
                 row.push(
                     <td key={j}>
@@ -489,6 +515,13 @@ class ResubmitSentenceSection extends React.Component {
     }
 }
 
+/*
+Main React component, renders ResultsTable and SideMenu
+
+Props: 
+    data - list of tokens with inputs and segmentations
+    jobId
+*/
 class ResultsSection extends React.Component {
     constructor(props) {
         super(props);
@@ -505,24 +538,30 @@ class ResultsSection extends React.Component {
 
         const max_tokens_per_view = 50;
         for (let i = 0; i < token_number; i++) {
-            // when you exceed max tokens, make a row
+            // if a new sentence starts, update the current_sentence_id and sentence start and end
             if (current_sentence_id != token_list[i].sentence_id) {
                 last_sentence_end = i - 1;
                 current_sentence_id = token_list[i]["sentence_id"];
                 sentence_start[current_sentence_id] = i;
             }
 
+            // when you exceed max tokens, make it last_sentence_end
             if (i == token_number - 1) {
                 last_sentence_end = i;
             }
 
+            // if we exceed max tokens per view or are at the end of the token list
+            // 
             if (i - first_token + 1 >= max_tokens_per_view || i == token_number - 1) {
+                // if sentence is too long, that just make it the end, otherwise just use
+                // the sentence end
                 last_sentence_end = first_token >= last_sentence_end ? i : last_sentence_end;
                 // console.log(sentence_start);
                 // console.log(`Start: ${first_token} and end ${last_sentence_end}`);
                 let sentences_included = [];
                 sentences_included.push(token_list[first_token].sentence_id);
                 // console.log(sentences_included);
+                // include sentences that are within the current view
                 for (let key in sentence_start) {
                     if (sentence_start[key] > first_token && sentence_start[key] <= last_sentence_end) {
                         sentences_included.push(key);
@@ -532,18 +571,43 @@ class ResultsSection extends React.Component {
                 first_token = last_sentence_end + 1;
             }
         }
+
+        // make a dictionary {key: list of indixes} and store it in state
+        // but also make it updatable?
+        const token_dictionary = this.makeTokenDictionary(token_list);
         
         this.state = {
+            //  initial lower and upper bound from the rows 2D array
             lower_bound: rows[0][0],
             upper_bound: rows[0][1],
             rows: rows,
             // below is a copy of input data
             data: [...props.data],
+            token_dictionary: token_dictionary,
             modify_sentence: false,
             sentence_to_modify: {},
             sentence_boundaries: sentence_start,
         };
     }
+
+    // make a dictionary {key: list of indixes} which stores the
+    // indices the input occurs in token_list.
+    makeTokenDictionary(token_list) {
+        const token_number = token_list.length;
+        let dictionary = {};
+        let current_token;
+        for (let i = 0; i < token_number; i++) {
+            current_token = token_list[i];
+            if (!(current_token.input in dictionary)) {
+                dictionary[current_token.input] = [i];
+            } else {
+                dictionary[current_token.input].push(i);
+            }
+        }
+        return dictionary;
+    }
+
+ 
 
     handleClick(lower_b, upper_b) {
         this.setState({
@@ -694,11 +758,14 @@ class ResultsSection extends React.Component {
             }
         }
 
+        const token_dictionary = this.makeTokenDictionary(updated_data);
+
         this.setState({
             lower_bound: lower_bound,
             upper_bound: upper_bound,
             rows: rows,
             data: updated_data,
+            token_dictionary: updated_data,
             modify_sentence: false,
             sentence_to_modify: {},
             sentence_boundaries: sentence_start,
