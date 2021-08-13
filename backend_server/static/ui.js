@@ -4,16 +4,16 @@ class Cell extends React.Component {
     constructor(props){
         super(props);
 
-        const dropdown_list = this.initilizeList();
-
         this.state = {
-          location: dropdown_list
+        //   location: this.initilizeList(),
         }
     }
 
-    initilizeList() {
-        // console.log(`this: ${this} props: `, this.props);
-        const segmentation_list = this.props.token["segmentation"];
+    // update the state when the token segmentation lists get updated
+    static getDerivedStateFromProps(nextProps) {
+        const {token, index} = nextProps;
+
+        const segmentation_list = token["segmentation"];
         let dropdown_list = [];
         for (let i = 0; i < segmentation_list.length; i++) {
             const option = {
@@ -33,14 +33,37 @@ class Cell extends React.Component {
         };
         dropdown_list.push(option);
 
-        return dropdown_list;
+        return { location:  dropdown_list};
     }
 
+    // initilizeList() {
+    //     // console.log(`this: ${this} props: `, this.props);
+    //     const segmentation_list = this.props.token["segmentation"];
+    //     let dropdown_list = [];
+    //     for (let i = 0; i < segmentation_list.length; i++) {
+    //         const option = {
+    //             id: i,
+    //             title: segmentation_list[i],
+    //             selected: false,
+    //             key: 'location'
+    //         };
+    //         dropdown_list.push(option);
+    //     }
+
+    //     const option = {
+    //         id: segmentation_list.length,
+    //         title: "Custom",
+    //         selected: false,
+    //         key: 'location'
+    //     };
+    //     dropdown_list.push(option);
+
+    //     return dropdown_list;
+    // }
+
+    // update preferred segmentation
     changeList(newPreferred, isCustom, update_mode) {
         this.props.updatePreferredSegmentation(this.props.index, newPreferred, isCustom, update_mode);
-        this.setState({
-            location: this.initilizeList(),
-        });
     }
 
     resetThenSet = (id, key) => {
@@ -182,12 +205,12 @@ class Dropdown extends React.Component {
         let update_mode = "all";
         if (event.target.value == "only_this") {
             update_mode = "only_this";
-            alert("Only this option is chosen");
-        } else if (event.target.value == "all_before") {
-            update_mode = "all_before";
-            alert("All before option is chosen");
+            // alert("Only this option is chosen");
+        } else if (event.target.value == "all_after") {
+            update_mode = "all_after";
+            // alert("All after option is chosen");
         } else {
-            alert("All option is chosen");
+            // alert("All option is chosen");
         }
         this.setState({
             selected_update_mode: update_mode,
@@ -249,13 +272,13 @@ class Dropdown extends React.Component {
                         />
                         <label htmlFor="only_this" className="mode_button">only this</label>
                         <input  type="radio" 
-                                id="all_before" 
+                                id="all_after" 
                                 name="update_mode" 
-                                value="all" 
-                                checked={this.state.selected_update_mode === "all_before"}
+                                value="all_after" 
+                                checked={this.state.selected_update_mode === "all_after"}
                                 onChange={this.handleRadioChange}
                         />
-                        <label htmlFor="all_before" className="mode_button">all after</label>
+                        <label htmlFor="all_after" className="mode_button">all after</label>
                         <input  type="radio" 
                                 id="all" 
                                 name="update_mode" 
@@ -292,7 +315,7 @@ class ResultsTable extends React.Component {
                     break;
                 }
                 // TODO why does this render every time
-                console.log(`Lower bound is ${this.props.lower_bound} and current_index is ${current_index} and index is ${current_index + this.props.lower_bound}`)
+                // console.log(`Lower bound is ${this.props.lower_bound} and current_index is ${current_index} and index is ${current_index + this.props.lower_bound}`)
                 row.push(
                     <td key={j}>
                         <Cell 
@@ -516,13 +539,14 @@ class ResubmitSentenceSection extends React.Component {
 }
 
 /*
-Main React component, renders ResultsTable and SideMenu
+Main React component, renders ResultsTable and SideMenu componenets.
 
 Props: 
     data - list of tokens with inputs and segmentations
     jobId
 */
 class ResultsSection extends React.Component {
+    
     constructor(props) {
         super(props);
         let rows = [];
@@ -616,14 +640,37 @@ class ResultsSection extends React.Component {
         });
     }
 
+    // update preferred segmentation and segmentation lists based on update mode and 
+    // whether it is custom.
     updatePreferredSegmentation(index, newPreferred, isCustom, update_mode) {
         // TODO do something with the update mode
         const newData = [...this.state.data];
         console.log(`The index is ${index}`);
         newData[index]["preferred_segmentation"] = newPreferred;
-
+        
         if (isCustom === true) {
-            newData[index]["segmentation"].push(newPreferred);
+            const same_token_index_list = this.state.token_dictionary[newData[index].input];
+
+            if (update_mode === "only_this") {
+                console.log("only this");
+                newData[index]["segmentation"].push(newPreferred);
+            } else if (update_mode === "all_after") {
+                console.log("all after");
+                for (let i = 0; i < same_token_index_list.length; i++) {
+                    console.log(`The current index is ${same_token_index_list[i]}`)
+                    if (same_token_index_list[i] > index) {
+                        console.log(`This index is pushed ${same_token_index_list[i]}`)
+                        newData[same_token_index_list[i]]["segmentation"].push(newPreferred);
+                    }
+                }
+            } else if (update_mode === "all") {
+                console.log("all");
+                for (let i = 0; i < same_token_index_list.length; i++) {
+                    newData[same_token_index_list[i]]["segmentation"].push(newPreferred);
+                }
+            } else {
+                console.log("Wrong update mode!")
+            }
         }
 
         this.setState({
@@ -691,16 +738,58 @@ class ResultsSection extends React.Component {
         const end = sentence_boundary[1];
         // console.log(`start is ${start}, end is ${end}, modified sentence ${modified_sentence}`);
 
-        const before_modified = this.state.data.slice(0, start);
-        
-        let updated_data = before_modified.concat(modified_sentence);
+        let before_modified;
+        let sentence_id_current;
+
+        if (start != 0) {
+            before_modified = this.state.data.slice(0, start);
+            sentence_id_current = before_modified[before_modified.length - 1].sentence_id;
+        } else {
+            before_modified = [];
+            sentence_id_current = 0;
+        }
+
+        // modify sentence id's after modification
+
+        let updated_data = before_modified;
+
+        if (modified_sentence.length > 0) {
+            let previous_id = modified_sentence[0].sentence_id;
+            modified_sentence[0].sentence_id = sentence_id_current;
+
+            for (let i = 1; i < modified_sentence.length; i++) {
+                if (modified_sentence[i].sentence_id != previous_id) {
+                    sentence_id_current++;
+                }
+                previous_id = modified_sentence[i].sentence_id;
+                modified_sentence[i].sentence_id = sentence_id_current;
+            }
+
+            updated_data = before_modified.concat(modified_sentence);
+        }
+
+        sentence_id_current++;
 
         if (end != this.state.data.length) {
             const after_modified = this.state.data.slice(end + 1, this.state.data.length);
+
+            let previous_id = after_modified[0].sentence_id;
+            after_modified[0].sentence_id = sentence_id_current;
+
+            for (let i = 1; i < after_modified.length; i++) {
+                if (after_modified[i].sentence_id != previous_id) {
+                    sentence_id_current++;
+                }
+                previous_id = after_modified[i].sentence_id;
+                after_modified[i].sentence_id = sentence_id_current;
+            }
             updated_data = updated_data.concat(after_modified);
         }
     
         console.log(`new data length is ${updated_data.length}`)
+        for (let i=0; i< updated_data.length; i++) {
+            console.log(updated_data[i].sentence_id);
+        }
 
         // update the state
 
@@ -708,22 +797,22 @@ class ResultsSection extends React.Component {
         // shows at the panel with the updated sentence
 
         let rows = [];
-        const token_list = updated_data;
-        const token_number = token_list.length;
+        const token_number = updated_data.length;
 
         let first_token = 0;
         let last_sentence_end = 0;
-        let current_sentence_id = token_list[0].sentence_id;
+        let current_sentence_id = updated_data[0].sentence_id;
 
         let sentence_start = {}
-        sentence_start[token_list[0].sentence_id] = 0;
+        sentence_start[updated_data[0].sentence_id] = 0;
 
         const max_tokens_per_view = 50;
+
         for (let i = 0; i < token_number; i++) {
             // when you exceed max tokens, make a row
-            if (current_sentence_id != token_list[i].sentence_id) {
+            if (current_sentence_id != updated_data[i].sentence_id) {
                 last_sentence_end = i - 1;
-                current_sentence_id = token_list[i]["sentence_id"];
+                current_sentence_id = updated_data[i]["sentence_id"];
                 sentence_start[current_sentence_id] = i;
             }
 
@@ -736,7 +825,7 @@ class ResultsSection extends React.Component {
                 // console.log(sentence_start);
                 // console.log(`Start: ${first_token} and end ${last_sentence_end}`);
                 let sentences_included = [];
-                sentences_included.push(token_list[first_token].sentence_id);
+                sentences_included.push(updated_data[first_token].sentence_id);
                 // console.log(sentences_included);
                 for (let key in sentence_start) {
                     if (sentence_start[key] > first_token && sentence_start[key] <= last_sentence_end) {
