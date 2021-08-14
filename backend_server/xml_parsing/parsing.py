@@ -1,3 +1,6 @@
+"""
+This will parse an eaf file. An example of eaf file is found in berrypicking_Annotations.eaf
+"""
 from defusedxml import ElementTree as ET
 
 ANNOTATION_DOCUMENT = 'ANNOTATION_DOCUMENT'
@@ -134,8 +137,7 @@ def getLinguisticTypes(root):
 # if the type_ref is Associated, then find the tier using PARENT_REF and do the same
 def parseTierWithTime(tier_id, xml_doc):
     # create time slot dictionary
-    tree = ET.parse(xml_doc)
-    root = tree.getroot()
+    root = ET.fromstring(xml_doc)
 
     if root.tag != ANNOTATION_DOCUMENT:
         raise EafParseError('Root is not ANNOTATION_DOCUMENT')
@@ -153,7 +155,6 @@ def parseTierWithTime(tier_id, xml_doc):
     if not time_order_dict:
         raise EafParseError('No time slots in time order')
     
-    # get tier, if its type_ref is Alignable True, then extract directly the time slots into a dictionary
     input_tier = None
 
     for child in root.findall(TIER):
@@ -177,16 +178,18 @@ def parseTierWithTime(tier_id, xml_doc):
     else:
         tier_list = getReferenceAnnotations(input_tier, root, time_order_dict)
         
-    for value in tier_list:
-        print(value)
+    # for value in tier_list:
+    #     print(value)
+    
+    return tier_list
 
 
-xml_document = open('berrypicking_Annotations.eaf')
-try:
-    # getInputText('Transcription', xml_document)
-    # TODO you cannot use the same xml_document second time?
-    parseTierWithTime('Transcription', xml_document)
-finally:
-    xml_document.close()
+# xml_document = open('berrypicking_Annotations.eaf')
+# try:
+#     # getInputText('Transcription', xml_document)
+#     # TODO you cannot use the same xml_document second time?
+#     parseTierWithTime('Transcription', xml_document)
+# finally:
+#     xml_document.close()
 
 

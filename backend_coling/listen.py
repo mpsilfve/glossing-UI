@@ -12,7 +12,7 @@ from sortedcontainers import SortedList
 from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
 import time, sys 
-print("I am here\n")
+# print("I am here\n")
 
 # make a sorted list of jobs 
 # job id is based on time stamp, so sorted list of jobs is effectively a queue.
@@ -44,6 +44,7 @@ def on_created(event):
     ----------
     event: event object 
         the event object containing information about the newly created file
+        the path of the newly created file is of the form: /data/model_requestId.txt
     """
     print("on created")
     print("hey, {} has been created!".format(event.src_path))

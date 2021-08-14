@@ -22,7 +22,7 @@ import os
 from os import path
 
 
-
+# TODO if the current job comes from an eaf file, then split according to annotations.
 
 def process_output(current_job):
     """ processes model output with current_job job id
@@ -32,11 +32,19 @@ def process_output(current_job):
     current_job: number 
         the id of the job which result is to be processed
     """
+    # load the job file to get information on eaf annotations if needed.
+    job_path = './jobs/coling_{}.txt'.format(current_job)
+    with open(job_path, "r") as new_job:
+        new_job_contents = new_job.read()
+    # converts string dictionary into dictionary
+    new_job_data = json.loads(new_job_contents)
+
     # read the results document into a string 
     # NOTE: the file to read as output can be changed. 
     results_path = 'coling2018-neural-transition-based-morphology/results_inference/Both/Word_dumb/f.beam10.dev.predictions'
     with open(results_path, "r") as new_result:
         new_result_contents = new_result.read()
+
 
     # make the results into a list
     result_by_line = new_result_contents.split('\n')
@@ -49,8 +57,11 @@ def process_output(current_job):
 
     # sentence_id to mark each sentence
     # word_id to mark a word index relative to a given sentence
-    sentence_id = 0
-    word_id = 0
+    if new_job_data['input_type'] == 'text':
+        sentence_id = 0
+        word_id = 0
+    elif new_job_data['input_type'] == 'eaf_file':
+        annotation_list = new_job_data['annotation_list']
 
     for i in range(len(result_by_line)):
         line = result_by_line[i]
@@ -62,7 +73,7 @@ def process_output(current_job):
         # split each line into tokens
         line_list = line.split()
         # remove the TRANS dummy variable
-        # TODO add the line below back when needed
+        # TODO add the line below back when needed to remove TRANS
         # line_list.pop()
         # make a python dictionary
         line_dict = {}
@@ -76,20 +87,24 @@ def process_output(current_job):
         # Users would be able to change the preferred segmentation.
         line_dict["preferred_segmentation"] = line_list[1]
         line_dict["custom_segmentation"] = []
-
-
-        # assign sentence and word id
-        line_dict["sentence_id"] = sentence_id
-        line_dict["word_id"] = word_id
         # TODO change to a separate section on metadata
         line_dict["model"] = "coling"
-        
-        # upadate sentence and word id
-        word_id = word_id + 1
-        # TODO determine a set of sentence-ending symbols
-        if line_dict["input"] in [".", "!", "?"]:
-            sentence_id = sentence_id + 1
-            word_id = 0
+
+
+        if new_job_data['input_type'] == 'text':
+            # assign sentence and word id
+            line_dict["sentence_id"] = sentence_id
+            # line_dict["word_id"] = word_id
+
+            # upadate sentence and word id
+            # word_id = word_id + 1
+            # TODO determine a set of sentence-ending symbols
+            if line_dict["input"] in [".", "!", "?"]:
+                sentence_id = sentence_id + 1
+                # word_id = 0
+
+        elif new_job_data['input_type'] == 'eaf_file':
+            line_dict["sentence_id"] = annotation_list[i]
 
         result_by_line_split.append(line_dict)
 

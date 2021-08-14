@@ -7,6 +7,7 @@ from datetime import datetime
 from flask import request, jsonify
 import os
 from os import path
+from .xml_parsing.parsing import parseTierWithTime
 
 
 app = flask.Flask(__name__) # create the Flask application object 
@@ -38,6 +39,48 @@ def home_new():
 @app.route('/api/job', methods=['POST'])
 def api_job():
     """" Receives and saves model input data
+    Example request:
+    {
+        "text": "Text string containing text to be processed",
+        "model": "Example_Model"
+    }
+    Returns
+    -------
+    JSON object 
+        object containing job id of the received request
+    """
+    # retrieve data in form of Python dictionary from request
+    data = request.json
+    # assign input_type to data
+    data['input_type'] = 'text'
+    # assign request id to be the current time stamp
+    now = datetime.now()
+    request_id = int(datetime.timestamp(now))
+    data["id"] = request_id
+    # retrieve which model was requested
+    model = data["model"]
+    if model not in ['fairseq', 'coling']:
+        flask.abort(400, 'Invalid model') 
+    # TODO delete when not needed anymore
+    print(data, file=sys.stderr)
+    # save the request data in the data folder
+    with open(f'/data/{model}_{request_id}.txt', 'w') as outfile:
+        json.dump(data, outfile)
+    
+    return jsonify({"job_id":request_id})
+
+@app.route('/api/job/eaf', methods=['POST'])
+def api_job_from_eaf():
+    """ Creates a new job from an eaf file.
+    Tier ID and model must be specified.
+
+    Example request:
+    {
+        "eaf": "XML string containing the EAF XML file",
+        "tier_id": "Example",
+        "model": "Example_Model"
+    }
+
     Returns
     -------
     JSON object 
@@ -48,16 +91,32 @@ def api_job():
     # assign request id to be the current time stamp
     now = datetime.now()
     request_id = int(datetime.timestamp(now))
-    data["id"] = request_id
     # retrieve which model was requested
     model = data["model"]
+    if model not in ['fairseq', 'coling']:
+        flask.abort(400, 'Invalid model') 
     # TODO delete when not needed anymore
+
+    eaf_data = parseTierWithTime(data['tier_id'], data['eaf'])
+    # TODO split in the same way as in the model
+    # eaf_model_input = ''
+
+    # for annotation in eaf_data:
+    #     eaf_model_input += annotation['annotation_text']
+    
+    model_input_data = {
+        'input_type': 'eaf_file',
+        'eaf_data': eaf_data,
+        'model': model,
+        'id': request_id,
+    }
     print(data, file=sys.stderr)
     # save the request data in the data folder
     with open(f'/data/{model}_{request_id}.txt', 'w') as outfile:
-        json.dump(data, outfile)
+        json.dump(model_input_data, outfile)
     
     return jsonify({"job_id":request_id})
+
 
 # for status check requests
 @app.route('/api/job/<int:job_id>')

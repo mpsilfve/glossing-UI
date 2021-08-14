@@ -1,1 +1,2 @@
 Flask==1.1.2
+defusedxml==0.7.1

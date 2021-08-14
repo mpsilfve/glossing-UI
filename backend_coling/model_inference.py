@@ -24,25 +24,47 @@ def process_file(job_id):
     # converts string dictionary into dictionary
     new_job_data = json.loads(new_job_contents)
 
-    # extract the text into a dev file and store it in model_inputs
-    text_input = new_job_data["text"]
-    # make word list - split text into words 
-    # TODO define a defininte list of punctuation to separate
-    # TODO think - maybe to separate by spaces first, and then using a regex
-    # from https://stackoverflow.com/questions/367155/splitting-a-string-into-words-and-punctuation
-    word_list_input = re.findall(r"[\w']+|[!#$%&()*+,-./:;<=>?@]", text_input)
-    print(word_list_input)
-    print("inputs")
-  
-    processed_input = ""
-    for word in word_list_input:
-        # add two dummy variables to each word using tab separated format
-        # first dummy variable is the word itself, the second one is TRANS
-        processed_input += word + "\t" + word + "\t" + "TRANS" + "\n" 
- 
-    # write the input string in to a file using utf-8 encoding   
-    with open('./model_inputs/{}.dev'.format(job_id), 'w') as outfile:
-        outfile.write(processed_input.encode('utf-8'))
+    if new_job_data['input_type'] == 'text':
+        # extract the text into a dev file and store it in model_inputs
+        text_input = new_job_data["text"]
+        # print(text_input)
+        # make word list - split text into words 
+        # TODO define a defininte list of punctuation to separate
+        # TODO think - maybe to separate by spaces first, and then using a regex
+        # from https://stackoverflow.com/questions/367155/splitting-a-string-into-words-and-punctuation
+        word_list_input = re.findall(r"[\w']+|[!#$%&()*+,-.:;<=>?@]", text_input)
+        print(word_list_input)
+        print("inputs")
+    
+        processed_input = ''
+        for word in word_list_input:
+            # add two dummy variables to each word using tab separated format
+            # first dummy variable is the word itself, the second one is TRANS
+            processed_input += word + "\t" + word + "\t" + "TRANS" + "\n" 
+    
+        # write the input string in to a file using utf-8 encoding   
+        with open('./model_inputs/{}.dev'.format(job_id), 'w') as outfile:
+            outfile.write(processed_input.encode('utf-8'))
+    elif new_job_data['input_type'] == 'eaf_file':
+        eaf_data = new_job_data['eaf_data']
+        processed_input = ''
+        annotation_list = []
+        for annotation in eaf_data:
+            annotation_value = annotation['annotation_text']
+            annotation_token_list = re.findall(r"[\w']+|[!#$%&()*+,-.:;<=>?@]", annotation_value)
+            for token in annotation_token_list:
+                processed_input += token + "\t" + token + "\t" + "TRANS" + "\n"
+                annotation_list.append(annotation['annotation_id']) 
+        
+        with open('./model_inputs/{}.dev'.format(job_id), 'w') as outfile:
+            outfile.write(processed_input.encode('utf-8'))
+        
+        # the resulting annotation list is saved in the original job file
+        # so that when the output is processed it can be accessed
+        # and the output token can be assigned to the annotations.
+        new_job_data['annotation_list'] = annotation_list
+        with open('./jobs/coling_{}.txt'.format(job_id), 'w') as outfile:
+            json.dump(new_job_data, outfile)
     
     # determine the python command to run the model with, 
     # alongside with the necessary paths

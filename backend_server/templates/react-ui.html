@@ -14,20 +14,34 @@
         <article>
             <div class="form">
                 <h2>Submit data</h2>
-                <p>Please enter the text you wish to submit:</p>       
-                <form>
-                    <textarea id=input_text class=user_input required></textarea>
+                <form onsubmit="event.preventDefault()">
                     <p>Choose the model that you wish to use:</p>
                     <div id="model_buttons" class="form">
                         <input type="radio" id="fairseq" 
-                               name="model" value="fairseq" checked>
-                        <label for="fairseq" class="model_button">fairseq</label>
+                        name="model" value="fairseq">
+                        <label for="fairseq" class="model_button">Fairseq</label>
                         <input type="radio" id="coling" 
-                               name="model" value="coling">
-                        <label for="coling" class="model_button">coling</label>
+                        name="model" value="coling" checked>
+                        <label for="coling" class="model_button">Coling</label>
                     </div>
-                </form>
-                <button class=job_buttons onclick="submit_job()">Submit</button>    
+                    <p>Please, choose if you would like to input text or an ELAN eaf file.</p>
+                    <div id="input_buttons" class="form">
+                        <input type="radio" id="text_field_radio_button" 
+                        name="input_type" value="text_field" onchange="selectInputType(this)">
+                        <label for="text_field_radio_button" class="model_button">Use text field</label>
+                        <input type="radio" id="eaf_file_radio_button" 
+                        name="input_type" value="eaf_file" onchange="selectInputType(this)" checked>
+                        <label for="eaf_file_radio_button" class="model_button">Upload an eaf file</label>
+                    </div>
+                    <div id=input_text_div style="display:none">
+                        <p>Please enter the text you wish to submit:</p>       
+                        <textarea id=input_text class=user_input></textarea>
+                    </div>
+                    <div id=eaf_text_div>
+                        <input id='eaf_input' type=file />
+                    </div>
+                    <button class=job_buttons onclick="submit_job()">Submit</button>  
+                </form>  
             </div>
         
             <div class="form">
@@ -65,20 +79,64 @@
                  * This will also prefill the job id in the get status form.
                  **/
                  async function submit_job() {
-                    const inputText = document.getElementById("input_text").value;
-                    const isFairseq = document.getElementById("fairseq").checked;
-                    const isColing = document.getElementById("coling").checked;
-                    let data;
-                    if (isFairseq) {
-                        data = {text:inputText, model:'fairseq'};
+                    let data = {};
+                    data = gatherModelMetadata(data);
+                    const isEafFile = document.getElementById('eaf_file_radio_button').checked;
+
+                    let jobData;
+                    // perform different requests depending on the chosen input type
+                    if (isEafFile) {
+                        const selectedFile = document.getElementById('eaf_input').files[0];
+                        const text = await selectedFile.text();
+                        // TODO set up transcription id specification by user
+                        const tier_id = 'Transcription';
+                        data = {...data, eaf:text, tier_id:tier_id};
+                        console.log(data);
+                        jobData = await requestData('/api/job/eaf', data, 'POST');
                     } else {
-                        data = {text:inputText, model:'coling'};
+                        const inputText = document.getElementById("input_text").value;
+                        data.text = inputText;
+                        console.log(data);
+                        jobData = await requestData('/api/job', data, 'POST');
                     }
-                    const jobData = await requestData('/api/job', data, 'POST');
                     document.getElementById("input_job_id").value = jobData.job_id;
                     checkStatus(jobData.job_id);
                 }
-            
+
+                /**
+                 * Helper function to add metadata (model type chosen, model parameters)
+                 * and add
+                 * @param: {Object} data - data object, to which metadata keys and values will be added.
+                 * @returns: {Object} data - data object with metadata added to it
+                 * @todo: expand this function, as more parameters about the model can be set by the user.
+                 * */
+                function gatherModelMetadata(data) {
+                    const isFairseq = document.getElementById("fairseq").checked;
+                    if (isFairseq) {
+                        data.model = 'fairseq';
+                    } else {
+                        data.model = 'coling';
+                    }
+                    return data;
+                }
+
+                /**
+                 * Onchange function that shows the text input field of eaf upload button
+                 * depending on what radio button is selected.
+                 * @param {Event} radio - An onchange event of a radio button
+                 * */
+                function selectInputType(radio) {
+                    const text_field = document.getElementById('input_text_div');
+                    const eaf_file = document.getElementById('eaf_text_div');
+
+                    if (radio.value === 'text_field') {
+                        text_field.style.display = 'block';
+                        eaf_file.style.display = 'none';
+                    } else if (radio.value === 'eaf_file') {
+                        text_field.style.display = 'none';
+                        eaf_file.style.display = 'block';
+                    }
+                }
             
                 /**
                  * Helper function for a REST API request.
