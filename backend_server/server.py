@@ -98,6 +98,8 @@ def api_job_from_eaf():
     # TODO delete when not needed anymore
 
     eaf_data = parseTierWithTime(data['tier_id'], data['eaf'])
+    for item in eaf_data:
+        print(item, file=sys.stderr)
     # TODO split in the same way as in the model
     # eaf_model_input = ''
 

@@ -22,7 +22,7 @@ import os
 from os import path
 
 
-# TODO if the current job comes from an eaf file, then split according to annotations.
+# eaf file has, in addition to sentence ids also annotation id attached to each token
 
 def process_output(current_job):
     """ processes model output with current_job job id
@@ -57,10 +57,9 @@ def process_output(current_job):
 
     # sentence_id to mark each sentence
     # word_id to mark a word index relative to a given sentence
-    if new_job_data['input_type'] == 'text':
-        sentence_id = 0
-        word_id = 0
-    elif new_job_data['input_type'] == 'eaf_file':
+    sentence_id = 0
+    word_id = 0
+    if new_job_data['input_type'] == 'eaf_file':
         annotation_list = new_job_data['annotation_list']
 
     for i in range(len(result_by_line)):
@@ -91,20 +90,26 @@ def process_output(current_job):
         line_dict["model"] = "coling"
 
 
-        if new_job_data['input_type'] == 'text':
-            # assign sentence and word id
-            line_dict["sentence_id"] = sentence_id
-            # line_dict["word_id"] = word_id
+        # assign sentence and word id
+        line_dict["sentence_id"] = sentence_id
+        # line_dict["word_id"] = word_id
 
-            # upadate sentence and word id
-            # word_id = word_id + 1
-            # TODO determine a set of sentence-ending symbols
+        # upadate sentence and word id
+        # word_id = word_id + 1
+        # TODO change sentence parsing for eaf file
+
+
+
+        if new_job_data['input_type'] == 'text':
+        # TODO determine a set of sentence-ending symbols
             if line_dict["input"] in [".", "!", "?"]:
                 sentence_id = sentence_id + 1
-                # word_id = 0
-
+            # word_id = 0
         elif new_job_data['input_type'] == 'eaf_file':
-            line_dict["sentence_id"] = annotation_list[i]
+            if i != len(result_by_line) - 2:
+                if annotation_list[i+1] != annotation_list[i]:
+                    sentence_id = sentence_id + 1
+            line_dict["annotation_id"] = annotation_list[i]
 
         result_by_line_split.append(line_dict)
 

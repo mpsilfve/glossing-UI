@@ -407,12 +407,14 @@ class PageTable extends React.Component {
 
         this.state = {
             sentences_included: this.props.data[0][2],
+            annotations_included: this.props.data[0][3],
         };
     }
 
     onClick(lower_b, upper_b, i) {
         this.setState({
             sentences_included: this.props.data[i][2],
+            annotation_included: this.props.data[i][3],
         });
         this.props.onClick(lower_b, upper_b);
     }
@@ -444,6 +446,7 @@ class PageTable extends React.Component {
                     <td>
                         <PageTableSentenceButton 
                             sentence_id={this.state.sentences_included[j]}
+                            annotation_id={this.state.annotations_included[j]}
                             onClick={(sentence_id) => {this.props.onRetrieveSentence(sentence_id)}}
                         />
                     </td>
@@ -491,7 +494,6 @@ class SideMenu extends React.Component {
 };
 
 class ResubmitSentenceSection extends React.Component {
-    // TODO add controlled component
     constructor(props){
         super(props)
         this.state = {
@@ -546,13 +548,14 @@ Props:
     jobId
 */
 class ResultsSection extends React.Component {
-    
+
     constructor(props) {
         super(props);
         let rows = [];
         const token_list = [...props.data];
         const token_number = token_list.length;
 
+        // The token index at the start of the current row
         let first_token = 0;
         let last_sentence_end = 0;
         let current_sentence_id = token_list[0].sentence_id;
@@ -584,14 +587,24 @@ class ResultsSection extends React.Component {
                 // console.log(`Start: ${first_token} and end ${last_sentence_end}`);
                 let sentences_included = [];
                 sentences_included.push(token_list[first_token].sentence_id);
+                // in case if we deal with eaf file, add annotation id
+                let annotation_id_included = [];
+                if ('annotation_id' in token_list[first_token]) {
+                    annotation_id_included.push(token_list[first_token]['annotation_id']);
+                }
                 // console.log(sentences_included);
                 // include sentences that are within the current view
                 for (let key in sentence_start) {
                     if (sentence_start[key] > first_token && sentence_start[key] <= last_sentence_end) {
                         sentences_included.push(key);
+                        if ('annotation_id' in token_list[sentence_start[key]]) {
+                            annotation_id_included.push(token_list[sentence_start[key]]['annotation_id']);
+                        }
                     }           
                 }
-                rows.push([first_token, last_sentence_end, sentences_included]);
+                // TODO make this structure more clear - turn it into an object?
+                let row = [first_token, last_sentence_end, sentences_included, annotation_id_included];
+                rows.push(row);
                 first_token = last_sentence_end + 1;
             }
         }
@@ -681,6 +694,7 @@ class ResultsSection extends React.Component {
     determineSentenceBoundaries(sentence_id) {
         const sentence_start = this.state.sentence_boundaries[sentence_id];
         let sentence_end;
+        // TODO change sentence boundaries so that it works with EAF... make it a list?
         if (this.state.sentence_boundaries[sentence_id + 1]) {
             sentence_end = this.state.sentence_boundaries[sentence_id + 1] - 1;
         } else {
@@ -891,6 +905,8 @@ class ResultsSection extends React.Component {
         )
     }
 }
+
+// TODO fix bug in sentence resubmission
 
 // add sentence indexing
 // page table - show number of sentences that fit into 100 tokens
