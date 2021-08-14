@@ -195,7 +195,10 @@
                         const result = await requestData(`/api/job/${jobId}/download`);
 
                         const domContainer = document.querySelector('#ui_container');
-                        ReactDOM.render( <ResultsSection data={result} jobId={jobId}/>, domContainer);
+                        // key attribute is required so that with new requests and thus with new jobId, the 
+                        // React components actually rerender.
+                        // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
+                        ReactDOM.render( <ResultsSection data={result} jobId={jobId} key={jobId}/>, domContainer);
                         // scroll to the results
                         completed_message.scrollIntoView(true);
                     } else {

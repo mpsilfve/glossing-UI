@@ -406,15 +406,15 @@ class PageTable extends React.Component {
         super(props);
 
         this.state = {
-            sentences_included: this.props.data[0][2],
-            annotations_included: this.props.data[0][3],
+            sentences_included: this.props.data[0].sentences_included,
+            annotations_included: this.props.data[0].annotations_included,
         };
     }
 
     onClick(lower_b, upper_b, i) {
         this.setState({
-            sentences_included: this.props.data[i][2],
-            annotation_included: this.props.data[i][3],
+            sentences_included: this.props.data[i].sentences_included,
+            annotation_included: this.props.data[i].annotations_included,
         });
         this.props.onClick(lower_b, upper_b);
     }
@@ -422,15 +422,15 @@ class PageTable extends React.Component {
 
 
     render() {
-        const rows_data = this.props.data;
+        const pages = this.props.data;
         let rows = [];
-        for (let i = 0; i < rows_data.length; i++) {
+        for (let i = 0; i < pages.length; i++) {
             rows.push(
                 <tr key={i}>
                     <td>
                         <PageTableCellButton 
-                            lower_bound={rows_data[i][0]} 
-                            upper_bound={rows_data[i][1]}
+                            lower_bound={pages[i].first_token} 
+                            upper_bound={pages[i].last_sentence_end}
                             page_index = {i}
                             onClick={(lower_b, upper_b, i) => this.onClick(lower_b, upper_b, i)}
                         />
@@ -551,8 +551,28 @@ class ResultsSection extends React.Component {
 
     constructor(props) {
         super(props);
-        let rows = [];
-        const token_list = [...props.data];
+        const {pages, sentence_boundaries} = this.computePages(props.data);
+        // make a dictionary {key: list of indixes} and store it in state
+        // but also make it updatable?
+        const token_dictionary = this.makeTokenDictionary(props.data);
+        
+        this.state = {
+            //  initial lower and upper bound from the rows 2D array
+            lower_bound: pages[0].first_token,
+            upper_bound: pages[0].last_sentence_end,
+            pages: pages,
+            // below is a copy of input data
+            data: [...props.data],
+            token_dictionary: token_dictionary,
+            modify_sentence: false,
+            sentence_to_modify: {},
+            sentence_boundaries: sentence_boundaries,
+        };
+    }
+
+    computePages(data) {
+        let pages = [];
+        const token_list = data;
         const token_number = token_list.length;
 
         // The token index at the start of the current row
@@ -560,8 +580,8 @@ class ResultsSection extends React.Component {
         let last_sentence_end = 0;
         let current_sentence_id = token_list[0].sentence_id;
 
-        let sentence_start = {}
-        sentence_start[token_list[0].sentence_id] = 0;
+        let sentence_boundaries = {}
+        sentence_boundaries[token_list[0].sentence_id] = 0;
 
         const max_tokens_per_view = 50;
         for (let i = 0; i < token_number; i++) {
@@ -569,7 +589,7 @@ class ResultsSection extends React.Component {
             if (current_sentence_id != token_list[i].sentence_id) {
                 last_sentence_end = i - 1;
                 current_sentence_id = token_list[i]["sentence_id"];
-                sentence_start[current_sentence_id] = i;
+                sentence_boundaries[current_sentence_id] = i;
             }
 
             // when you exceed max tokens, make it last_sentence_end
@@ -588,43 +608,27 @@ class ResultsSection extends React.Component {
                 let sentences_included = [];
                 sentences_included.push(token_list[first_token].sentence_id);
                 // in case if we deal with eaf file, add annotation id
-                let annotation_id_included = [];
+                let annotations_included = [];
                 if ('annotation_id' in token_list[first_token]) {
-                    annotation_id_included.push(token_list[first_token]['annotation_id']);
+                    annotations_included.push(token_list[first_token]['annotation_id']);
                 }
                 // console.log(sentences_included);
                 // include sentences that are within the current view
-                for (let key in sentence_start) {
-                    if (sentence_start[key] > first_token && sentence_start[key] <= last_sentence_end) {
-                        sentences_included.push(key);
-                        if ('annotation_id' in token_list[sentence_start[key]]) {
-                            annotation_id_included.push(token_list[sentence_start[key]]['annotation_id']);
+                for (let key in sentence_boundaries) {
+                    if (sentence_boundaries[key] > first_token && sentence_boundaries[key] <= last_sentence_end) {
+                        // keys in JavaScript are strings, and we need integers so use Number()
+                        sentences_included.push(Number(key));
+                        if ('annotation_id' in token_list[sentence_boundaries[key]]) {
+                            annotations_included.push(token_list[sentence_boundaries[key]]['annotation_id']);
                         }
                     }           
                 }
-                // TODO make this structure more clear - turn it into an object?
-                let row = [first_token, last_sentence_end, sentences_included, annotation_id_included];
-                rows.push(row);
+                let page = {first_token, last_sentence_end, sentences_included, annotations_included};
+                pages.push(page);
                 first_token = last_sentence_end + 1;
             }
         }
-
-        // make a dictionary {key: list of indixes} and store it in state
-        // but also make it updatable?
-        const token_dictionary = this.makeTokenDictionary(token_list);
-        
-        this.state = {
-            //  initial lower and upper bound from the rows 2D array
-            lower_bound: rows[0][0],
-            upper_bound: rows[0][1],
-            rows: rows,
-            // below is a copy of input data
-            data: [...props.data],
-            token_dictionary: token_dictionary,
-            modify_sentence: false,
-            sentence_to_modify: {},
-            sentence_boundaries: sentence_start,
-        };
+        return {pages, sentence_boundaries};
     }
 
     // make a dictionary {key: list of indixes} which stores the
@@ -645,7 +649,6 @@ class ResultsSection extends React.Component {
     }
 
  
-
     handleClick(lower_b, upper_b) {
         this.setState({
             lower_bound: lower_b,
@@ -695,7 +698,9 @@ class ResultsSection extends React.Component {
         const sentence_start = this.state.sentence_boundaries[sentence_id];
         let sentence_end;
         // TODO change sentence boundaries so that it works with EAF... make it a list?
+
         if (this.state.sentence_boundaries[sentence_id + 1]) {
+
             sentence_end = this.state.sentence_boundaries[sentence_id + 1] - 1;
         } else {
             sentence_end = this.state.data.length - 1;
@@ -724,19 +729,11 @@ class ResultsSection extends React.Component {
     }
 
     async resubmitSentence(new_sentence) {
-        // TODO implement handler
         const inputText = new_sentence;
-        // TODO expand on that if other models are here
-        const isColing = this.state.data[0].model === "coling";
-        let data;
-        if (isColing) {
-            data = {text:inputText, model:'coling'};
-        } else {
-            data = {text:inputText, model:'fairseq'};
-        }
+        const data = {text:inputText, model: this.state.data[0].model}
         //  submit a new job and get a new job id
         const request = await requestData('/api/job', data, 'POST');
-
+        // wait for the job to finish and get the new data
         let status = {status:false};
 
         while(!status.status) {
@@ -752,34 +749,29 @@ class ResultsSection extends React.Component {
         const end = sentence_boundary[1];
         // console.log(`start is ${start}, end is ${end}, modified sentence ${modified_sentence}`);
 
-        let before_modified;
-        let sentence_id_current;
+        // isolate the part before the modified sentence if it exists
+        // then isolate the part after the modified sentence if it exists
+        // then stich the before part with modified sentence and the after part.
+        const before_modified = this.state.data.slice(0, start);
+        let sentence_id_current = sentence_id;
 
-        if (start != 0) {
-            before_modified = this.state.data.slice(0, start);
-            sentence_id_current = before_modified[before_modified.length - 1].sentence_id;
-        } else {
-            before_modified = [];
-            sentence_id_current = 0;
-        }
-
-        // modify sentence id's after modification
+        // modify sentence id's after modification in case if the modified sentence has been split into 2 or more sentences
 
         let updated_data = before_modified;
 
         if (modified_sentence.length > 0) {
-            let previous_id = modified_sentence[0].sentence_id;
+            let sentence_id_in_modified = modified_sentence[0].sentence_id;
             modified_sentence[0].sentence_id = sentence_id_current;
 
             for (let i = 1; i < modified_sentence.length; i++) {
-                if (modified_sentence[i].sentence_id != previous_id) {
+                if (modified_sentence[i].sentence_id != sentence_id_in_modified) {
                     sentence_id_current++;
                 }
-                previous_id = modified_sentence[i].sentence_id;
+                sentence_id_in_modified = modified_sentence[i].sentence_id;
                 modified_sentence[i].sentence_id = sentence_id_current;
             }
 
-            updated_data = before_modified.concat(modified_sentence);
+            updated_data = updated_data.concat(modified_sentence);
         }
 
         sentence_id_current++;
@@ -805,77 +797,40 @@ class ResultsSection extends React.Component {
             console.log(updated_data[i].sentence_id);
         }
 
+        console.log(updated_data);
         // update the state
 
         // need to update the state in such a way so that the results table
         // shows at the panel with the updated sentence
 
-        let rows = [];
-        const token_number = updated_data.length;
+        const {pages, sentence_boundaries} = this.computePages(updated_data);
+        // make a dictionary {key: list of indixes} and store it in state
+        // but also make it updatable?
+        const token_dictionary = this.makeTokenDictionary(updated_data);
 
-        let first_token = 0;
-        let last_sentence_end = 0;
-        let current_sentence_id = updated_data[0].sentence_id;
-
-        let sentence_start = {}
-        sentence_start[updated_data[0].sentence_id] = 0;
-
-        const max_tokens_per_view = 50;
-
-        for (let i = 0; i < token_number; i++) {
-            // when you exceed max tokens, make a row
-            if (current_sentence_id != updated_data[i].sentence_id) {
-                last_sentence_end = i - 1;
-                current_sentence_id = updated_data[i]["sentence_id"];
-                sentence_start[current_sentence_id] = i;
-            }
-
-            if (i == token_number - 1) {
-                last_sentence_end = i;
-            }
-
-            if (i - first_token + 1 >= max_tokens_per_view || i == token_number - 1) {
-                last_sentence_end = first_token >= last_sentence_end ? i : last_sentence_end;
-                // console.log(sentence_start);
-                // console.log(`Start: ${first_token} and end ${last_sentence_end}`);
-                let sentences_included = [];
-                sentences_included.push(updated_data[first_token].sentence_id);
-                // console.log(sentences_included);
-                for (let key in sentence_start) {
-                    if (sentence_start[key] > first_token && sentence_start[key] <= last_sentence_end) {
-                        sentences_included.push(key);
-                    }           
-                }
-                rows.push([first_token, last_sentence_end, sentences_included]);
-                first_token = last_sentence_end + 1;
-            }
-        }
         
+        // determine the lower and upper bounds of the page on which the modified setences appears
         let lower_bound;
         let upper_bound;
 
-        for (let k = 0; k < rows.length; k++) {
-            if (sentence_id in rows[k][2]) {
-                lower_bound = rows[k][0];
-                upper_bound = rows[k][1];
+        for (let k = 0; k < pages.length; k++) {
+            if (sentence_id in pages[k].sentences_included) {
+                lower_bound = pages[k].first_token;
+                upper_bound = pages[k].last_sentence_end;
+                break;
             }
         }
-
-        const token_dictionary = this.makeTokenDictionary(updated_data);
 
         this.setState({
             lower_bound: lower_bound,
             upper_bound: upper_bound,
-            rows: rows,
+            pages: pages,
             data: updated_data,
-            token_dictionary: updated_data,
+            token_dictionary: token_dictionary,
             modify_sentence: false,
             sentence_to_modify: {},
-            sentence_boundaries: sentence_start,
+            sentence_boundaries: sentence_boundaries,
         });
-
-        // TODO make it more efficient so that you do not have to traverse the entire
-        // data again
     }
 
     render() {
@@ -887,7 +842,7 @@ class ResultsSection extends React.Component {
                     />)}
                 <div id="completed_message">
                     <SideMenu 
-                        data={this.state.rows} 
+                        data={this.state.pages} 
                         onClick={(lower_b, upper_b) => this.handleClick(lower_b, upper_b)}
                         onRetrieveSentence={(sentence_id) => {this.retrieveSentenceToModify(sentence_id)}}
                     />
