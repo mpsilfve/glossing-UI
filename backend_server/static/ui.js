@@ -383,13 +383,20 @@ class PageTableCellButton extends React.Component {
 
 class PageTableSentenceButton extends React.Component {
     render() {
+        let message;
+        if (this.props.annotation_id === null) {
+            message = `Sentence ${this.props.sentence_id}`;
+        } else {
+            message = `Annotation ${this.props.annotation_id}`;
+        }
+     
         return (
             <button 
                 className="sentence_button"
                 onClick={() => {this.props.onClick(this.props.sentence_id)}}
                 className="range_button"
             >
-                Modify sentence {this.props.sentence_id}
+                {message}
             </button>
         )
     }
@@ -439,20 +446,28 @@ class PageTable extends React.Component {
             );
         }
 
+        let annotation_present = false;
+        if (this.state.annotations_included.length === this.state.sentences_included.length) {
+            annotation_present = true;
+        }
+
         let sentence_rows = [];
         for (let j = 0; j < this.state.sentences_included.length; j++) {
+            const annotation = annotation_present ? this.state.annotations_included[j] : null;
             sentence_rows.push(
                 <tr key={j}>
                     <td>
                         <PageTableSentenceButton 
                             sentence_id={this.state.sentences_included[j]}
-                            annotation_id={this.state.annotations_included[j]}
+                            annotation_id={annotation}
                             onClick={(sentence_id) => {this.props.onRetrieveSentence(sentence_id)}}
                         />
                     </td>
                 </tr>
             );
         }
+
+        const unit_type = annotation_present ? 'an annotation' : 'a sentence';
 
         return (
             <div id="range_table_wrapper">
@@ -461,7 +476,7 @@ class PageTable extends React.Component {
                     {rows}
                 </tbody>
             </table>
-            <p>Sentences in this window:</p>
+            <p>Select {unit_type} to modify:</p>
             <table>
                 <tbody>
                     {sentence_rows}
@@ -623,6 +638,9 @@ class ResultsSection extends React.Component {
                         }
                     }           
                 }
+                if (('annotation_id' in token_list[first_token]) && (sentences_included.length != annotations_included.length)) {
+                    throw new Error('Annotations are present but sentences included are not equal to annotations included!');
+                }
                 let page = {first_token, last_sentence_end, sentences_included, annotations_included};
                 pages.push(page);
                 first_token = last_sentence_end + 1;
@@ -697,7 +715,6 @@ class ResultsSection extends React.Component {
     determineSentenceBoundaries(sentence_id) {
         const sentence_start = this.state.sentence_boundaries[sentence_id];
         let sentence_end;
-        // TODO change sentence boundaries so that it works with EAF... make it a list?
 
         if (this.state.sentence_boundaries[sentence_id + 1]) {
 
@@ -722,8 +739,13 @@ class ResultsSection extends React.Component {
                 sentence = sentence.concat(" ");
             }
         }
+        let sentence_to_modify = {sentence:sentence, sentence_id: sentence_id, annotation_id: null};
+        if ('annotation_id' in this.state.data[sentence_start]) {
+            sentence_to_modify.annotation_id = this.state.data[sentence_start].annotation_id;
+        }
+
         this.setState({
-            sentence_to_modify: {sentence:sentence, id: sentence_id},
+            sentence_to_modify: sentence_to_modify,
             modify_sentence: true,
         });
     }
@@ -743,7 +765,7 @@ class ResultsSection extends React.Component {
         const modified_sentence = await requestData(`/api/job/${request.job_id}/download`);
 
         // exchange the tokens in data
-        const sentence_id = this.state.sentence_to_modify.id;
+        const sentence_id = this.state.sentence_to_modify.sentence_id;
         const sentence_boundary = this.determineSentenceBoundaries(sentence_id);
         const start = sentence_boundary[0];
         const end = sentence_boundary[1];
@@ -759,24 +781,44 @@ class ResultsSection extends React.Component {
 
         let updated_data = before_modified;
 
-        if (modified_sentence.length > 0) {
-            let sentence_id_in_modified = modified_sentence[0].sentence_id;
-            modified_sentence[0].sentence_id = sentence_id_current;
 
-            for (let i = 1; i < modified_sentence.length; i++) {
-                if (modified_sentence[i].sentence_id != sentence_id_in_modified) {
-                    sentence_id_current++;
+        console.log(`the annotation id of sentence to modify is ${this.state.sentence_to_modify.annotation_id}`)
+        if (modified_sentence.length > 0) {
+            if (this.state.sentence_to_modify.annotation_id === null) {
+                // if the iniput type originally was text, then recalculate sentence id, 
+                // as a sentence can be split during resubmitting a sentence.
+                let sentence_id_in_modified = modified_sentence[0].sentence_id;
+                modified_sentence[0].sentence_id = sentence_id_current;
+    
+                for (let i = 1; i < modified_sentence.length; i++) {
+                    if (modified_sentence[i].sentence_id != sentence_id_in_modified) {
+                        sentence_id_current++;
+                    }
+                    sentence_id_in_modified = modified_sentence[i].sentence_id;
+                    modified_sentence[i].sentence_id = sentence_id_current;
+                    console.log(`${sentence_id_current} is current id and modified sentence has id ${modified_sentence[i].sentence_id}`);
                 }
-                sentence_id_in_modified = modified_sentence[i].sentence_id;
-                modified_sentence[i].sentence_id = sentence_id_current;
+            } else {
+                // if the input type origianlly was an eaf file, then simply assign the same sentence id 
+                // and annotation id to the entire resubmitted output as originally, as we do not allow
+                // changing annotation id for the resubmitted chunk.
+                const original_sentence_id = this.state.sentence_to_modify.sentence_id;
+                const original_annotation_id = this.state.sentence_to_modify.annotation_id;
+                console.log(original_sentence_id);
+                for (let i = 1; i < modified_sentence.length; i++) {
+                    modified_sentence[i].sentence_id = original_sentence_id;
+                    modified_sentence[i].annotation_id = original_annotation_id;
+                }
             }
+
 
             updated_data = updated_data.concat(modified_sentence);
         }
 
         sentence_id_current++;
 
-        if (end != this.state.data.length) {
+        console.log(`the length of data is ${this.state.data.length} and the end is on ${end}`);
+        if (end + 1 !== this.state.data.length) {
             const after_modified = this.state.data.slice(end + 1, this.state.data.length);
 
             let previous_id = after_modified[0].sentence_id;
