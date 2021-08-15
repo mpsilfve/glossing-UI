@@ -103,6 +103,10 @@ p {
   font-weight: bold;
 }
 
+.preferred_segmentation {
+  color: #7A4ECA;
+}
+
 table {
   table-layout: fixed;
   width: 100%;
@@ -112,6 +116,14 @@ table {
 #results_table tbody tr {
   /* background: linear-gradient(to bottom, #c1c8e4, #8860d0); */
   border-bottom: 2px solid #5680e9;
+}
+
+.odd {
+  background-color: #c2cbf3a6;
+}
+
+.even {
+  background-color: #b3e5f1;
 }
 
 #completed_message {

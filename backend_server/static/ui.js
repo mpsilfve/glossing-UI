@@ -80,7 +80,7 @@ class Cell extends React.Component {
     render() {
         return (
             <div className="cell">
-                <p>{this.props.token["input"]}</p>
+                <p className='input_token'>{this.props.token["input"]}</p>
                 <p>{this.props.token["preferred_segmentation"]}</p>
                 <Dropdown  
                     title={this.props.token["segmentation"][0]}
@@ -316,9 +316,16 @@ class ResultsTable extends React.Component {
                 }
                 // TODO why does this render every time
                 // console.log(`Lower bound is ${this.props.lower_bound} and current_index is ${current_index} and index is ${current_index + this.props.lower_bound}`)
+                
+                // assign class to cells based on sentence id to colour different sentences differently in styling
+                // odd sentences will get className="odd", and even will get "even".
+                let cell_sentence_class = 'odd';
+                if (this.props.data[current_token].sentence_id % 2 === 0) {
+                    cell_sentence_class = 'even';
+                }
                 row.push(
-                    <td key={j}>
-                        <Cell 
+                    <td key={j} className={cell_sentence_class}>
+                        <Cell
                             token={this.props.data[current_token]}
                             index={current_index + this.props.lower_bound}
                             updatePreferredSegmentation = {
@@ -355,7 +362,7 @@ class Legend extends React.Component {
             <div id="legend">
                 <h3>Table Legend</h3>
                 <p className="input_token">Input token</p>
-                <p> Preferred segmentation</p>
+                <p className="preferred_segmentation"> Preferred segmentation</p>
                 <p id="segmentation_list_legend">
                     List of n-best segmentations
                 </p>
@@ -447,6 +454,8 @@ class PageTable extends React.Component {
         }
 
         let annotation_present = false;
+        console.log(this.state.annotations_included.length);
+        console.log(this.state.sentences_included.length);
         if (this.state.annotations_included.length === this.state.sentences_included.length) {
             annotation_present = true;
         }
