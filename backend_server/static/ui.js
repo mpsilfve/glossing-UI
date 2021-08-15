@@ -77,9 +77,22 @@ class Cell extends React.Component {
         });
     }
 
+
     render() {
+        let sentence_message = '';
+        if (this.props.show_sentence_number) {
+            if ('annotation_id' in this.props.token) {
+                sentence_message = `Annotation ${this.props.token.annotation_id}`
+            } else {
+                sentence_message = `Sentence ${this.props.token.sentence_id}`;
+            }
+        }
+
         return (
             <div className="cell">
+                {/* &nbsp non-breaking space - at this space words are not broken and also the browser does not cancel it.
+                Here, it is used for alignment. */}
+                <p className='annotation'>{sentence_message}&nbsp;</p>
                 <p className='input_token'>{this.props.token["input"]}</p>
                 <p>{this.props.token["preferred_segmentation"]}</p>
                 <Dropdown  
@@ -307,6 +320,7 @@ class ResultsTable extends React.Component {
 
         let current_index = 0;
         // the outer loop will count up to ten, and break if there is less
+        // 
         for (let i = 0; i < row_number; i++) {
             let row = [];
             for (let j = 0; j < column_number; j++) {
@@ -323,10 +337,17 @@ class ResultsTable extends React.Component {
                 if (this.props.data[current_token].sentence_id % 2 === 0) {
                     cell_sentence_class = 'even';
                 }
+
+                let show_sentence_number = false;
+                if (current_token === 0 || this.props.data[current_token].sentence_id != this.props.data[current_token - 1].sentence_id) {
+                    show_sentence_number = true;
+                }
+
                 row.push(
                     <td key={j} className={cell_sentence_class}>
                         <Cell
                             token={this.props.data[current_token]}
+                            show_sentence_number={show_sentence_number}
                             index={current_index + this.props.lower_bound}
                             updatePreferredSegmentation = {
                                 ( index, newPreferred, isCustom, update_mode) => 
@@ -428,7 +449,7 @@ class PageTable extends React.Component {
     onClick(lower_b, upper_b, i) {
         this.setState({
             sentences_included: this.props.data[i].sentences_included,
-            annotation_included: this.props.data[i].annotations_included,
+            annotations_included: this.props.data[i].annotations_included,
         });
         this.props.onClick(lower_b, upper_b);
     }
@@ -463,6 +484,7 @@ class PageTable extends React.Component {
         let sentence_rows = [];
         for (let j = 0; j < this.state.sentences_included.length; j++) {
             const annotation = annotation_present ? this.state.annotations_included[j] : null;
+            console.log(annotation);
             sentence_rows.push(
                 <tr key={j}>
                     <td>

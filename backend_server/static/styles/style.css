@@ -126,6 +126,10 @@ table {
   background-color: #b3e5f1;
 }
 
+.annotation {
+  font-size: 1em
+}
+
 #completed_message {
   /*defines flex container*/
   display: flex;
