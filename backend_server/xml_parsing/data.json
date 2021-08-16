@@ -25,49 +25,25 @@
     }, 
     {
         "segmentation": [
-            "g", 
+            "g\u0332o'o?hl", 
             "TRANS"
         ], 
-        "preferred_segmentation": "g", 
+        "preferred_segmentation": "g\u0332o'o?hl", 
         "sentence_id": 0, 
         "custom_segmentation": [], 
-        "input": "g", 
+        "input": "g\u0332o'ohl", 
         "model": "coling", 
         "annotation_id": "a1"
     }, 
     {
         "segmentation": [
-            "o'o?hl", 
+            "sg\u0332a'nist", 
             "TRANS"
         ], 
-        "preferred_segmentation": "o'o?hl", 
+        "preferred_segmentation": "sg\u0332a'nist", 
         "sentence_id": 0, 
         "custom_segmentation": [], 
-        "input": "o'ohl", 
-        "model": "coling", 
-        "annotation_id": "a1"
-    }, 
-    {
-        "segmentation": [
-            "sg", 
-            "TRANS"
-        ], 
-        "preferred_segmentation": "sg", 
-        "sentence_id": 0, 
-        "custom_segmentation": [], 
-        "input": "sg", 
-        "model": "coling", 
-        "annotation_id": "a1"
-    }, 
-    {
-        "segmentation": [
-            "a'nist", 
-            "TRANS"
-        ], 
-        "preferred_segmentation": "a'nist", 
-        "sentence_id": 0, 
-        "custom_segmentation": [], 
-        "input": "a'nist", 
+        "input": "sg\u0332a'nist", 
         "model": "coling", 
         "annotation_id": "a1"
     }, 
@@ -190,25 +166,13 @@
     }, 
     {
         "segmentation": [
-            "sindok", 
+            "sindok\u0332-diit?hl", 
             "TRANS"
         ], 
-        "preferred_segmentation": "sindok", 
+        "preferred_segmentation": "sindok\u0332-diit?hl", 
         "sentence_id": 3, 
         "custom_segmentation": [], 
-        "input": "sindok", 
-        "model": "coling", 
-        "annotation_id": "a4"
-    }, 
-    {
-        "segmentation": [
-            "diit?hl", 
-            "TRANS"
-        ], 
-        "preferred_segmentation": "diit?hl", 
-        "sentence_id": 3, 
-        "custom_segmentation": [], 
-        "input": "diithl", 
+        "input": "sindok\u0332diithl", 
         "model": "coling", 
         "annotation_id": "a4"
     }, 
@@ -579,25 +543,13 @@
     }, 
     {
         "segmentation": [
-            "K'eek", 
+            "K'eek\u0332-xw-t", 
             "TRANS"
         ], 
-        "preferred_segmentation": "K'eek", 
+        "preferred_segmentation": "K'eek\u0332-xw-t", 
         "sentence_id": 10, 
         "custom_segmentation": [], 
-        "input": "K'eek", 
-        "model": "coling", 
-        "annotation_id": "a11"
-    }, 
-    {
-        "segmentation": [
-            "xwt", 
-            "TRANS"
-        ], 
-        "preferred_segmentation": "xwt", 
-        "sentence_id": 10, 
-        "custom_segmentation": [], 
-        "input": "xwt", 
+        "input": "K'eek\u0332xwt", 
         "model": "coling", 
         "annotation_id": "a11"
     }, 
@@ -721,13 +673,13 @@
     }, 
     {
         "segmentation": [
-            "lax", 
+            "lax\u0332", 
             "TRANS"
         ], 
-        "preferred_segmentation": "lax", 
+        "preferred_segmentation": "lax\u0332", 
         "sentence_id": 12, 
         "custom_segmentation": [], 
-        "input": "lax", 
+        "input": "lax\u0332", 
         "model": "coling", 
         "annotation_id": "a13"
     }, 
@@ -803,49 +755,25 @@
     }, 
     {
         "segmentation": [
-            "g", 
+            "g\u0332alt-m", 
             "TRANS"
         ], 
-        "preferred_segmentation": "g", 
+        "preferred_segmentation": "g\u0332alt-m", 
         "sentence_id": 14, 
         "custom_segmentation": [], 
-        "input": "g", 
+        "input": "g\u0332aldim", 
         "model": "coling", 
         "annotation_id": "a15"
     }, 
     {
         "segmentation": [
-            "aldim", 
+            "t'aahlxw[-t", 
             "TRANS"
         ], 
-        "preferred_segmentation": "aldim", 
+        "preferred_segmentation": "t'aahlxw[-t", 
         "sentence_id": 14, 
         "custom_segmentation": [], 
-        "input": "aldim", 
-        "model": "coling", 
-        "annotation_id": "a15"
-    }, 
-    {
-        "segmentation": [
-            "t'aahlxw", 
-            "TRANS"
-        ], 
-        "preferred_segmentation": "t'aahlxw", 
-        "sentence_id": 14, 
-        "custom_segmentation": [], 
-        "input": "t'aahlxw", 
-        "model": "coling", 
-        "annotation_id": "a15"
-    }, 
-    {
-        "segmentation": [
-            "t", 
-            "TRANS"
-        ], 
-        "preferred_segmentation": "t", 
-        "sentence_id": 14, 
-        "custom_segmentation": [], 
-        "input": "t", 
+        "input": "t'aahlxw[t]", 
         "model": "coling", 
         "annotation_id": "a15"
     }, 
@@ -1016,25 +944,13 @@
     }, 
     {
         "segmentation": [
-            "g", 
+            "g\u0332alt-m", 
             "TRANS"
         ], 
-        "preferred_segmentation": "g", 
+        "preferred_segmentation": "g\u0332alt-m", 
         "sentence_id": 17, 
         "custom_segmentation": [], 
-        "input": "g", 
-        "model": "coling", 
-        "annotation_id": "a18"
-    }, 
-    {
-        "segmentation": [
-            "aldim", 
-            "TRANS"
-        ], 
-        "preferred_segmentation": "aldim", 
-        "sentence_id": 17, 
-        "custom_segmentation": [], 
-        "input": "aldim", 
+        "input": "g\u0332aldim", 
         "model": "coling", 
         "annotation_id": "a18"
     }, 
@@ -1181,25 +1097,13 @@
     }, 
     {
         "segmentation": [
-            "t'aahlxw", 
+            "t'aahlxw[-t", 
             "TRANS"
         ], 
-        "preferred_segmentation": "t'aahlxw", 
+        "preferred_segmentation": "t'aahlxw[-t", 
         "sentence_id": 19, 
         "custom_segmentation": [], 
-        "input": "t'aahlxw", 
-        "model": "coling", 
-        "annotation_id": "a20"
-    }, 
-    {
-        "segmentation": [
-            "t", 
-            "TRANS"
-        ], 
-        "preferred_segmentation": "t", 
-        "sentence_id": 19, 
-        "custom_segmentation": [], 
-        "input": "t", 
+        "input": "t'aahlxw[t]", 
         "model": "coling", 
         "annotation_id": "a20"
     }, 
@@ -1263,13 +1167,13 @@
     }, 
     {
         "segmentation": [
-            "Dim", 
+            "dim", 
             "TRANS"
         ], 
-        "preferred_segmentation": "Dim", 
+        "preferred_segmentation": "dim", 
         "sentence_id": 20, 
         "custom_segmentation": [], 
-        "input": "Dim", 
+        "input": "\"Dim", 
         "model": "coling", 
         "annotation_id": "a21"
     }, 
@@ -1329,6 +1233,17 @@
         "sentence_id": 20, 
         "custom_segmentation": [], 
         "input": ",", 
+        "model": "coling", 
+        "annotation_id": "a21"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 20, 
+        "custom_segmentation": [], 
+        "input": "\"", 
         "model": "coling", 
         "annotation_id": "a21"
     }, 

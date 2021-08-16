@@ -1,7 +1,7 @@
 """
 This will parse an eaf file. An example of eaf file is found in berrypicking_Annotations.eaf
 """
-# TODO use defusedxml
+# TODO use defusedxml for security reasons
 # from defusedxml import ElementTree as ET
 import xml.etree.ElementTree as ET
 import json
@@ -322,17 +322,17 @@ def writeEafTier(eaf_file, data):
     return root
 
 
+# code below for debugging purposes
+# with open('berrypicking_Annotations.eaf', 'r') as file:
+#     xml_document = file.read()
 
-with open('berrypicking_Annotations.eaf', 'r') as file:
-    xml_document = file.read()
+# with open('data.json', 'r') as outfile:
+#     data = json.load(outfile)
 
-with open('data.json', 'r') as outfile:
-    data = json.load(outfile)
-
-# getInputText('Transcription', xml_document)
-# TODO you cannot use the same xml_document second time?
-# parseTierWithTime('Transcription', xml_document)
-writeEafTier(xml_document,data)
+# # getInputText('Transcription', xml_document)
+# # TODO you cannot use the same xml_document second time?
+# # parseTierWithTime('Transcription', xml_document)
+# writeEafTier(xml_document,data)
 
 
 

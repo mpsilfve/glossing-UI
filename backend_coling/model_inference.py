@@ -32,7 +32,7 @@ def process_file(job_id):
         # TODO define a defininte list of punctuation to separate
         # TODO think - maybe to separate by spaces first, and then using a regex
         # from https://stackoverflow.com/questions/367155/splitting-a-string-into-words-and-punctuation
-        word_list_input = re.findall(r"[\w']+|[!#$%&()*+,-.:;<=>?@]", text_input)
+        word_list_input = re.findall(r"[^!#$%&()*+,.:;<=>? ]+|[!#$%&()*+,.:;<=>?@]", text_input, re.UNICODE)
         print(word_list_input)
         print("inputs")
     
@@ -51,7 +51,7 @@ def process_file(job_id):
         annotation_list = []
         for annotation in eaf_data:
             annotation_value = annotation['annotation_text']
-            annotation_token_list = re.findall(r"[\w']+|[!#$%&()*+,-.:;<=>?@]", annotation_value)
+            annotation_token_list = re.findall(r"[^!#$%&()*+,.:;<=>? ]+|[!#$%&()*+,.:;<=>?@]", annotation_value, re.UNICODE)
             for token in annotation_token_list:
                 processed_input += token + "\t" + token + "\t" + "TRANS" + "\n"
                 annotation_list.append(annotation['annotation_id']) 
