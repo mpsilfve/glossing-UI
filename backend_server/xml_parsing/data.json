@@ -1,0 +1,1370 @@
+[
+    {
+        "segmentation": [
+            "Yee-t", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Yee-t", 
+        "sentence_id": 0, 
+        "custom_segmentation": [], 
+        "input": "Yeet", 
+        "model": "coling", 
+        "annotation_id": "a1"
+    }, 
+    {
+        "segmentation": [
+            "Emaa", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Emaa", 
+        "sentence_id": 0, 
+        "custom_segmentation": [], 
+        "input": "Emaa", 
+        "model": "coling", 
+        "annotation_id": "a1"
+    }, 
+    {
+        "segmentation": [
+            "g", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "g", 
+        "sentence_id": 0, 
+        "custom_segmentation": [], 
+        "input": "g", 
+        "model": "coling", 
+        "annotation_id": "a1"
+    }, 
+    {
+        "segmentation": [
+            "o'o?hl", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "o'o?hl", 
+        "sentence_id": 0, 
+        "custom_segmentation": [], 
+        "input": "o'ohl", 
+        "model": "coling", 
+        "annotation_id": "a1"
+    }, 
+    {
+        "segmentation": [
+            "sg", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "sg", 
+        "sentence_id": 0, 
+        "custom_segmentation": [], 
+        "input": "sg", 
+        "model": "coling", 
+        "annotation_id": "a1"
+    }, 
+    {
+        "segmentation": [
+            "a'nist", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "a'nist", 
+        "sentence_id": 0, 
+        "custom_segmentation": [], 
+        "input": "a'nist", 
+        "model": "coling", 
+        "annotation_id": "a1"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 0, 
+        "custom_segmentation": [], 
+        "input": ".", 
+        "model": "coling", 
+        "annotation_id": "a1"
+    }, 
+    {
+        "segmentation": [
+            "Sdil-it", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Sdil-it", 
+        "sentence_id": 1, 
+        "custom_segmentation": [], 
+        "input": "Sdilit", 
+        "model": "coling", 
+        "annotation_id": "a2"
+    }, 
+    {
+        "segmentation": [
+            "ts'iits'-t", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "ts'iits'-t", 
+        "sentence_id": 1, 
+        "custom_segmentation": [], 
+        "input": "ts'iits't", 
+        "model": "coling", 
+        "annotation_id": "a2"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 1, 
+        "custom_segmentation": [], 
+        "input": ".", 
+        "model": "coling", 
+        "annotation_id": "a2"
+    }, 
+    {
+        "segmentation": [
+            "Yukw", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Yukw", 
+        "sentence_id": 2, 
+        "custom_segmentation": [], 
+        "input": "Yukw", 
+        "model": "coling", 
+        "annotation_id": "a3"
+    }, 
+    {
+        "segmentation": [
+            "dim", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "dim", 
+        "sentence_id": 2, 
+        "custom_segmentation": [], 
+        "input": "dim", 
+        "model": "coling", 
+        "annotation_id": "a3"
+    }, 
+    {
+        "segmentation": [
+            "t'aa?hl", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "t'aa?hl", 
+        "sentence_id": 2, 
+        "custom_segmentation": [], 
+        "input": "t'aahl", 
+        "model": "coling", 
+        "annotation_id": "a3"
+    }, 
+    {
+        "segmentation": [
+            "sim", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "sim", 
+        "sentence_id": 2, 
+        "custom_segmentation": [], 
+        "input": "sim", 
+        "model": "coling", 
+        "annotation_id": "a3"
+    }, 
+    {
+        "segmentation": [
+            "maa'y-diit", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "maa'y-diit", 
+        "sentence_id": 2, 
+        "custom_segmentation": [], 
+        "input": "maa'ydiit", 
+        "model": "coling", 
+        "annotation_id": "a3"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 2, 
+        "custom_segmentation": [], 
+        "input": ",", 
+        "model": "coling", 
+        "annotation_id": "a3"
+    }, 
+    {
+        "segmentation": [
+            "sindok", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "sindok", 
+        "sentence_id": 3, 
+        "custom_segmentation": [], 
+        "input": "sindok", 
+        "model": "coling", 
+        "annotation_id": "a4"
+    }, 
+    {
+        "segmentation": [
+            "diit?hl", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "diit?hl", 
+        "sentence_id": 3, 
+        "custom_segmentation": [], 
+        "input": "diithl", 
+        "model": "coling", 
+        "annotation_id": "a4"
+    }, 
+    {
+        "segmentation": [
+            "ha'aks", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "ha'aks", 
+        "sentence_id": 3, 
+        "custom_segmentation": [], 
+        "input": "ha'aks", 
+        "model": "coling", 
+        "annotation_id": "a4"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 3, 
+        "custom_segmentation": [], 
+        "input": ".", 
+        "model": "coling", 
+        "annotation_id": "a4"
+    }, 
+    {
+        "segmentation": [
+            "Ts'il-m", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Ts'il-m", 
+        "sentence_id": 4, 
+        "custom_segmentation": [], 
+        "input": "Ts'ilim", 
+        "model": "coling", 
+        "annotation_id": "a5"
+    }, 
+    {
+        "segmentation": [
+            "'nidiit", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "'nidiit", 
+        "sentence_id": 4, 
+        "custom_segmentation": [], 
+        "input": "'nidiit", 
+        "model": "coling", 
+        "annotation_id": "a5"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 4, 
+        "custom_segmentation": [], 
+        "input": ".", 
+        "model": "coling", 
+        "annotation_id": "a5"
+    }, 
+    {
+        "segmentation": [
+            "Gini?s", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Gini?s", 
+        "sentence_id": 5, 
+        "custom_segmentation": [], 
+        "input": "Ginis", 
+        "model": "coling", 
+        "annotation_id": "a6"
+    }, 
+    {
+        "segmentation": [
+            "Ts'iits'-t", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Ts'iits'-t", 
+        "sentence_id": 5, 
+        "custom_segmentation": [], 
+        "input": "Ts'iits't", 
+        "model": "coling", 
+        "annotation_id": "a6"
+    }, 
+    {
+        "segmentation": [
+            "Emaa", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Emaa", 
+        "sentence_id": 5, 
+        "custom_segmentation": [], 
+        "input": "Emaa", 
+        "model": "coling", 
+        "annotation_id": "a6"
+    }, 
+    {
+        "segmentation": [
+            "a-loo?hl", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "a-loo?hl", 
+        "sentence_id": 5, 
+        "custom_segmentation": [], 
+        "input": "aloohl", 
+        "model": "coling", 
+        "annotation_id": "a6"
+    }, 
+    {
+        "segmentation": [
+            "anaayim", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "anaayim", 
+        "sentence_id": 5, 
+        "custom_segmentation": [], 
+        "input": "anaayim", 
+        "model": "coling", 
+        "annotation_id": "a6"
+    }, 
+    {
+        "segmentation": [
+            "it-asxw-it", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "it-asxw-it", 
+        "sentence_id": 5, 
+        "custom_segmentation": [], 
+        "input": "isbawdis", 
+        "model": "coling", 
+        "annotation_id": "a6"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 5, 
+        "custom_segmentation": [], 
+        "input": ".", 
+        "model": "coling", 
+        "annotation_id": "a6"
+    }, 
+    {
+        "segmentation": [
+            "'Wa-diit", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "'Wa-diit", 
+        "sentence_id": 6, 
+        "custom_segmentation": [], 
+        "input": "'Wadiit", 
+        "model": "coling", 
+        "annotation_id": "a7"
+    }, 
+    {
+        "segmentation": [
+            "win", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "win", 
+        "sentence_id": 6, 
+        "custom_segmentation": [], 
+        "input": "wil", 
+        "model": "coling", 
+        "annotation_id": "a7"
+    }, 
+    {
+        "segmentation": [
+            "'weexsw", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "'weexsw", 
+        "sentence_id": 6, 
+        "custom_segmentation": [], 
+        "input": "'weexsw", 
+        "model": "coling", 
+        "annotation_id": "a7"
+    }, 
+    {
+        "segmentation": [
+            "sim", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "sim", 
+        "sentence_id": 6, 
+        "custom_segmentation": [], 
+        "input": "sim", 
+        "model": "coling", 
+        "annotation_id": "a7"
+    }, 
+    {
+        "segmentation": [
+            "maa'y", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "maa'y", 
+        "sentence_id": 6, 
+        "custom_segmentation": [], 
+        "input": "maa'y", 
+        "model": "coling", 
+        "annotation_id": "a7"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 6, 
+        "custom_segmentation": [], 
+        "input": ".", 
+        "model": "coling", 
+        "annotation_id": "a7"
+    }, 
+    {
+        "segmentation": [
+            "Helt?hl", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Helt?hl", 
+        "sentence_id": 7, 
+        "custom_segmentation": [], 
+        "input": "Helthl", 
+        "model": "coling", 
+        "annotation_id": "a8"
+    }, 
+    {
+        "segmentation": [
+            "t'aahlxw?s", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "t'aahlxw?s", 
+        "sentence_id": 7, 
+        "custom_segmentation": [], 
+        "input": "t'aahlxws", 
+        "model": "coling", 
+        "annotation_id": "a8"
+    }, 
+    {
+        "segmentation": [
+            "Emaa", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Emaa", 
+        "sentence_id": 7, 
+        "custom_segmentation": [], 
+        "input": "Emaa", 
+        "model": "coling", 
+        "annotation_id": "a8"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 7, 
+        "custom_segmentation": [], 
+        "input": ".", 
+        "model": "coling", 
+        "annotation_id": "a8"
+    }, 
+    {
+        "segmentation": [
+            "Iit", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Iit", 
+        "sentence_id": 8, 
+        "custom_segmentation": [], 
+        "input": "Iit", 
+        "model": "coling", 
+        "annotation_id": "a9"
+    }, 
+    {
+        "segmentation": [
+            "gya'a?s", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "gya'a?s", 
+        "sentence_id": 8, 
+        "custom_segmentation": [], 
+        "input": "gya'as", 
+        "model": "coling", 
+        "annotation_id": "a9"
+    }, 
+    {
+        "segmentation": [
+            "Emaa?hl", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Emaa?hl", 
+        "sentence_id": 8, 
+        "custom_segmentation": [], 
+        "input": "Emaahl", 
+        "model": "coling", 
+        "annotation_id": "a9"
+    }, 
+    {
+        "segmentation": [
+            "lalt", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "lalt", 
+        "sentence_id": 8, 
+        "custom_segmentation": [], 
+        "input": "lalt", 
+        "model": "coling", 
+        "annotation_id": "a9"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 8, 
+        "custom_segmentation": [], 
+        "input": ".", 
+        "model": "coling", 
+        "annotation_id": "a9"
+    }, 
+    {
+        "segmentation": [
+            "Baa-sxw-it", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Baa-sxw-it", 
+        "sentence_id": 9, 
+        "custom_segmentation": [], 
+        "input": "Baasxis", 
+        "model": "coling", 
+        "annotation_id": "a10"
+    }, 
+    {
+        "segmentation": [
+            "Emaa?hl", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Emaa?hl", 
+        "sentence_id": 9, 
+        "custom_segmentation": [], 
+        "input": "Emaahl", 
+        "model": "coling", 
+        "annotation_id": "a10"
+    }, 
+    {
+        "segmentation": [
+            "lalt", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "lalt", 
+        "sentence_id": 9, 
+        "custom_segmentation": [], 
+        "input": "lalt", 
+        "model": "coling", 
+        "annotation_id": "a10"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 9, 
+        "custom_segmentation": [], 
+        "input": ".", 
+        "model": "coling", 
+        "annotation_id": "a10"
+    }, 
+    {
+        "segmentation": [
+            "K'eek", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "K'eek", 
+        "sentence_id": 10, 
+        "custom_segmentation": [], 
+        "input": "K'eek", 
+        "model": "coling", 
+        "annotation_id": "a11"
+    }, 
+    {
+        "segmentation": [
+            "xwt", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "xwt", 
+        "sentence_id": 10, 
+        "custom_segmentation": [], 
+        "input": "xwt", 
+        "model": "coling", 
+        "annotation_id": "a11"
+    }, 
+    {
+        "segmentation": [
+            "Emaa", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Emaa", 
+        "sentence_id": 10, 
+        "custom_segmentation": [], 
+        "input": "Emaa", 
+        "model": "coling", 
+        "annotation_id": "a11"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 10, 
+        "custom_segmentation": [], 
+        "input": ".", 
+        "model": "coling", 
+        "annotation_id": "a11"
+    }, 
+    {
+        "segmentation": [
+            "Akst", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Akst", 
+        "sentence_id": 11, 
+        "custom_segmentation": [], 
+        "input": "Akst", 
+        "model": "coling", 
+        "annotation_id": "a12"
+    }, 
+    {
+        "segmentation": [
+            "lo'op", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "lo'op", 
+        "sentence_id": 11, 
+        "custom_segmentation": [], 
+        "input": "lo'op", 
+        "model": "coling", 
+        "annotation_id": "a12"
+    }, 
+    {
+        "segmentation": [
+            "win", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "win", 
+        "sentence_id": 11, 
+        "custom_segmentation": [], 
+        "input": "wil", 
+        "model": "coling", 
+        "annotation_id": "a12"
+    }, 
+    {
+        "segmentation": [
+            "'wihl", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "'wihl", 
+        "sentence_id": 11, 
+        "custom_segmentation": [], 
+        "input": "'wihl", 
+        "model": "coling", 
+        "annotation_id": "a12"
+    }, 
+    {
+        "segmentation": [
+            "wil-diit", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "wil-diit", 
+        "sentence_id": 11, 
+        "custom_segmentation": [], 
+        "input": "wildiit", 
+        "model": "coling", 
+        "annotation_id": "a12"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 11, 
+        "custom_segmentation": [], 
+        "input": ".", 
+        "model": "coling", 
+        "annotation_id": "a12"
+    }, 
+    {
+        "segmentation": [
+            "Hliks-t", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Hliks-t", 
+        "sentence_id": 12, 
+        "custom_segmentation": [], 
+        "input": "Hlikst", 
+        "model": "coling", 
+        "annotation_id": "a13"
+    }, 
+    {
+        "segmentation": [
+            "Emaa", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Emaa", 
+        "sentence_id": 12, 
+        "custom_segmentation": [], 
+        "input": "Emaa", 
+        "model": "coling", 
+        "annotation_id": "a13"
+    }, 
+    {
+        "segmentation": [
+            "lax", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "lax", 
+        "sentence_id": 12, 
+        "custom_segmentation": [], 
+        "input": "lax", 
+        "model": "coling", 
+        "annotation_id": "a13"
+    }, 
+    {
+        "segmentation": [
+            "lo'op?gi", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "lo'op?gi", 
+        "sentence_id": 12, 
+        "custom_segmentation": [], 
+        "input": "lo'opgi", 
+        "model": "coling", 
+        "annotation_id": "a13"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 12, 
+        "custom_segmentation": [], 
+        "input": ".", 
+        "model": "coling", 
+        "annotation_id": "a13"
+    }, 
+    {
+        "segmentation": [
+            "Moo?ji", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Moo?ji", 
+        "sentence_id": 13, 
+        "custom_segmentation": [], 
+        "input": "Mooji", 
+        "model": "coling", 
+        "annotation_id": "a14"
+    }, 
+    {
+        "segmentation": [
+            "deex-it", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "deex-it", 
+        "sentence_id": 13, 
+        "custom_segmentation": [], 
+        "input": "deexit", 
+        "model": "coling", 
+        "annotation_id": "a14"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 13, 
+        "custom_segmentation": [], 
+        "input": ".", 
+        "model": "coling", 
+        "annotation_id": "a14"
+    }, 
+    {
+        "segmentation": [
+            "T'ukw-in-t?hl", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "T'ukw-in-t?hl", 
+        "sentence_id": 14, 
+        "custom_segmentation": [], 
+        "input": "T'ugwandinthl", 
+        "model": "coling", 
+        "annotation_id": "a15"
+    }, 
+    {
+        "segmentation": [
+            "g", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "g", 
+        "sentence_id": 14, 
+        "custom_segmentation": [], 
+        "input": "g", 
+        "model": "coling", 
+        "annotation_id": "a15"
+    }, 
+    {
+        "segmentation": [
+            "aldim", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "aldim", 
+        "sentence_id": 14, 
+        "custom_segmentation": [], 
+        "input": "aldim", 
+        "model": "coling", 
+        "annotation_id": "a15"
+    }, 
+    {
+        "segmentation": [
+            "t'aahlxw", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "t'aahlxw", 
+        "sentence_id": 14, 
+        "custom_segmentation": [], 
+        "input": "t'aahlxw", 
+        "model": "coling", 
+        "annotation_id": "a15"
+    }, 
+    {
+        "segmentation": [
+            "t", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "t", 
+        "sentence_id": 14, 
+        "custom_segmentation": [], 
+        "input": "t", 
+        "model": "coling", 
+        "annotation_id": "a15"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 14, 
+        "custom_segmentation": [], 
+        "input": ".", 
+        "model": "coling", 
+        "annotation_id": "a15"
+    }, 
+    {
+        "segmentation": [
+            "Ii", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Ii", 
+        "sentence_id": 15, 
+        "custom_segmentation": [], 
+        "input": "Ii", 
+        "model": "coling", 
+        "annotation_id": "a16"
+    }, 
+    {
+        "segmentation": [
+            "lak?hl", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "lak?hl", 
+        "sentence_id": 15, 
+        "custom_segmentation": [], 
+        "input": "lakhl", 
+        "model": "coling", 
+        "annotation_id": "a16"
+    }, 
+    {
+        "segmentation": [
+            "t'aahlxw?s", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "t'aahlxw?s", 
+        "sentence_id": 15, 
+        "custom_segmentation": [], 
+        "input": "t'aahlxws", 
+        "model": "coling", 
+        "annotation_id": "a16"
+    }, 
+    {
+        "segmentation": [
+            "Emaa", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Emaa", 
+        "sentence_id": 15, 
+        "custom_segmentation": [], 
+        "input": "Emaa", 
+        "model": "coling", 
+        "annotation_id": "a16"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 15, 
+        "custom_segmentation": [], 
+        "input": ".", 
+        "model": "coling", 
+        "annotation_id": "a16"
+    }, 
+    {
+        "segmentation": [
+            "Ii", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Ii", 
+        "sentence_id": 16, 
+        "custom_segmentation": [], 
+        "input": "Ii", 
+        "model": "coling", 
+        "annotation_id": "a17"
+    }, 
+    {
+        "segmentation": [
+            "hats'im", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "hats'im", 
+        "sentence_id": 16, 
+        "custom_segmentation": [], 
+        "input": "hats'im", 
+        "model": "coling", 
+        "annotation_id": "a17"
+    }, 
+    {
+        "segmentation": [
+            "hoo", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "hoo", 
+        "sentence_id": 16, 
+        "custom_segmentation": [], 
+        "input": "hoo", 
+        "model": "coling", 
+        "annotation_id": "a17"
+    }, 
+    {
+        "segmentation": [
+            "si-t'aa-'mat", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "si-t'aa-'mat", 
+        "sentence_id": 16, 
+        "custom_segmentation": [], 
+        "input": "sit'aa'mat", 
+        "model": "coling", 
+        "annotation_id": "a17"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 16, 
+        "custom_segmentation": [], 
+        "input": ".", 
+        "model": "coling", 
+        "annotation_id": "a17"
+    }, 
+    {
+        "segmentation": [
+            "Hats'im", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Hats'im", 
+        "sentence_id": 17, 
+        "custom_segmentation": [], 
+        "input": "Hats'im", 
+        "model": "coling", 
+        "annotation_id": "a18"
+    }, 
+    {
+        "segmentation": [
+            "hoo", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "hoo", 
+        "sentence_id": 17, 
+        "custom_segmentation": [], 
+        "input": "hoo", 
+        "model": "coling", 
+        "annotation_id": "a18"
+    }, 
+    {
+        "segmentation": [
+            "mit-in-t?hl", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "mit-in-t?hl", 
+        "sentence_id": 17, 
+        "custom_segmentation": [], 
+        "input": "midinthl", 
+        "model": "coling", 
+        "annotation_id": "a18"
+    }, 
+    {
+        "segmentation": [
+            "g", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "g", 
+        "sentence_id": 17, 
+        "custom_segmentation": [], 
+        "input": "g", 
+        "model": "coling", 
+        "annotation_id": "a18"
+    }, 
+    {
+        "segmentation": [
+            "aldim", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "aldim", 
+        "sentence_id": 17, 
+        "custom_segmentation": [], 
+        "input": "aldim", 
+        "model": "coling", 
+        "annotation_id": "a18"
+    }, 
+    {
+        "segmentation": [
+            "t'aahlxw-t", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "t'aahlxw-t", 
+        "sentence_id": 17, 
+        "custom_segmentation": [], 
+        "input": "t'aahlxwt", 
+        "model": "coling", 
+        "annotation_id": "a18"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 17, 
+        "custom_segmentation": [], 
+        "input": ".", 
+        "model": "coling", 
+        "annotation_id": "a18"
+    }, 
+    {
+        "segmentation": [
+            "Ii", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Ii", 
+        "sentence_id": 18, 
+        "custom_segmentation": [], 
+        "input": "Ii", 
+        "model": "coling", 
+        "annotation_id": "a19"
+    }, 
+    {
+        "segmentation": [
+            "ha'w-diit", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "ha'w-diit", 
+        "sentence_id": 18, 
+        "custom_segmentation": [], 
+        "input": "ha'wdiit", 
+        "model": "coling", 
+        "annotation_id": "a19"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 18, 
+        "custom_segmentation": [], 
+        "input": ".", 
+        "model": "coling", 
+        "annotation_id": "a19"
+    }, 
+    {
+        "segmentation": [
+            "Gini?s", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Gini?s", 
+        "sentence_id": 19, 
+        "custom_segmentation": [], 
+        "input": "Ginis", 
+        "model": "coling", 
+        "annotation_id": "a20"
+    }, 
+    {
+        "segmentation": [
+            "Emaat", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Emaat", 
+        "sentence_id": 19, 
+        "custom_segmentation": [], 
+        "input": "Emaat", 
+        "model": "coling", 
+        "annotation_id": "a20"
+    }, 
+    {
+        "segmentation": [
+            "Ye'e'-t", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Ye'e'-t", 
+        "sentence_id": 19, 
+        "custom_segmentation": [], 
+        "input": "Ye'e't", 
+        "model": "coling", 
+        "annotation_id": "a20"
+    }, 
+    {
+        "segmentation": [
+            "a?hl", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "a?hl", 
+        "sentence_id": 19, 
+        "custom_segmentation": [], 
+        "input": "ahl", 
+        "model": "coling", 
+        "annotation_id": "a20"
+    }, 
+    {
+        "segmentation": [
+            "sim", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "sim", 
+        "sentence_id": 19, 
+        "custom_segmentation": [], 
+        "input": "sim", 
+        "model": "coling", 
+        "annotation_id": "a20"
+    }, 
+    {
+        "segmentation": [
+            "maa'y", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "maa'y", 
+        "sentence_id": 19, 
+        "custom_segmentation": [], 
+        "input": "maa'y", 
+        "model": "coling", 
+        "annotation_id": "a20"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 19, 
+        "custom_segmentation": [], 
+        "input": ",", 
+        "model": "coling", 
+        "annotation_id": "a20"
+    }, 
+    {
+        "segmentation": [
+            "t'aahlxw", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "t'aahlxw", 
+        "sentence_id": 19, 
+        "custom_segmentation": [], 
+        "input": "t'aahlxw", 
+        "model": "coling", 
+        "annotation_id": "a20"
+    }, 
+    {
+        "segmentation": [
+            "t", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "t", 
+        "sentence_id": 19, 
+        "custom_segmentation": [], 
+        "input": "t", 
+        "model": "coling", 
+        "annotation_id": "a20"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 19, 
+        "custom_segmentation": [], 
+        "input": ",", 
+        "model": "coling", 
+        "annotation_id": "a20"
+    }, 
+    {
+        "segmentation": [
+            "ii?t", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "ii?t", 
+        "sentence_id": 19, 
+        "custom_segmentation": [], 
+        "input": "iit", 
+        "model": "coling", 
+        "annotation_id": "a20"
+    }, 
+    {
+        "segmentation": [
+            "dawt-in?hl", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "dawt-in?hl", 
+        "sentence_id": 19, 
+        "custom_segmentation": [], 
+        "input": "dawdinhl", 
+        "model": "coling", 
+        "annotation_id": "a20"
+    }, 
+    {
+        "segmentation": [
+            "man-it", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "man-it", 
+        "sentence_id": 19, 
+        "custom_segmentation": [], 
+        "input": "manit", 
+        "model": "coling", 
+        "annotation_id": "a20"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 19, 
+        "custom_segmentation": [], 
+        "input": ".", 
+        "model": "coling", 
+        "annotation_id": "a20"
+    }, 
+    {
+        "segmentation": [
+            "Dim", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Dim", 
+        "sentence_id": 20, 
+        "custom_segmentation": [], 
+        "input": "Dim", 
+        "model": "coling", 
+        "annotation_id": "a21"
+    }, 
+    {
+        "segmentation": [
+            "ixsda", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "ixsda", 
+        "sentence_id": 20, 
+        "custom_segmentation": [], 
+        "input": "ixsda", 
+        "model": "coling", 
+        "annotation_id": "a21"
+    }, 
+    {
+        "segmentation": [
+            "ji", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "ji", 
+        "sentence_id": 20, 
+        "custom_segmentation": [], 
+        "input": "ji", 
+        "model": "coling", 
+        "annotation_id": "a21"
+    }, 
+    {
+        "segmentation": [
+            "hlaa", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "hlaa", 
+        "sentence_id": 20, 
+        "custom_segmentation": [], 
+        "input": "hlaa", 
+        "model": "coling", 
+        "annotation_id": "a21"
+    }, 
+    {
+        "segmentation": [
+            "maadim", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "maadim", 
+        "sentence_id": 20, 
+        "custom_segmentation": [], 
+        "input": "maadim", 
+        "model": "coling", 
+        "annotation_id": "a21"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 20, 
+        "custom_segmentation": [], 
+        "input": ",", 
+        "model": "coling", 
+        "annotation_id": "a21"
+    }, 
+    {
+        "segmentation": [
+            "t?ya-t", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "t?ya-t", 
+        "sentence_id": 20, 
+        "custom_segmentation": [], 
+        "input": "diyat", 
+        "model": "coling", 
+        "annotation_id": "a21"
+    }, 
+    {
+        "segmentation": [
+            "Ts'iits'-t", 
+            "TRANS"
+        ], 
+        "preferred_segmentation": "Ts'iits'-t", 
+        "sentence_id": 20, 
+        "custom_segmentation": [], 
+        "input": "Ts'iits't", 
+        "model": "coling", 
+        "annotation_id": "a21"
+    }, 
+    {
+        "segmentation": [
+            "TRANS"
+        ], 
+        "preferred_segmentation": "TRANS", 
+        "sentence_id": 20, 
+        "custom_segmentation": [], 
+        "input": ".", 
+        "model": "coling", 
+        "annotation_id": "a21"
+    }
+]

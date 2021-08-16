@@ -413,9 +413,9 @@ class PageTableSentenceButton extends React.Component {
     render() {
         let message;
         if (this.props.annotation_id === null) {
-            message = `Sentence ${this.props.sentence_id}`;
+            message = this.props.sentence_id;
         } else {
-            message = `Annotation ${this.props.annotation_id}`;
+            message = this.props.annotation_id;
         }
      
         return (
