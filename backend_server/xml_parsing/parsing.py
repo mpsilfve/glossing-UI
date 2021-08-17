@@ -4,7 +4,7 @@ This will parse an eaf file. An example of eaf file is found in berrypicking_Ann
 # TODO use defusedxml for security reasons
 # from defusedxml import ElementTree as ET
 import xml.etree.ElementTree as ET
-import json
+import json, re
 from xml.dom import minidom
 
 
@@ -38,26 +38,27 @@ class EafParseError(Exception):
 # TODO tiers can be nested - transcription tier can be such that audio information is not in its immideate parents
 # but higher up in hierarchy
 # # concatenates all the annotation values from tier with tier_id from xml_doc
-# def getInputText(tier_id, xml_doc):
-#     tree = ET.parse(xml_doc)
-#     root = tree.getroot()
+def getInputText(tier_id, xml_doc):
+    # tree = ET.parse(xml_doc)
+    # root = tree.getroot()
+    root = ET.fromstring(xml_doc)
 
-#     for child in root.findall('TIER'):
-#         child_attrib = child.attrib
-#         if child_attrib.get('TIER_ID') == tier_id:
-#             input_tier = child
+    for child in root.findall('TIER'):
+        child_attrib = child.attrib
+        if child_attrib.get('TIER_ID') == tier_id:
+            input_tier = child
 
-#     try:
-#         input_tier
-#     except NameError:
-#         print("there is not such tier with this tier_id")
+    try:
+        input_tier
+    except NameError:
+        print("there is not such tier with this tier_id")
 
-#     input_text = ''
+    input_text = ''
 
-#     for child in input_tier.iter('ANNOTATION_VALUE'):
-#         input_text = input_text + " " + child.text
+    for child in input_tier.iter('ANNOTATION_VALUE'):
+        input_text = input_text + " " + child.text
 
-#     print(input_text)
+    print(input_text)
 
 def makeAnnotationDict(annotation_id, time_slot_1, time_slot_2, annotation_text):
     if not all([annotation_id, time_slot_1, time_slot_2]):
@@ -203,6 +204,31 @@ def parseTierWithTime(tier_id, xml_doc):
     
     return tier_list
 
+# find the highest used annotation id and determine annotation prefix
+# assumes that annotation prefix is made of word charaters and is the same
+# for all annotations
+# returns annotation prefix and first available annotation id
+def getStartAnnotationId(root):
+    
+    first_available_id = 0
+    annotation_prefix = None
+    for input_tier in root.findall(TIER):
+        for annotation in input_tier.iter(REF_ANNOTATION):
+            if annotation_prefix is None:
+                annotation_prefix =re.findall(r"[^0-9]", annotation.get(ANNOTATION_ID))[0]
+            
+            annotation_id_number = int(re.findall(r"[0-9]+", annotation.get(ANNOTATION_ID))[0])
+            if annotation_id_number > first_available_id:
+                first_available_id = annotation_id_number
+        for annotation in input_tier.iter(ALIGNABLE_ANNOTATION):
+            annotation_id_number = int(re.findall(r"[0-9]+", annotation.get(ANNOTATION_ID))[0])
+            if annotation_id_number > first_available_id:
+                first_available_id = annotation_id_number
+    
+    first_available_id += 1
+    return annotation_prefix, first_available_id
+    
+
 def writeEafTier(eaf_file, data):
     #  first, find the highest annotation number by cycling through all the tiers.
     #  then begin defining a new tier that is a symbolic subdivision, not time alignable and has a new linguistic typ
@@ -218,7 +244,9 @@ def writeEafTier(eaf_file, data):
     # TODO NOTE: it is important to have the first added id to be the next highest id in the document, or else the ELAN
     # software won't recognize it.
     annotation_id_prefix = 'a'
-    highest_annotation_id = 94
+    first_available_id = 94
+
+    annotation_id_prefix, first_available_id = getStartAnnotationId(root)
 
     input_type_attributes = {
         CONSTRAINTS: "Symbolic_Subdivision",
@@ -243,9 +271,11 @@ def writeEafTier(eaf_file, data):
         LINGUISTIC_TYPE_ID: "Glossing_UI_N_best_segmentations",
         TIME_ALIGNABLE: "false",
     }
+    linguistic_type_n_best_list = ET.Element(LINGUISTIC_TYPE, n_best_segmentation_type_attributes)
 
     root.append(linguistic_type_input)
     root.append(linguistic_type_pref_segmentation)
+    root.append(linguistic_type_n_best_list)
 
     # create a tier containing inputs
     input_tier_attributes = {
@@ -263,15 +293,25 @@ def writeEafTier(eaf_file, data):
     }
     preferred_segm_tier = ET.Element(TIER, preferred_segm_tier_attributes)
 
+    # create a tier containing n-best list of segmentations
+    n_best_list_tier_attributes = {
+        LINGUISTIC_TYPE_REF: n_best_segmentation_type_attributes[LINGUISTIC_TYPE_ID],
+        PARENT_REF: preferred_segm_tier_attributes[TIER_ID],
+        TIER_ID: "Glossing_UI_n_Best_Segmentations_Tier"
+    }
+    n_best_list_tier = ET.Element(TIER, n_best_list_tier_attributes)
+
     input_annotation_list = []
     preferred_segm_annotation_list = []
+    n_best_list_annotaiton_list = []
+
     previous_token = {}
     for token in data:
         token_number = len(data)
         # make annotation for input tier
         input_annotation = ET.Element(ANNOTATION)
 
-        input_annotation_id = annotation_id_prefix + str(highest_annotation_id)
+        input_annotation_id = annotation_id_prefix + str(first_available_id)
 
         input_ref_annotation_attributes = {
             ANNOTATION_ID: input_annotation_id,
@@ -291,9 +331,7 @@ def writeEafTier(eaf_file, data):
 
         # make annotation for preferred segmentation tier
         pref_segm_annotation = ET.Element(ANNOTATION)
-        pref_segm_annotation_id = annotation_id_prefix + str(highest_annotation_id + token_number)
-
-        highest_annotation_id += 1
+        pref_segm_annotation_id = annotation_id_prefix + str(first_available_id + token_number)
 
         pref_segm_ref_annotation_attributes = {
             ANNOTATION_ID: pref_segm_annotation_id,
@@ -306,33 +344,60 @@ def writeEafTier(eaf_file, data):
         pref_segm_value_annotation.text = token['preferred_segmentation']
 
         preferred_segm_annotation_list.append(pref_segm_annotation)
+
+        # make annotations for n-best list
+        segmentation_list = ''
+        for segmentation in token['segmentation']:
+            segmentation_list += (segmentation + ", ")
+
+        n_best_annotation = ET.Element(ANNOTATION)
+        n_best_annotation_id = annotation_id_prefix + str(first_available_id + (token_number * 2))
+
+        n_best_annotatin_attributes = {
+            ANNOTATION_ID: n_best_annotation_id,
+            ANNOTATION_REF: pref_segm_ref_annotation.attrib[ANNOTATION_ID]
+        }
+
+        n_best_ref_annotation = ET.SubElement(n_best_annotation, REF_ANNOTATION, n_best_annotatin_attributes)
+
+        n_best_value_annotation = ET.SubElement(n_best_ref_annotation, ANNOTATION_VALUE)
+        n_best_value_annotation.text = segmentation_list
+
+        n_best_list_annotaiton_list.append(n_best_annotation)
+
+        first_available_id += 1
+        
     
     input_tier.extend(input_annotation_list)
     preferred_segm_tier.extend(preferred_segm_annotation_list)
+    n_best_list_tier.extend(n_best_list_annotaiton_list)
 
     root.append(input_tier)
     root.append(preferred_segm_tier)
+    root.append(n_best_list_tier)
 
 
     xmlstr = minidom.parseString(ET.tostring(root)).toprettyxml(indent="   ")
 
-    with open('result.eaf', 'w') as outfile:
+    with open('results.eaf', 'w') as outfile:
         outfile.write(xmlstr)
 
     return root
 
 
 # code below for debugging purposes
-# with open('berrypicking_Annotations.eaf', 'r') as file:
-#     xml_document = file.read()
+with open('berrypicking_Annotations.eaf', 'r') as file:
+    xml_document = file.read()
 
-# with open('data.json', 'r') as outfile:
-#     data = json.load(outfile)
+with open('data.json', 'r') as outfile:
+    data = json.load(outfile)
 
 # # getInputText('Transcription', xml_document)
 # # TODO you cannot use the same xml_document second time?
 # # parseTierWithTime('Transcription', xml_document)
-# writeEafTier(xml_document,data)
+writeEafTier(xml_document,data)
+
+# getInputText('Transcription', xml_document)
 
 
 

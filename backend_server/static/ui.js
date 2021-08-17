@@ -96,7 +96,7 @@ class Cell extends React.Component {
                 <p className='input_token'>{this.props.token["input"]}</p>
                 <p>{this.props.token["preferred_segmentation"]}</p>
                 <Dropdown  
-                    title={this.props.token["segmentation"][0]}
+                    title={this.props.token["preferred_segmentation"]}
                     list={this.state.location}
                     resetThenSet={this.resetThenSet}
                     changeList = {(newPreferred, isCustom, mode) => this.changeList(newPreferred, isCustom, mode)}
@@ -131,6 +131,15 @@ class Dropdown extends React.Component {
         this.handleRadioChange = this.handleRadioChange.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
 
+    }
+
+    //  when preferred segmentation changes, set the segmentation on dropdown list button to that.
+    componentDidUpdate(prevProps) {
+        if (prevProps.title !== this.props.title) {
+            this.setState({
+                title: this.props.title,
+            });
+        }
     }
 
     static getDerivedStateFromProps(nextProps) {
@@ -484,7 +493,7 @@ class PageTable extends React.Component {
         let sentence_rows = [];
         for (let j = 0; j < this.state.sentences_included.length; j++) {
             const annotation = annotation_present ? this.state.annotations_included[j] : null;
-            console.log(annotation);
+            // console.log(annotation);
             sentence_rows.push(
                 <tr key={j}>
                     <td>
@@ -551,6 +560,15 @@ class ResubmitSentenceSection extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    // called upon sentence prop update
+    componentDidUpdate(prevProps) {
+        if (prevProps.sentence !== this.props.sentence) {
+            this.setState({
+                value: this.props.sentence,
+            });
+        }
+    }
+
     handleChange(event) {
         this.setState({
             value: event.target.value,
@@ -580,6 +598,10 @@ class ResubmitSentenceSection extends React.Component {
                         className="job_buttons"
                         value="Re-submit sentence">
                 </input>
+                <button className="job_buttons"
+                        onClick={this.props.cancelSentenceResubmission}>
+                            Cancel
+                </button>
             </form>
         );
 
@@ -614,6 +636,24 @@ class ResultsSection extends React.Component {
             sentence_to_modify: {},
             sentence_boundaries: sentence_boundaries,
         };
+
+        this.cancelSentenceResubmission = this.cancelSentenceResubmission.bind(this);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        // if the page changes, then hide the input box that allows sentence resubmission, 
+        // since the sentence is no longer visible.
+        if (prevState.upper_bound !== this.state.upper_bound) {
+            this.setState({
+                modify_sentence: false,
+            });
+        }
+    }
+
+    cancelSentenceResubmission() {
+        this.setState({
+            modify_sentence:false,
+        });
     }
 
     computePages(data) {
@@ -726,12 +766,14 @@ class ResultsSection extends React.Component {
                     if (same_token_index_list[i] > index) {
                         console.log(`This index is pushed ${same_token_index_list[i]}`)
                         newData[same_token_index_list[i]]["segmentation"].push(newPreferred);
+                        newData[same_token_index_list[i]]["preferred_segmentation"] = newPreferred;
                     }
                 }
             } else if (update_mode === "all") {
                 console.log("all");
                 for (let i = 0; i < same_token_index_list.length; i++) {
                     newData[same_token_index_list[i]]["segmentation"].push(newPreferred);
+                    newData[same_token_index_list[i]]["preferred_segmentation"] = newPreferred;
                 }
             } else {
                 console.log("Wrong update mode!")
@@ -782,6 +824,11 @@ class ResultsSection extends React.Component {
     }
 
     async resubmitSentence(new_sentence) {
+        // TODO make different requests depending on the eaf file or text
+        this.setState({
+            modify_sentence: false,
+        });
+
         const inputText = new_sentence;
         const data = {text:inputText, model: this.state.data[0].model}
         //  submit a new job and get a new job id
@@ -815,7 +862,9 @@ class ResultsSection extends React.Component {
 
         console.log(`the annotation id of sentence to modify is ${this.state.sentence_to_modify.annotation_id}`)
         if (modified_sentence.length > 0) {
+            console.log("i am inside the conditional")
             if (this.state.sentence_to_modify.annotation_id === null) {
+                console.log("the annotation id is null")
                 // if the iniput type originally was text, then recalculate sentence id, 
                 // as a sentence can be split during resubmitting a sentence.
                 let sentence_id_in_modified = modified_sentence[0].sentence_id;
@@ -830,13 +879,16 @@ class ResultsSection extends React.Component {
                     console.log(`${sentence_id_current} is current id and modified sentence has id ${modified_sentence[i].sentence_id}`);
                 }
             } else {
+                console.log("I am inside else")
                 // if the input type origianlly was an eaf file, then simply assign the same sentence id 
                 // and annotation id to the entire resubmitted output as originally, as we do not allow
                 // changing annotation id for the resubmitted chunk.
                 const original_sentence_id = this.state.sentence_to_modify.sentence_id;
                 const original_annotation_id = this.state.sentence_to_modify.annotation_id;
+                console.log(`original annotation id is ${original_annotation_id}`)
+                console.log(`original sentence id ${original_sentence_id}`)
                 console.log(original_sentence_id);
-                for (let i = 1; i < modified_sentence.length; i++) {
+                for (let i = 0; i < modified_sentence.length; i++) {
                     modified_sentence[i].sentence_id = original_sentence_id;
                     modified_sentence[i].annotation_id = original_annotation_id;
                 }
@@ -865,12 +917,12 @@ class ResultsSection extends React.Component {
             updated_data = updated_data.concat(after_modified);
         }
     
-        console.log(`new data length is ${updated_data.length}`)
-        for (let i=0; i< updated_data.length; i++) {
-            console.log(updated_data[i].sentence_id);
-        }
+        // console.log(`new data length is ${updated_data.length}`)
+        // for (let i=0; i< updated_data.length; i++) {
+        //     console.log(updated_data[i].annotation_id);
+        // }
 
-        console.log(updated_data);
+        
         // update the state
 
         // need to update the state in such a way so that the results table
@@ -912,6 +964,7 @@ class ResultsSection extends React.Component {
                 {this.state.modify_sentence && (<ResubmitSentenceSection 
                         sentence={this.state.sentence_to_modify.sentence}
                         onSubmit={(new_sentence) => {this.resubmitSentence(new_sentence)}}
+                        cancelSentenceResubmission={this.cancelSentenceResubmission}
                     />)}
                 <div id="completed_message">
                     <SideMenu 
