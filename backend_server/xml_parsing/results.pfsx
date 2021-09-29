@@ -70,7 +70,10 @@
         <String>AAM-LR Phone level audio segmentation</String>
     </pref>
     <pref key="FrameLocation">
-        <Object class="java.awt.Point">910,270</Object>
+        <Object class="java.awt.Point">830,128</Object>
+    </pref>
+    <pref key="TimeLineViewer.ZoomLevel">
+        <Float>162.99998</Float>
     </pref>
     <pref key="SelectionBeginTime">
         <Long>0</Long>
@@ -87,7 +90,7 @@
         <Long>0</Long>
     </pref>
     <pref key="MediaTime">
-        <Long>0</Long>
+        <Long>3791</Long>
     </pref>
     <prefGroup key="TierColors">
         <pref key="Transcription">
@@ -103,6 +106,7 @@
         <String>AudioTranscription</String>
         <String>Glossing_UI_Input_Tier</String>
         <String>Glossing_UI_Pref_Segmentation_Tier</String>
+        <String>Glossing_UI_n_Best_Segmentations_Tier</String>
     </prefList>
     <pref key="LayoutManager.SplitPaneDividerLocation">
         <Int>2</Int>
