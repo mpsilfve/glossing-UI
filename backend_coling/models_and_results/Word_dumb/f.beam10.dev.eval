@@ -1,0 +1,13 @@
+Evaluation script arguments:  Namespace(format2016=False, golden='/backend_coling/model_inputs/1633045681.dev', guesses='/backend_coling/models_and_results/Word_dumb/f.beam10.dev.predictions', merge_same_keys=True)
+
+TRANS
+Accuracy: 0.4
+Mean Levenshtein: 1.4
+Mean Normalized Levenshtein: 0.392857142857
+Mean Reciprocal Rank: 0.4
+
+Aggregate
+Accuracy: 0.4
+Mean Levenshtein: 1.4
+Mean Normalized Levenshtein: 0.392857142857
+Mean Reciprocal Rank: 0.4
