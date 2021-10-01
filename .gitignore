@@ -1,8 +1,7 @@
 __pycache__
 *.pyc
-# backend_coling/jobs/
-# backend_coling/model_inputs/
-# backend_coling/results/
 *.DS_Store
 backend_coling/models_and_results/**/*
 !backend_coling/models_and_results/**/f.model
+backend_coling/jobs/*
+backend_coling/model_inputs/*
