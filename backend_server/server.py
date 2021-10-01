@@ -27,6 +27,8 @@ if not os.path.isdir(inputs_path):
 if not os.path.isdir(results_path):
     os.mkdir(results_path)
 
+# TODO figure out when to delete inputs and results from the /data directory
+
 @app.route('/')
 def home():
     return flask.render_template("form.html")
@@ -64,7 +66,7 @@ def api_job():
     # TODO delete when not needed anymore
     print(data, file=sys.stderr)
     # save the request data in the data folder
-    with open(f'/data/{model}_{request_id}.txt', 'w') as outfile:
+    with open(f'/data/inputs/{model}_{request_id}.txt', 'w') as outfile:
         json.dump(data, outfile)
     
     return jsonify({"job_id":request_id})
@@ -114,7 +116,7 @@ def api_job_from_eaf():
     }
     print(data, file=sys.stderr)
     # save the request data in the data folder
-    with open(f'/data/{model}_{request_id}.txt', 'w') as outfile:
+    with open(f'/data/inputs/{model}_{request_id}.txt', 'w') as outfile:
         json.dump(model_input_data, outfile)
     
     return jsonify({"job_id":request_id})
@@ -140,10 +142,10 @@ def get_job_status(job_id):
     """
     # if path corresponding to differnet models and job id
     # exists, then check is there is a corresponding results file
-    if path.isfile(f'/data/fairseq_{job_id}.txt'):
+    if path.isfile(f'/data/inputs/fairseq_{job_id}.txt'):
         # TODO add for fairseq when fairseq exists
         return jsonify({"status": False, "model" : "fairseq"})
-    elif path.isfile(f'/data/coling_{job_id}.txt'):
+    elif path.isfile(f'/data/inputs/coling_{job_id}.txt'):
         completed = path.isfile(f'/data/results/output_inference_json-{job_id}.std.out')
         return jsonify({"status": completed, "model" : "coling"})
     else:

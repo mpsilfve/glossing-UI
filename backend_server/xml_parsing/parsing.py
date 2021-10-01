@@ -241,7 +241,7 @@ def writeEafTier(eaf_file, data):
     parent_tier_id = 'Transcription'
 
     # TODO get highest annotation id
-    # TODO NOTE: it is important to have the first added id to be the next highest id in the document, or else the ELAN
+    # NOTE: it is important to have the first added id to be the next highest id in the document, or else the ELAN
     # software won't recognize it.
     annotation_id_prefix = 'a'
     first_available_id = 94

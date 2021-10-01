@@ -3,19 +3,6 @@
 Processes an output file and creates a JSON object containing 
 a dictionary of inputs and segmentations for each token.
 
-Example of a part of JSON output: 
-[    
-    {
-        "input": "isolated", 
-        "segmentation": "i*sekw-t"
-        "custom_segmentation: "i?sekw?t"
-    }, 
-    {
-        "input": "networks", 
-        "segmentation": "networks"
-        "custom_segmentation: "net-works"
-    }
-]
 """
 import json
 import os

@@ -1,13 +1,13 @@
-Evaluation script arguments:  Namespace(format2016=False, golden='/backend_coling/model_inputs/1633045681.dev', guesses='/backend_coling/models_and_results/Word_dumb/f.beam10.dev.predictions', merge_same_keys=True)
+Evaluation script arguments:  Namespace(format2016=False, golden='/backend_coling/model_inputs/1633063173.dev', guesses='/backend_coling/models_and_results/Word_dumb/f.beam10.dev.predictions', merge_same_keys=True)
 
 TRANS
-Accuracy: 0.4
-Mean Levenshtein: 1.4
-Mean Normalized Levenshtein: 0.392857142857
-Mean Reciprocal Rank: 0.4
+Accuracy: 0.5
+Mean Levenshtein: 0.875
+Mean Normalized Levenshtein: 0.272321428571
+Mean Reciprocal Rank: 0.5
 
 Aggregate
-Accuracy: 0.4
-Mean Levenshtein: 1.4
-Mean Normalized Levenshtein: 0.392857142857
-Mean Reciprocal Rank: 0.4
+Accuracy: 0.5
+Mean Levenshtein: 0.875
+Mean Normalized Levenshtein: 0.272321428571
+Mean Reciprocal Rank: 0.5

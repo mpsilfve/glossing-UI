@@ -31,7 +31,12 @@ if __name__ == "__main__":
     # sets if file directories are case sensitive or not
     case_sensitive = True
     # Watchdog event handler - object that is notified when something is chnaged in the filesystem we are observing
-    my_event_handler = PatternMatchingEventHandler(patterns, ignore_patterns, ignore_directories, case_sensitive)
+    my_event_handler = PatternMatchingEventHandler(
+        patterns, 
+        ignore_patterns, 
+        ignore_directories, 
+        case_sensitive
+    )
 
 # FILESYSTEM WATCHDOG EVENT FUNCTIONS
 # the following are functiosn that are run when my_event_handler receives an event
@@ -53,7 +58,7 @@ def on_created(event):
     path = str(event.src_path)
     path_components = path.split("_")
 
-    if path_components[0] == "/data/coling":
+    if path_components[0] == "/data/inputs/coling":
         newPath = shutil.copy(path, "./jobs")
 
         further_path_components = path_components[1].split(".")
