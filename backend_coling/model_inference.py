@@ -45,6 +45,7 @@ def process_file(job_id):
         # write the input string in to a file using utf-8 encoding   
         with open('./model_inputs/{}.dev'.format(job_id), 'w') as outfile:
             outfile.write(processed_input.encode('utf-8'))
+
     elif new_job_data['input_type'] == 'eaf_file':
         eaf_data = new_job_data['eaf_data']
         processed_input = ''
@@ -68,10 +69,12 @@ def process_file(job_id):
     
     # determine the python command to run the model with, 
     # alongside with the necessary paths
-    train_path = "../data_Ming/trainFiles/gitksan.train"
+    train_path = "/backend_coling/dummy_train_file/gitksan.train"
     input_path = "/backend_coling/model_inputs/{}.dev".format(job_id)
-    model_path = "../results_inference/Both/Word_dumb"
-    output_path = "/backend_coling/results/output_inference-{}.std.out".format(job_id)
+    # path that contains the model to be used
+    model_path = "/backend_coling/models_and_results/Word_dumb"
+    # provides path for default stdout for the model, not particularly useful
+    output_path = "/backend_coling/stdout_inference/output_inference-{}.std.out".format(job_id)
 
 
     # also: implement bridging code between coling and 

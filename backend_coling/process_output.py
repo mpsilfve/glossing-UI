@@ -3,19 +3,6 @@
 Processes an output file and creates a JSON object containing 
 a dictionary of inputs and segmentations for each token.
 
-Example of a part of JSON output: 
-[    
-    {
-        "input": "isolated", 
-        "segmentation": "i*sekw-t"
-        "custom_segmentation: "i?sekw?t"
-    }, 
-    {
-        "input": "networks", 
-        "segmentation": "networks"
-        "custom_segmentation: "net-works"
-    }
-]
 """
 import json
 import os
@@ -41,7 +28,7 @@ def process_output(current_job):
 
     # read the results document into a string 
     # NOTE: the file to read as output can be changed. 
-    results_path = 'coling2018-neural-transition-based-morphology/results_inference/Both/Word_dumb/f.beam10.dev.predictions'
+    results_path = 'models_and_results/Word_dumb/f.beam10.dev.predictions'
     with open(results_path, "r") as new_result:
         new_result_contents = new_result.read()
 
@@ -119,7 +106,17 @@ def process_output(current_job):
     # write JSON object into a file and save 
     with open('/data/results/output_inference_json-{}.std.out'.format(current_job), 'w') as outfile:
         outfile.write(result_json)
-
+    
+    # delete unnecessary files
+    # delete current job-related files in inputs, jobs, stdout_inference folders
+    if os.path.exists("jobs/coling_{}.txt".format(current_job)):
+        os.remove("jobs/coling_{}.txt".format(current_job))
+    if os.path.exists("model_inputs/{}.dev".format(current_job)):
+        os.remove("model_inputs/{}.dev".format(current_job))
+    if os.path.exists("/backend_coling/stdout_inference/output_inference-{}.std.out".format(current_job)):
+        os.remove("/backend_coling/stdout_inference/output_inference-{}.std.out".format(current_job))
+  
+    # NOTE consider deleting results files (not models!) from models_and_results folder
 
 
 

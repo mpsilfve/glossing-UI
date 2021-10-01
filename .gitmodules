@@ -1,0 +1,3 @@
+[submodule "backend_coling/coling2018-neural-transition-based-morphology"]
+	path = backend_coling/coling2018-neural-transition-based-morphology
+	url = git@github.com:mpsilfve/coling2018-neural-transition-based-morphology.git
