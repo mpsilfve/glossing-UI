@@ -5,6 +5,8 @@ WORKDIR /backend_coling
 RUN apt-get update && apt-get install -y \
             python2.7\
             python-pip\
+            # will install cython 0.29.2
+            cython\ 
             && apt-get clean && rm -rf /var/lib/apt/lists/*
 COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip && \

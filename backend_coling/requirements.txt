@@ -9,7 +9,7 @@ progressbar==2.5
 backports.functools-lru-cache==1.6.1
 certifi==2020.6.20
 cycler==0.10.0
-Cython==0.29.21
+# Cython==0.29.21 # installed via apt-get
 kiwisolver==1.1.0
 pyparsing==2.4.7
 python-dateutil==2.8.1

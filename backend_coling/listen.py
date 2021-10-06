@@ -11,12 +11,32 @@ import time, shutil, json, model_inference, process_output
 from sortedcontainers import SortedList
 from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
-import time, sys 
-# print("I am here\n")
+import time, sys, os
+
+# constants
+required_directories = [
+    "/backend_coling/jobs",
+    "/backend_coling/model_inputs",
+    '/backend_coling/stdout_inference'
+]
+COLING_MODEL_SUBPATH = "/data/inputs/coling"
+# path to be monitored
+data_directory_path = "/data"
+JOBS_DIRECTORY_PATH = "./jobs"
+
+# SCRIPT
 
 # make a sorted list of jobs 
 # job id is based on time stamp, so sorted list of jobs is effectively a queue.
 job_list = SortedList()
+
+# create necessary folders if they do not exist
+
+
+for path in required_directories:
+    if not os.path.exists(path):
+        os.makedirs(path)
+        print("Created directory {}".format(path))
 
 
 if __name__ == "__main__":
@@ -30,7 +50,8 @@ if __name__ == "__main__":
     ignore_directories = True
     # sets if file directories are case sensitive or not
     case_sensitive = True
-    # Watchdog event handler - object that is notified when something is chnaged in the filesystem we are observing
+    # Watchdog event handler - object that is notified when 
+    # something is chnaged in the filesystem we are observing
     my_event_handler = PatternMatchingEventHandler(
         patterns, 
         ignore_patterns, 
@@ -49,17 +70,17 @@ def on_created(event):
     ----------
     event: event object 
         the event object containing information about the newly created file
-        the path of the newly created file is of the form: /data/model_requestId.txt
+        the path of the newly created file is of the form: /data/inputs/model_requestId.txt
     """
-    print("on created")
-    print("hey, {} has been created!".format(event.src_path))
+    print("a file at path {} has been created!".format(event.src_path))
 
     # the first part of new file path contains the name of the model type to be used. 
     path = str(event.src_path)
     path_components = path.split("_")
 
-    if path_components[0] == "/data/inputs/coling":
-        newPath = shutil.copy(path, "./jobs")
+    if path_components[0] == COLING_MODEL_SUBPATH:
+        # copy inputs from /data folder into jobs directory
+        newPath = shutil.copy(path, JOBS_DIRECTORY_PATH)
 
         further_path_components = path_components[1].split(".")
         job_id = further_path_components[0]
@@ -84,14 +105,12 @@ my_event_handler.on_modified = on_modified
 my_event_handler.on_moved = on_moved
 
 # CREATE WATCHDOG OBSERVER
-# path to be monitored
 # TODO as users add files into this folder, we need to delete them as well
-path = "/data"
 # whether or not to monitor subdirectories
 go_recursively = True
-# create the observer and pass the event handler, path and go_recursively boolean
+# create the observer and pass the event handler, data_directory_path and go_recursively boolean
 my_observer = Observer()
-my_observer.schedule(my_event_handler, path, recursive=go_recursively)
+my_observer.schedule(my_event_handler, data_directory_path, recursive=go_recursively)
 
 # start the observer
 my_observer.start()
