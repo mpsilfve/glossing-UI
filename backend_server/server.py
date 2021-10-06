@@ -40,7 +40,7 @@ def home_new():
 
 @app.route('/api/job', methods=['POST'])
 def api_job():
-    """" Receives and saves model input data
+    """" Receives and saves text model input data
     Example request:
     {
         "text": "Text string containing text to be processed",

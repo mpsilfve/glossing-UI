@@ -27,7 +27,7 @@ def process_output(current_job):
     new_job_data = json.loads(new_job_contents)
 
     # read the results document into a string 
-    # NOTE: the file to read as output can be changed. 
+    # NOTE: the file to read as output can be changed - adjsut in the future for the model
     results_path = 'models_and_results/Word_dumb/f.beam10.dev.predictions'
     with open(results_path, "r") as new_result:
         new_result_contents = new_result.read()
@@ -108,6 +108,7 @@ def process_output(current_job):
         outfile.write(result_json)
     
     # delete unnecessary files
+    # NOTE think about deleting all files in these folders every time
     # delete current job-related files in inputs, jobs, stdout_inference folders
     if os.path.exists("jobs/coling_{}.txt".format(current_job)):
         os.remove("jobs/coling_{}.txt".format(current_job))
