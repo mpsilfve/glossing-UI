@@ -7,7 +7,7 @@ from datetime import datetime
 from flask import request, jsonify
 import os
 from os import path
-from .xml_parsing.parsing import parseTierWithTime
+from .xml_parsing.parsing import parseTierWithTime, get_tier_ids
 
 
 app = flask.Flask(__name__) # create the Flask application object 
@@ -115,6 +115,23 @@ def api_job_from_eaf():
         json.dump(model_input_data, outfile)
     
     return jsonify({"job_id":request_id})
+
+@app.route('/api/eaf/tier_list', methods=['POST'])
+def parse_and_get_tier_ids():
+    """parse n EAF file and if it's valid return tier ids
+    Parameters
+    ----------
+    eaf_string: string
+        eaf file string
+    Returns
+    -------
+    tier_list: JSON list
+        a list containing tier ids contained in the eaf file
+    """
+    data = request.json
+    eaf_string = data['eaf_text']
+    tier_list = get_tier_ids(eaf_string)
+    return jsonify(tier_list)
 
 
 # for status check requests
