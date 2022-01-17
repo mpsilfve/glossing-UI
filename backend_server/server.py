@@ -143,8 +143,8 @@ def get_job_status(job_id):
     # if path corresponding to differnet models and job id
     # exists, then check is there is a corresponding results file
     if path.isfile(f'/data/inputs/fairseq_{job_id}.txt'):
-        # TODO add for fairseq when fairseq exists
-        return jsonify({"status": False, "model" : "fairseq"})
+        completed = path.isfile(f'/data/results/output_inference_json-{job_id}.std.out')
+        return jsonify({"status": completed, "model" : "fairseq"})
     elif path.isfile(f'/data/inputs/coling_{job_id}.txt'):
         completed = path.isfile(f'/data/results/output_inference_json-{job_id}.std.out')
         return jsonify({"status": completed, "model" : "coling"})
