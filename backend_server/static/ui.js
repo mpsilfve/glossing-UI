@@ -324,11 +324,11 @@ class ResultsTable extends React.Component {
     render() {
         let rows = [];
         const tokens_included = this.props.upper_bound - this.props.lower_bound + 1;
-        const column_number = (tokens_included >= 10) ? 10 : tokens_included;
-        const row_number = Math.ceil(tokens_included/10);
+        const column_number = (tokens_included >= 8) ? 8 : tokens_included;
+        const row_number = Math.ceil(tokens_included/8);
 
         let current_index = 0;
-        // the outer loop will count up to ten, and break if there is less
+        // the outer loop will count up to (COL LENGTH = 8), and break if there is less
         // 
         for (let i = 0; i < row_number; i++) {
             let row = [];
@@ -407,9 +407,10 @@ class PageTableCellButton extends React.Component {
     }
 
     render() {
+        let display_type = (this.props.is_curr_page) ? "curr_page_range_button" : "range_button";
         return (
             <button 
-                className="range_button"
+                className={display_type}
                 onClick={() => this.props.onClick(this.props.lower_bound, this.props.upper_bound, this.props.page_index)}
             >
                 {this.props.lower_bound} - {this.props.upper_bound}
@@ -449,6 +450,8 @@ class PageTable extends React.Component {
     constructor(props) {
         super(props);
 
+        console.log(this.props.currPage);
+
         this.state = {
             sentences_included: this.props.data[0].sentences_included,
             annotations_included: this.props.data[0].annotations_included,
@@ -456,19 +459,20 @@ class PageTable extends React.Component {
     }
 
     onClick(lower_b, upper_b, i) {
+        this.props.onClick(lower_b, upper_b, i);
+        
+        let currPage = this.props.currPage;
         this.setState({
-            sentences_included: this.props.data[i].sentences_included,
-            annotations_included: this.props.data[i].annotations_included,
+            sentences_included: this.props.data[currPage].sentences_included,
+            annotations_included: this.props.data[currPage].annotations_included,
         });
-        this.props.onClick(lower_b, upper_b);
     }
-
-
 
     render() {
         const pages = this.props.data;
         let rows = [];
         for (let i = 0; i < pages.length; i++) {
+            let is_curr_page = (i === this.props.currPage);
             rows.push(
                 <tr key={i}>
                     <td>
@@ -476,6 +480,7 @@ class PageTable extends React.Component {
                             lower_bound={pages[i].first_token} 
                             upper_bound={pages[i].last_sentence_end}
                             page_index = {i}
+                            is_curr_page = {is_curr_page}
                             onClick={(lower_b, upper_b, i) => this.onClick(lower_b, upper_b, i)}
                         />
                     </td>
@@ -484,21 +489,25 @@ class PageTable extends React.Component {
         }
 
         let annotation_present = false;
-        console.log(this.state.annotations_included.length);
-        console.log(this.state.sentences_included.length);
-        if (this.state.annotations_included.length === this.state.sentences_included.length) {
+        let currPage = this.props.currPage;
+        let sentences_included = this.props.data[currPage].sentences_included;
+        let annotations_included = this.props.data[currPage].annotations_included;
+
+        console.log(sentences_included.length);
+        console.log(annotations_included.length);
+        if (annotations_included.length === sentences_included.length) {
             annotation_present = true;
         }
 
         let sentence_rows = [];
-        for (let j = 0; j < this.state.sentences_included.length; j++) {
-            const annotation = annotation_present ? this.state.annotations_included[j] : null;
+        for (let j = 0; j < sentences_included.length; j++) {
+            const annotation = annotation_present ? annotations_included[j] : null;
             // console.log(annotation);
             sentence_rows.push(
                 <tr key={j}>
                     <td>
                         <PageTableSentenceButton 
-                            sentence_id={this.state.sentences_included[j]}
+                            sentence_id={sentences_included[j]}
                             annotation_id={annotation}
                             onClick={(sentence_id) => {this.props.onRetrieveSentence(sentence_id)}}
                         />
@@ -528,25 +537,204 @@ class PageTable extends React.Component {
 }
 
 
+class SaveMenu extends React.Component {
+    constructor(props) {
+        super(props);
+
+        // keep track of the file saving options
+        this.changeFilename = this.changeFilename.bind(this);
+        this.changeFormat = this.changeFormat.bind(this);
+
+        this.state = {
+            defaultFilename: "model_results",
+            filename: "model_results",
+            format: "txt"
+        };
+    }
+
+    changeFilename(e) {
+        this.setState({filename: e.target.value});
+    }
+
+    changeFormat(e) {
+        this.setState({format: e.target.value});
+    }
+
+    onClick() {
+        return this.props.handleSave(this.state.filename, this.state.format);
+    }
+
+    render() {
+        return (
+            <div id="save_menu">
+                <p>Save results to desktop</p>
+
+                <div id="file_format_buttons" className="form" onChange={this.changeFormat}>
+                    <input type="radio" id="save_text_file" name="file_format" value="txt" defaultChecked/> Text
+                    <input type="radio" id="save_eaf_file" name="file_format" value="eaf" disabled={!this.props.is_eaf} /> ELAN
+                </div>
+
+                <input 
+                    defaultValue={this.state.defaultFilename}
+                    onChange={this.changeFilename}
+                />
+
+                <button id="save_changes_button" className="job_buttons" onClick={() => this.onClick()}>
+                    Save changes
+                </button>
+
+            </div>  
+        );
+    }
+}
+
 
 class SideMenu extends React.Component {
     render() {
+        // if the data comes from an ELAN file, enable saving as an .eaf file
+        let is_eaf = (this.props.data[0].annotations_included.length > 0); 
+        console.log(this.props.data);
+        console.log(is_eaf);
+
         return (
             <div className="range_and_save">
                 <Legend />
                 <PageTable 
                     data={this.props.data}
-                    onClick={(lower_b, upper_b) => this.props.onClick(lower_b, upper_b)}
+                    currPage={this.props.currPage}
+                    onClick={(lower_b, upper_b, i) => this.props.onClick(lower_b, upper_b, i)}
                     onRetrieveSentence={(sentence_id) => {this.props.onRetrieveSentence(sentence_id)}}
                 />
-                <button id="save_changes_button" className="job_buttons">
-                    Save changes
-                </button>
+                <SaveMenu 
+                    handleSave={(filename, format) => this.props.handleSave(filename, format)}
+                    is_eaf={is_eaf}
+                />
             </div>
 
         );
     }
 };
+
+
+class PageStepButton extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.onClick = this.onClick.bind(this);
+    }
+
+    onClick() {
+        let to_page;
+
+        // find the previous/next page index (within bounds)
+        if (this.props.direction === "prev") {
+            to_page = Math.max(this.props.currPage - 1, 0);
+        } else {
+            to_page = Math.min(this.props.currPage + 1, this.props.pages.length - 1);
+        }
+
+        // pass up to PageNav
+        let to_page_lower_bound = this.props.pages[to_page].first_token;
+        let to_page_upper_bound = this.props.pages[to_page].last_sentence_end;
+
+        return this.props.onClick(to_page_lower_bound, to_page_upper_bound, to_page);
+    }
+
+    render() {
+        let display_text = (this.props.direction === "prev") ? "<-" : "->";
+        
+        return (
+            <button
+                className="range_button"
+                onClick={this.onClick}
+            >
+                {display_text}
+            </button>
+        );
+    }
+}
+
+
+class PageNavButton extends React.Component {
+    render() {
+        let display_type = (this.props.is_curr_page) ? "curr_page_range_button" : "range_button";
+        return (
+            <button 
+                className={display_type}
+                onClick={() => this.props.onClick(this.props.lower_bound, this.props.upper_bound, this.props.page_index)}
+            >
+                {this.props.page_index + 1}
+            </button>
+        )
+    }
+}
+
+
+class PageNav extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    onClick(lower_b, upper_b, i) {
+        this.props.onClick(lower_b, upper_b, i);
+    }
+
+    render() {
+        const pages = this.props.data;
+        let cols = [];
+
+        // first, a prev button, then the page buttons, then a next button
+        cols.push(
+            <td key="prev">
+                <PageStepButton
+                    pages={pages}
+                    direction="prev"
+                    currPage={this.props.currPage}
+                    onClick={(lower_b, upper_b, i) => this.onClick(lower_b, upper_b, i)}
+                />
+            </td>
+        );
+
+        for (let i=0; i<pages.length; i++) {
+            let is_curr_page = (this.props.currPage === i);
+            cols.push(
+                <td key={i}>
+                    <PageNavButton 
+                            lower_bound={pages[i].first_token} 
+                            upper_bound={pages[i].last_sentence_end}
+                            page_index={i}
+                            is_curr_page={is_curr_page}
+                            onClick={(lower_b, upper_b, i) => this.onClick(lower_b, upper_b, i)}
+                        />
+                </td>
+            );
+        }
+
+        cols.push(
+            <td key="next">
+                <PageStepButton
+                    pages={pages}
+                    direction="next"
+                    currPage={this.props.currPage}
+                    onClick={(lower_b, upper_b, i) => this.onClick(lower_b, upper_b, i)}
+                />
+            </td>
+        );
+
+        return (
+            <div className="page_nav_wrapper">
+                <table id="page_nav_table">
+                    <tbody>
+                        <tr>
+                            {cols}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        );
+    }
+}
+
 
 class ResubmitSentenceSection extends React.Component {
     constructor(props){
@@ -629,6 +817,7 @@ class ResultsSection extends React.Component {
             lower_bound: pages[0].first_token,
             upper_bound: pages[0].last_sentence_end,
             pages: pages,
+            currPage: 0,
             // below is a copy of input data
             data: [...props.data],
             token_dictionary: token_dictionary,
@@ -636,6 +825,7 @@ class ResultsSection extends React.Component {
             sentence_to_modify: {},
             sentence_boundaries: sentence_boundaries,
         };
+        console.log(this.state);
 
         this.cancelSentenceResubmission = this.cancelSentenceResubmission.bind(this);
     }
@@ -648,6 +838,9 @@ class ResultsSection extends React.Component {
                 modify_sentence: false,
             });
         }
+
+        // TODO: come back here for page legend!
+        // console.log(this.state);
     }
 
     cancelSentenceResubmission() {
@@ -737,12 +930,15 @@ class ResultsSection extends React.Component {
         return dictionary;
     }
 
- 
-    handleClick(lower_b, upper_b) {
+
+    // Here is the page change method!
+    handleClick(lower_b, upper_b, i) {
         this.setState({
             lower_bound: lower_b,
             upper_bound: upper_b,
+            currPage: i
         });
+        // console.log('The ResultsSection handleClick method was called.');
     }
 
     // update preferred segmentation and segmentation lists based on update mode and 
@@ -830,7 +1026,8 @@ class ResultsSection extends React.Component {
         });
 
         const inputText = new_sentence;
-        const data = {text:inputText, model: this.state.data[0].model}
+        const data = {text:inputText, model: this.state.data[0].model, nbest: this.state.data[0].nbest, task: this.state.data[0].task};
+        console.log(this.state.data);
         //  submit a new job and get a new job id
         const request = await requestData('/api/job', data, 'POST');
         // wait for the job to finish and get the new data
@@ -958,6 +1155,41 @@ class ResultsSection extends React.Component {
         });
     }
 
+    handleSave(filename, format) {
+        console.log(this.state.data);
+
+        // generate a string representing the preferred segmentations of all the tokens. Sentences separated by lines.
+        let output_tokens = [];
+        let curr_sentence = 0;
+
+        for (let i=0; i < this.state.data.length; i++) {
+            let curr_token = this.state.data[i];
+
+            if (curr_token['sentence_id'] > curr_sentence) {
+                output_tokens.push([]);
+                curr_sentence++;
+            }
+
+            output_tokens[output_tokens.length - 1].push(curr_token['preferred_segmentation']);
+        }
+
+        // construct a string from the list of lists
+        let output_string = '';
+        for (const sent of output_tokens) {
+            output_string += sent.join(' ') + '\n';
+        }
+
+        console.log(output_string);
+
+        // download text as a blob
+        let output_blob = new Blob([output_string], {type: "text/plain;charset=utf-8"});
+        var link = document.createElement('a');
+        link.download = filename + '.' + format;
+        link.href = window.URL.createObjectURL(output_blob);
+        link.click();
+        
+    }
+
     render() {
         return (
             <div>
@@ -968,9 +1200,11 @@ class ResultsSection extends React.Component {
                     />)}
                 <div id="completed_message">
                     <SideMenu 
-                        data={this.state.pages} 
-                        onClick={(lower_b, upper_b) => this.handleClick(lower_b, upper_b)}
+                        data={this.state.pages}
+                        currPage={this.state.currPage}
+                        onClick={(lower_b, upper_b, i) => this.handleClick(lower_b, upper_b, i)}
                         onRetrieveSentence={(sentence_id) => {this.retrieveSentenceToModify(sentence_id)}}
+                        handleSave={(filename, format) => this.handleSave(filename, format)}
                     />
                     <ResultsTable 
                         data={this.state.data} 
@@ -982,6 +1216,13 @@ class ResultsSection extends React.Component {
                         }
                     />
                 </div>
+                <div id="completed_message">
+                    <PageNav 
+                        data={this.state.pages}
+                        currPage={this.state.currPage}
+                        onClick={(lower_b, upper_b, i) => this.handleClick(lower_b, upper_b, i)}
+                    /> 
+                </div>    
             </div>
         )
     }

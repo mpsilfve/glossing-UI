@@ -36,6 +36,11 @@ def home():
 @app.route('/new')
 def home_new():
     return flask.render_template("react-ui.html")
+
+
+@app.route('/gloss')
+def home_gloss():
+    return flask.render_template("react-ui-gloss.html")
  
 
 @app.route('/api/job', methods=['POST'])
@@ -44,7 +49,9 @@ def api_job():
     Example request:
     {
         "text": "Text string containing text to be processed",
-        "model": "Example_Model"
+        "model": "Example_Model",
+        "nbest": 1,
+        "task": "example_task"
     }
     Returns
     -------
@@ -80,7 +87,9 @@ def api_job_from_eaf():
     {
         "eaf": "XML string containing the EAF XML file",
         "tier_id": "Example",
-        "model": "Example_Model"
+        "model": "Example_Model",
+        "nbest": n_predictions,
+        "task": "example_task"
     }
 
     Returns
@@ -107,12 +116,18 @@ def api_job_from_eaf():
 
     # for annotation in eaf_data:
     #     eaf_model_input += annotation['annotation_text']
+
+    # Model metadata
+    nbest = data["nbest"]
+    task = data['task']
     
     model_input_data = {
         'input_type': 'eaf_file',
         'eaf_data': eaf_data,
         'model': model,
         'id': request_id,
+        'nbest': nbest,
+        'task': task
     }
     print(data, file=sys.stderr)
     # save the request data in the data folder

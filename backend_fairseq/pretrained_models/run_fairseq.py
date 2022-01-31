@@ -1,4 +1,5 @@
 from .nbest_model_evaluate_2 import *
+from .gloss_utils import *
 import argparse
 import subprocess
 import re
@@ -10,15 +11,17 @@ A python script for running and evaluating the pre-trained Fairseq models.
 
 
 # sentence: string, a line from an input file.
-# returns: tuple of (list of strings, list of strings)
-def preprocess_line(sentence):
-    padded_tokens = ['<S>', '<S>'] + sentence.split() + ['<E>', '<E>']
+# n_context: int, the number of tokens on either side of the target
+# returns: list of string examples
+def preprocess_line(sentence, n_context):
+    pad_s = ['<S>' for i in range(n_context)]
+    pad_e = ['<E>' for i in range(n_context)]
+    padded_tokens = pad_s + sentence.split(' ') + pad_e
 
-    context_1 = []
-    context_2 = []
-    for i in range(2, len(padded_tokens) - 2):
+    context_tokens = []
+    for i in range(n_context, len(padded_tokens) - n_context):
         # get target token and two neighbors on either side
-        context = padded_tokens[i-2:i+3]
+        context = padded_tokens[i-n_context:i+n_context+1]
         preprocessed = []
         for t in context:
             if t == '<S>' or t == '<E>':
@@ -26,30 +29,45 @@ def preprocess_line(sentence):
             else:
                 preprocessed.append(' '.join(list(t)))
         # add examples to collectors
-        context_1.append(' _ '.join(preprocessed[1:-1]))
-        context_2.append(' _ '.join(preprocessed))
-    return context_1, context_2
+        context_tokens.append(' _ '.join(preprocessed))
+
+    return context_tokens
 
 
 # path: string, path to the text file to preprocess
+# n_context: int, context tokens
 # returns: list of tuples of (list of strings, list of strings)
-def preprocess_file(path):
+def preprocess_file(path, n_context, gloss=False):
     file = [line.rstrip() for line in open(path).readlines()]
-    return [preprocess_line(line) for line in file]
+    if gloss:
+        file = [underlined_to_alt_chars(line) for line in file]
+    return [preprocess_line(line, n_context) for line in file]
 
 
 # path: string, path to the text file to preprocess and pipe
 # returns: tuple of (string, string)
-def build_input_text_pipe(path):
-    examples = preprocess_file(path)
+def build_morphseg_text_pipe(path):
+    examples_1 = preprocess_file(path, 1)
+    examples_2 = preprocess_file(path, 2)
 
     pipe_context1 = ""
     pipe_context2 = ""
-    for line in examples:
-        pipe_context1 += '\n'.join(line[0]) + '\n'
-        pipe_context2 += '\n'.join(line[1]) + '\n'
+    for i in range(len(examples_1)):
+        pipe_context1 += '\n'.join(examples_1[i]) + '\n'
+        pipe_context2 += '\n'.join(examples_2[i]) + '\n'
 
     return pipe_context1, pipe_context2
+
+
+# path: string, path to text representations
+# returns: string for piping
+def build_gloss_text_pipe(path):
+    examples = preprocess_file(path, 1)
+    pipe_str = ""
+    for line in examples:
+        pipe_str += '\n'.join(line) + '\n'
+
+    return pipe_str
 
 
 # examples: string, output of build_input_text_pipe
@@ -72,13 +90,15 @@ def call_interactive(examples, preprocess_path, checkpoints, n):
 def get_output_words(out_file, n):
     if len(out_file) == 1:
         predictions = read_predictions(out_file[0], n, string=True)
-        pred_text = [tuple([w[0] for w in t]) for t in predictions]
-        pred_conf = [tuple([w[1] for w in t]) for t in predictions]
+        # print('Predictions:', predictions)
+        pred_text = [tuple([ex[0] for ex in t]) for t in predictions]
+        pred_conf = [tuple([ex[1] for ex in t]) for t in predictions]
         return pred_text, pred_conf
     else:
         predictions = [read_predictions(p, n, string=True) for p in out_file]
         rearranged = get_guess_lists(predictions)
-        pred_text = [scored_majority_vote(t, 4) for t in rearranged]
+        print(rearranged)
+        pred_text = [scored_majority_vote(t, n) for t in rearranged]
         pred_conf = [[tuple([w[1] for w in t]) for t in p] for p in predictions]
         return pred_text, pred_conf
 
@@ -86,7 +106,7 @@ def get_output_words(out_file, n):
 # predictions: tuple, output of get_output_words
 # inputs: list of strings, input to model
 # ensemble: bool, if the input contains multiple confidence levels
-def format_json(predictions, inputs, ensemble):
+def format_json(predictions, inputs, task="morphseg"):
     # json_dict = {'predictions':[]}
     # words, confidences = predictions
     # for i in range(len(words)):
@@ -120,12 +140,17 @@ def format_json(predictions, inputs, ensemble):
         # make all of the tokens in sentence 1 for now
         word_dict['sentence_id'] = 1
         token_list.append(word_dict)
+        # n_best: len of (words[i])
+        word_dict['nbest'] = len(words[i])
+        # task: morphseg or gloss
+        word_dict['task'] = task
     return token_list
 
 
 # assign a number to each word in the input file (with sentences on every newline)
 # use that to give sentence ids to output tokens
 def get_sentence_ids(input_file, token_list):
+    print(token_list)
     sents_by_ids = []
     sents = [line.split(' ') for line in open(input_file, 'r').readlines()]
     tokens_w_ids = token_list
@@ -155,21 +180,21 @@ def format_inputs(path):
     return input_tokens
 
 
-def call_single_model(path, arch, n):
-    input = build_input_text_pipe(path)
-    if arch == 'transformer':
-        input = input[0]
-        preprocess = "/backend_fairseq/pretrained_models/data/transformer/transformer_preprocess"
-        checkpoint = '/backend_fairseq/pretrained_models/data/transformer/checkpoint_best.pt'
-    elif arch == 'lstm':
-        input = input[1]
-        preprocess = "/backend_fairseq/pretrained_models/data/lstm/lstm_preprocess"
-        checkpoint = "/backend_fairseq/pretrained_models/data/lstm/checkpoint_best.pt"
-    else:
-        raise ValueError("Unrecognized architecture.")
+# def call_single_model(path, arch, n):
+#     input = build_input_text_pipe(path)
+#     if arch == 'transformer':
+#         input = input[0]
+#         preprocess = "/backend_fairseq/pretrained_models/data/transformer/transformer_preprocess"
+#         checkpoint = '/backend_fairseq/pretrained_models/data/transformer/checkpoint_best.pt'
+#     elif arch == 'lstm':
+#         input = input[1]
+#         preprocess = "/backend_fairseq/pretrained_models/data/lstm/lstm_preprocess"
+#         checkpoint = "/backend_fairseq/pretrained_models/data/lstm/checkpoint_best.pt"
+#     else:
+#         raise ValueError("Unrecognized architecture.")
 
-    output = call_interactive(input, preprocess, checkpoint, n)
-    return get_output_words([output], n)
+#     output = call_interactive(input, preprocess, checkpoint, n)
+#     return get_output_words([output], n)
 
 
 # def call_random_model(path, arch, n):
@@ -192,24 +217,43 @@ def call_single_model(path, arch, n):
 #     return get_output_words(outputs, n)
 
 
-def call_default_model(path, n, out_path):
-    input = build_input_text_pipe(path)
+def call_morphseg_model(path, n, out_path):
+    input = build_morphseg_text_pipe(path)
 
-    preprocess_transf = "/backend_fairseq/pretrained_models/data/transformer/transformer_preprocess"
-    checkpoint_transf = "/backend_fairseq/pretrained_models/data/transformer/checkpoint_best.pt"
+    preprocess_transf = "/backend_fairseq/pretrained_models/data/morphseg/transformer/transformer_preprocess"
+    checkpoint_transf = "/backend_fairseq/pretrained_models/data/morphseg/transformer/checkpoint_best.pt"
 
-    preprocess_lstm = "/backend_fairseq/pretrained_models/data/lstm/lstm_preprocess"
-    checkpoint_lstm = "/backend_fairseq/pretrained_models/data/lstm/checkpoint_best.pt"
+    preprocess_lstm = "/backend_fairseq/pretrained_models/data/morphseg/lstm/lstm_preprocess"
+    checkpoint_lstm = "/backend_fairseq/pretrained_models/data/morphseg/lstm/checkpoint_best.pt"
 
     outputs = [call_interactive(input[0], preprocess_transf, checkpoint_transf, n),
                call_interactive(input[1], preprocess_lstm, checkpoint_lstm, n)]
 
     wordlist = get_output_words(outputs, n)
-    token_list = format_json(wordlist, format_inputs(path), True)
+    token_list = format_json(wordlist, format_inputs(path))
     token_list = get_sentence_ids(path, token_list)
     jobject = json.dumps(token_list, indent=4)
     with open(out_path, 'w') as out_json:
         out_json.write(jobject)
+
+
+def call_glossing_model(path, n, out_path):
+    input = build_gloss_text_pipe(path)
+
+    preprocess = "/backend_fairseq/pretrained_models/data/gloss/gloss_preprocess"
+    checkpoint = "/backend_fairseq/pretrained_models/data/gloss/checkpoint_best.pt"
+
+    output = call_interactive(input, preprocess, checkpoint, n)
+    output_cleaned = [alt_to_underline_chars(output)]
+    print(output_cleaned)
+
+    wordlist = get_output_words(output_cleaned, n)
+    token_list = format_json(wordlist, format_inputs(path), task='gloss')
+    token_list = get_sentence_ids(path, token_list)
+    jobject = json.dumps(token_list, indent=4)
+    with open(out_path, 'w') as out_json:
+        out_json.write(jobject)
+
 
 if __name__ == "__main__":
     # inputs = format_inputs('text_file')

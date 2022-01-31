@@ -1,0 +1,14 @@
+Namespace(align_suffix=None, alignfile=None, all_gather_list_size=16384, bf16=False, bpe=None, checkpoint_shard_count=1, checkpoint_suffix='', cpu=False, criterion='cross_entropy', dataset_impl='mmap', destdir='/scratch/ecoates/glossing/prep_out/context_1', empty_cache_freq=0, fp16=False, fp16_init_scale=128, fp16_no_flatten_grads=False, fp16_scale_tolerance=0.0, fp16_scale_window=None, joined_dictionary=True, log_format=None, log_interval=100, lr_scheduler='fixed', memory_efficient_bf16=False, memory_efficient_fp16=False, min_loss_scale=0.0001, model_parallel_size=1, no_progress_bar=False, nwordssrc=-1, nwordstgt=-1, only_source=False, optimizer=None, padding_factor=8, profile=False, quantization_config_path=None, scoring='bleu', seed=1, source_lang='src', srcdict=None, target_lang='trg', task='translation', tensorboard_logdir=None, testpref='/project/def-msilfver/ecoates/glossing/data/context_1/context_1-test', tgtdict=None, threshold_loss_scale=None, thresholdsrc=0, thresholdtgt=0, tokenizer=None, tpu=False, trainpref='/project/def-msilfver/ecoates/glossing/data/context_1/context_1-train', user_dir=None, validpref='/project/def-msilfver/ecoates/glossing/data/context_1/context_1-dev', workers=1)
+[src] Dictionary: 224 types
+[src] /project/def-msilfver/ecoates/glossing/data/context_1/context_1-train.src: 7798 sents, 140718 tokens, 0.0% replaced by <unk>
+[src] Dictionary: 224 types
+[src] /project/def-msilfver/ecoates/glossing/data/context_1/context_1-dev.src: 594 sents, 10957 tokens, 0.0183% replaced by <unk>
+[src] Dictionary: 224 types
+[src] /project/def-msilfver/ecoates/glossing/data/context_1/context_1-test.src: 1019 sents, 17513 tokens, 0.0286% replaced by <unk>
+[trg] Dictionary: 224 types
+[trg] /project/def-msilfver/ecoates/glossing/data/context_1/context_1-train.trg: 7798 sents, 48767 tokens, 0.0% replaced by <unk>
+[trg] Dictionary: 224 types
+[trg] /project/def-msilfver/ecoates/glossing/data/context_1/context_1-dev.trg: 594 sents, 4010 tokens, 0.0748% replaced by <unk>
+[trg] Dictionary: 224 types
+[trg] /project/def-msilfver/ecoates/glossing/data/context_1/context_1-test.trg: 1019 sents, 5809 tokens, 0.0% replaced by <unk>
+Wrote preprocessed data to /scratch/ecoates/glossing/prep_out/context_1

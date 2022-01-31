@@ -31,8 +31,8 @@ def read_predictions(path, nbest, string=False):
 def create_tuples(results, nbest):
     # take a list of predictions and divide into a list of tuples of nbest
     # results_indv is list of strings, nbest is int
-    if nbest == 1:
-        return results
+    # if nbest == 1:
+    #     return results
 
     divide_by_nbest = []
     grouper = []
@@ -164,12 +164,13 @@ def get_guess_lists(all_preds):
 def scored_majority_vote(inits_sys, k):
     # from a group of predictions, find the k predictions with the highest scores
 
-    sys = ()
+    sys = []
     for s in inits_sys:
         sys += s
 
     scores_dict = {}
     for s in sys:
+        print('S:', inits_sys)
         if s[0] in scores_dict:
             scores_dict[s[0]] += math.exp(s[1])
         else:
