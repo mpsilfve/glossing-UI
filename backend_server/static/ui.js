@@ -456,14 +456,19 @@ class Legend extends React.Component {
             <div id="legend">
                 <h3>Table Legend</h3>
                 <p className="input_token">Input token</p>
-                <p className="preferred_segmentation"> Preferred segmentation</p>
-                <p id="segmentation_list_legend">
-                    List of n-best segmentations
-                </p>
-                <p className="preferred_segmentation"> Preferred gloss</p>
-                <p id="segmentation_list_legend">
-                    List of n-best glosses
-                </p>
+                {this.props.hasSeg &&   <div>
+                                            <p className="preferred_segmentation"> Preferred segmentation</p>
+                                            <p id="segmentation_list_legend">
+                                                List of n-best segmentations
+                                            </p>
+                                        </div>}
+                {this.props.hasGloss && <div>
+                                            <p className="preferred_segmentation"> Preferred gloss</p>
+                                            <p id="segmentation_list_legend">
+                                                List of n-best glosses
+                                            </p>
+                                        </div>}
+                
             </div>
         )
     }
@@ -617,8 +622,8 @@ class SaveMenu extends React.Component {
             defaultFilename: "model_results",
             filename: "model_results",
             format: "txt",
-            saveGloss: true,
-            saveSeg: true
+            saveGloss: this.props.hasGloss,
+            saveSeg: this.props.hasSeg
         };
     }
 
@@ -645,6 +650,10 @@ class SaveMenu extends React.Component {
     }
 
     render() {
+        const bothDefault = this.props.hasSeg && this.props.hasGloss;
+        const segDefault = this.props.hasSeg && !bothDefault;
+        const glossDefault = !bothDefault && !segDefault;
+
         return (
             <div id="save_menu">
                 <p>Save results to desktop</p>
@@ -655,24 +664,24 @@ class SaveMenu extends React.Component {
                 </div>
 
                 <div id="model_save_buttons" className="form" onChange={this.changeModelSave}>
-                    <div>
+                    {this.props.hasSeg && <div>
                         <label className="option_radio_button">
-                            <input type="radio" id="save_seg" name="model_to_save" value="seg"/> 
+                            <input type="radio" id="save_seg" name="model_to_save" value="seg" defaultChecked={segDefault}/> 
                             Only segmentation
                         </label>
-                    </div>
-                    <div>
+                    </div>}
+                    {this.props.hasGloss && <div>
                         <label className="option_radio_button">
-                            <input type="radio" id="save_gloss" name="model_to_save" value="gloss"/> 
+                            <input type="radio" id="save_gloss" name="model_to_save" value="gloss" defaultChecked={glossDefault}/> 
                             Only gloss
                         </label>
-                    </div>
-                    <div>
+                    </div>}
+                    {this.props.hasSeg && this.props.hasGloss && <div>
                         <label className="option_radio_button">
-                            <input type="radio" id="save_both" name="model_to_save" value="both" defaultChecked/> 
+                            <input type="radio" id="save_both" name="model_to_save" value="both" defaultChecked={bothDefault}/> 
                             Both
                         </label>
-                    </div>
+                    </div>}
                     
                 </div>
 
@@ -700,7 +709,10 @@ class SideMenu extends React.Component {
 
         return (
             <div className="range_and_save">
-                <Legend />
+                <Legend 
+                    hasSeg={this.props.hasSeg}
+                    hasGloss={this.props.hasGloss}
+                />
                 <PageTable 
                     data={this.props.data}
                     currPage={this.props.currPage}
@@ -708,6 +720,8 @@ class SideMenu extends React.Component {
                     onRetrieveSentence={(sentence_id) => {this.props.onRetrieveSentence(sentence_id)}}
                 />
                 <SaveMenu 
+                    hasSeg={this.props.hasSeg}
+                    hasGloss={this.props.hasGloss}
                     handleSave={(filename, format, saveGloss, saveSeg) => this.props.handleSave(filename, format, saveGloss, saveSeg)}
                     is_eaf={is_eaf}
                 />
@@ -1370,6 +1384,8 @@ class ResultsSection extends React.Component {
                 <div id="completed_message">
                     <SideMenu 
                         data={this.state.pages}
+                        hasSeg={this.state.hasSeg}
+                        hasGloss={this.state.hasGloss}
                         currPage={this.state.currPage}
                         onClick={(lower_b, upper_b, i) => this.handleClick(lower_b, upper_b, i)}
                         onRetrieveSentence={(sentence_id) => {this.retrieveSentenceToModify(sentence_id)}}

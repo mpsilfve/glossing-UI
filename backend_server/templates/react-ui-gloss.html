@@ -45,6 +45,9 @@
                             <input type="checkbox" id="gloss_task_checkbox" name="task_type" value="gloss_task" checked>
                             <label for="gloss_task_button" class="model_button">Generate gloss</label>
                         </div>
+                        <div id="parameter_error" style="display:none">
+                            <p>Select at least one output task.</p>
+                        </div>
                         <label for="n_best_select" class="model_button">Model predictions for each token:</label>
                         <select name="n_best" id="n_best_select">
                             <option value="1" selected>1</option>
@@ -53,7 +56,6 @@
                             <option value="4">4</option>
                         </select>
                     </div>
-                    <!-- TODO: submit button -->
                     <button class=job_buttons onclick="submit_job()">Submit</button>  
                 </form>  
             </div>
@@ -97,7 +99,16 @@
                  **/
                  async function submit_job() {
                     let data = {};
-                    data = gatherModelMetadata(data);
+
+                    document.getElementById('parameter_error').style.display = 'none';
+
+                    try {
+                        data = gatherModelMetadata(data);
+                    } catch(e) {
+                        document.getElementById('parameter_error').style.display = 'block';
+                        return undefined;
+                    }
+                    
                     const isEafFile = document.getElementById('eaf_file_radio_button').checked;
                     const isTextFile = document.getElementById('text_file_radio_button').checked;
 
@@ -138,47 +149,53 @@
                  * First, it splits the input into individual sentences. Then, it submits each sentence as its own job.
                  * It maintains a queue of jobs, and whenever the next job is complete, it renders all the completed data so far into a ResultsWindow
                  * */
-                async function submit_batch_job() {
-                    let metadata = {};
-                    medadata = gatherModelMetadata(metadata);
-                    const fileType = input_file_type();
+                // async function submit_batch_job() {
+                //     let metadata = {};
 
-                    // init the queue of running jobs
-                    let jobs = [];
+                //     try {
+                //         medadata = gatherModelMetadata(metadata);
+                //     } catch(e) {
+                //         console.log('caught!');
+                //     }
                     
-                    // get text
-                    if (fileType === 0) {
-                        // text entry
-                        const inputText = document.getElementById("input_text").value;
-                        // submit a batch job
-                        let data = {...metadata, text:inputText};
-                        jobData = await requestData('/api/job/by_sentence', data, 'POST');
-                        console.log(jobData);
-                    } else if (fileType === 1) {
-                        // text file
-                        const selectedFile = document.getElementById('text_file_input').files[0];
-                        const inputText = await selectedFile.text();
+                //     const fileType = input_file_type();
+
+                //     // init the queue of running jobs
+                //     let jobs = [];
+                    
+                //     // get text
+                //     if (fileType === 0) {
+                //         // text entry
+                //         const inputText = document.getElementById("input_text").value;
+                //         // submit a batch job
+                //         let data = {...metadata, text:inputText};
+                //         jobData = await requestData('/api/job/by_sentence', data, 'POST');
+                //         console.log(jobData);
+                //     } else if (fileType === 1) {
+                //         // text file
+                //         const selectedFile = document.getElementById('text_file_input').files[0];
+                //         const inputText = await selectedFile.text();
                         
-                        // submit a batch job
-                        let data = {...metadata, text:inputText};
-                        jobData = await requestData('/api/job/by_sentence', data, 'POST');
-                        console.log(jobData);
-                    } else {
-                        // ELAN (placeholder)
-                        const inputText = 'test';
-                    }
+                //         // submit a batch job
+                //         let data = {...metadata, text:inputText};
+                //         jobData = await requestData('/api/job/by_sentence', data, 'POST');
+                //         console.log(jobData);
+                //     } else {
+                //         // ELAN (placeholder)
+                //         const inputText = 'test';
+                //     }
 
-                    // submit each sentence as its own job
-                    // for (const sent of sentences) {
-                    //     let curr_job = {...metadata, text:sent};
-                    //     jobData = await requestData('/api/job', curr_job, 'POST');
-                    //     jobs.splice(0, 0, jobData);
-                    //     //console.log(jobs);
-                    // }
+                //     // submit each sentence as its own job
+                //     // for (const sent of sentences) {
+                //     //     let curr_job = {...metadata, text:sent};
+                //     //     jobData = await requestData('/api/job', curr_job, 'POST');
+                //     //     jobs.splice(0, 0, jobData);
+                //     //     //console.log(jobs);
+                //     // }
 
-                    // console.log(jobs);
-                    // batch_job_listen(jobs);
-                }
+                //     // console.log(jobs);
+                //     // batch_job_listen(jobs);
+                // }
 
                 /**
                  * Listener for a batch job request. 
@@ -253,6 +270,11 @@
 
                     const getSeg = document.getElementById("morphseg_task_checkbox").checked;
                     const getGloss = document.getElementById("gloss_task_checkbox").checked;
+
+                    if (!(getSeg || getGloss)) {
+                        throw new Error('Must select at least one task.');
+                    }
+
                     data.getSeg = getSeg;
                     data.getGloss = getGloss;
 
