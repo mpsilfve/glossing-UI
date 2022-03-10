@@ -3,6 +3,7 @@ This will parse an eaf file. An example of eaf file is found in berrypicking_Ann
 """
 # TODO use defusedxml for security reasons
 # from defusedxml import ElementTree as ET
+from operator import mod
 import xml.etree.ElementTree as ET
 import json, re
 from xml.dom import minidom
@@ -229,7 +230,7 @@ def getStartAnnotationId(root):
     return annotation_prefix, first_available_id
     
 
-def writeEafTier(eaf_file, data):
+def writeEafTier(eaf_file, data, model_type="segmentation", save_path='results.eaf'):
     #  first, find the highest annotation number by cycling through all the tiers.
     #  then begin defining a new tier that is a symbolic subdivision, not time alignable and has a new linguistic typ
     # to this tier, add the inputs. This tier will use previous annotation
@@ -259,7 +260,7 @@ def writeEafTier(eaf_file, data):
     preferred_segmentation_type_attributes = {
         CONSTRAINTS: "Symbolic_Association",
         GRAPHIC_REFERENCES: "false",
-        LINGUISTIC_TYPE_ID: "Glossing_UI_Preferred_Segmentation",
+        LINGUISTIC_TYPE_ID: "Glossing_UI_Preferred_" + model_type.capitalize(),
         TIME_ALIGNABLE: "false",
     }
     linguistic_type_pref_segmentation = ET.Element(LINGUISTIC_TYPE, preferred_segmentation_type_attributes)
@@ -268,7 +269,7 @@ def writeEafTier(eaf_file, data):
     n_best_segmentation_type_attributes = {
         CONSTRAINTS: "Symbolic_Association",
         GRAPHIC_REFERENCES: "false",
-        LINGUISTIC_TYPE_ID: "Glossing_UI_N_best_segmentations",
+        LINGUISTIC_TYPE_ID: "Glossing_UI_N_best_" + model_type,
         TIME_ALIGNABLE: "false",
     }
     linguistic_type_n_best_list = ET.Element(LINGUISTIC_TYPE, n_best_segmentation_type_attributes)
@@ -289,7 +290,7 @@ def writeEafTier(eaf_file, data):
     preferred_segm_tier_attributes = {
         LINGUISTIC_TYPE_REF: preferred_segmentation_type_attributes[LINGUISTIC_TYPE_ID],
         PARENT_REF: input_tier_attributes[TIER_ID],
-        TIER_ID: "Glossing_UI_Pref_Segmentation_Tier"
+        TIER_ID: "Glossing_UI_Pref_" + model_type.capitalize() + "_Tier"
     }
     preferred_segm_tier = ET.Element(TIER, preferred_segm_tier_attributes)
 
@@ -297,7 +298,7 @@ def writeEafTier(eaf_file, data):
     n_best_list_tier_attributes = {
         LINGUISTIC_TYPE_REF: n_best_segmentation_type_attributes[LINGUISTIC_TYPE_ID],
         PARENT_REF: preferred_segm_tier_attributes[TIER_ID],
-        TIER_ID: "Glossing_UI_n_Best_Segmentations_Tier"
+        TIER_ID: "Glossing_UI_n_Best_" + model_type.capitalize() + "_Tier"
     }
     n_best_list_tier = ET.Element(TIER, n_best_list_tier_attributes)
 
@@ -341,13 +342,13 @@ def writeEafTier(eaf_file, data):
         pref_segm_ref_annotation = ET.SubElement(pref_segm_annotation, REF_ANNOTATION, pref_segm_ref_annotation_attributes)
 
         pref_segm_value_annotation = ET.SubElement(pref_segm_ref_annotation, ANNOTATION_VALUE)
-        pref_segm_value_annotation.text = token['preferred_segmentation']
+        pref_segm_value_annotation.text = token['preferred_' + model_type]
 
         preferred_segm_annotation_list.append(pref_segm_annotation)
 
         # make annotations for n-best list
         segmentation_list = ''
-        for segmentation in token['segmentation']:
+        for segmentation in token[model_type]:
             segmentation_list += (segmentation + ", ")
 
         n_best_annotation = ET.Element(ANNOTATION)
@@ -379,7 +380,7 @@ def writeEafTier(eaf_file, data):
 
     xmlstr = minidom.parseString(ET.tostring(root)).toprettyxml(indent="   ")
 
-    with open('results.eaf', 'w') as outfile:
+    with open(save_path, 'w') as outfile:
         outfile.write(xmlstr)
 
     return root
@@ -392,7 +393,7 @@ def writeEafTier(eaf_file, data):
 # with open('data.json', 'r') as outfile:
 #     data = json.load(outfile)
 
-# # getInputText('Transcription', xml_document)
+# getInputText('Transcription', xml_document)
 # # TODO you cannot use the same xml_document second time?
 # # parseTierWithTime('Transcription', xml_document)
 # writeEafTier(xml_document,data)

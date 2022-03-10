@@ -9,16 +9,14 @@ class Cell extends React.Component {
         }
     }
 
-    // update the state when the token segmentation lists get updated
-    static getDerivedStateFromProps(nextProps) {
-        const {token, index} = nextProps;
-
-        const segmentation_list = token["segmentation"];
+    // generate a list of gloss/seg predictions for rendering in a dropdown
+    static getListForDropdown(token, modelType) {
+        const prediction_list = token[modelType];
         let dropdown_list = [];
-        for (let i = 0; i < segmentation_list.length; i++) {
+        for (let i = 0; i < prediction_list.length; i++) {
             const option = {
                 id: i,
-                title: segmentation_list[i],
+                title: prediction_list[i],
                 selected: false,
                 key: 'location'
             };
@@ -26,14 +24,67 @@ class Cell extends React.Component {
         }
 
         const option = {
-            id: segmentation_list.length,
+            id: prediction_list.length,
             title: "Custom",
             selected: false,
             key: 'location'
         };
         dropdown_list.push(option);
 
-        return { location:  dropdown_list};
+        return dropdown_list;
+    }
+
+    // update the state when the token segmentation lists get updated
+    static getDerivedStateFromProps(nextProps) {
+        const {token, hasSeg, hasGloss, index} = nextProps;
+
+        let gloss_dropdown = [];
+        if (hasGloss) {
+            const gloss_list = token['gloss'];
+            
+            for (let i = 0; i < gloss_list.length; i++) {
+                const option = {
+                    id: i,
+                    title: gloss_list[i],
+                    selected: false,
+                    key: 'gloss_location'
+                };
+                gloss_dropdown.push(option);
+            }
+
+            const option = {
+                id: gloss_list.length,
+                title: "Custom",
+                selected: false,
+                key: 'gloss_location'
+            };
+            gloss_dropdown.push(option);
+        }
+        
+        let seg_dropdown = [];
+        if (hasSeg) {
+            const seg_list = token['segmentation'];
+
+            for (let i = 0; i < seg_list.length; i++) {
+                const glossOption = {
+                    id: i,
+                    title: seg_list[i],
+                    selected: false,
+                    key: 'location'
+                };
+                seg_dropdown.push(glossOption);
+            }
+
+            const segOption = {
+                id: seg_list.length,
+                title: "Custom",
+                selected: false,
+                key: 'location'
+            };
+            seg_dropdown.push(segOption);
+        }
+        
+        return { location: seg_dropdown, gloss_location: gloss_dropdown };
     }
 
     // initilizeList() {
@@ -62,8 +113,8 @@ class Cell extends React.Component {
     // }
 
     // update preferred segmentation
-    changeList(newPreferred, isCustom, update_mode) {
-        this.props.updatePreferredSegmentation(this.props.index, newPreferred, isCustom, update_mode);
+    changeList(modelType, newPreferred, isCustom, update_mode) {
+        this.props.updatePreferredSegmentation(this.props.index, modelType, newPreferred, isCustom, update_mode);
     }
 
     resetThenSet = (id, key) => {
@@ -94,13 +145,24 @@ class Cell extends React.Component {
                 Here, it is used for alignment. */}
                 <p className='annotation'>{sentence_message}&nbsp;</p>
                 <p className='input_token'>{this.props.token["input"]}</p>
-                <p>{this.props.token["preferred_segmentation"]}</p>
-                <Dropdown  
-                    title={this.props.token["preferred_segmentation"]}
-                    list={this.state.location}
-                    resetThenSet={this.resetThenSet}
-                    changeList = {(newPreferred, isCustom, mode) => this.changeList(newPreferred, isCustom, mode)}
-                />
+                {this.props.hasSeg && <div>
+                                        <p>{this.props.token["preferred_segmentation"]}</p>
+                                        <Dropdown  
+                                            title={this.props.token["preferred_segmentation"]}
+                                            list={this.state.location}
+                                            resetThenSet={this.resetThenSet}
+                                            changeList = {(newPreferred, isCustom, mode) => this.changeList('segmentation', newPreferred, isCustom, mode)}
+                                        />
+                                       </div>}
+                {this.props.hasGloss && <div>
+                                            <p>{this.props.token["preferred_gloss"]}</p>
+                                            <Dropdown 
+                                                title={this.props.token["preferred_gloss"]}
+                                                list={this.state.gloss_location}
+                                                resetThenSet={this.resetThenSet}
+                                                changeList={(newPreferred, isCustom, mode) => this.changeList('gloss', newPreferred, isCustom, mode)}
+                                            />
+                                        </div>}
             </div>
         )
     }
@@ -357,10 +419,12 @@ class ResultsTable extends React.Component {
                         <Cell
                             token={this.props.data[current_token]}
                             show_sentence_number={show_sentence_number}
+                            hasSeg={this.props.hasSeg}
+                            hasGloss={this.props.hasGloss}
                             index={current_index + this.props.lower_bound}
                             updatePreferredSegmentation = {
-                                ( index, newPreferred, isCustom, update_mode) => 
-                                this.props.updatePreferredSegmentation(index, newPreferred, isCustom, update_mode)
+                                ( index, modelType, newPreferred, isCustom, update_mode) => 
+                                this.props.updatePreferredSegmentation(index, modelType, newPreferred, isCustom, update_mode)
                             }
                         />
                     </td>
@@ -396,6 +460,10 @@ class Legend extends React.Component {
                 <p id="segmentation_list_legend">
                     List of n-best segmentations
                 </p>
+                <p className="preferred_segmentation"> Preferred gloss</p>
+                <p id="segmentation_list_legend">
+                    List of n-best glosses
+                </p>
             </div>
         )
     }
@@ -430,7 +498,6 @@ class PageTableSentenceButton extends React.Component {
      
         return (
             <button 
-                className="sentence_button"
                 onClick={() => {this.props.onClick(this.props.sentence_id)}}
                 className="range_button"
             >
@@ -544,11 +611,14 @@ class SaveMenu extends React.Component {
         // keep track of the file saving options
         this.changeFilename = this.changeFilename.bind(this);
         this.changeFormat = this.changeFormat.bind(this);
+        this.changeModelSave = this.changeModelSave.bind(this);
 
         this.state = {
             defaultFilename: "model_results",
             filename: "model_results",
-            format: "txt"
+            format: "txt",
+            saveGloss: true,
+            saveSeg: true
         };
     }
 
@@ -560,8 +630,18 @@ class SaveMenu extends React.Component {
         this.setState({format: e.target.value});
     }
 
+    changeModelSave(e) {
+        if (e.target.value === 'seg') {
+            this.setState({saveGloss: false, saveSeg: true});
+        } else if (e.target.value === 'gloss') {
+            this.setState({saveGloss: true, saveSeg: false});
+        } else {
+            this.setState({saveGloss: true, saveSeg: true});
+        }
+    }
+
     onClick() {
-        return this.props.handleSave(this.state.filename, this.state.format);
+        return this.props.handleSave(this.state.filename, this.state.format, this.state.saveGloss, this.state.saveSeg);
     }
 
     render() {
@@ -572,6 +652,28 @@ class SaveMenu extends React.Component {
                 <div id="file_format_buttons" className="form" onChange={this.changeFormat}>
                     <input type="radio" id="save_text_file" name="file_format" value="txt" defaultChecked/> Text
                     <input type="radio" id="save_eaf_file" name="file_format" value="eaf" disabled={!this.props.is_eaf} /> ELAN
+                </div>
+
+                <div id="model_save_buttons" className="form" onChange={this.changeModelSave}>
+                    <div>
+                        <label className="option_radio_button">
+                            <input type="radio" id="save_seg" name="model_to_save" value="seg"/> 
+                            Only segmentation
+                        </label>
+                    </div>
+                    <div>
+                        <label className="option_radio_button">
+                            <input type="radio" id="save_gloss" name="model_to_save" value="gloss"/> 
+                            Only gloss
+                        </label>
+                    </div>
+                    <div>
+                        <label className="option_radio_button">
+                            <input type="radio" id="save_both" name="model_to_save" value="both" defaultChecked/> 
+                            Both
+                        </label>
+                    </div>
+                    
                 </div>
 
                 <input 
@@ -606,7 +708,7 @@ class SideMenu extends React.Component {
                     onRetrieveSentence={(sentence_id) => {this.props.onRetrieveSentence(sentence_id)}}
                 />
                 <SaveMenu 
-                    handleSave={(filename, format) => this.props.handleSave(filename, format)}
+                    handleSave={(filename, format, saveGloss, saveSeg) => this.props.handleSave(filename, format, saveGloss, saveSeg)}
                     is_eaf={is_eaf}
                 />
             </div>
@@ -811,8 +913,14 @@ class ResultsSection extends React.Component {
         // make a dictionary {key: list of indixes} and store it in state
         // but also make it updatable?
         const token_dictionary = this.makeTokenDictionary(props.data);
+
+        // display segmentation and/or gloss?
+        const includeSeg = 'preferred_segmentation' in props.data[0];
+        const includeGloss = 'preferred_gloss' in props.data[0];
         
         this.state = {
+            hasSeg: includeSeg,
+            hasGloss: includeGloss,
             //  initial lower and upper bound from the rows 2D array
             lower_bound: pages[0].first_token,
             upper_bound: pages[0].last_sentence_end,
@@ -825,7 +933,6 @@ class ResultsSection extends React.Component {
             sentence_to_modify: {},
             sentence_boundaries: sentence_boundaries,
         };
-        console.log(this.state);
 
         this.cancelSentenceResubmission = this.cancelSentenceResubmission.bind(this);
     }
@@ -943,33 +1050,37 @@ class ResultsSection extends React.Component {
 
     // update preferred segmentation and segmentation lists based on update mode and 
     // whether it is custom.
-    updatePreferredSegmentation(index, newPreferred, isCustom, update_mode) {
+    updatePreferredSegmentation(index, modelType, newPreferred, isCustom, update_mode) {
+        // create keys based on modelType value
+        const modelKey = modelType;
+        const modelPreferredKey = 'preferred_' + modelType;
+        
         // TODO do something with the update mode
         const newData = [...this.state.data];
         console.log(`The index is ${index}`);
-        newData[index]["preferred_segmentation"] = newPreferred;
+        newData[index][modelPreferredKey] = newPreferred;
         
         if (isCustom === true) {
             const same_token_index_list = this.state.token_dictionary[newData[index].input];
 
             if (update_mode === "only_this") {
                 console.log("only this");
-                newData[index]["segmentation"].push(newPreferred);
+                newData[index][modelKey].push(newPreferred);
             } else if (update_mode === "all_after") {
                 console.log("all after");
                 for (let i = 0; i < same_token_index_list.length; i++) {
                     console.log(`The current index is ${same_token_index_list[i]}`)
                     if (same_token_index_list[i] > index) {
                         console.log(`This index is pushed ${same_token_index_list[i]}`)
-                        newData[same_token_index_list[i]]["segmentation"].push(newPreferred);
-                        newData[same_token_index_list[i]]["preferred_segmentation"] = newPreferred;
+                        newData[same_token_index_list[i]][modelKey].push(newPreferred);
+                        newData[same_token_index_list[i]][modelPreferredKey] = newPreferred;
                     }
                 }
             } else if (update_mode === "all") {
                 console.log("all");
                 for (let i = 0; i < same_token_index_list.length; i++) {
-                    newData[same_token_index_list[i]]["segmentation"].push(newPreferred);
-                    newData[same_token_index_list[i]]["preferred_segmentation"] = newPreferred;
+                    newData[same_token_index_list[i]][modelKey].push(newPreferred);
+                    newData[same_token_index_list[i]][modelPreferredKey] = newPreferred;
                 }
             } else {
                 console.log("Wrong update mode!")
@@ -1026,18 +1137,27 @@ class ResultsSection extends React.Component {
         });
 
         const inputText = new_sentence;
-        const data = {text:inputText, model: this.state.data[0].model, nbest: this.state.data[0].nbest, task: this.state.data[0].task};
+        const data = {
+            text: inputText, 
+            model: 'fairseq',
+            nbest: this.state.data[0].nbest, 
+            getSeg: this.state.hasSeg,
+            getGloss: this.state.hasGloss
+        };
+
+        console.log(data);
+
         console.log(this.state.data);
-        //  submit a new job and get a new job id
-        const request = await requestData('/api/job', data, 'POST');
+        //  submit a new job and get a new job id (Changed: requesting batch job)
+        const request = await requestData('/api/job/batch', data, 'POST');
         // wait for the job to finish and get the new data
         let status = {status:false};
 
         while(!status.status) {
-            status = await requestData(`/api/job/${request.job_id}`);
+            status = await requestData(`/api/job/${request.job_id}/batch`);
             await new Promise(resolve => setTimeout(resolve, 1000));
         }
-        const modified_sentence = await requestData(`/api/job/${request.job_id}/download`);
+        const modified_sentence = await requestData(`/api/job/${request.job_id}/batch/download`);
 
         // exchange the tokens in data
         const sentence_id = this.state.sentence_to_modify.sentence_id;
@@ -1155,38 +1275,87 @@ class ResultsSection extends React.Component {
         });
     }
 
-    handleSave(filename, format) {
+    async handleSave(filename, format, saveGloss, saveSeg) {
         console.log(this.state.data);
 
-        // generate a string representing the preferred segmentations of all the tokens. Sentences separated by lines.
-        let output_tokens = [];
-        let curr_sentence = 0;
+        // if the format is text, save a file of preferred segmentations. If it's an EAF, convert and then save
+        if (format === 'txt') {
+            // generate a string representing the preferred segmentations of all the tokens. Sentences separated by lines.
+            let seg_tokens = [];
+            let gloss_tokens = [];
+            let curr_sentence = -1;
 
-        for (let i=0; i < this.state.data.length; i++) {
-            let curr_token = this.state.data[i];
+            for (let i=0; i < this.state.data.length; i++) {
+                let curr_token = this.state.data[i];
 
-            if (curr_token['sentence_id'] > curr_sentence) {
-                output_tokens.push([]);
-                curr_sentence++;
+                if (curr_token['sentence_id'] > curr_sentence) {
+                    seg_tokens.push([]);
+                    gloss_tokens.push([]);
+                    curr_sentence++;
+                }
+
+                seg_tokens[seg_tokens.length - 1].push(curr_token['preferred_segmentation']);
+                gloss_tokens[gloss_tokens.length - 1].push(curr_token['preferred_gloss']);
             }
 
-            output_tokens[output_tokens.length - 1].push(curr_token['preferred_segmentation']);
+            // construct a string from the two list of lists, depending on preferences
+            let output_string = '';
+            for (let i=0; i<seg_tokens.length; i++) { 
+                if (saveSeg) {
+                    output_string += seg_tokens[i].join(' ') + '\n';
+                }
+                if (saveGloss) {
+                    output_string += gloss_tokens[i].join(' ') + '\n';
+                }
+                if (saveSeg && saveGloss && i < seg_tokens.length - 1) {
+                    output_string += '\n';
+                }
+            }
+            // let output_string = '';
+            // for (const sent of output_tokens) {
+            //     output_string += sent.join(' ') + '\n';
+            // }
+
+            console.log(output_string);
+
+            // download text as a blob
+            let output_blob = new Blob([output_string], {type: "text/plain;charset=utf-8"});
+            var link = document.createElement('a');
+            link.download = filename + '.' + format;
+            link.href = window.URL.createObjectURL(output_blob);
+            link.click();
+        } else {
+            let model_type = 'both';
+            if (!saveGloss) {
+                model_type = 'segmentation';
+            } else if (!saveSeg) {
+                model_type = 'gloss';
+            }
+
+            const data = {id: this.props.jobId, tokens: this.state.data, models: model_type};
+            console.log(data);
+
+            // submit an API request
+            const result = await requestData('/api/job/convert', data, 'POST');
+            console.log(result);
+
+            // wait for the job to finish and get the new data
+            let status = {status:false};
+
+            while(!status.status) {
+                status = await requestData(`/api/job/${this.props.jobId}/get_eaf_file`);
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+            console.log(status);
+            let save_text = status.written_elan;
+
+            // download text as a blob
+            let output_blob = new Blob([save_text], {type: "text/plain;charset=utf-8"});
+            var link = document.createElement('a');
+            link.download = filename + '.' + format;
+            link.href = window.URL.createObjectURL(output_blob);
+            link.click();
         }
-
-        // construct a string from the list of lists
-        let output_string = '';
-        for (const sent of output_tokens) {
-            output_string += sent.join(' ') + '\n';
-        }
-
-        console.log(output_string);
-
-        // download text as a blob
-        let output_blob = new Blob([output_string], {type: "text/plain;charset=utf-8"});
-        var link = document.createElement('a');
-        link.download = filename + '.' + format;
-        link.href = window.URL.createObjectURL(output_blob);
-        link.click();
         
     }
 
@@ -1204,15 +1373,17 @@ class ResultsSection extends React.Component {
                         currPage={this.state.currPage}
                         onClick={(lower_b, upper_b, i) => this.handleClick(lower_b, upper_b, i)}
                         onRetrieveSentence={(sentence_id) => {this.retrieveSentenceToModify(sentence_id)}}
-                        handleSave={(filename, format) => this.handleSave(filename, format)}
+                        handleSave={(filename, format, saveGloss, saveSeg) => this.handleSave(filename, format, saveGloss, saveSeg)}
                     />
                     <ResultsTable 
                         data={this.state.data} 
                         lower_bound={this.state.lower_bound} 
                         upper_bound={this.state.upper_bound}
+                        hasSeg={this.state.hasSeg}
+                        hasGloss={this.state.hasGloss}
                         updatePreferredSegmentation = {
-                            (index, newPreferred, isCustom, update_mode) => 
-                                this.updatePreferredSegmentation(index, newPreferred, isCustom, update_mode)
+                            (index, modelType, newPreferred, isCustom, update_mode) => 
+                                this.updatePreferredSegmentation(index, modelType, newPreferred, isCustom, update_mode)
                         }
                     />
                 </div>

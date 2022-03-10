@@ -1,0 +1,2879 @@
+<?xml version="1.0" ?>
+<ANNOTATION_DOCUMENT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" AUTHOR="" DATE="2021-06-30T14:35:50-07:00" FORMAT="3.0" VERSION="3.0" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/EAFv3.0.xsd">
+   
+    
+   <HEADER MEDIA_FILE="" TIME_UNITS="milliseconds">
+      
+        
+      <MEDIA_DESCRIPTOR MEDIA_URL="file:///C:/Users/forcf/Dropbox/CAF Documents/Data/Gitksan Data/Corpus/JS/07_berrypicking/berrypicking_Source.wav" MIME_TYPE="audio/x-wav" RELATIVE_MEDIA_URL="./berrypicking_Source.wav"/>
+      
+        
+      <PROPERTY NAME="URN">urn:nl-mpi-tools-elan-eaf:2b97abfa-a93f-4b98-bf81-604bbf661228</PROPERTY>
+      
+        
+      <PROPERTY NAME="lastUsedAnnotationId">93</PROPERTY>
+      
+    
+   </HEADER>
+   
+    
+   <TIME_ORDER>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts1" TIME_VALUE="39"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts2" TIME_VALUE="2776"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts3" TIME_VALUE="2776"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts4" TIME_VALUE="4624"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts5" TIME_VALUE="4624"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts6" TIME_VALUE="7429"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts7" TIME_VALUE="7429"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts8" TIME_VALUE="9831"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts9" TIME_VALUE="9831"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts10" TIME_VALUE="11951"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts11" TIME_VALUE="11951"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts12" TIME_VALUE="16767"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts13" TIME_VALUE="16767"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts14" TIME_VALUE="19603"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts15" TIME_VALUE="19603"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts16" TIME_VALUE="22195"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts17" TIME_VALUE="22195"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts18" TIME_VALUE="24646"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts19" TIME_VALUE="24646"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts20" TIME_VALUE="26939"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts21" TIME_VALUE="26939"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts22" TIME_VALUE="28487"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts23" TIME_VALUE="28487"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts24" TIME_VALUE="31490"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts25" TIME_VALUE="31490"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts26" TIME_VALUE="34412"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts27" TIME_VALUE="34412"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts28" TIME_VALUE="36428"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts29" TIME_VALUE="36428"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts30" TIME_VALUE="39047"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts31" TIME_VALUE="39047"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts32" TIME_VALUE="41318"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts33" TIME_VALUE="41318"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts34" TIME_VALUE="43810"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts35" TIME_VALUE="43810"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts36" TIME_VALUE="46963"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts37" TIME_VALUE="46963"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts38" TIME_VALUE="48327"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts39" TIME_VALUE="48327"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts40" TIME_VALUE="54380"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts41" TIME_VALUE="54380"/>
+      
+        
+      <TIME_SLOT TIME_SLOT_ID="ts42" TIME_VALUE="58630"/>
+      
+    
+   </TIME_ORDER>
+   
+    
+   <TIER LINGUISTIC_TYPE_REF="Text" TIER_ID="Transcription">
+      
+        
+      <ANNOTATION>
+         
+            
+         <ALIGNABLE_ANNOTATION ANNOTATION_ID="a1" TIME_SLOT_REF1="ts1" TIME_SLOT_REF2="ts2">
+            
+                
+            <ANNOTATION_VALUE>Yeet Emaa g̲o'ohl sg̲a'nist.</ANNOTATION_VALUE>
+            
+            
+         </ALIGNABLE_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <ALIGNABLE_ANNOTATION ANNOTATION_ID="a2" TIME_SLOT_REF1="ts3" TIME_SLOT_REF2="ts4">
+            
+                
+            <ANNOTATION_VALUE>Sdilit ts'iits't.</ANNOTATION_VALUE>
+            
+            
+         </ALIGNABLE_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <ALIGNABLE_ANNOTATION ANNOTATION_ID="a3" TIME_SLOT_REF1="ts5" TIME_SLOT_REF2="ts6">
+            
+                
+            <ANNOTATION_VALUE>Yukw dim t'aahl sim maa'ydiit,</ANNOTATION_VALUE>
+            
+            
+         </ALIGNABLE_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <ALIGNABLE_ANNOTATION ANNOTATION_ID="a4" TIME_SLOT_REF1="ts7" TIME_SLOT_REF2="ts8">
+            
+                
+            <ANNOTATION_VALUE>sindok̲diithl ha'aks.</ANNOTATION_VALUE>
+            
+            
+         </ALIGNABLE_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <ALIGNABLE_ANNOTATION ANNOTATION_ID="a5" TIME_SLOT_REF1="ts9" TIME_SLOT_REF2="ts10">
+            
+                
+            <ANNOTATION_VALUE>Ts'ilim 'nidiit.</ANNOTATION_VALUE>
+            
+            
+         </ALIGNABLE_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <ALIGNABLE_ANNOTATION ANNOTATION_ID="a6" TIME_SLOT_REF1="ts11" TIME_SLOT_REF2="ts12">
+            
+                
+            <ANNOTATION_VALUE>Ginis Ts'iits't Emaa aloohl anaayim isbawdis.</ANNOTATION_VALUE>
+            
+            
+         </ALIGNABLE_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <ALIGNABLE_ANNOTATION ANNOTATION_ID="a7" TIME_SLOT_REF1="ts13" TIME_SLOT_REF2="ts14">
+            
+                
+            <ANNOTATION_VALUE>'Wadiit wil 'weexsw sim maa'y.</ANNOTATION_VALUE>
+            
+            
+         </ALIGNABLE_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <ALIGNABLE_ANNOTATION ANNOTATION_ID="a8" TIME_SLOT_REF1="ts15" TIME_SLOT_REF2="ts16">
+            
+                
+            <ANNOTATION_VALUE>Helthl t'aahlxws Emaa.</ANNOTATION_VALUE>
+            
+            
+         </ALIGNABLE_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <ALIGNABLE_ANNOTATION ANNOTATION_ID="a9" TIME_SLOT_REF1="ts17" TIME_SLOT_REF2="ts18">
+            
+                
+            <ANNOTATION_VALUE>Iit gya'as Emaahl lalt.</ANNOTATION_VALUE>
+            
+            
+         </ALIGNABLE_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <ALIGNABLE_ANNOTATION ANNOTATION_ID="a10" TIME_SLOT_REF1="ts19" TIME_SLOT_REF2="ts20">
+            
+                
+            <ANNOTATION_VALUE>Baasxis Emaahl lalt.</ANNOTATION_VALUE>
+            
+            
+         </ALIGNABLE_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <ALIGNABLE_ANNOTATION ANNOTATION_ID="a11" TIME_SLOT_REF1="ts21" TIME_SLOT_REF2="ts22">
+            
+                
+            <ANNOTATION_VALUE>K'eek̲xwt Emaa.</ANNOTATION_VALUE>
+            
+            
+         </ALIGNABLE_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <ALIGNABLE_ANNOTATION ANNOTATION_ID="a12" TIME_SLOT_REF1="ts23" TIME_SLOT_REF2="ts24">
+            
+                
+            <ANNOTATION_VALUE>Akst lo'op wil 'wihl wildiit.</ANNOTATION_VALUE>
+            
+            
+         </ALIGNABLE_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <ALIGNABLE_ANNOTATION ANNOTATION_ID="a13" TIME_SLOT_REF1="ts25" TIME_SLOT_REF2="ts26">
+            
+                
+            <ANNOTATION_VALUE>Hlikst Emaa lax̲ lo'opgi.</ANNOTATION_VALUE>
+            
+            
+         </ALIGNABLE_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <ALIGNABLE_ANNOTATION ANNOTATION_ID="a14" TIME_SLOT_REF1="ts27" TIME_SLOT_REF2="ts28">
+            
+                
+            <ANNOTATION_VALUE>Mooji deexit.</ANNOTATION_VALUE>
+            
+            
+         </ALIGNABLE_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <ALIGNABLE_ANNOTATION ANNOTATION_ID="a15" TIME_SLOT_REF1="ts29" TIME_SLOT_REF2="ts30">
+            
+                
+            <ANNOTATION_VALUE>T'ugwandinthl g̲aldim t'aahlxw[t].</ANNOTATION_VALUE>
+            
+            
+         </ALIGNABLE_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <ALIGNABLE_ANNOTATION ANNOTATION_ID="a16" TIME_SLOT_REF1="ts31" TIME_SLOT_REF2="ts32">
+            
+                
+            <ANNOTATION_VALUE>Ii lakhl t'aahlxws Emaa.</ANNOTATION_VALUE>
+            
+            
+         </ALIGNABLE_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <ALIGNABLE_ANNOTATION ANNOTATION_ID="a17" TIME_SLOT_REF1="ts33" TIME_SLOT_REF2="ts34">
+            
+                
+            <ANNOTATION_VALUE>Ii hats'im hoo sit'aa'mat.</ANNOTATION_VALUE>
+            
+            
+         </ALIGNABLE_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <ALIGNABLE_ANNOTATION ANNOTATION_ID="a18" TIME_SLOT_REF1="ts35" TIME_SLOT_REF2="ts36">
+            
+                
+            <ANNOTATION_VALUE>Hats'im hoo midinthl g̲aldim t'aahlxwt.</ANNOTATION_VALUE>
+            
+            
+         </ALIGNABLE_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <ALIGNABLE_ANNOTATION ANNOTATION_ID="a19" TIME_SLOT_REF1="ts37" TIME_SLOT_REF2="ts38">
+            
+                
+            <ANNOTATION_VALUE>Ii ha'wdiit.</ANNOTATION_VALUE>
+            
+            
+         </ALIGNABLE_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <ALIGNABLE_ANNOTATION ANNOTATION_ID="a20" TIME_SLOT_REF1="ts39" TIME_SLOT_REF2="ts41">
+            
+                
+            <ANNOTATION_VALUE>Ginis Emaat Ye'e't ahl sim maa'y, t'aahlxw[t], iit dawdinhl manit.</ANNOTATION_VALUE>
+            
+            
+         </ALIGNABLE_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <ALIGNABLE_ANNOTATION ANNOTATION_ID="a21" TIME_SLOT_REF1="ts40" TIME_SLOT_REF2="ts42">
+            
+                
+            <ANNOTATION_VALUE>&quot;Dim ixsda ji hlaa maadim,&quot; diyat Ts'iits't.</ANNOTATION_VALUE>
+            
+            
+         </ALIGNABLE_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+    
+   </TIER>
+   
+    
+   <TIER LINGUISTIC_TYPE_REF="Associated" PARENT_REF="Transcription" TIER_ID="WrittenTranslation">
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a43" ANNOTATION_REF="a1">
+            
+                
+            <ANNOTATION_VALUE>Emma went to the mountain</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a44" ANNOTATION_REF="a2">
+            
+                
+            <ANNOTATION_VALUE>with her Granny.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a45" ANNOTATION_REF="a3">
+            
+                
+            <ANNOTATION_VALUE>They are going to pick huckleberries.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a46" ANNOTATION_REF="a4">
+            
+                
+            <ANNOTATION_VALUE>They took buckets.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a47" ANNOTATION_REF="a5">
+            
+                
+            <ANNOTATION_VALUE>They took a lunch.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a48" ANNOTATION_REF="a6">
+            
+                
+            <ANNOTATION_VALUE>Granny gave Emma a baking powder biscuit.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a49" ANNOTATION_REF="a7">
+            
+                
+            <ANNOTATION_VALUE>They found a good patch.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a50" ANNOTATION_REF="a8">
+            
+                
+            <ANNOTATION_VALUE/>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a51" ANNOTATION_REF="a9">
+            
+                
+            <ANNOTATION_VALUE>Emma saw a snake.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a52" ANNOTATION_REF="a10">
+            
+                
+            <ANNOTATION_VALUE>She was afraid of snakes.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a53" ANNOTATION_REF="a11">
+            
+                
+            <ANNOTATION_VALUE>Emma ran away.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a54" ANNOTATION_REF="a12">
+            
+                
+            <ANNOTATION_VALUE>The rocks were slippery.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a55" ANNOTATION_REF="a13">
+            
+                
+            <ANNOTATION_VALUE>Emma slipped on the rocks.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a56" ANNOTATION_REF="a14">
+            
+                
+            <ANNOTATION_VALUE>She almost fell.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a57" ANNOTATION_REF="a15">
+            
+                
+            <ANNOTATION_VALUE>She dropped her bucket of berries.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a58" ANNOTATION_REF="a16">
+            
+                
+            <ANNOTATION_VALUE>Emma's berries dumped out.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a59" ANNOTATION_REF="a17">
+            
+                
+            <ANNOTATION_VALUE>She started again.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a60" ANNOTATION_REF="a18">
+            
+                
+            <ANNOTATION_VALUE>She filled her bucket once again.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a61" ANNOTATION_REF="a19">
+            
+                
+            <ANNOTATION_VALUE>They went home.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a62" ANNOTATION_REF="a20">
+            
+                
+            <ANNOTATION_VALUE>Emma gave some berries to her Grandfather and froze the rest.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a63" ANNOTATION_REF="a21">
+            
+                
+            <ANNOTATION_VALUE>&quot;They will taste good in the winter,&quot; said Granny.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+    
+   </TIER>
+   
+    
+   <TIER LINGUISTIC_TYPE_REF="Associated" PARENT_REF="Transcription" TIER_ID="Notes">
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a92" ANNOTATION_REF="a4">
+            
+                
+            <ANNOTATION_VALUE>what does sindok̲ mean?</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a85" ANNOTATION_REF="a5">
+            
+                
+            <ANNOTATION_VALUE>what does ts'ilim mean? is there a word lim?</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a86" ANNOTATION_REF="a6">
+            
+                
+            <ANNOTATION_VALUE>isbawdis = baking powder? or does it mean something else, like a way of cooking the biscuit?</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+    
+   </TIER>
+   
+    
+   <TIER LINGUISTIC_TYPE_REF="Associated" PARENT_REF="Transcription" TIER_ID="LiteralTranslation">
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a87" ANNOTATION_REF="a2">
+            
+                
+            <ANNOTATION_VALUE>She went with her Granny.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a88" ANNOTATION_REF="a7">
+            
+                
+            <ANNOTATION_VALUE>They found where the huckleberries were plentiful.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a89" ANNOTATION_REF="a8">
+            
+                
+            <ANNOTATION_VALUE>Emma picked a lot.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a90" ANNOTATION_REF="a10">
+            
+                
+            <ANNOTATION_VALUE>Emma was afraid of snakes.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a91" ANNOTATION_REF="a12">
+            
+                
+            <ANNOTATION_VALUE>The rocks were wet where they were.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a93" ANNOTATION_REF="a20">
+            
+                
+            <ANNOTATION_VALUE>Emma gave her Grandfather some huckleberries, her pickings, and froze what remained.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+    
+   </TIER>
+   
+    
+   <TIER LINGUISTIC_TYPE_REF="Associated" PARENT_REF="Transcription" TIER_ID="WrittenTranscription">
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a22" ANNOTATION_REF="a1">
+            
+                
+            <ANNOTATION_VALUE>Yeet Emma go'ohl sga'nist.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a23" ANNOTATION_REF="a2">
+            
+                
+            <ANNOTATION_VALUE>Stilit ts'iits't.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a24" ANNOTATION_REF="a3">
+            
+                
+            <ANNOTATION_VALUE>yukw dim t'aahl sim maa'y diit,</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a25" ANNOTATION_REF="a4">
+            
+                
+            <ANNOTATION_VALUE>xsindok̲ diit ha'aks.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a26" ANNOTATION_REF="a5">
+            
+                
+            <ANNOTATION_VALUE>Ts'ilim 'nidiit.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a27" ANNOTATION_REF="a6">
+            
+                
+            <ANNOTATION_VALUE>Ginis Ts'iits't Emma a loohl anaayim isbawdis.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a28" ANNOTATION_REF="a7">
+            
+                
+            <ANNOTATION_VALUE>Wadiit wil 'weexsw sim maa'y.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a29" ANNOTATION_REF="a8">
+            
+                
+            <ANNOTATION_VALUE>Helthl t'aahlxws Emma.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a30" ANNOTATION_REF="a9">
+            
+                
+            <ANNOTATION_VALUE>iit gya'as Emmahl lalt.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a31" ANNOTATION_REF="a10">
+            
+                
+            <ANNOTATION_VALUE>Baasxis Emma lalt.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a32" ANNOTATION_REF="a11">
+            
+                
+            <ANNOTATION_VALUE>K'eek̲xw't Emma.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a33" ANNOTATION_REF="a12">
+            
+                
+            <ANNOTATION_VALUE>Aks't lo'op wil 'wihl wildiit.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a34" ANNOTATION_REF="a13">
+            
+                
+            <ANNOTATION_VALUE>hliks't  Emma lax̲ lo'op gi.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a35" ANNOTATION_REF="a14">
+            
+                
+            <ANNOTATION_VALUE>Mooji dee'yit.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a36" ANNOTATION_REF="a15">
+            
+                
+            <ANNOTATION_VALUE>T'ugwandin'thl galdim t'aahlxw't.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a37" ANNOTATION_REF="a16">
+            
+                
+            <ANNOTATION_VALUE>ii lakhl t'aahlxws Emma.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a38" ANNOTATION_REF="a17">
+            
+                
+            <ANNOTATION_VALUE>ii hatsim hoo sit'aa'mad.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a39" ANNOTATION_REF="a18">
+            
+                
+            <ANNOTATION_VALUE>Hatsim hoo midin'thl galdim t'aahlxw't.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a40" ANNOTATION_REF="a19">
+            
+                
+            <ANNOTATION_VALUE>ii ha'w diit.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a41" ANNOTATION_REF="a20">
+            
+                
+            <ANNOTATION_VALUE>Ginis Emmat Ye'e't ahl sim maa'y, t'aahlxwt. ii dawdinhl man it.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a42" ANNOTATION_REF="a21">
+            
+                
+            <ANNOTATION_VALUE>&quot;Dim ixst'a ji laa maadim,&quot; diya't Ts'iits't.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+    
+   </TIER>
+   
+    
+   <TIER LINGUISTIC_TYPE_REF="Associated" PARENT_REF="Transcription" TIER_ID="AudioTranscription">
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a64" ANNOTATION_REF="a1">
+            
+                
+            <ANNOTATION_VALUE>Yeet Emaa g̲o'ohl sg̲a'nist.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a65" ANNOTATION_REF="a2">
+            
+                
+            <ANNOTATION_VALUE>Sdilit ts'iits't.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a66" ANNOTATION_REF="a3">
+            
+                
+            <ANNOTATION_VALUE>Yukw dim t'aahl sim maa'ydiit,</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a67" ANNOTATION_REF="a4">
+            
+                
+            <ANNOTATION_VALUE>sindok̲diithl ha'aks.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a68" ANNOTATION_REF="a5">
+            
+                
+            <ANNOTATION_VALUE>Ts'ilim 'nidiit.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a69" ANNOTATION_REF="a6">
+            
+                
+            <ANNOTATION_VALUE>Ginis Ts'iits't Emaa aloohl anaayim isbawdis.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a70" ANNOTATION_REF="a7">
+            
+                
+            <ANNOTATION_VALUE>'Wadiit wil 'weexsw sim maa'y.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a71" ANNOTATION_REF="a8">
+            
+                
+            <ANNOTATION_VALUE>Helthl t'aahlxws Emaa.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a72" ANNOTATION_REF="a9">
+            
+                
+            <ANNOTATION_VALUE>Iit gya'as Emaahl lalt.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a73" ANNOTATION_REF="a10">
+            
+                
+            <ANNOTATION_VALUE>Baasxis Emaahl lalt.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a74" ANNOTATION_REF="a11">
+            
+                
+            <ANNOTATION_VALUE>K'eek̲xwt Emaa.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a75" ANNOTATION_REF="a12">
+            
+                
+            <ANNOTATION_VALUE>Akst lo'op wil 'wihl wildiit.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a76" ANNOTATION_REF="a13">
+            
+                
+            <ANNOTATION_VALUE>Hlikst Emaa lax̲ lo'opgi.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a77" ANNOTATION_REF="a14">
+            
+                
+            <ANNOTATION_VALUE>Mooji deexit.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a78" ANNOTATION_REF="a15">
+            
+                
+            <ANNOTATION_VALUE>T'ugwandinthl g̲aldim t'aahlxw[t].</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a79" ANNOTATION_REF="a16">
+            
+                
+            <ANNOTATION_VALUE>Ii lakhl t'aahlxws Emaa.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a80" ANNOTATION_REF="a17">
+            
+                
+            <ANNOTATION_VALUE>Ii hats'im hoo sit'aa'mat.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a81" ANNOTATION_REF="a18">
+            
+                
+            <ANNOTATION_VALUE>Hats'im hoo midinthl g̲aldim t'aahlxwt.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a82" ANNOTATION_REF="a19">
+            
+                
+            <ANNOTATION_VALUE>Ii ha'wdiit.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a83" ANNOTATION_REF="a20">
+            
+                
+            <ANNOTATION_VALUE>Ginis Emaat Ye'e't ahl sim maa'y, t'aahlxw[t], ii[t?] dawdinhl manit.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+        
+      <ANNOTATION>
+         
+            
+         <REF_ANNOTATION ANNOTATION_ID="a84" ANNOTATION_REF="a21">
+            
+                
+            <ANNOTATION_VALUE>&quot;Dim ixsda ji hlaa maadim,&quot; diyat Ts'iits't.</ANNOTATION_VALUE>
+            
+            
+         </REF_ANNOTATION>
+         
+        
+      </ANNOTATION>
+      
+    
+   </TIER>
+   
+    
+   <LINGUISTIC_TYPE GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="Text" TIME_ALIGNABLE="true"/>
+   
+    
+   <LINGUISTIC_TYPE CONSTRAINTS="Symbolic_Subdivision" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="Subpart" TIME_ALIGNABLE="false"/>
+   
+    
+   <LINGUISTIC_TYPE CONSTRAINTS="Symbolic_Association" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="Associated" TIME_ALIGNABLE="false"/>
+   
+    
+   <LINGUISTIC_TYPE CONSTRAINTS="Time_Subdivision" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="Subtime" TIME_ALIGNABLE="true"/>
+   
+    
+   <LINGUISTIC_TYPE CONSTRAINTS="Included_In" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="Included" TIME_ALIGNABLE="true"/>
+   
+    
+   <CONSTRAINT DESCRIPTION="Time subdivision of parent annotation's time interval, no time gaps allowed within this interval" STEREOTYPE="Time_Subdivision"/>
+   
+    
+   <CONSTRAINT DESCRIPTION="Symbolic subdivision of a parent annotation. Annotations refering to the same parent are ordered" STEREOTYPE="Symbolic_Subdivision"/>
+   
+    
+   <CONSTRAINT DESCRIPTION="1-1 association with a parent annotation" STEREOTYPE="Symbolic_Association"/>
+   
+    
+   <CONSTRAINT DESCRIPTION="Time alignable annotations within the parent annotation's time interval, gaps are allowed" STEREOTYPE="Included_In"/>
+   
+
+   <LINGUISTIC_TYPE CONSTRAINTS="Symbolic_Subdivision" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="Glossing_UI_Input" TIME_ALIGNABLE="false"/>
+   <LINGUISTIC_TYPE CONSTRAINTS="Symbolic_Association" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="Glossing_UI_Preferred_Segmentation" TIME_ALIGNABLE="false"/>
+   <LINGUISTIC_TYPE CONSTRAINTS="Symbolic_Association" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="Glossing_UI_N_best_segmentations" TIME_ALIGNABLE="false"/>
+   <TIER LINGUISTIC_TYPE_REF="Glossing_UI_Input" PARENT_REF="Transcription" TIER_ID="Glossing_UI_Input_Tier">
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a94" ANNOTATION_REF="a1">
+            <ANNOTATION_VALUE>Yeet</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a95" ANNOTATION_REF="a1" PREVIOUS_ANNOTATION="a94">
+            <ANNOTATION_VALUE>Emaa</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a96" ANNOTATION_REF="a1" PREVIOUS_ANNOTATION="a95">
+            <ANNOTATION_VALUE>g̲o'ohl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a97" ANNOTATION_REF="a1" PREVIOUS_ANNOTATION="a96">
+            <ANNOTATION_VALUE>sg̲a'nist.</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a98" ANNOTATION_REF="a2">
+            <ANNOTATION_VALUE>Sdilit</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a99" ANNOTATION_REF="a2" PREVIOUS_ANNOTATION="a98">
+            <ANNOTATION_VALUE>ts'iits't.</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a100" ANNOTATION_REF="a3">
+            <ANNOTATION_VALUE>Yukw</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a101" ANNOTATION_REF="a3" PREVIOUS_ANNOTATION="a100">
+            <ANNOTATION_VALUE>dim</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a102" ANNOTATION_REF="a3" PREVIOUS_ANNOTATION="a101">
+            <ANNOTATION_VALUE>t'aahl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a103" ANNOTATION_REF="a3" PREVIOUS_ANNOTATION="a102">
+            <ANNOTATION_VALUE>sim</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a104" ANNOTATION_REF="a3" PREVIOUS_ANNOTATION="a103">
+            <ANNOTATION_VALUE>maa'ydiit,</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a105" ANNOTATION_REF="a4">
+            <ANNOTATION_VALUE>sindok̲diithl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a106" ANNOTATION_REF="a4" PREVIOUS_ANNOTATION="a105">
+            <ANNOTATION_VALUE>ha'aks.</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a107" ANNOTATION_REF="a5">
+            <ANNOTATION_VALUE>Ts'ilim</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a108" ANNOTATION_REF="a5" PREVIOUS_ANNOTATION="a107">
+            <ANNOTATION_VALUE>'nidiit.</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a109" ANNOTATION_REF="a6">
+            <ANNOTATION_VALUE>Ginis</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a110" ANNOTATION_REF="a6" PREVIOUS_ANNOTATION="a109">
+            <ANNOTATION_VALUE>Ts'iits't</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a111" ANNOTATION_REF="a6" PREVIOUS_ANNOTATION="a110">
+            <ANNOTATION_VALUE>Emaa</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a112" ANNOTATION_REF="a6" PREVIOUS_ANNOTATION="a111">
+            <ANNOTATION_VALUE>aloohl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a113" ANNOTATION_REF="a6" PREVIOUS_ANNOTATION="a112">
+            <ANNOTATION_VALUE>anaayim</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a114" ANNOTATION_REF="a6" PREVIOUS_ANNOTATION="a113">
+            <ANNOTATION_VALUE>isbawdis.</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a115" ANNOTATION_REF="a7">
+            <ANNOTATION_VALUE>'Wadiit</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a116" ANNOTATION_REF="a7" PREVIOUS_ANNOTATION="a115">
+            <ANNOTATION_VALUE>wil</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a117" ANNOTATION_REF="a7" PREVIOUS_ANNOTATION="a116">
+            <ANNOTATION_VALUE>'weexsw</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a118" ANNOTATION_REF="a7" PREVIOUS_ANNOTATION="a117">
+            <ANNOTATION_VALUE>sim</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a119" ANNOTATION_REF="a7" PREVIOUS_ANNOTATION="a118">
+            <ANNOTATION_VALUE>maa'y.</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a120" ANNOTATION_REF="a8">
+            <ANNOTATION_VALUE>Helthl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a121" ANNOTATION_REF="a8" PREVIOUS_ANNOTATION="a120">
+            <ANNOTATION_VALUE>t'aahlxws</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a122" ANNOTATION_REF="a8" PREVIOUS_ANNOTATION="a121">
+            <ANNOTATION_VALUE>Emaa.</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a123" ANNOTATION_REF="a9">
+            <ANNOTATION_VALUE>Iit</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a124" ANNOTATION_REF="a9" PREVIOUS_ANNOTATION="a123">
+            <ANNOTATION_VALUE>gya'as</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a125" ANNOTATION_REF="a9" PREVIOUS_ANNOTATION="a124">
+            <ANNOTATION_VALUE>Emaahl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a126" ANNOTATION_REF="a9" PREVIOUS_ANNOTATION="a125">
+            <ANNOTATION_VALUE>lalt.</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a127" ANNOTATION_REF="a10">
+            <ANNOTATION_VALUE>Baasxis</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a128" ANNOTATION_REF="a10" PREVIOUS_ANNOTATION="a127">
+            <ANNOTATION_VALUE>Emaahl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a129" ANNOTATION_REF="a10" PREVIOUS_ANNOTATION="a128">
+            <ANNOTATION_VALUE>lalt.</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a130" ANNOTATION_REF="a11">
+            <ANNOTATION_VALUE>K'eek̲xwt</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a131" ANNOTATION_REF="a11" PREVIOUS_ANNOTATION="a130">
+            <ANNOTATION_VALUE>Emaa.</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a132" ANNOTATION_REF="a12">
+            <ANNOTATION_VALUE>Akst</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a133" ANNOTATION_REF="a12" PREVIOUS_ANNOTATION="a132">
+            <ANNOTATION_VALUE>lo'op</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a134" ANNOTATION_REF="a12" PREVIOUS_ANNOTATION="a133">
+            <ANNOTATION_VALUE>wil</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a135" ANNOTATION_REF="a12" PREVIOUS_ANNOTATION="a134">
+            <ANNOTATION_VALUE>'wihl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a136" ANNOTATION_REF="a12" PREVIOUS_ANNOTATION="a135">
+            <ANNOTATION_VALUE>wildiit.</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a137" ANNOTATION_REF="a13">
+            <ANNOTATION_VALUE>Hlikst</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a138" ANNOTATION_REF="a13" PREVIOUS_ANNOTATION="a137">
+            <ANNOTATION_VALUE>Emaa</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a139" ANNOTATION_REF="a13" PREVIOUS_ANNOTATION="a138">
+            <ANNOTATION_VALUE>lax̲</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a140" ANNOTATION_REF="a13" PREVIOUS_ANNOTATION="a139">
+            <ANNOTATION_VALUE>lo'opgi.</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a141" ANNOTATION_REF="a14">
+            <ANNOTATION_VALUE>Mooji</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a142" ANNOTATION_REF="a14" PREVIOUS_ANNOTATION="a141">
+            <ANNOTATION_VALUE>deexit.</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a143" ANNOTATION_REF="a15">
+            <ANNOTATION_VALUE>T'ugwandinthl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a144" ANNOTATION_REF="a15" PREVIOUS_ANNOTATION="a143">
+            <ANNOTATION_VALUE>g̲aldim</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a145" ANNOTATION_REF="a15" PREVIOUS_ANNOTATION="a144">
+            <ANNOTATION_VALUE>t'aahlxw[t].</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a146" ANNOTATION_REF="a16">
+            <ANNOTATION_VALUE>Ii</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a147" ANNOTATION_REF="a16" PREVIOUS_ANNOTATION="a146">
+            <ANNOTATION_VALUE>lakhl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a148" ANNOTATION_REF="a16" PREVIOUS_ANNOTATION="a147">
+            <ANNOTATION_VALUE>t'aahlxws</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a149" ANNOTATION_REF="a16" PREVIOUS_ANNOTATION="a148">
+            <ANNOTATION_VALUE>Emaa.</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a150" ANNOTATION_REF="a17">
+            <ANNOTATION_VALUE>Ii</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a151" ANNOTATION_REF="a17" PREVIOUS_ANNOTATION="a150">
+            <ANNOTATION_VALUE>hats'im</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a152" ANNOTATION_REF="a17" PREVIOUS_ANNOTATION="a151">
+            <ANNOTATION_VALUE>hoo</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a153" ANNOTATION_REF="a17" PREVIOUS_ANNOTATION="a152">
+            <ANNOTATION_VALUE>sit'aa'mat.</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a154" ANNOTATION_REF="a18">
+            <ANNOTATION_VALUE>Hats'im</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a155" ANNOTATION_REF="a18" PREVIOUS_ANNOTATION="a154">
+            <ANNOTATION_VALUE>hoo</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a156" ANNOTATION_REF="a18" PREVIOUS_ANNOTATION="a155">
+            <ANNOTATION_VALUE>midinthl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a157" ANNOTATION_REF="a18" PREVIOUS_ANNOTATION="a156">
+            <ANNOTATION_VALUE>g̲aldim</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a158" ANNOTATION_REF="a18" PREVIOUS_ANNOTATION="a157">
+            <ANNOTATION_VALUE>t'aahlxwt.</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a159" ANNOTATION_REF="a19">
+            <ANNOTATION_VALUE>Ii</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a160" ANNOTATION_REF="a19" PREVIOUS_ANNOTATION="a159">
+            <ANNOTATION_VALUE>ha'wdiit.</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a161" ANNOTATION_REF="a20">
+            <ANNOTATION_VALUE>Ginis</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a162" ANNOTATION_REF="a20" PREVIOUS_ANNOTATION="a161">
+            <ANNOTATION_VALUE>Emaat</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a163" ANNOTATION_REF="a20" PREVIOUS_ANNOTATION="a162">
+            <ANNOTATION_VALUE>Ye'e't</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a164" ANNOTATION_REF="a20" PREVIOUS_ANNOTATION="a163">
+            <ANNOTATION_VALUE>ahl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a165" ANNOTATION_REF="a20" PREVIOUS_ANNOTATION="a164">
+            <ANNOTATION_VALUE>sim</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a166" ANNOTATION_REF="a20" PREVIOUS_ANNOTATION="a165">
+            <ANNOTATION_VALUE>maa'y,</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a167" ANNOTATION_REF="a20" PREVIOUS_ANNOTATION="a166">
+            <ANNOTATION_VALUE>t'aahlxw[t],</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a168" ANNOTATION_REF="a20" PREVIOUS_ANNOTATION="a167">
+            <ANNOTATION_VALUE>iit</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a169" ANNOTATION_REF="a20" PREVIOUS_ANNOTATION="a168">
+            <ANNOTATION_VALUE>dawdinhl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a170" ANNOTATION_REF="a20" PREVIOUS_ANNOTATION="a169">
+            <ANNOTATION_VALUE>manit.</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a171" ANNOTATION_REF="a21">
+            <ANNOTATION_VALUE>&quot;Dim</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a172" ANNOTATION_REF="a21" PREVIOUS_ANNOTATION="a171">
+            <ANNOTATION_VALUE>ixsda</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a173" ANNOTATION_REF="a21" PREVIOUS_ANNOTATION="a172">
+            <ANNOTATION_VALUE>ji</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a174" ANNOTATION_REF="a21" PREVIOUS_ANNOTATION="a173">
+            <ANNOTATION_VALUE>hlaa</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a175" ANNOTATION_REF="a21" PREVIOUS_ANNOTATION="a174">
+            <ANNOTATION_VALUE>maadim,&quot;</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a176" ANNOTATION_REF="a21" PREVIOUS_ANNOTATION="a175">
+            <ANNOTATION_VALUE>diyat</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a177" ANNOTATION_REF="a21" PREVIOUS_ANNOTATION="a176">
+            <ANNOTATION_VALUE>Ts'iits't.</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+   </TIER>
+   <TIER LINGUISTIC_TYPE_REF="Glossing_UI_Preferred_Segmentation" PARENT_REF="Glossing_UI_Input_Tier" TIER_ID="Glossing_UI_Pref_Segmentation_Tier">
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a178" ANNOTATION_REF="a94">
+            <ANNOTATION_VALUE>yee-t</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a179" ANNOTATION_REF="a95">
+            <ANNOTATION_VALUE>imaa</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a180" ANNOTATION_REF="a96">
+            <ANNOTATION_VALUE>g̲o'o=hl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a181" ANNOTATION_REF="a97">
+            <ANNOTATION_VALUE>sg̲a'nist</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a182" ANNOTATION_REF="a98">
+            <ANNOTATION_VALUE>sdil-it</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a183" ANNOTATION_REF="a99">
+            <ANNOTATION_VALUE>ts'iits'-t</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a184" ANNOTATION_REF="a100">
+            <ANNOTATION_VALUE>yukw</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a185" ANNOTATION_REF="a101">
+            <ANNOTATION_VALUE>dim</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a186" ANNOTATION_REF="a102">
+            <ANNOTATION_VALUE>t'aa=hl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a187" ANNOTATION_REF="a103">
+            <ANNOTATION_VALUE>sim</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a188" ANNOTATION_REF="a104">
+            <ANNOTATION_VALUE>maa'y-diit</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a189" ANNOTATION_REF="a105">
+            <ANNOTATION_VALUE>si-ndok̲-diit=hl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a190" ANNOTATION_REF="a106">
+            <ANNOTATION_VALUE>ha'aks</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a191" ANNOTATION_REF="a107">
+            <ANNOTATION_VALUE>ts'il-m</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a192" ANNOTATION_REF="a108">
+            <ANNOTATION_VALUE>'nidiit</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a193" ANNOTATION_REF="a109">
+            <ANNOTATION_VALUE>ginis</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a194" ANNOTATION_REF="a110">
+            <ANNOTATION_VALUE>ts'iits'-t</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a195" ANNOTATION_REF="a111">
+            <ANNOTATION_VALUE>t=maa</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a196" ANNOTATION_REF="a112">
+            <ANNOTATION_VALUE>a-loo=hl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a197" ANNOTATION_REF="a113">
+            <ANNOTATION_VALUE>anaayim</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a198" ANNOTATION_REF="a114">
+            <ANNOTATION_VALUE>is-baw-is</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a199" ANNOTATION_REF="a115">
+            <ANNOTATION_VALUE>'wa-diit</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a200" ANNOTATION_REF="a116">
+            <ANNOTATION_VALUE>win</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a201" ANNOTATION_REF="a117">
+            <ANNOTATION_VALUE>'weexsw</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a202" ANNOTATION_REF="a118">
+            <ANNOTATION_VALUE>sim</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a203" ANNOTATION_REF="a119">
+            <ANNOTATION_VALUE>maa'y</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a204" ANNOTATION_REF="a120">
+            <ANNOTATION_VALUE>helt=hl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a205" ANNOTATION_REF="a121">
+            <ANNOTATION_VALUE>t'aahl-xw=s</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a206" ANNOTATION_REF="a122">
+            <ANNOTATION_VALUE>t=aa</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a207" ANNOTATION_REF="a123">
+            <ANNOTATION_VALUE>ii=t</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a208" ANNOTATION_REF="a124">
+            <ANNOTATION_VALUE>gya'a=s</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a209" ANNOTATION_REF="a125">
+            <ANNOTATION_VALUE>imaa=hl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a210" ANNOTATION_REF="a126">
+            <ANNOTATION_VALUE>lalt</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a211" ANNOTATION_REF="a127">
+            <ANNOTATION_VALUE>baasx-i=s</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a212" ANNOTATION_REF="a128">
+            <ANNOTATION_VALUE>t=maa=hl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a213" ANNOTATION_REF="a129">
+            <ANNOTATION_VALUE>lalt</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a214" ANNOTATION_REF="a130">
+            <ANNOTATION_VALUE>k'eek̲-xw-t</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a215" ANNOTATION_REF="a131">
+            <ANNOTATION_VALUE>t=aa</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a216" ANNOTATION_REF="a132">
+            <ANNOTATION_VALUE>aks-t</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a217" ANNOTATION_REF="a133">
+            <ANNOTATION_VALUE>lo'op</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a218" ANNOTATION_REF="a134">
+            <ANNOTATION_VALUE>win</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a219" ANNOTATION_REF="a135">
+            <ANNOTATION_VALUE>'wihl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a220" ANNOTATION_REF="a136">
+            <ANNOTATION_VALUE>wil-diit</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a221" ANNOTATION_REF="a137">
+            <ANNOTATION_VALUE>hliks-t</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a222" ANNOTATION_REF="a138">
+            <ANNOTATION_VALUE>t=maa</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a223" ANNOTATION_REF="a139">
+            <ANNOTATION_VALUE>lax̲</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a224" ANNOTATION_REF="a140">
+            <ANNOTATION_VALUE>lo'op=gi</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a225" ANNOTATION_REF="a141">
+            <ANNOTATION_VALUE>moo=ji</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a226" ANNOTATION_REF="a142">
+            <ANNOTATION_VALUE>deex-it</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a227" ANNOTATION_REF="a143">
+            <ANNOTATION_VALUE>t'ukw-an-in-t=hl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a228" ANNOTATION_REF="a144">
+            <ANNOTATION_VALUE>g̲al-dim</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a229" ANNOTATION_REF="a145">
+            <ANNOTATION_VALUE>t'aahlxw-T-t</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a230" ANNOTATION_REF="a146">
+            <ANNOTATION_VALUE>ii</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a231" ANNOTATION_REF="a147">
+            <ANNOTATION_VALUE>lak=hl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a232" ANNOTATION_REF="a148">
+            <ANNOTATION_VALUE>t'aahlxw=s</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a233" ANNOTATION_REF="a149">
+            <ANNOTATION_VALUE>imaa</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a234" ANNOTATION_REF="a150">
+            <ANNOTATION_VALUE>ii</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a235" ANNOTATION_REF="a151">
+            <ANNOTATION_VALUE>hats'im</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a236" ANNOTATION_REF="a152">
+            <ANNOTATION_VALUE>hoo</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a237" ANNOTATION_REF="a153">
+            <ANNOTATION_VALUE>si-t'aa-'m-t</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a238" ANNOTATION_REF="a154">
+            <ANNOTATION_VALUE>hats'im</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a239" ANNOTATION_REF="a155">
+            <ANNOTATION_VALUE>hoo</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a240" ANNOTATION_REF="a156">
+            <ANNOTATION_VALUE>mit-in-t=hl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a241" ANNOTATION_REF="a157">
+            <ANNOTATION_VALUE>g̲al-dim</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a242" ANNOTATION_REF="a158">
+            <ANNOTATION_VALUE>t'aahlxw-t</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a243" ANNOTATION_REF="a159">
+            <ANNOTATION_VALUE>ii</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a244" ANNOTATION_REF="a160">
+            <ANNOTATION_VALUE>ha'w-diit</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a245" ANNOTATION_REF="a161">
+            <ANNOTATION_VALUE>ginis</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a246" ANNOTATION_REF="a162">
+            <ANNOTATION_VALUE>'maa=t</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a247" ANNOTATION_REF="a163">
+            <ANNOTATION_VALUE>ye'e-'t</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a248" ANNOTATION_REF="a164">
+            <ANNOTATION_VALUE>a=hl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a249" ANNOTATION_REF="a165">
+            <ANNOTATION_VALUE>sim</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a250" ANNOTATION_REF="a166">
+            <ANNOTATION_VALUE>maa'y</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a251" ANNOTATION_REF="a167">
+            <ANNOTATION_VALUE>t'aa-hlxw-it</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a252" ANNOTATION_REF="a168">
+            <ANNOTATION_VALUE>ii=t</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a253" ANNOTATION_REF="a169">
+            <ANNOTATION_VALUE>daw-in=hl</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a254" ANNOTATION_REF="a170">
+            <ANNOTATION_VALUE>man-it</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a255" ANNOTATION_REF="a171">
+            <ANNOTATION_VALUE>dim</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a256" ANNOTATION_REF="a172">
+            <ANNOTATION_VALUE>ixsda</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a257" ANNOTATION_REF="a173">
+            <ANNOTATION_VALUE>ji</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a258" ANNOTATION_REF="a174">
+            <ANNOTATION_VALUE>hlaa</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a259" ANNOTATION_REF="a175">
+            <ANNOTATION_VALUE>maadim</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a260" ANNOTATION_REF="a176">
+            <ANNOTATION_VALUE>t=ya=t</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a261" ANNOTATION_REF="a177">
+            <ANNOTATION_VALUE>ts'iits'-t</ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+   </TIER>
+   <TIER LINGUISTIC_TYPE_REF="Glossing_UI_N_best_segmentations" PARENT_REF="Glossing_UI_Pref_Segmentation_Tier" TIER_ID="Glossing_UI_n_Best_Segmentations_Tier">
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a262" ANNOTATION_REF="a178">
+            <ANNOTATION_VALUE>yee-t, yee=t, Yee-t, wee-t, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a263" ANNOTATION_REF="a179">
+            <ANNOTATION_VALUE>imaa, 'maa, dmaa, m=aa, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a264" ANNOTATION_REF="a180">
+            <ANNOTATION_VALUE>g̲o'o=hl, g̲o'a=hl, g̲a'o=hl, g̲oo=hl, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a265" ANNOTATION_REF="a181">
+            <ANNOTATION_VALUE>sg̲a'nist, sg̲a-'nist, sg̲a'nitst, sk̲a'nist, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a266" ANNOTATION_REF="a182">
+            <ANNOTATION_VALUE>sdil-it, sdilit, sdi-lit, sdiliit, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a267" ANNOTATION_REF="a183">
+            <ANNOTATION_VALUE>ts'iits'-t, ts'iits't, ts'iits'-it, ts'iits-'t, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a268" ANNOTATION_REF="a184">
+            <ANNOTATION_VALUE>yukw, yukws, yukwT, jukw, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a269" ANNOTATION_REF="a185">
+            <ANNOTATION_VALUE>dim, =dim, diml, dimy, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a270" ANNOTATION_REF="a186">
+            <ANNOTATION_VALUE>t'aa=hl, t'ap=hl, t'aa=hlm, t'aa-hl, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a271" ANNOTATION_REF="a187">
+            <ANNOTATION_VALUE>sim, simm, si=m, dim, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a272" ANNOTATION_REF="a188">
+            <ANNOTATION_VALUE>maa'y-diit, maha'y-diit, maa'w-diit, maa'-diit, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a273" ANNOTATION_REF="a189">
+            <ANNOTATION_VALUE>si-ndok̲-diit=hl, sin-dok̲-diit=hl, si-n-dok̲-diit=hl, sin-Cok̲-diit=hl, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a274" ANNOTATION_REF="a190">
+            <ANNOTATION_VALUE>ha'aks, ha-aks, hi'aks, hu'aks, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a275" ANNOTATION_REF="a191">
+            <ANNOTATION_VALUE>ts'il-m, ts'ilim, ts'ip-m, ts'il-im, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a276" ANNOTATION_REF="a192">
+            <ANNOTATION_VALUE>'nidiit, 'nit-iit, 'ni-diit, 'n-diit, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a277" ANNOTATION_REF="a193">
+            <ANNOTATION_VALUE>ginis, gini=s, Ginis, g̲nis, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a278" ANNOTATION_REF="a194">
+            <ANNOTATION_VALUE>ts'iits'-t, ts'iits't, Ts'iits'-t, Hs'iits'-t, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a279" ANNOTATION_REF="a195">
+            <ANNOTATION_VALUE>t=maa, imaa, 'maa, dmaa, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a280" ANNOTATION_REF="a196">
+            <ANNOTATION_VALUE>a-loo=hl, aloo=hl, a-woo=hl, a-loohl, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a281" ANNOTATION_REF="a197">
+            <ANNOTATION_VALUE>anaayim, anaax-m, an-aayim, an-aax-m, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a282" ANNOTATION_REF="a198">
+            <ANNOTATION_VALUE>is-baw-is, is-baw-i=s, isbawdis, isbawt-is, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a283" ANNOTATION_REF="a199">
+            <ANNOTATION_VALUE>'wa-diit, 'Wa-diit, 'Ma-diit, 'wi-diit, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a284" ANNOTATION_REF="a200">
+            <ANNOTATION_VALUE>win, wil, winC, wii, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a285" ANNOTATION_REF="a201">
+            <ANNOTATION_VALUE>'weexsw, 'weexs-w, 'weexsxw, 'weexs, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a286" ANNOTATION_REF="a202">
+            <ANNOTATION_VALUE>sim, si=m, s=m, dim, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a287" ANNOTATION_REF="a203">
+            <ANNOTATION_VALUE>maa'y, maa-'y, Maa'y, maa'-, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a288" ANNOTATION_REF="a204">
+            <ANNOTATION_VALUE>helt=hl, Helt=hl, hent=hl, he-t=hl, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a289" ANNOTATION_REF="a205">
+            <ANNOTATION_VALUE>t'aahl-xw=s, t'aahlxw=s, t'aahlxws, t'aahl-xws, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a290" ANNOTATION_REF="a206">
+            <ANNOTATION_VALUE>t=aa, imaa, 'maa, wmaa, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a291" ANNOTATION_REF="a207">
+            <ANNOTATION_VALUE>ii=t, ii=tl, ii=ta, ii-t, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a292" ANNOTATION_REF="a208">
+            <ANNOTATION_VALUE>gya'a=s, gya'as, gya'a-s, gya'a=is, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a293" ANNOTATION_REF="a209">
+            <ANNOTATION_VALUE>imaa=hl, umaa=hl, 'maa=hl, wmaa=hl, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a294" ANNOTATION_REF="a210">
+            <ANNOTATION_VALUE>lalt, lal-t, lalit, Lalt, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a295" ANNOTATION_REF="a211">
+            <ANNOTATION_VALUE>baasx-i=s, taasx-i=s, gaasx-i=s, baasx-is, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a296" ANNOTATION_REF="a212">
+            <ANNOTATION_VALUE>t=maa=hl, umaa=hl, 'maa=hl, wmaa=hl, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a297" ANNOTATION_REF="a213">
+            <ANNOTATION_VALUE>lalt, lal-t, lalit, Yalt, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a298" ANNOTATION_REF="a214">
+            <ANNOTATION_VALUE>k'eek̲-xw-t, k'eek̲xw-t, k'eek̲-xw=t, k'iek̲-xw-t, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a299" ANNOTATION_REF="a215">
+            <ANNOTATION_VALUE>t=aa, imaa, 'maa, n=aa, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a300" ANNOTATION_REF="a216">
+            <ANNOTATION_VALUE>aks-t, aks=t, Aks=t, Aks-t, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a301" ANNOTATION_REF="a217">
+            <ANNOTATION_VALUE>lo'op, lo'o-p, lo'o=p, loo-p, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a302" ANNOTATION_REF="a218">
+            <ANNOTATION_VALUE>win, wil, winp, Win, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a303" ANNOTATION_REF="a219">
+            <ANNOTATION_VALUE>'wihl, 'wit=hl, 'wi=hl, 'Wihl, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a304" ANNOTATION_REF="a220">
+            <ANNOTATION_VALUE>wil-diit, win-diit, wil-diitr, wal-diit, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a305" ANNOTATION_REF="a221">
+            <ANNOTATION_VALUE>hliks-t, hliks=t, hlikst, hlits-t, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a306" ANNOTATION_REF="a222">
+            <ANNOTATION_VALUE>t=maa, imaa, wmaa, k̲aa, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a307" ANNOTATION_REF="a223">
+            <ANNOTATION_VALUE>lax̲, lax̲l, lag̲, Lax̲, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a308" ANNOTATION_REF="a224">
+            <ANNOTATION_VALUE>lo'op=gi, lo'opgi, lo'op=hi, lo'op-gi, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a309" ANNOTATION_REF="a225">
+            <ANNOTATION_VALUE>moo=ji, Moo=ji, ooo=ji, mooji, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a310" ANNOTATION_REF="a226">
+            <ANNOTATION_VALUE>deex-it, deex-i-t, deex-t, dee-xi-t, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a311" ANNOTATION_REF="a227">
+            <ANNOTATION_VALUE>t'ukw-an-in-t=hl, t'ukw-Tn-in-t=hl, t'ukw-an-i-n=hl, t'ukw-Tn-i-n=hl, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a312" ANNOTATION_REF="a228">
+            <ANNOTATION_VALUE>g̲al-dim, g̲aldim, g̲al=dim, g̲al-T-m, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a313" ANNOTATION_REF="a229">
+            <ANNOTATION_VALUE>t'aahlxw-T-t, t'aahlxw-it, t'aa-hlxw-it, t'aahl-xw-t, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a314" ANNOTATION_REF="a230">
+            <ANNOTATION_VALUE>ii, iia, in, i̲, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a315" ANNOTATION_REF="a231">
+            <ANNOTATION_VALUE>lak=hl, lakhl, lak̲=hl, lakw=hl, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a316" ANNOTATION_REF="a232">
+            <ANNOTATION_VALUE>t'aahlxw=s, t'aahlxws, t'aa-hlxws, t'aahl-xws, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a317" ANNOTATION_REF="a233">
+            <ANNOTATION_VALUE>imaa, t=aa, 'maa, n=aa, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a318" ANNOTATION_REF="a234">
+            <ANNOTATION_VALUE>ii, iia, it, im, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a319" ANNOTATION_REF="a235">
+            <ANNOTATION_VALUE>hats'im, hats'-m, hats'em, hats'-T, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a320" ANNOTATION_REF="a236">
+            <ANNOTATION_VALUE>hoo, hox, hlo, hoi, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a321" ANNOTATION_REF="a237">
+            <ANNOTATION_VALUE>si-t'aa-'m-t, si-t'aa-'m-it, si-t'aa-i-'m-t, si-t'aa-T-'m-t, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a322" ANNOTATION_REF="a238">
+            <ANNOTATION_VALUE>hats'im, hats'-m, Hats'im, hits'im, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a323" ANNOTATION_REF="a239">
+            <ANNOTATION_VALUE>hoo, hox, hoi, doo, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a324" ANNOTATION_REF="a240">
+            <ANNOTATION_VALUE>mit-in-t=hl, midin-t=hl, mitin-t=hl, mit=in-t=hl, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a325" ANNOTATION_REF="a241">
+            <ANNOTATION_VALUE>g̲al-dim, g̲aldim, g̲al=dim, g̲al-T-m, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a326" ANNOTATION_REF="a242">
+            <ANNOTATION_VALUE>t'aahlxw-t, t'aa-hlxw-t, t'aahl-xw-t, t'aa=hlxw-t, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a327" ANNOTATION_REF="a243">
+            <ANNOTATION_VALUE>ii, =ii, it, iK, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a328" ANNOTATION_REF="a244">
+            <ANNOTATION_VALUE>ha'w-diit, ha-'w-diit, hi'w-diit, hu'w-diit, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a329" ANNOTATION_REF="a245">
+            <ANNOTATION_VALUE>ginis, gini=s, Ginis, gin=s, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a330" ANNOTATION_REF="a246">
+            <ANNOTATION_VALUE>'maa=t, gmaa=t, 'maa-t, wmaa=t, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a331" ANNOTATION_REF="a247">
+            <ANNOTATION_VALUE>ye'e-'t, ye'e-'-t, ye'e't, ye'e-'it, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a332" ANNOTATION_REF="a248">
+            <ANNOTATION_VALUE>a=hl, a=hlM, a=hld, a=hn, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a333" ANNOTATION_REF="a249">
+            <ANNOTATION_VALUE>sim, dim, Sim, sem, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a334" ANNOTATION_REF="a250">
+            <ANNOTATION_VALUE>maa'y, maa-'y, maha'y, maa'-, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a335" ANNOTATION_REF="a251">
+            <ANNOTATION_VALUE>t'aa-hlxw-it, t'aahlxw-it, t'aahl-xw-it, t'aahlxw-T-t, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a336" ANNOTATION_REF="a252">
+            <ANNOTATION_VALUE>ii=t, ii=td, hii=t, ii=n, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a337" ANNOTATION_REF="a253">
+            <ANNOTATION_VALUE>daw-in=hl, daxw-in=hl, da-win=hl, dap-in=hl, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a338" ANNOTATION_REF="a254">
+            <ANNOTATION_VALUE>man-it, man-i-t, *mani-t, *manit, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a339" ANNOTATION_REF="a255">
+            <ANNOTATION_VALUE>dim, dimi, dim., d=m, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a340" ANNOTATION_REF="a256">
+            <ANNOTATION_VALUE>ixsda, ixs-da, ixs=da, ixs-di, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a341" ANNOTATION_REF="a257">
+            <ANNOTATION_VALUE>ji, =ji, Ji, jj, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a342" ANNOTATION_REF="a258">
+            <ANNOTATION_VALUE>hlaa, hlia, hlgaa, hl̲a, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a343" ANNOTATION_REF="a259">
+            <ANNOTATION_VALUE>maadim, maat-m, maa-T-m, maaT-m, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a344" ANNOTATION_REF="a260">
+            <ANNOTATION_VALUE>t=ya=t, t=ya-t, diya=t, t=yat, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+      <ANNOTATION>
+         <REF_ANNOTATION ANNOTATION_ID="a345" ANNOTATION_REF="a261">
+            <ANNOTATION_VALUE>ts'iits'-t, Ts'iits'-t, ts'iits't, Ss'iits'-t, </ANNOTATION_VALUE>
+         </REF_ANNOTATION>
+      </ANNOTATION>
+   </TIER>
+</ANNOTATION_DOCUMENT>

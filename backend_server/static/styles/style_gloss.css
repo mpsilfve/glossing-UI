@@ -63,6 +63,10 @@ p {
   padding: 0.8em 1em;
 }
 
+.option_radio_button {
+  white-space: nowrap;
+}
+
 .user_input {
   border: 2px solid #5680e9;
   padding: 10px 10px; 

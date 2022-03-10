@@ -40,6 +40,9 @@ def on_created(event):
         further_path_components = path_components[1].split(".")
         job_id = further_path_components[0]
         job_list.add(job_id)
+
+    elif path_components[0] == "/data/results/sentence":
+        print("Spotted sentence!")
     
     # add it to the sorted list 
     # act on the first item in the list 
@@ -63,18 +66,22 @@ go_recursively = True
 my_observer = Observer()
 my_observer.schedule(my_event_handler, path, recursive=go_recursively)
 
+# object for submitting Fairseq jobs
+submitter = model_inference.FairseqSubmitter()
+
 my_observer.start()
 try:
     while True:
         # sleep to avoid running constantly
         time.sleep(1)
         # process jobs in the job list
-        while len(job_list) > 0:
+        if len(job_list) > 0:
             # pass job to model_inference.py
             tic = time.time()
             current_job = job_list.pop(0)
+
             # process file
-            model_inference.process_file(current_job)
+            submitter.process_batch(current_job)
 except KeyboardInterrupt:
     my_observer.stop()
     my_observer.join()

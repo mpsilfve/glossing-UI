@@ -1,0 +1,51 @@
+2022-03-10 20:56:42 | INFO | fairseq_cli.interactive | {'_name': None, 'common': {'_name': None, 'no_progress_bar': False, 'log_interval': 100, 'log_format': None, 'log_file': None, 'tensorboard_logdir': None, 'wandb_project': None, 'azureml_logging': False, 'seed': 1, 'cpu': False, 'tpu': False, 'bf16': False, 'memory_efficient_bf16': False, 'fp16': False, 'memory_efficient_fp16': False, 'fp16_no_flatten_grads': False, 'fp16_init_scale': 128, 'fp16_scale_window': None, 'fp16_scale_tolerance': 0.0, 'min_loss_scale': 0.0001, 'threshold_loss_scale': None, 'user_dir': None, 'empty_cache_freq': 0, 'all_gather_list_size': 16384, 'model_parallel_size': 1, 'quantization_config_path': None, 'profile': False, 'reset_logging': False, 'suppress_crashes': False, 'use_plasma_view': False, 'plasma_path': '/tmp/plasma'}, 'common_eval': {'_name': None, 'path': '/backend_fairseq/pretrained_models/data/morphseg/lstm/checkpoint_best.pt', 'post_process': None, 'quiet': False, 'model_overrides': '{}', 'results_path': None}, 'distributed_training': {'_name': None, 'distributed_world_size': 1, 'distributed_rank': 0, 'distributed_backend': 'nccl', 'distributed_init_method': None, 'distributed_port': -1, 'device_id': 0, 'distributed_no_spawn': False, 'ddp_backend': 'pytorch_ddp', 'bucket_cap_mb': 25, 'fix_batches_to_gpus': False, 'find_unused_parameters': False, 'fast_stat_sync': False, 'heartbeat_timeout': -1, 'broadcast_buffers': False, 'slowmo_momentum': None, 'slowmo_algorithm': 'LocalSGD', 'localsgd_frequency': 3, 'nprocs_per_node': 1, 'pipeline_model_parallel': False, 'pipeline_balance': None, 'pipeline_devices': None, 'pipeline_chunks': 0, 'pipeline_encoder_balance': None, 'pipeline_encoder_devices': None, 'pipeline_decoder_balance': None, 'pipeline_decoder_devices': None, 'pipeline_checkpoint': 'never', 'zero_sharding': 'none', 'fp16': False, 'memory_efficient_fp16': False, 'tpu': False, 'no_reshard_after_forward': False, 'fp32_reduce_scatter': False, 'cpu_offload': False, 'distributed_num_procs': 0}, 'dataset': {'_name': None, 'num_workers': 1, 'skip_invalid_size_inputs_valid_test': False, 'max_tokens': None, 'batch_size': 1, 'required_batch_size_multiple': 8, 'required_seq_len_multiple': 1, 'dataset_impl': None, 'data_buffer_size': 10, 'train_subset': 'train', 'valid_subset': 'valid', 'validate_interval': 1, 'validate_interval_updates': 0, 'validate_after_updates': 0, 'fixed_validation_seed': None, 'disable_validation': False, 'max_tokens_valid': None, 'batch_size_valid': None, 'max_valid_steps': None, 'curriculum': 0, 'gen_subset': 'test', 'num_shards': 1, 'shard_id': 0}, 'optimization': {'_name': None, 'max_epoch': 0, 'max_update': 0, 'stop_time_hours': 0.0, 'clip_norm': 0.0, 'sentence_avg': False, 'update_freq': [1], 'lr': [0.25], 'stop_min_lr': -1.0, 'use_bmuf': False}, 'checkpoint': {'_name': None, 'save_dir': 'checkpoints', 'restore_file': 'checkpoint_last.pt', 'finetune_from_model': None, 'reset_dataloader': False, 'reset_lr_scheduler': False, 'reset_meters': False, 'reset_optimizer': False, 'optimizer_overrides': '{}', 'save_interval': 1, 'save_interval_updates': 0, 'keep_interval_updates': -1, 'keep_interval_updates_pattern': -1, 'keep_last_epochs': -1, 'keep_best_checkpoints': -1, 'no_save': False, 'no_epoch_checkpoints': False, 'no_last_checkpoints': False, 'no_save_optimizer_state': False, 'best_checkpoint_metric': 'loss', 'maximize_best_checkpoint_metric': False, 'patience': -1, 'checkpoint_suffix': '', 'checkpoint_shard_count': 1, 'load_checkpoint_on_all_dp_ranks': False, 'write_checkpoints_asynchronously': False, 'model_parallel_size': 1}, 'bmuf': {'_name': None, 'block_lr': 1.0, 'block_momentum': 0.875, 'global_sync_iter': 50, 'warmup_iterations': 500, 'use_nbm': False, 'average_sync': False, 'distributed_world_size': 1}, 'generation': {'_name': None, 'beam': 5, 'nbest': 1, 'max_len_a': 0.0, 'max_len_b': 200, 'min_len': 1, 'match_source_len': False, 'unnormalized': False, 'no_early_stop': False, 'no_beamable_mm': False, 'lenpen': 1.0, 'unkpen': 0.0, 'replace_unk': None, 'sacrebleu': False, 'score_reference': False, 'prefix_size': 0, 'no_repeat_ngram_size': 0, 'sampling': False, 'sampling_topk': -1, 'sampling_topp': -1.0, 'constraints': None, 'temperature': 1.0, 'diverse_beam_groups': -1, 'diverse_beam_strength': 0.5, 'diversity_rate': -1.0, 'print_alignment': None, 'print_step': False, 'lm_path': None, 'lm_weight': 0.0, 'iter_decode_eos_penalty': 0.0, 'iter_decode_max_iter': 10, 'iter_decode_force_max_iter': False, 'iter_decode_with_beam': 1, 'iter_decode_with_external_reranker': False, 'retain_iter_history': False, 'retain_dropout': False, 'retain_dropout_modules': None, 'decoding_format': None, 'no_seed_provided': False}, 'eval_lm': {'_name': None, 'output_word_probs': False, 'output_word_stats': False, 'context_window': 0, 'softmax_batch': 9223372036854775807}, 'interactive': {'_name': None, 'buffer_size': 1, 'input': '-'}, 'model': None, 'task': {'_name': 'translation', 'data': '/backend_fairseq/pretrained_models/data/morphseg/lstm/lstm_preprocess', 'source_lang': 'src', 'target_lang': 'trg', 'load_alignments': False, 'left_pad_source': True, 'left_pad_target': False, 'max_source_positions': 1024, 'max_target_positions': 1024, 'upsample_primary': -1, 'truncate_source': False, 'num_batch_buckets': 0, 'train_subset': 'train', 'dataset_impl': None, 'required_seq_len_multiple': 1, 'eval_bleu': False, 'eval_bleu_args': '{}', 'eval_bleu_detok': 'space', 'eval_bleu_detok_args': '{}', 'eval_tokenized_bleu': False, 'eval_bleu_remove_bpe': None, 'eval_bleu_print_samples': False}, 'criterion': {'_name': 'cross_entropy', 'sentence_avg': True}, 'optimizer': None, 'lr_scheduler': {'_name': 'fixed', 'force_anneal': None, 'lr_shrink': 0.1, 'warmup_updates': 0, 'lr': [0.25]}, 'scoring': {'_name': 'bleu', 'pad': 1, 'eos': 2, 'unk': 3}, 'bpe': None, 'tokenizer': None}
+2022-03-10 20:56:42 | INFO | fairseq.tasks.translation | [src] dictionary: 80 types
+2022-03-10 20:56:42 | INFO | fairseq.tasks.translation | [trg] dictionary: 80 types
+2022-03-10 20:56:42 | INFO | fairseq_cli.interactive | loading model(s) from /backend_fairseq/pretrained_models/data/morphseg/lstm/checkpoint_best.pt
+2022-03-10 20:56:47 | INFO | fairseq_cli.interactive | NOTE: hypothesis and token scores are output in base 2
+2022-03-10 20:56:47 | INFO | fairseq_cli.interactive | Type the input sentence and press return:
+S-0	<S> _ <S> _ h e _ i s _ k ' u u h l
+W-0	0.082	seconds
+H-0	-0.37979811429977417	h e
+D-0	-0.37979811429977417	h e
+P-0	-0.4234 -0.4466 -0.2694
+S-1	<S> _ h e _ i s _ k ' u u h l _ s i w a d i ' m
+W-1	0.125	seconds
+H-1	-0.3934863209724426	i s
+D-1	-0.3934863209724426	i s
+P-1	-0.2988 -0.6848 -0.1969
+S-2	h e _ i s _ k ' u u h l _ s i w a d i ' m _ a h l
+W-2	0.129	seconds
+H-2	-0.21443383395671844	k ' u u h l
+D-2	-0.21443383395671844	k ' u u h l
+P-2	-0.0979 -0.1417 -0.1486 -0.1783 -0.1822 -0.2230 -0.5293
+S-3	i s _ k ' u u h l _ s i w a d i ' m _ a h l _ l a ' o o ' y
+W-3	0.179	seconds
+H-3	-0.2159690260887146	s i - w a - T - ' m
+D-3	-0.2159690260887146	s i - w a - T - ' m
+P-3	-0.2070 -0.1073 -0.1076 -0.2156 -0.2291 -0.0781 -0.5466 -0.1667 -0.3040 -0.1848 -0.2289
+S-4	k ' u u h l _ s i w a d i ' m _ a h l _ l a ' o o ' y _ g ̲ o ' o h l
+W-4	0.188	seconds
+H-4	-0.22156170010566711	a = h l
+D-4	-0.22156170010566711	a = h l
+P-4	-0.3119 -0.1614 -0.1621 -0.2214 -0.2509
+S-5	s i w a d i ' m _ a h l _ l a ' o o ' y _ g ̲ o ' o h l _ H l a
+W-5	0.470	seconds
+H-5	-0.3867274522781372	l a ' o o ' y
+D-5	-0.3867274522781372	l a ' o o ' y
+P-5	-0.1594 -1.1006 -0.5275 -0.1371 -0.3469 -0.3938 -0.1850 -0.2435
+S-6	a h l _ l a ' o o ' y _ g ̲ o ' o h l _ H l a _ H e e n
+W-6	0.239	seconds
+H-6	-0.177327960729599	g ̲ o ' o = h l
+D-6	-0.177327960729599	g ̲ o ' o = h l
+P-6	-0.1057 -0.1642 -0.1672 -0.2171 -0.1713 -0.1338 -0.1968 -0.2037 -0.2362
+S-7	l a ' o o ' y _ g ̲ o ' o h l _ H l a _ H e e n _ <E>
+W-7	0.383	seconds
+H-7	-0.7720779180526733	h l a
+D-7	-0.7720779180526733	h l a
+P-7	-1.7732 -0.2047 -0.9124 -0.1980
+S-8	g ̲ o ' o h l _ H l a _ H e e n _ <E> _ <E>
+W-8	0.060	seconds
+H-8	-0.45571890473365784	H e e n
+D-8	-0.45571890473365784	H e e n
+P-8	-1.3920 -0.2403 -0.2178 -0.1703 -0.2582
