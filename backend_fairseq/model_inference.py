@@ -8,7 +8,8 @@ from __future__ import annotations
 import json, re
 import os
 import subprocess
-from time import sleep
+import cProfile
+from time import sleep, time
 from pretrained_models.run_fairseq import *
 
 
@@ -45,11 +46,34 @@ class FairseqSubmitter:
 
         for i in range(n_sentences):
             sentence = sentences[i]
+            print(sentence)
             n_tokens = len(sentence.split(' '))
             save_path = f'/data/results/sentence_{jobid}_{i}.std.out'
+
             self.last_example += n_tokens
             submit_sentence(sentence, i, getSeg, getGloss, self.first_example, self.last_example, n_best, save_path)
             self.first_example += n_tokens
+
+        # found_sentences = 0
+        # # while found_sentences < n_sentences:
+        # #     sentence, i, first, last, nbest, path = sentence_dict[found_sentences]
+        # #     if get_sentence(sentence, i, first, last, nbest, path):
+        # #         found_sentences += 1
+        # out_path = '/backend_fairseq/pretrained_models/io/outputs/gloss_out.txt'
+        # out_file = open(out_path, 'r')
+        # out_file.seek(0,2)
+        # out_str = ''
+        # while found_sentences < n_sentences:
+        #     line = out_file.readline()
+        #     if line:
+        #         out_str += line
+        #         sentence, i, first, last, nbest, path = sentence_dict[found_sentences]
+        #         if get_sentence(sentence, out_str, i, first, last, nbest, path):
+        #             found_sentences += 1
+        #     else:
+        #         sleep(0.01)
+
+        #out, err = gloss.communicate()
 
         if getSeg:
             seg.terminate()
@@ -92,11 +116,11 @@ class FairseqSubmitter:
             self.first_example += n_tokens
 
         if getSeg:
-            seg.terminate()
             stail.terminate()
+            seg.terminate()
         if getGloss:
-            gloss.terminate()
             gtail.terminate()
+            gloss.terminate()
             
         self.first_example = 0
         self.last_example = -1
@@ -115,7 +139,13 @@ class FairseqSubmitter:
         # process based on input type
         in_type = new_job_data['input_type']
         if in_type == 'text':
+            start = time()
+            
             self.process_text_sentence_batch(new_job_data)
+
+            #cProfile.run('self.process_text_sentence_batch(new_job_data)')
+            end = time()
+            print('Time elapsed:', end-start)
         elif in_type == "eaf_file":
             self.process_elan_annotation_batch(new_job_data)
 

@@ -3,6 +3,7 @@ from .gloss_utils import *
 from os import path
 from time import sleep
 import os
+import sys
 import subprocess
 import json
 
@@ -166,8 +167,8 @@ def init_fairseq_model(task: str, nbest: int) -> str:
     tail_input = subprocess.Popen(["tail", "-f", pipe_path], stdout=subprocess.PIPE)
     args = ["fairseq-interactive", "--path", checkpoint_path, "--beam", "5", "--nbest", str(nbest),
             "--source-lang", "src", "--target-lang", "trg", preprocess]
-    fairseq_call = subprocess.Popen(args, stdin=tail_input.stdout,
-                                    stdout=open(out_path, 'wb'))
+    fairseq_call = subprocess.Popen(args, bufsize=1, stdin=tail_input.stdout,
+                                    stdout=open(out_path, 'w'))
 
     # job = subprocess.run(['sh', path.join(io_path, 'pipes', 'init_model.sh'), 
     #                      pipe_path, checkpoint_path, str(nbest), preprocess, out_path], capture_output=True)
@@ -182,9 +183,9 @@ def get_sentence_lines(lines: list, first_token: int, last_token: int):
 
     collecting_flag = False
     for line in lines:
-        if re.search(f'^S-{last_token+1}', line):
+        if re.search(f'^S-{last_token+1}\s', line):
             collecting_flag = False
-        elif re.search(f'^S-{first_token}', line):
+        elif re.search(f'^S-{first_token}\s', line):
             collecting_flag = True
 
         if collecting_flag:
@@ -198,9 +199,7 @@ def read_lines_so_far(out_path: str, first_token: int, last_token: int, nbest: i
     lines = open(out_path, 'r').readlines()
     if len(lines) > 0:
         # see if the final prediction has appeared $n_best times
-        n_match = sum([1 for line in lines if re.search(f'^P-{last_token}', line)])
-        if n_match > 0:
-            print('Task:', out_path, 'Last_token:', last_token, 'n:', n_match)
+        n_match = sum([1 for line in lines if re.search(f'^P-{last_token}\s', line)])
         if n_match == nbest:
             return get_sentence_lines(lines, first_token, last_token)
 
@@ -294,3 +293,30 @@ def submit_sentence(sentence: str, id: int, get_seg: bool, get_gloss: bool,
         outputs = get_gloss_results(sentence, gloss_out, id, nbest, annotation_id=annotation_id)
         print('Gloss predictions:', outputs)
         save_predictions(outputs, save_path)
+
+
+def get_sentence(sentence: str, out_str: str, id: int, first_token: int, last_token: int, nbest: int, save_path: str):
+    # if gout.stdout:
+    #     print(gout.stdout)
+    # outs = open('/backend_fairseq/pretrained_models/io/outputs/gloss_out.txt', 'r').read()
+    # if re.search(f'S-{last_token}\s', outs):
+    #     print('Found sentence', id)
+    #     return True
+    # sentence_output = read_lines_so_far('/backend_fairseq/pretrained_models/io/outputs/gloss_out.txt', first_token, last_token, nbest)
+    # if sentence_output:
+    #     outputs = get_gloss_results(sentence, ''.join(sentence_output), id, nbest)
+    #     print(outputs)
+    #     save_predictions(outputs, save_path)
+    #     return True
+    #print(gout.stdout)
+    #print(gout.stdout.read())
+
+    return True
+   
+    sent_output = read_lines_so_far(out_str, first_token, last_token, nbest)
+    if sent_output:
+        outputs = get_gloss_results(sentence, '\n'.join(sent_output), id, nbest)
+        save_predictions(outputs, save_path)
+        return True
+
+    return False

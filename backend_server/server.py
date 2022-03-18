@@ -36,14 +36,6 @@ if not os.path.isdir(results_path):
 
 @app.route('/')
 def home():
-    return flask.render_template("form.html")
-
-@app.route('/new')
-def home_new():
-    return flask.render_template("react-ui.html")
-
-@app.route('/gloss')
-def home_gloss():
     return flask.render_template("react-ui-gloss.html")
 
 @app.route('/api/job', methods=['POST'])

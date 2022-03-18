@@ -14,6 +14,12 @@ then
 fi
 mkfifo $PIPE_DIR/glossPipe
 
+if [[ -p $PIPE_DIR/glossOut ]]
+then
+    rm $PIPE_DIR/glossOut
+fi
+mkfifo $PIPE_DIR/glossOut
+
 if [[ -p $PIPE_DIR/morphSegPipe ]]
 then
     rm $PIPE_DIR/morphSegPipe
@@ -24,6 +30,8 @@ mkfifo $PIPE_DIR/morphSegPipe
 OUT_DIR=io/outputs
 rm $OUT_DIR/gloss_out.txt
 rm $OUT_DIR/morph_seg_out.txt
+
+#time head -n 1 dev_small.txt | fairseq-interactive --path data/gloss/checkpoint_best.pt --beam 5 --nbest 1 --source-lang src --target-lang trg data/gloss/gloss_preprocess > out.txt
 
 # tail -f $PIPE_DIR/glossPipe | fairseq-interactive --path data/gloss/checkpoint_best.pt --beam 5 --nbest 4 \
 #     --source-lang src --target-lang trg data/gloss/gloss_preprocess > $OUT_DIR/gloss_out.txt &

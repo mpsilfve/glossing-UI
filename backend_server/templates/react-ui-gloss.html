@@ -7,7 +7,7 @@
     </head>
     <body>
         <header>
-            <h1>Glossing UI (Test)</h1>
+            <h1>Gitksan Glossing + Segmentation</h1>
             <p>Silfverberg Lab</p>
     
         </header>
@@ -98,6 +98,14 @@
                  * This will also prefill the job id in the get status form.
                  **/
                  async function submit_job() {
+                    const curr_result = document.getElementById('completed_message');
+                    const progress = document.getElementById('progress_message');
+                    if (curr_result.style.display !== 'none') {
+                        confirm('Any unsaved changes will be lost. Continue?');
+                        curr_result.style.display = 'none';
+                        progress.style.display = 'none';
+                    }
+
                     let data = {};
 
                     document.getElementById('parameter_error').style.display = 'none';
@@ -391,6 +399,7 @@
                      clearTimeout(timeout_result);
 
                      const status = await requestData(`/api/job/${jobId}/batch`);
+                     console.log(status);
                      const running_message = document.getElementById("running_message");
                      const progress_message = document.getElementById("progress_message");
                      const completed_message = document.getElementById("completed_message");
@@ -429,6 +438,15 @@
                         timeout_result = setTimeout(checkBatchStatus, 2000, jobId);
                      }
                  }
+                </script>
+
+                <script type="text/babel">
+                    // listen for the user unloading, warn about unsaved progress
+                    window.addEventListener('beforeunload', (event) => {
+                        event.preventDefault();
+                        event.returnValue = '';
+                    })
+
                 </script>
         </article>
         <footer>

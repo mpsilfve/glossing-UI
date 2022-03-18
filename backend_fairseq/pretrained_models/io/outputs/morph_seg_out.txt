@@ -1,661 +1,678 @@
-2022-03-10 21:31:17 | INFO | fairseq_cli.interactive | {'_name': None, 'common': {'_name': None, 'no_progress_bar': False, 'log_interval': 100, 'log_format': None, 'log_file': None, 'tensorboard_logdir': None, 'wandb_project': None, 'azureml_logging': False, 'seed': 1, 'cpu': False, 'tpu': False, 'bf16': False, 'memory_efficient_bf16': False, 'fp16': False, 'memory_efficient_fp16': False, 'fp16_no_flatten_grads': False, 'fp16_init_scale': 128, 'fp16_scale_window': None, 'fp16_scale_tolerance': 0.0, 'min_loss_scale': 0.0001, 'threshold_loss_scale': None, 'user_dir': None, 'empty_cache_freq': 0, 'all_gather_list_size': 16384, 'model_parallel_size': 1, 'quantization_config_path': None, 'profile': False, 'reset_logging': False, 'suppress_crashes': False, 'use_plasma_view': False, 'plasma_path': '/tmp/plasma'}, 'common_eval': {'_name': None, 'path': '/backend_fairseq/pretrained_models/data/morphseg/lstm/checkpoint_best.pt', 'post_process': None, 'quiet': False, 'model_overrides': '{}', 'results_path': None}, 'distributed_training': {'_name': None, 'distributed_world_size': 1, 'distributed_rank': 0, 'distributed_backend': 'nccl', 'distributed_init_method': None, 'distributed_port': -1, 'device_id': 0, 'distributed_no_spawn': False, 'ddp_backend': 'pytorch_ddp', 'bucket_cap_mb': 25, 'fix_batches_to_gpus': False, 'find_unused_parameters': False, 'fast_stat_sync': False, 'heartbeat_timeout': -1, 'broadcast_buffers': False, 'slowmo_momentum': None, 'slowmo_algorithm': 'LocalSGD', 'localsgd_frequency': 3, 'nprocs_per_node': 1, 'pipeline_model_parallel': False, 'pipeline_balance': None, 'pipeline_devices': None, 'pipeline_chunks': 0, 'pipeline_encoder_balance': None, 'pipeline_encoder_devices': None, 'pipeline_decoder_balance': None, 'pipeline_decoder_devices': None, 'pipeline_checkpoint': 'never', 'zero_sharding': 'none', 'fp16': False, 'memory_efficient_fp16': False, 'tpu': False, 'no_reshard_after_forward': False, 'fp32_reduce_scatter': False, 'cpu_offload': False, 'distributed_num_procs': 0}, 'dataset': {'_name': None, 'num_workers': 1, 'skip_invalid_size_inputs_valid_test': False, 'max_tokens': None, 'batch_size': 1, 'required_batch_size_multiple': 8, 'required_seq_len_multiple': 1, 'dataset_impl': None, 'data_buffer_size': 10, 'train_subset': 'train', 'valid_subset': 'valid', 'validate_interval': 1, 'validate_interval_updates': 0, 'validate_after_updates': 0, 'fixed_validation_seed': None, 'disable_validation': False, 'max_tokens_valid': None, 'batch_size_valid': None, 'max_valid_steps': None, 'curriculum': 0, 'gen_subset': 'test', 'num_shards': 1, 'shard_id': 0}, 'optimization': {'_name': None, 'max_epoch': 0, 'max_update': 0, 'stop_time_hours': 0.0, 'clip_norm': 0.0, 'sentence_avg': False, 'update_freq': [1], 'lr': [0.25], 'stop_min_lr': -1.0, 'use_bmuf': False}, 'checkpoint': {'_name': None, 'save_dir': 'checkpoints', 'restore_file': 'checkpoint_last.pt', 'finetune_from_model': None, 'reset_dataloader': False, 'reset_lr_scheduler': False, 'reset_meters': False, 'reset_optimizer': False, 'optimizer_overrides': '{}', 'save_interval': 1, 'save_interval_updates': 0, 'keep_interval_updates': -1, 'keep_interval_updates_pattern': -1, 'keep_last_epochs': -1, 'keep_best_checkpoints': -1, 'no_save': False, 'no_epoch_checkpoints': False, 'no_last_checkpoints': False, 'no_save_optimizer_state': False, 'best_checkpoint_metric': 'loss', 'maximize_best_checkpoint_metric': False, 'patience': -1, 'checkpoint_suffix': '', 'checkpoint_shard_count': 1, 'load_checkpoint_on_all_dp_ranks': False, 'write_checkpoints_asynchronously': False, 'model_parallel_size': 1}, 'bmuf': {'_name': None, 'block_lr': 1.0, 'block_momentum': 0.875, 'global_sync_iter': 50, 'warmup_iterations': 500, 'use_nbm': False, 'average_sync': False, 'distributed_world_size': 1}, 'generation': {'_name': None, 'beam': 5, 'nbest': 1, 'max_len_a': 0.0, 'max_len_b': 200, 'min_len': 1, 'match_source_len': False, 'unnormalized': False, 'no_early_stop': False, 'no_beamable_mm': False, 'lenpen': 1.0, 'unkpen': 0.0, 'replace_unk': None, 'sacrebleu': False, 'score_reference': False, 'prefix_size': 0, 'no_repeat_ngram_size': 0, 'sampling': False, 'sampling_topk': -1, 'sampling_topp': -1.0, 'constraints': None, 'temperature': 1.0, 'diverse_beam_groups': -1, 'diverse_beam_strength': 0.5, 'diversity_rate': -1.0, 'print_alignment': None, 'print_step': False, 'lm_path': None, 'lm_weight': 0.0, 'iter_decode_eos_penalty': 0.0, 'iter_decode_max_iter': 10, 'iter_decode_force_max_iter': False, 'iter_decode_with_beam': 1, 'iter_decode_with_external_reranker': False, 'retain_iter_history': False, 'retain_dropout': False, 'retain_dropout_modules': None, 'decoding_format': None, 'no_seed_provided': False}, 'eval_lm': {'_name': None, 'output_word_probs': False, 'output_word_stats': False, 'context_window': 0, 'softmax_batch': 9223372036854775807}, 'interactive': {'_name': None, 'buffer_size': 1, 'input': '-'}, 'model': None, 'task': {'_name': 'translation', 'data': '/backend_fairseq/pretrained_models/data/morphseg/lstm/lstm_preprocess', 'source_lang': 'src', 'target_lang': 'trg', 'load_alignments': False, 'left_pad_source': True, 'left_pad_target': False, 'max_source_positions': 1024, 'max_target_positions': 1024, 'upsample_primary': -1, 'truncate_source': False, 'num_batch_buckets': 0, 'train_subset': 'train', 'dataset_impl': None, 'required_seq_len_multiple': 1, 'eval_bleu': False, 'eval_bleu_args': '{}', 'eval_bleu_detok': 'space', 'eval_bleu_detok_args': '{}', 'eval_tokenized_bleu': False, 'eval_bleu_remove_bpe': None, 'eval_bleu_print_samples': False}, 'criterion': {'_name': 'cross_entropy', 'sentence_avg': True}, 'optimizer': None, 'lr_scheduler': {'_name': 'fixed', 'force_anneal': None, 'lr_shrink': 0.1, 'warmup_updates': 0, 'lr': [0.25]}, 'scoring': {'_name': 'bleu', 'pad': 1, 'eos': 2, 'unk': 3}, 'bpe': None, 'tokenizer': None}
-2022-03-10 21:31:17 | INFO | fairseq.tasks.translation | [src] dictionary: 80 types
-2022-03-10 21:31:17 | INFO | fairseq.tasks.translation | [trg] dictionary: 80 types
-2022-03-10 21:31:17 | INFO | fairseq_cli.interactive | loading model(s) from /backend_fairseq/pretrained_models/data/morphseg/lstm/checkpoint_best.pt
-2022-03-10 21:31:19 | INFO | fairseq_cli.interactive | NOTE: hypothesis and token scores are output in base 2
-2022-03-10 21:31:19 | INFO | fairseq_cli.interactive | Type the input sentence and press return:
-S-0	<S> _ <S> _ H e l t h l _ k ' u u h l _ s i w a d i ' m
-W-0	0.054	seconds
-H-0	-0.1790798157453537	h e l t = h l
-D-0	-0.1790798157453537	h e l t = h l
-P-0	-0.1796 -0.1664 -0.2515 -0.0917 -0.1127 -0.1847 -0.2265 -0.2196
-S-1	<S> _ H e l t h l _ k ' u u h l _ s i w a d i ' m _ a h l
-W-1	0.054	seconds
-H-1	-0.25129076838493347	k ' u u h l
-D-1	-0.25129076838493347	k ' u u h l
-P-1	-0.1520 -0.1556 -0.1448 -0.1657 -0.1767 -0.2231 -0.7411
-S-2	H e l t h l _ k ' u u h l _ s i w a d i ' m _ a h l _ l a ' o o ' y
-W-2	0.071	seconds
-H-2	-0.234895259141922	s i - w a - T - ' m
-D-2	-0.234895259141922	s i - w a - T - ' m
-P-2	-0.2048 -0.1504 -0.1522 -0.2108 -0.2389 -0.0807 -0.6774 -0.1699 -0.2860 -0.1835 -0.2291
-S-3	k ' u u h l _ s i w a d i ' m _ a h l _ l a ' o o ' y _ g ̲ o ' o h l
-W-3	0.042	seconds
-H-3	-0.22156170010566711	a = h l
-D-3	-0.22156170010566711	a = h l
-P-3	-0.3119 -0.1614 -0.1621 -0.2214 -0.2509
-S-4	s i w a d i ' m _ a h l _ l a ' o o ' y _ g ̲ o ' o h l _ H l a
-W-4	0.050	seconds
-H-4	-0.3867274522781372	l a ' o o ' y
-D-4	-0.3867274522781372	l a ' o o ' y
-P-4	-0.1594 -1.1006 -0.5275 -0.1371 -0.3469 -0.3938 -0.1850 -0.2435
-S-5	a h l _ l a ' o o ' y _ g ̲ o ' o h l _ H l a _ H e e n
-W-5	0.054	seconds
-H-5	-0.177327960729599	g ̲ o ' o = h l
-D-5	-0.177327960729599	g ̲ o ' o = h l
-P-5	-0.1057 -0.1642 -0.1672 -0.2171 -0.1713 -0.1338 -0.1968 -0.2037 -0.2362
-S-6	l a ' o o ' y _ g ̲ o ' o h l _ H l a _ H e e n _ <E>
-W-6	0.032	seconds
-H-6	-0.7720779180526733	h l a
-D-6	-0.7720779180526733	h l a
-P-6	-1.7732 -0.2047 -0.9124 -0.1980
-S-7	g ̲ o ' o h l _ H l a _ H e e n _ <E> _ <E>
-W-7	0.036	seconds
-H-7	-0.45571890473365784	H e e n
-D-7	-0.45571890473365784	H e e n
-P-7	-1.3920 -0.2403 -0.2178 -0.1703 -0.2582
-S-8	<S> _ <S> _ K y ' u l h l _ k ̲ ' a y _ ' m e s i m
-W-8	0.054	seconds
-H-8	-0.19663827121257782	k y ' u l = h l
-D-8	-0.19663827121257782	k y ' u l = h l
-P-8	-0.1000 -0.2515 -0.1647 -0.2105 -0.2287 -0.1527 -0.1929 -0.2397 -0.2289
-S-9	<S> _ K y ' u l h l _ k ̲ ' a y _ ' m e s i m _ h a n a k ̲ '
-W-9	0.049	seconds
-H-9	-0.18166661262512207	k ̲ ' a y
-D-9	-0.18166661262512207	k ̲ ' a y
-P-9	-0.1073 -0.2282 -0.1717 -0.2299 -0.1506 -0.2023
-S-10	K y ' u l h l _ k ̲ ' a y _ ' m e s i m _ h a n a k ̲ ' _ w a t
-W-10	0.047	seconds
-H-10	-0.17062576115131378	' m e s - m
-D-10	-0.17062576115131378	' m e s - m
-P-10	-0.1791 -0.1689 -0.1658 -0.1248 -0.1461 -0.2041 -0.2056
-S-11	k ̲ ' a y _ ' m e s i m _ h a n a k ̲ ' _ w a t _ a s
-W-11	0.054	seconds
-H-11	-0.17247577011585236	h a n a k ̲ '
-D-11	-0.17247577011585236	h a n a k ̲ '
-P-11	-0.1887 -0.1722 -0.1316 -0.1859 -0.1259 -0.1651 -0.2357 -0.1748
-S-12	' m e s i m _ h a n a k ̲ ' _ w a t _ a s _ W i l a d o o
-W-12	0.037	seconds
-H-12	-0.4365285038948059	w a - t
-D-12	-0.4365285038948059	w a - t
-P-12	-0.2119 -0.4131 -0.5244 -0.7992 -0.2340
-S-13	h a n a k ̲ ' _ w a t _ a s _ W i l a d o o _ a n t
-W-13	0.033	seconds
-H-13	-0.30335313081741333	a = s
-D-13	-0.30335313081741333	a = s
-P-13	-0.5838 -0.2171 -0.1999 -0.2126
-S-14	w a t _ a s _ W i l a d o o _ a n t _ ' w a h l
-W-14	0.052	seconds
-H-14	-0.3690730035305023	w i l a d o o
-D-14	-0.3690730035305023	w i l a d o o
-P-14	-1.2331 -0.1473 -0.3537 -0.2130 -0.4303 -0.1523 -0.2070 -0.2158
-S-15	a s _ W i l a d o o _ a n t _ ' w a h l _ k y ' e e g w i h l
-W-15	0.050	seconds
-H-15	-0.1693853735923767	a n = t
-D-15	-0.1693853735923767	a n = t
-P-15	-0.2944 -0.1504 -0.0897 -0.1066 -0.2058
-S-16	W i l a d o o _ a n t _ ' w a h l _ k y ' e e g w i h l _ t ' a ' w i h l g ̲ a n
-W-16	0.054	seconds
-H-16	-0.20501571893692017	' w a = h l
-D-16	-0.20501571893692017	' w a = h l
-P-16	-0.1624 -0.1881 -0.2758 -0.1488 -0.1757 -0.2339 -0.2504
-S-17	a n t _ ' w a h l _ k y ' e e g w i h l _ t ' a ' w i h l g ̲ a n _ <E>
-W-17	0.076	seconds
-H-17	-0.19550664722919464	k y ' e e k w - T = h l
-D-17	-0.19550664722919464	k y ' e e k w - T = h l
-P-17	-0.1628 -0.2269 -0.2353 -0.2033 -0.2236 -0.3164 -0.1894 -0.0647 -0.1044 -0.1398 -0.1945 -0.2127 -0.2677
-S-18	' w a h l _ k y ' e e g w i h l _ t ' a ' w i h l g ̲ a n _ <E> _ <E>
-W-18	0.101	seconds
-H-18	-0.36914950609207153	t ' a ' w i h l g ̲ a n
-D-18	-0.36914950609207153	t ' a ' w i h l g ̲ a n
-P-18	-0.2004 -0.2465 -0.2207 -0.4419 -0.1727 -0.8146 -0.1441 -0.1662 -1.4659 -0.2165 -0.1847 -0.2950 -0.2298
-S-19	<S> _ <S> _ I i _ s i i _ h l g u u h l x w t
-W-19	0.031	seconds
-H-19	-0.2166711986064911	i i
-D-19	-0.2166711986064911	i i
-P-19	-0.1988 -0.2383 -0.2129
-S-20	<S> _ I i _ s i i _ h l g u u h l x w t _ l o o t
-W-20	0.053	seconds
-H-20	-0.20217137038707733	s i i
-D-20	-0.20217137038707733	s i i
-P-20	-0.1530 -0.1890 -0.2697 -0.1971
-S-21	I i _ s i i _ h l g u u h l x w t _ l o o t _ i i t
-W-21	0.077	seconds
-H-21	-0.2166060209274292	h l g u u h l x w - t
-D-21	-0.2166060209274292	h l g u u h l x w - t
-P-21	-0.2539 -0.1755 -0.0648 -0.0590 -0.1733 -0.3225 -0.1753 -0.1746 -0.1286 -0.7076 -0.1285 -0.2356
-S-22	s i i _ h l g u u h l x w t _ l o o t _ i i t _ h a b o o ' l t
-W-22	0.047	seconds
-H-22	-0.17957691848278046	l o o - t
-D-22	-0.17957691848278046	l o o - t
-P-22	-0.2171 -0.1810 -0.2490 -0.0597 -0.1415 -0.2291
-S-23	h l g u u h l x w t _ l o o t _ i i t _ h a b o o ' l t _ <E>
-W-23	0.037	seconds
-H-23	-0.20990897715091705	i i = t
-D-23	-0.20990897715091705	i i = t
-P-23	-0.2747 -0.2721 -0.1100 -0.1342 -0.2586
-S-24	l o o t _ i i t _ h a b o o ' l t _ <E> _ <E>
-W-24	0.047	seconds
-H-24	-0.36623477935791016	h a b o o ' l t
-D-24	-0.36623477935791016	h a b o o ' l t
-P-24	-0.2076 -0.2918 -0.9548 -0.1527 -0.1486 -0.2435 -0.2307 -0.8104 -0.2560
-S-25	<S> _ <S> _ N e e d i i _ s i m _ g ̲ a l
-W-25	0.049	seconds
-H-25	-0.17375744879245758	n e e = d i i
-D-25	-0.17375744879245758	n e e = d i i
-P-25	-0.1350 -0.1698 -0.1842 -0.0805 -0.1230 -0.2720 -0.2083 -0.2173
-S-26	<S> _ N e e d i i _ s i m _ g ̲ a l _ ' w u d i n
-W-26	0.037	seconds
-H-26	-0.20083817839622498	s i m
-D-26	-0.20083817839622498	s i m
-P-26	-0.1948 -0.2082 -0.1601 -0.2402
-S-27	N e e d i i _ s i m _ g ̲ a l _ ' w u d i n _ ' n e k w t
-W-27	0.037	seconds
-H-27	-0.2183820605278015	g ̲ a l
-D-27	-0.2183820605278015	g ̲ a l
-P-27	-0.1379 -0.1231 -0.2633 -0.3532 -0.2144
-S-28	s i m _ g ̲ a l _ ' w u d i n _ ' n e k w t _ i i
-W-28	0.075	seconds
-H-28	-0.40762799978256226	' w u d i n
-D-28	-0.40762799978256226	' w u d i n
-P-28	-0.2154 -0.1961 -0.3689 -1.2558 -0.3025 -0.2877 -0.2271
-S-29	g ̲ a l _ ' w u d i n _ ' n e k w t _ i i _ k ̲ ' a p
-W-29	0.057	seconds
-H-29	-0.17967240512371063	' n e k w - t
-D-29	-0.17967240512371063	' n e k w - t
-P-29	-0.1323 -0.1572 -0.1660 -0.1343 -0.2147 -0.2580 -0.1306 -0.2442
-S-30	' w u d i n _ ' n e k w t _ i i _ k ̲ ' a p _ g ̲ a l a ' y
-W-30	0.031	seconds
-H-30	-0.20768332481384277	i i
-D-30	-0.20768332481384277	i i
-P-30	-0.1881 -0.2033 -0.2316
-S-31	' n e k w t _ i i _ k ̲ ' a p _ g ̲ a l a ' y _ t u s t h l
-W-31	0.042	seconds
-H-31	-0.15647640824317932	k ̲ ' a p
-D-31	-0.15647640824317932	k ̲ ' a p
-P-31	-0.1282 -0.1379 -0.1262 -0.1737 -0.1755 -0.1975
-S-32	i i _ k ̲ ' a p _ g ̲ a l a ' y _ t u s t h l _ b e n t
-W-32	0.058	seconds
-H-32	-0.3223890960216522	g ̲ a l a ' y
-D-32	-0.3223890960216522	g ̲ a l a ' y
-P-32	-0.0929 -0.1422 -0.2273 -0.3207 -0.6031 -0.7935 -0.2089 -0.1905
-S-33	k ̲ ' a p _ g ̲ a l a ' y _ t u s t h l _ b e n t _ <E>
-W-33	0.057	seconds
-H-33	-0.1677297055721283	t = u s t = h l
-D-33	-0.1677297055721283	t = u s t = h l
-P-33	-0.3119 -0.1977 -0.1354 -0.1499 -0.0784 -0.0393 -0.1989 -0.1695 -0.2286
-S-34	g ̲ a l a ' y _ t u s t h l _ b e n t _ <E> _ <E>
-W-34	0.045	seconds
-H-34	-0.3145584464073181	b e n - t
-D-34	-0.3145584464073181	b e n - t
-P-34	-0.3440 -0.2604 -0.2368 -0.4694 -0.3358 -0.2411
-S-35	<S> _ <S> _ I i _ s i l d i m _ w i l t x w s t
-W-35	0.034	seconds
-H-35	-0.2180439680814743	i i
-D-35	-0.2180439680814743	i i
-P-35	-0.2205 -0.2224 -0.2112
-S-36	<S> _ I i _ s i l d i m _ w i l t x w s t _ <E>
-W-36	0.047	seconds
-H-36	-0.2982405424118042	s i l - d i m
-D-36	-0.2982405424118042	s i l - d i m
-P-36	-0.1921 -0.1524 -0.3433 -0.5754 -0.4707 -0.2454 -0.1546 -0.2521
-S-37	I i _ s i l d i m _ w i l t x w s t _ <E> _ <E>
-W-37	0.062	seconds
-H-37	-0.45740771293640137	w i l - x w s - t
-D-37	-0.45740771293640137	w i l - x w s - t
-P-37	-0.1456 -0.1679 -0.1325 -1.6952 -0.1068 -0.1734 -1.3531 -0.3741 -0.1628 -0.2628
-S-38	<S> _ <S> _ H a ' o n d i i _ ' n e k w t _ d i i
-W-38	0.078	seconds
-H-38	-0.231131911277771	h a ' o n = d i i
-D-38	-0.231131911277771	h a ' o n = d i i
-P-38	-0.2016 -0.2922 -0.2644 -0.2474 -0.1814 -0.3081 -0.1743 -0.2341 -0.1975 -0.2103
-S-39	<S> _ H a ' o n d i i _ ' n e k w t _ d i i _ s g y e t h l
-W-39	0.085	seconds
-H-39	-0.19180098176002502	' n e k w - t
-D-39	-0.19180098176002502	' n e k w - t
-P-39	-0.1497 -0.1870 -0.1750 -0.1316 -0.1911 -0.3150 -0.1468 -0.2382
-S-40	H a ' o n d i i _ ' n e k w t _ d i i _ s g y e t h l _ h l g u
-W-40	0.079	seconds
-H-40	-0.25894349813461304	d i i
-D-40	-0.25894349813461304	d i i
-P-40	-0.2522 -0.2569 -0.3077 -0.2189
-S-41	' n e k w t _ d i i _ s g y e t h l _ h l g u _ t k ' i h l x w
-W-41	0.091	seconds
-H-41	-0.2355523407459259	s g y e t = h l
-D-41	-0.2355523407459259	s g y e t = h l
-P-41	-0.1130 -0.2186 -0.2648 -0.2257 -0.3118 -0.3284 -0.1641 -0.2300 -0.2636
-S-42	d i i _ s g y e t h l _ h l g u _ t k ' i h l x w _ h l g u u h l x w
-W-42	0.068	seconds
-H-42	-0.19617116451263428	h l g u
-D-42	-0.19617116451263428	h l g u
-P-42	-0.2001 -0.1939 -0.2113 -0.1854 -0.1902
-S-43	s g y e t h l _ h l g u _ t k ' i h l x w _ h l g u u h l x w _ k ̲ ' a y
-W-43	0.088	seconds
-H-43	-0.18656262755393982	t k ' i h l x w
-D-43	-0.18656262755393982	t k ' i h l x w
-P-43	-0.2358 -0.1282 -0.1549 -0.1086 -0.3688 -0.2035 -0.1369 -0.1250 -0.2174
-S-44	h l g u _ t k ' i h l x w _ h l g u u h l x w _ k ̲ ' a y _ ' m e s i m
-W-44	0.098	seconds
-H-44	-0.19261816143989563	h l g u u h l x w
-D-44	-0.19261816143989563	h l g u u h l x w
-P-44	-0.3049 -0.1339 -0.0828 -0.0706 -0.2271 -0.3905 -0.1829 -0.1941 -0.1361 -0.2033
-S-45	t k ' i h l x w _ h l g u u h l x w _ k ̲ ' a y _ ' m e s i m _ h a n a k ̲ ' s i ,
-W-45	0.098	seconds
-H-45	-0.19382762908935547	k ̲ ' a y
-D-45	-0.19382762908935547	k ̲ ' a y
-P-45	-0.1950 -0.1972 -0.1830 -0.2184 -0.1579 -0.2115
-S-46	h l g u u h l x w _ k ̲ ' a y _ ' m e s i m _ h a n a k ̲ ' s i , _ <E>
-W-46	0.063	seconds
-H-46	-0.1908191591501236	' m e s - m
-D-46	-0.1908191591501236	' m e s - m
-P-46	-0.2409 -0.1699 -0.1674 -0.1096 -0.2503 -0.1941 -0.2035
-S-47	k ̲ ' a y _ ' m e s i m _ h a n a k ̲ ' s i , _ <E> _ <E>
-W-47	0.082	seconds
-H-47	-0.1839780956506729	h a n a k ̲ ' = s i
-D-47	-0.1839780956506729	h a n a k ̲ ' = s i
-P-47	-0.1401 -0.1252 -0.2056 -0.1763 -0.1416 -0.1574 -0.1683 -0.3494 -0.2168 -0.1817 -0.1614
-S-48	<S> _ <S> _ i i _ a p _ g y a t t
-W-48	0.035	seconds
-H-48	-0.19749324023723602	i i
-D-48	-0.19749324023723602	i i
-P-48	-0.1588 -0.1957 -0.2380
-S-49	<S> _ i i _ a p _ g y a t t _ w i l t
-W-49	0.036	seconds
-H-49	-0.16144609451293945	a p
-D-49	-0.16144609451293945	a p
-P-49	-0.1148 -0.1487 -0.2209
-S-50	i i _ a p _ g y a t t _ w i l t _ g y a ' a d i i t ,
-W-50	0.045	seconds
-H-50	-0.2557452619075775	g y a t - t
-D-50	-0.2557452619075775	g y a t - t
-P-50	-0.1331 -0.1715 -0.2302 -0.1278 -0.7361 -0.1798 -0.2117
-S-51	a p _ g y a t t _ w i l t _ g y a ' a d i i t , _ k ̲ ' a p
-W-51	0.042	seconds
-H-51	-0.28317737579345703	w i l = t
-D-51	-0.28317737579345703	w i l = t
-P-51	-0.1938 -0.1535 -0.3583 -0.5437 -0.1918 -0.2580
-S-52	g y a t t _ w i l t _ g y a ' a d i i t , _ k ̲ ' a p _ h o g y a g ̲ a m
-W-52	0.074	seconds
-H-52	-0.16390149295330048	g y a ' a - d i i t
-D-52	-0.16390149295330048	g y a ' a - d i i t
-P-52	-0.1168 -0.1507 -0.1800 -0.1616 -0.1907 -0.0663 -0.1417 -0.2332 -0.1741 -0.1436 -0.2443
-S-53	w i l t _ g y a ' a d i i t , _ k ̲ ' a p _ h o g y a g ̲ a m _ d i d i l s
-W-53	0.046	seconds
-H-53	-0.16509999334812164	k ̲ ' a p
-D-53	-0.16509999334812164	k ̲ ' a p
-P-53	-0.1468 -0.1075 -0.1319 -0.1969 -0.1977 -0.2097
-S-54	g y a ' a d i i t , _ k ̲ ' a p _ h o g y a g ̲ a m _ d i d i l s _ w i l t
-W-54	0.094	seconds
-H-54	-0.2529773414134979	h o g y a x ̲ - m
-D-54	-0.2529773414134979	h o g y a x ̲ - m
-P-54	-0.1958 -0.1997 -0.1761 -0.2194 -0.2170 -0.7952 -0.1606 -0.1598 -0.2013 -0.2049
-S-55	k ̲ ' a p _ h o g y a g ̲ a m _ d i d i l s _ w i l t _ g y a ' a h l
-W-55	0.066	seconds
-H-55	-0.23072195053100586	C V ~ d i l s
-D-55	-0.23072195053100586	C V ~ d i l s
-P-55	-0.3550 -0.1497 -0.2363 -0.1717 -0.1641 -0.2479 -0.2833 -0.2378
-S-56	h o g y a g ̲ a m _ d i d i l s _ w i l t _ g y a ' a h l _ g y e t
-W-56	0.045	seconds
-H-56	-0.332994669675827	w i l = t
-D-56	-0.332994669675827	w i l = t
-P-56	-0.1705 -0.1643 -0.7420 -0.4977 -0.1975 -0.2261
-S-57	d i d i l s _ w i l t _ g y a ' a h l _ g y e t _ <E>
-W-57	0.060	seconds
-H-57	-0.17578884959220886	g y a ' a = h l
-D-57	-0.17578884959220886	g y a ' a = h l
-P-57	-0.1365 -0.1253 -0.1745 -0.1341 -0.2003 -0.1091 -0.2411 -0.2084 -0.2527
-S-58	w i l t _ g y a ' a h l _ g y e t _ <E> _ <E>
-W-58	0.038	seconds
-H-58	-0.1877659559249878	g y e t
-D-58	-0.1877659559249878	g y e t
-P-58	-0.2427 -0.1466 -0.2040 -0.1066 -0.2390
-S-59	<S> _ <S> _ I i _ h e l t _ a n t
-W-59	0.028	seconds
-H-59	-0.21664823591709137	i i
-D-59	-0.21664823591709137	i i
-P-59	-0.2111 -0.2212 -0.2177
-S-60	<S> _ I i _ h e l t _ a n t _ n e e d i i t
-W-60	0.041	seconds
-H-60	-0.21385307610034943	h e l t
-D-60	-0.21385307610034943	h e l t
-P-60	-0.2075 -0.1830 -0.3303 -0.1332 -0.2153
-S-61	I i _ h e l t _ a n t _ n e e d i i t _ w i l a a x t
-W-61	0.049	seconds
-H-61	-0.16693910956382751	a n = t
-D-61	-0.16693910956382751	a n = t
-P-61	-0.2177 -0.1358 -0.1185 -0.1290 -0.2337
-S-62	h e l t _ a n t _ n e e d i i t _ w i l a a x t _ w i l
-W-62	0.079	seconds
-H-62	-0.1837446689605713	n e e = d i i = t
-D-62	-0.1837446689605713	n e e = d i i = t
-P-62	-0.1477 -0.1545 -0.1952 -0.1604 -0.1048 -0.2866 -0.2163 -0.1770 -0.1393 -0.2557
-S-63	a n t _ n e e d i i t _ w i l a a x t _ w i l _ ' n i t
-W-63	0.056	seconds
-H-63	-0.19418621063232422	w i l a a x - t
-D-63	-0.19418621063232422	w i l a a x - t
-P-63	-0.2201 -0.1946 -0.3052 -0.2076 -0.3086 -0.0537 -0.0743 -0.1262 -0.2574
-S-64	n e e d i i t _ w i l a a x t _ w i l _ ' n i t _ h l g u u h l x u m
-W-64	0.039	seconds
-H-64	-0.3544454574584961	w i l
-D-64	-0.3544454574584961	w i l
-P-64	-0.1618 -0.2086 -0.8406 -0.2068
-S-65	w i l a a x t _ w i l _ ' n i t _ h l g u u h l x u m _ t ' a ' w i h l g ̲ a n
-W-65	0.094	seconds
-H-65	-0.19396577775478363	' n i t
-D-65	-0.19396577775478363	' n i t
-P-65	-0.1711 -0.1246 -0.2089 -0.2395 -0.2259
-S-66	w i l _ ' n i t _ h l g u u h l x u m _ t ' a ' w i h l g ̲ a n _ k ̲ ' a y
-W-66	0.082	seconds
-H-66	-0.23033779859542847	h l g u u h l x w - m
-D-66	-0.23033779859542847	h l g u u h l x w - m
-P-66	-0.3610 -0.1555 -0.1308 -0.0733 -0.3766 -0.3345 -0.2081 -0.2037 -0.2387 -0.3040 -0.1585 -0.2194
-S-67	' n i t _ h l g u u h l x u m _ t ' a ' w i h l g ̲ a n _ k ̲ ' a y _ ' m e s i m
-W-67	0.089	seconds
-H-67	-0.3946124315261841	t ' a ' w i h l g ̲ a n
-D-67	-0.3946124315261841	t ' a ' w i h l g ̲ a n
-P-67	-0.1497 -0.2170 -0.2495 -0.5190 -0.2018 -1.1246 -0.2495 -0.1615 -1.3395 -0.2032 -0.1936 -0.3202 -0.2009
-S-68	h l g u u h l x u m _ t ' a ' w i h l g ̲ a n _ k ̲ ' a y _ ' m e s i m _ h a n a k ̲ ' s i
-W-68	0.057	seconds
-H-68	-0.17449231445789337	k ̲ ' a y
-D-68	-0.17449231445789337	k ̲ ' a y
-P-68	-0.1313 -0.1745 -0.1796 -0.2112 -0.1444 -0.2060
-S-69	t ' a ' w i h l g ̲ a n _ k ̲ ' a y _ ' m e s i m _ h a n a k ̲ ' s i _ <E>
-W-69	0.056	seconds
-H-69	-0.18402723968029022	' m e s - m
-D-69	-0.18402723968029022	' m e s - m
-P-69	-0.1773 -0.1743 -0.1747 -0.1129 -0.2635 -0.1869 -0.1987
-S-70	k ̲ ' a y _ ' m e s i m _ h a n a k ̲ ' s i _ <E> _ <E>
-W-70	0.052	seconds
-H-70	-0.20762568712234497	h a n a k ̲ ' = s i
-D-70	-0.20762568712234497	h a n a k ̲ ' = s i
-P-70	-0.1435 -0.1329 -0.1953 -0.1789 -0.1450 -0.1537 -0.1524 -0.6271 -0.1845 -0.1754 -0.1952
-S-71	<S> _ <S> _ I i _ l u k w ' i l _ k y ' a a
-W-71	0.032	seconds
-H-71	-0.22218634188175201	i i
-D-71	-0.22218634188175201	i i
-P-71	-0.2141 -0.2320 -0.2204
-S-72	<S> _ I i _ l u k w ' i l _ k y ' a a _ ' w i i
-W-72	0.053	seconds
-H-72	-0.21314705908298492	l u k w ' i l
-D-72	-0.21314705908298492	l u k w ' i l
-P-72	-0.1898 -0.2359 -0.1550 -0.1799 -0.2227 -0.2905 -0.2230 -0.2083
-S-73	I i _ l u k w ' i l _ k y ' a a _ ' w i i _ ' n e k w t
-W-73	0.059	seconds
-H-73	-0.1745349019765854	k y ' a a
-D-73	-0.1745349019765854	k y ' a a
-P-73	-0.1473 -0.2128 -0.1651 -0.1493 -0.1853 -0.1875
-S-74	l u k w ' i l _ k y ' a a _ ' w i i _ ' n e k w t _ <E>
-W-74	0.049	seconds
-H-74	-0.21904024481773376	' w i i
-D-74	-0.21904024481773376	' w i i
-P-74	-0.1805 -0.2847 -0.2580 -0.1586 -0.2134
-S-75	k y ' a a _ ' w i i _ ' n e k w t _ <E> _ <E>
-W-75	0.050	seconds
-H-75	-0.17613832652568817	' n e k w - t
-D-75	-0.17613832652568817	' n e k w - t
-P-75	-0.1372 -0.1586 -0.1648 -0.1137 -0.2079 -0.2203 -0.1277 -0.2789
-S-76	<S> _ <S> _ G ̲ a s g ̲ o o h l _ h l a _ ' w i i
-W-76	0.077	seconds
-H-76	-0.18213188648223877	g ̲ a s g ̲ o o = h l
-D-76	-0.18213188648223877	g ̲ a s g ̲ o o = h l
-P-76	-0.2207 -0.1483 -0.1503 -0.1816 -0.2566 -0.1333 -0.1737 -0.1542 -0.1313 -0.1808 -0.2161 -0.2385
-S-77	<S> _ G ̲ a s g ̲ o o h l _ h l a _ ' w i i _ t ' i s h l
-W-77	0.031	seconds
-H-77	-0.5236760377883911	h l a
-D-77	-0.5236760377883911	h l a
-P-77	-0.2883 -0.2320 -1.3503 -0.2241
-S-78	G ̲ a s g ̲ o o h l _ h l a _ ' w i i _ t ' i s h l _ t ' a ' w i h l g ̲ a n
-W-78	0.034	seconds
-H-78	-0.19578664004802704	' w i i
-D-78	-0.19578664004802704	' w i i
-P-78	-0.1945 -0.2086 -0.2003 -0.1738 -0.2017
-S-79	h l a _ ' w i i _ t ' i s h l _ t ' a ' w i h l g ̲ a n _ t u n s i
-W-79	0.050	seconds
-H-79	-0.14778104424476624	t ' i s = h l
-D-79	-0.14778104424476624	t ' i s = h l
-P-79	-0.1239 -0.1751 -0.1731 -0.1296 -0.0570 -0.1006 -0.1891 -0.2338
-S-80	' w i i _ t ' i s h l _ t ' a ' w i h l g ̲ a n _ t u n s i _ <E>
-W-80	0.070	seconds
-H-80	-0.37313592433929443	t ' a ' w i h l g ̲ a n
-D-80	-0.37313592433929443	t ' a ' w i h l g ̲ a n
-P-80	-0.2111 -0.2180 -0.2205 -0.4830 -0.2004 -1.0263 -0.1542 -0.1548 -1.2978 -0.2139 -0.1778 -0.3064 -0.1865
-S-81	t ' i s h l _ t ' a ' w i h l g ̲ a n _ t u n s i _ <E> _ <E>
-W-81	0.053	seconds
-H-81	-0.15592974424362183	t = u n = s i
-D-81	-0.15592974424362183	t = u n = s i
-P-81	-0.1416 -0.1045 -0.1052 -0.1192 -0.2408 -0.1946 -0.1414 -0.2002
-S-82	<S> _ <S> _ I i _ b e l g i _ g w i t k w ' o o t x w h l
-W-82	0.034	seconds
-H-82	-0.20645074546337128	i i
-D-82	-0.20645074546337128	i i
-P-82	-0.2058 -0.2214 -0.1922
-S-83	<S> _ I i _ b e l g i _ g w i t k w ' o o t x w h l _ e n x ̲
-W-83	0.048	seconds
-H-83	-0.2441357523202896	b e l i g i
-D-83	-0.2441357523202896	b e l i g i
-P-83	-0.1238 -0.1828 -0.1744 -0.6857 -0.2104 -0.1561 -0.1759
-S-84	I i _ b e l g i _ g w i t k w ' o o t x w h l _ e n x ̲ _ g ̲ a n h l
-W-84	0.124	seconds
-H-84	-0.2884027063846588	C V C ~ k w ' o o t - x w = h l
-D-84	-0.2884027063846588	C V C ~ k w ' o o t - x w = h l
-P-84	-1.2395 -0.1819 -1.2587 -0.0932 -0.1908 -0.2056 -0.1510 -0.1696 -0.1775 -0.0730 -0.1420 -0.1351 -0.1571 -0.1313 -0.1659 -0.2158 -0.2148
-S-85	b e l g i _ g w i t k w ' o o t x w h l _ e n x ̲ _ g ̲ a n h l _ g ̲ a x ̲ b i i s t
-W-85	0.051	seconds
-H-85	-0.27367421984672546	e n x ̲
-D-85	-0.27367421984672546	e n x ̲
-P-85	-0.2349 -0.1791 -0.4066 -0.3664 -0.1813
-S-86	g w i t k w ' o o t x w h l _ e n x ̲ _ g ̲ a n h l _ g ̲ a x ̲ b i i s t _ g ̲ a n h l
-W-86	0.076	seconds
-H-86	-0.18158714473247528	g ̲ a n = h l
-D-86	-0.18158714473247528	g ̲ a n = h l
-P-86	-0.1360 -0.1608 -0.2123 -0.1628 -0.1254 -0.1936 -0.2361 -0.2257
-S-87	e n x ̲ _ g ̲ a n h l _ g ̲ a x ̲ b i i s t _ g ̲ a n h l _ h u w i l p
-W-87	0.069	seconds
-H-87	-0.26633861660957336	g ̲ a - x ̲ b i i s t
-D-87	-0.26633861660957336	g ̲ a - x ̲ b i i s t
-P-87	-0.1960 -0.1856 -0.1987 -0.4488 -0.2737 -0.2521 -0.2524 -0.2300 -0.2804 -0.3024 -0.3912 -0.1848
-S-88	g ̲ a n h l _ g ̲ a x ̲ b i i s t _ g ̲ a n h l _ h u w i l p _ <E>
-W-88	0.051	seconds
-H-88	-0.20138061046600342	g ̲ a n = h l
-D-88	-0.20138061046600342	g ̲ a n = h l
-P-88	-0.2296 -0.1847 -0.2532 -0.1551 -0.1230 -0.2127 -0.2243 -0.2284
-S-89	g ̲ a x ̲ b i i s t _ g ̲ a n h l _ h u w i l p _ <E> _ <E>
-W-89	0.043	seconds
-H-89	-0.15947429835796356	C V ~ w i l p
-D-89	-0.15947429835796356	C V ~ w i l p
-P-89	-0.1809 -0.2024 -0.0916 -0.1958 -0.1507 -0.1348 -0.1000 -0.2195
-S-90	<S> _ <S> _ W i h l _ a p _ g u p g u p x w i d i i h l
-W-90	0.042	seconds
-H-90	-0.21618233621120453	w i l = h l
-D-90	-0.21618233621120453	w i l = h l
-P-90	-0.2838 -0.2506 -0.2831 -0.0670 -0.1672 -0.2272 -0.2343
-S-91	<S> _ W i h l _ a p _ g u p g u p x w i d i i h l _ w i l t ,
-W-91	0.031	seconds
-H-91	-0.2440323531627655	a p
-D-91	-0.2440323531627655	a p
-P-91	-0.3523 -0.1850 -0.1947
-S-92	W i h l _ a p _ g u p g u p x w i d i i h l _ w i l t , _ w i l t
-W-92	0.120	seconds
-H-92	-0.39702552556991577	g u p - g u p - x w - d i i h l
-D-92	-0.39702552556991577	g u p - g u p - x w - d i i h l
-P-92	-0.3333 -0.2704 -0.1477 -0.1959 -0.1647 -0.2701 -0.1667 -0.4968 -0.1278 -0.1143 -0.2654 -1.3349 -0.2167 -0.2676 -1.8335 -0.2891 -0.2546
-S-93	a p _ g u p g u p x w i d i i h l _ w i l t , _ w i l t _ g y a ' a h l
-W-93	0.056	seconds
-H-93	-0.2063850462436676	w i l - t
-D-93	-0.2063850462436676	w i l - t
-P-93	-0.1623 -0.2077 -0.1421 -0.1635 -0.3351 -0.2276
-S-94	g u p g u p x w i d i i h l _ w i l t , _ w i l t _ g y a ' a h l _ h l i
-W-94	0.049	seconds
-H-94	-0.3510266840457916	w i l = t
-D-94	-0.3510266840457916	w i l = t
-P-94	-0.1832 -0.1865 -0.4475 -0.7937 -0.2516 -0.2437
-S-95	w i l t , _ w i l t _ g y a ' a h l _ h l i _ g y e d i h l
-W-95	0.068	seconds
-H-95	-0.17724107205867767	g y a ' a = h l
-D-95	-0.17724107205867767	g y a ' a = h l
-P-95	-0.1501 -0.1219 -0.1768 -0.1296 -0.2232 -0.1308 -0.2103 -0.2120 -0.2404
-S-96	w i l t _ g y a ' a h l _ h l i _ g y e d i h l _ t s ' e p s i ,
-W-96	0.031	seconds
-H-96	-0.18338221311569214	h l i
-D-96	-0.18338221311569214	h l i
-P-96	-0.2477 -0.1915 -0.1226 -0.1718
-S-97	g y a ' a h l _ h l i _ g y e d i h l _ t s ' e p s i , _ i i t
-W-97	0.054	seconds
-H-97	-0.18148045241832733	g y e t - T = h l
-D-97	-0.18148045241832733	g y e t - T = h l
-P-97	-0.2179 -0.1256 -0.1658 -0.1903 -0.0914 -0.2048 -0.1962 -0.1849 -0.2055 -0.2324
-S-98	h l i _ g y e d i h l _ t s ' e p s i , _ i i t _ l i k s g y e d i n h l
-W-98	0.054	seconds
-H-98	-0.2543472945690155	t s ' e p = s i
-D-98	-0.2543472945690155	t s ' e p = s i
-P-98	-0.2949 -0.1751 -0.1377 -0.1666 -0.1305 -0.7880 -0.2236 -0.2043 -0.1684
-S-99	g y e d i h l _ t s ' e p s i , _ i i t _ l i k s g y e d i n h l _ h l i
-W-99	0.038	seconds
-H-99	-0.18501527607440948	i i = t
-D-99	-0.18501527607440948	i i = t
-P-99	-0.2062 -0.2150 -0.1111 -0.1429 -0.2499
-S-100	t s ' e p s i , _ i i t _ l i k s g y e d i n h l _ h l i _ g y e d i h l
-W-100	0.090	seconds
-H-100	-0.2564285695552826	l i k s - g y e t - i n = h l
-D-100	-0.2564285695552826	l i k s - g y e t - i n = h l
-P-100	-0.1929 -0.1929 -0.3435 -0.1052 -0.2328 -0.1701 -0.0797 -0.1591 -0.0882 -0.0503 -1.3376 -0.2749 -0.1533 -0.2517 -0.2277 -0.2429
-S-101	i i t _ l i k s g y e d i n h l _ h l i _ g y e d i h l _ g ̲ a l t s ' e p s i
-W-101	0.038	seconds
-H-101	-0.17445489764213562	h l i
-D-101	-0.17445489764213562	h l i
-P-101	-0.1883 -0.2036 -0.1157 -0.1902
-S-102	l i k s g y e d i n h l _ h l i _ g y e d i h l _ g ̲ a l t s ' e p s i _ <E>
-W-102	0.094	seconds
-H-102	-0.18174606561660767	g y e t - T = h l
-D-102	-0.18174606561660767	g y e t - T = h l
-P-102	-0.1517 -0.1475 -0.1650 -0.1633 -0.1124 -0.2036 -0.2339 -0.1639 -0.2195 -0.2565
-S-103	h l i _ g y e d i h l _ g ̲ a l t s ' e p s i _ <E> _ <E>
-W-103	0.068	seconds
-H-103	-0.16622653603553772	g ̲ a l - t s ' e p = s i
-D-103	-0.16622653603553772	g ̲ a l - t s ' e p = s i
-P-103	-0.1759 -0.1546 -0.1763 -0.1689 -0.0891 -0.1653 -0.1374 -0.1239 -0.1702 -0.1203 -0.2355 -0.1772 -0.2280 -0.2047
-S-104	<S> _ <S> _ I i t _ s e e x ̲ d i i t h l _ k ' i ' y h l
-W-104	0.043	seconds
-H-104	-0.2026168406009674	i i = t
-D-104	-0.2026168406009674	i i = t
-P-104	-0.2101 -0.2480 -0.1594 -0.1499 -0.2457
-S-105	<S> _ I i t _ s e e x ̲ d i i t h l _ k ' i ' y h l _ w i l p
-W-105	0.076	seconds
-H-105	-0.21702450513839722	s e e x ̲ - d i i t = h l
-D-105	-0.21702450513839722	s e e x ̲ - d i i t = h l
-P-105	-0.1258 -0.1828 -0.1904 -0.4147 -0.3860 -0.2887 -0.1244 -0.2082 -0.1948 -0.1565 -0.1334 -0.1898 -0.2109 -0.2320
-S-106	I i t _ s e e x ̲ d i i t h l _ k ' i ' y h l _ w i l p _ x ̲ h l i p h e t x w i t
-W-106	0.061	seconds
-H-106	-0.18064354360103607	k ' i ' y = h l
-D-106	-0.18064354360103607	k ' i ' y = h l
-P-106	-0.2011 -0.1819 -0.1387 -0.1739 -0.1356 -0.1313 -0.1888 -0.2218 -0.2527
-S-107	s e e x ̲ d i i t h l _ k ' i ' y h l _ w i l p _ x ̲ h l i p h e t x w i t _ a h l
-W-107	0.037	seconds
-H-107	-0.2137700915336609	w i l p
-D-107	-0.2137700915336609	w i l p
-P-107	-0.1334 -0.1890 -0.3567 -0.1754 -0.2143
-S-108	k ' i ' y h l _ w i l p _ x ̲ h l i p h e t x w i t _ a h l _ h l a
-W-108	0.083	seconds
-H-108	-0.3342985212802887	x ̲ - h l i p - h e - x w - i t
-D-108	-0.3342985212802887	x ̲ - h l i p - h e - x w - i t
-P-108	-0.2348 -0.2367 -0.9337 -0.1957 -0.1902 -0.0694 -0.1185 -0.4436 -0.6215 -0.1565 -1.1959 -0.1283 -0.1230 -0.1313 -0.4682 -0.1781 -0.2577
-S-109	w i l p _ x ̲ h l i p h e t x w i t _ a h l _ h l a _ k ̲ ' a p h l
-W-109	0.035	seconds
-H-109	-0.20469817519187927	a = h l
-D-109	-0.20469817519187927	a = h l
-P-109	-0.2631 -0.1115 -0.1505 -0.2433 -0.2551
-S-110	x ̲ h l i p h e t x w i t _ a h l _ h l a _ k ̲ ' a p h l _ t s ' e p s i
-W-110	0.037	seconds
-H-110	-0.3730526268482208	h l i
-D-110	-0.3730526268482208	h l i
-P-110	-0.3079 -0.2309 -0.7721 -0.1813
-S-111	a h l _ h l a _ k ̲ ' a p h l _ t s ' e p s i _ <E>
-W-111	0.085	seconds
-H-111	-0.19504143297672272	k ̲ ' a p = h l
-D-111	-0.19504143297672272	k ̲ ' a p = h l
-P-111	-0.1586 -0.1892 -0.1791 -0.1916 -0.1921 -0.1831 -0.1978 -0.2123 -0.2516
-S-112	h l a _ k ̲ ' a p h l _ t s ' e p s i _ <E> _ <E>
-W-112	0.058	seconds
-H-112	-0.2244592159986496	t s ' e p = s i
-D-112	-0.2244592159986496	t s ' e p = s i
-P-112	-0.1989 -0.1680 -0.1468 -0.1654 -0.1263 -0.5648 -0.2230 -0.2300 -0.1968
-S-113	<S> _ <S> _ I i t _ d o k ̲ s _ d i p u n h l
-W-113	0.042	seconds
-H-113	-0.19033938646316528	i i = t
-D-113	-0.19033938646316528	i i = t
-P-113	-0.2091 -0.2356 -0.1179 -0.1383 -0.2508
-S-114	<S> _ I i t _ d o k ̲ s _ d i p u n h l _ g ̲ a x ̲ b i i s t
-W-114	0.055	seconds
-H-114	-0.19185186922550201	d o k ̲ = s
-D-114	-0.19185186922550201	d o k ̲ = s
-P-114	-0.1445 -0.1618 -0.1172 -0.1791 -0.3528 -0.1807 -0.2069
-S-115	I i t _ d o k ̲ s _ d i p u n h l _ g ̲ a x ̲ b i i s t _ i i t
-W-115	0.062	seconds
-H-115	-0.16734512150287628	d i p = u n = h l
-D-115	-0.16734512150287628	d i p = u n = h l
-P-115	-0.0995 -0.1998 -0.1615 -0.1454 -0.1573 -0.1332 -0.1408 -0.1882 -0.2210 -0.2268
-S-116	d o k ̲ s _ d i p u n h l _ g ̲ a x ̲ b i i s t _ i i t _ l i i l u x w d i i t
-W-116	0.075	seconds
-H-116	-0.3167452812194824	g ̲ a x ̲ b i i s t
-D-116	-0.3167452812194824	g ̲ a x ̲ b i i s t
-P-116	-0.0857 -0.1850 -0.1623 -1.0042 -0.2248 -0.5533 -0.2426 -0.2690 -0.2883 -0.2720 -0.1972
-S-117	d i p u n h l _ g ̲ a x ̲ b i i s t _ i i t _ l i i l u x w d i i t _ <E>
-W-117	0.043	seconds
-H-117	-0.1905873417854309	i i = t
-D-117	-0.1905873417854309	i i = t
-P-117	-0.1896 -0.2425 -0.1037 -0.1630 -0.2541
-S-118	g ̲ a x ̲ b i i s t _ i i t _ l i i l u x w d i i t _ <E> _ <E>
-W-118	0.074	seconds
-H-118	-0.22550517320632935	l i i l u x w - d i i t
-D-118	-0.22550517320632935	l i i l u x w - d i i t
-P-118	-0.2259 -0.1935 -0.4500 -0.2542 -0.1584 -0.1674 -0.2057 -0.3583 -0.1365 -0.2291 -0.1687 -0.1333 -0.2507
-S-119	<S> _ <S> _ K ' i ' y h l _ s a _ i i t
-W-119	0.050	seconds
-H-119	-0.15972544252872467	k ' i ' y = h l
-D-119	-0.15972544252872467	k ' i ' y = h l
-P-119	-0.1135 -0.1433 -0.1456 -0.1622 -0.1349 -0.1066 -0.1920 -0.2120 -0.2275
-S-120	<S> _ K ' i ' y h l _ s a _ i i t _ n a x ̲ ' n i s
-W-120	0.032	seconds
-H-120	-0.2411220222711563	s a
-D-120	-0.2411220222711563	s a
-P-120	-0.2253 -0.2996 -0.1985
-S-121	K ' i ' y h l _ s a _ i i t _ n a x ̲ ' n i s _ d i p u n
-W-121	0.059	seconds
-H-121	-0.18548785150051117	i i = t
-D-121	-0.18548785150051117	i i = t
-P-121	-0.2103 -0.2714 -0.0850 -0.1209 -0.2398
-S-122	s a _ i i t _ n a x ̲ ' n i s _ d i p u n _ w i l
-W-122	0.076	seconds
-H-122	-0.1838379055261612	n a x ̲ ' n i = s
-D-122	-0.1838379055261612	n a x ̲ ' n i = s
-P-122	-0.1250 -0.1932 -0.1782 -0.1684 -0.2352 -0.2405 -0.1669 -0.1473 -0.1885 -0.1952
-S-123	i i t _ n a x ̲ ' n i s _ d i p u n _ w i l _ y u k w h l
-W-123	0.062	seconds
-H-123	-0.15562841296195984	d i p = u n
-D-123	-0.15562841296195984	d i p = u n
-P-123	-0.1040 -0.1460 -0.1589 -0.1190 -0.1689 -0.1723 -0.2202
-S-124	n a x ̲ ' n i s _ d i p u n _ w i l _ y u k w h l _ y o o k ̲ x w h l
-W-124	0.036	seconds
-H-124	-0.43169471621513367	w i l
-D-124	-0.43169471621513367	w i l
-P-124	-0.1650 -0.2103 -1.1567 -0.1948
-S-125	d i p u n _ w i l _ y u k w h l _ y o o k ̲ x w h l _ s i m i l o o ' o
-W-125	0.044	seconds
-H-125	-0.1684083342552185	y u k w = h l
-D-125	-0.1684083342552185	y u k w = h l
-P-125	-0.1512 -0.1251 -0.1505 -0.1696 -0.1068 -0.1796 -0.2089 -0.2556
-S-126	w i l _ y u k w h l _ y o o k ̲ x w h l _ s i m i l o o ' o _ <E>
-W-126	0.068	seconds
-H-126	-0.16019542515277863	y o o k ̲ - x w = h l
-D-126	-0.16019542515277863	y o o k ̲ - x w = h l
-P-126	-0.1530 -0.1136 -0.1490 -0.1579 -0.1991 -0.1185 -0.1302 -0.1105 -0.1232 -0.1913 -0.2181 -0.2580
-S-127	y u k w h l _ y o o k ̲ x w h l _ s i m i l o o ' o _ <E> _ <E>
-W-127	0.063	seconds
-H-127	-0.24116986989974976	s i m i l o o ' o
-D-127	-0.24116986989974976	s i m i l o o ' o
-P-127	-0.1186 -0.2634 -0.3133 -0.2112 -0.2321 -0.2375 -0.1171 -0.3543 -0.3060 -0.2581
-S-128	<S> _ <S> _ H e t s ' i m _ x ̲ j a a x ̲ x w h l _ n a x ̲ ' n i d i i t
-W-128	0.054	seconds
-H-128	-0.1644529551267624	h e t s ' i m
-D-128	-0.1644529551267624	h e t s ' i m
-P-128	-0.1677 -0.1795 -0.1277 -0.1276 -0.1593 -0.1607 -0.1485 -0.2447
-S-129	<S> _ H e t s ' i m _ x ̲ j a a x ̲ x w h l _ n a x ̲ ' n i d i i t _ <E>
-W-129	0.080	seconds
-H-129	-0.26997920870780945	x ̲ - j a a x ̲ - x w = h l
-D-129	-0.26997920870780945	x ̲ - j a a x ̲ - x w = h l
-P-129	-0.1530 -0.3300 -1.1233 -0.3827 -0.2301 -0.2677 -0.1058 -0.1996 -0.2330 -0.0727 -0.0849 -0.1783 -0.2008 -0.2237 -0.2641
-S-130	H e t s ' i m _ x ̲ j a a x ̲ x w h l _ n a x ̲ ' n i d i i t _ <E> _ <E>
-W-130	0.094	seconds
-H-130	-0.17990398406982422	n a x ̲ ' n i - d i i t
-D-130	-0.17990398406982422	n a x ̲ ' n i - d i i t
-P-130	-0.1969 -0.1161 -0.2311 -0.1863 -0.2090 -0.1773 -0.1723 -0.1257 -0.1721 -0.1801 -0.1640 -0.1331 -0.2749
+2022-03-18 17:55:01 | INFO | fairseq_cli.interactive | {'_name': None, 'common': {'_name': None, 'no_progress_bar': False, 'log_interval': 100, 'log_format': None, 'log_file': None, 'tensorboard_logdir': None, 'wandb_project': None, 'azureml_logging': False, 'seed': 1, 'cpu': False, 'tpu': False, 'bf16': False, 'memory_efficient_bf16': False, 'fp16': False, 'memory_efficient_fp16': False, 'fp16_no_flatten_grads': False, 'fp16_init_scale': 128, 'fp16_scale_window': None, 'fp16_scale_tolerance': 0.0, 'min_loss_scale': 0.0001, 'threshold_loss_scale': None, 'user_dir': None, 'empty_cache_freq': 0, 'all_gather_list_size': 16384, 'model_parallel_size': 1, 'quantization_config_path': None, 'profile': False, 'reset_logging': False, 'suppress_crashes': False, 'use_plasma_view': False, 'plasma_path': '/tmp/plasma'}, 'common_eval': {'_name': None, 'path': '/backend_fairseq/pretrained_models/data/morphseg/lstm/checkpoint_best.pt', 'post_process': None, 'quiet': False, 'model_overrides': '{}', 'results_path': None}, 'distributed_training': {'_name': None, 'distributed_world_size': 1, 'distributed_rank': 0, 'distributed_backend': 'nccl', 'distributed_init_method': None, 'distributed_port': -1, 'device_id': 0, 'distributed_no_spawn': False, 'ddp_backend': 'pytorch_ddp', 'bucket_cap_mb': 25, 'fix_batches_to_gpus': False, 'find_unused_parameters': False, 'fast_stat_sync': False, 'heartbeat_timeout': -1, 'broadcast_buffers': False, 'slowmo_momentum': None, 'slowmo_algorithm': 'LocalSGD', 'localsgd_frequency': 3, 'nprocs_per_node': 1, 'pipeline_model_parallel': False, 'pipeline_balance': None, 'pipeline_devices': None, 'pipeline_chunks': 0, 'pipeline_encoder_balance': None, 'pipeline_encoder_devices': None, 'pipeline_decoder_balance': None, 'pipeline_decoder_devices': None, 'pipeline_checkpoint': 'never', 'zero_sharding': 'none', 'fp16': False, 'memory_efficient_fp16': False, 'tpu': False, 'no_reshard_after_forward': False, 'fp32_reduce_scatter': False, 'cpu_offload': False, 'distributed_num_procs': 0}, 'dataset': {'_name': None, 'num_workers': 1, 'skip_invalid_size_inputs_valid_test': False, 'max_tokens': None, 'batch_size': 1, 'required_batch_size_multiple': 8, 'required_seq_len_multiple': 1, 'dataset_impl': None, 'data_buffer_size': 10, 'train_subset': 'train', 'valid_subset': 'valid', 'validate_interval': 1, 'validate_interval_updates': 0, 'validate_after_updates': 0, 'fixed_validation_seed': None, 'disable_validation': False, 'max_tokens_valid': None, 'batch_size_valid': None, 'max_valid_steps': None, 'curriculum': 0, 'gen_subset': 'test', 'num_shards': 1, 'shard_id': 0}, 'optimization': {'_name': None, 'max_epoch': 0, 'max_update': 0, 'stop_time_hours': 0.0, 'clip_norm': 0.0, 'sentence_avg': False, 'update_freq': [1], 'lr': [0.25], 'stop_min_lr': -1.0, 'use_bmuf': False}, 'checkpoint': {'_name': None, 'save_dir': 'checkpoints', 'restore_file': 'checkpoint_last.pt', 'finetune_from_model': None, 'reset_dataloader': False, 'reset_lr_scheduler': False, 'reset_meters': False, 'reset_optimizer': False, 'optimizer_overrides': '{}', 'save_interval': 1, 'save_interval_updates': 0, 'keep_interval_updates': -1, 'keep_interval_updates_pattern': -1, 'keep_last_epochs': -1, 'keep_best_checkpoints': -1, 'no_save': False, 'no_epoch_checkpoints': False, 'no_last_checkpoints': False, 'no_save_optimizer_state': False, 'best_checkpoint_metric': 'loss', 'maximize_best_checkpoint_metric': False, 'patience': -1, 'checkpoint_suffix': '', 'checkpoint_shard_count': 1, 'load_checkpoint_on_all_dp_ranks': False, 'write_checkpoints_asynchronously': False, 'model_parallel_size': 1}, 'bmuf': {'_name': None, 'block_lr': 1.0, 'block_momentum': 0.875, 'global_sync_iter': 50, 'warmup_iterations': 500, 'use_nbm': False, 'average_sync': False, 'distributed_world_size': 1}, 'generation': {'_name': None, 'beam': 5, 'nbest': 2, 'max_len_a': 0.0, 'max_len_b': 200, 'min_len': 1, 'match_source_len': False, 'unnormalized': False, 'no_early_stop': False, 'no_beamable_mm': False, 'lenpen': 1.0, 'unkpen': 0.0, 'replace_unk': None, 'sacrebleu': False, 'score_reference': False, 'prefix_size': 0, 'no_repeat_ngram_size': 0, 'sampling': False, 'sampling_topk': -1, 'sampling_topp': -1.0, 'constraints': None, 'temperature': 1.0, 'diverse_beam_groups': -1, 'diverse_beam_strength': 0.5, 'diversity_rate': -1.0, 'print_alignment': None, 'print_step': False, 'lm_path': None, 'lm_weight': 0.0, 'iter_decode_eos_penalty': 0.0, 'iter_decode_max_iter': 10, 'iter_decode_force_max_iter': False, 'iter_decode_with_beam': 1, 'iter_decode_with_external_reranker': False, 'retain_iter_history': False, 'retain_dropout': False, 'retain_dropout_modules': None, 'decoding_format': None, 'no_seed_provided': False}, 'eval_lm': {'_name': None, 'output_word_probs': False, 'output_word_stats': False, 'context_window': 0, 'softmax_batch': 9223372036854775807}, 'interactive': {'_name': None, 'buffer_size': 1, 'input': '-'}, 'model': None, 'task': {'_name': 'translation', 'data': '/backend_fairseq/pretrained_models/data/morphseg/lstm/lstm_preprocess', 'source_lang': 'src', 'target_lang': 'trg', 'load_alignments': False, 'left_pad_source': True, 'left_pad_target': False, 'max_source_positions': 1024, 'max_target_positions': 1024, 'upsample_primary': -1, 'truncate_source': False, 'num_batch_buckets': 0, 'train_subset': 'train', 'dataset_impl': None, 'required_seq_len_multiple': 1, 'eval_bleu': False, 'eval_bleu_args': '{}', 'eval_bleu_detok': 'space', 'eval_bleu_detok_args': '{}', 'eval_tokenized_bleu': False, 'eval_bleu_remove_bpe': None, 'eval_bleu_print_samples': False}, 'criterion': {'_name': 'cross_entropy', 'sentence_avg': True}, 'optimizer': None, 'lr_scheduler': {'_name': 'fixed', 'force_anneal': None, 'lr_shrink': 0.1, 'warmup_updates': 0, 'lr': [0.25]}, 'scoring': {'_name': 'bleu', 'pad': 1, 'eos': 2, 'unk': 3}, 'bpe': None, 'tokenizer': None}
+2022-03-18 17:55:01 | INFO | fairseq.tasks.translation | [src] dictionary: 80 types
+2022-03-18 17:55:01 | INFO | fairseq.tasks.translation | [trg] dictionary: 80 types
+2022-03-18 17:55:01 | INFO | fairseq_cli.interactive | loading model(s) from /backend_fairseq/pretrained_models/data/morphseg/lstm/checkpoint_best.pt
+2022-03-18 17:55:05 | INFO | fairseq_cli.interactive | NOTE: hypothesis and token scores are output in base 2
+2022-03-18 17:55:05 | INFO | fairseq_cli.interactive | Type the input sentence and press return:
+S-0	<S> _ <S> _ Y e e t _ <unk> m a a _ g ̲ o ' o h l
+W-0	0.119	seconds
+H-0	-0.1993122398853302	y e e - t
+D-0	-0.1993122398853302	y e e - t
+P-0	-0.2086 -0.1763 -0.2076 -0.2556 -0.1196 -0.2282
+H-0	-0.8379778265953064	y e e = t
+D-0	-0.8379778265953064	y e e = t
+P-0	-0.2086 -0.1763 -0.2076 -3.9349 -0.2502 -0.2503
+S-1	<S> _ Y e e t _ <unk> m a a _ g ̲ o ' o h l _ s g ̲ a ' n i s t .
+W-1	0.089	seconds
+H-1	-1.1714919805526733	i m a a
+D-1	-1.1714919805526733	i m a a
+P-1	-5.0048 -0.2412 -0.1908 -0.2453 -0.1754
+H-1	-1.243395209312439	' m a a
+D-1	-1.243395209312439	' m a a
+P-1	-5.4109 -0.2159 -0.1099 -0.2892 -0.1911
+S-2	Y e e t _ <unk> m a a _ g ̲ o ' o h l _ s g ̲ a ' n i s t . _ <E>
+W-2	0.108	seconds
+H-2	-0.2029160112142563	g ̲ o ' o = h l
+D-2	-0.2029160112142563	g ̲ o ' o = h l
+P-2	-0.2018 -0.1739 -0.1877 -0.2098 -0.1820 -0.1718 -0.2330 -0.2276 -0.2388
+H-2	-0.9767207503318787	g ̲ o ' a = h l
+D-2	-0.9767207503318787	g ̲ o ' a = h l
+P-2	-0.2018 -0.1739 -0.1877 -0.2098 -7.1381 -0.1768 -0.2355 -0.2293 -0.2378
+S-3	<unk> m a a _ g ̲ o ' o h l _ s g ̲ a ' n i s t . _ <E> _ <E>
+W-3	0.100	seconds
+H-3	-0.16109278798103333	s g ̲ a ' n i s t
+D-3	-0.16109278798103333	s g ̲ a ' n i s t
+P-3	-0.1540 -0.1826 -0.1352 -0.1601 -0.2552 -0.1494 -0.1471 -0.1425 -0.0835 -0.2013
+H-3	-0.6887809038162231	s g ̲ a - ' n i s t
+D-3	-0.6887809038162231	s g ̲ a - ' n i s t
+P-3	-0.1540 -0.1826 -0.1352 -0.1601 -5.7673 -0.1063 -0.1463 -0.1426 -0.2012 -0.3792 -0.2016
+S-4	<S> _ <S> _ S d i l i t _ t s ' i i t s ' t . _ <E>
+W-4	0.377	seconds
+H-4	-0.3987649977207184	s d i l - i t
+D-4	-0.3987649977207184	s d i l - i t
+P-4	-0.0885 -0.2261 -0.1860 -0.3984 -1.3358 -0.5651 -0.1505 -0.2396
+H-4	-0.47717341780662537	s d i l i t
+D-4	-0.47717341780662537	s d i l i t
+P-4	-0.0885 -0.2261 -0.1860 -0.3984 -1.4196 -0.7765 -0.2451
+S-5	<S> _ S d i l i t _ t s ' i i t s ' t . _ <E> _ <E>
+W-5	0.113	seconds
+H-5	-0.1723337173461914	t s ' i i t s ' - t
+D-5	-0.1723337173461914	t s ' i i t s ' - t
+P-5	-0.0831 -0.1285 -0.1457 -0.1408 -0.2408 -0.1781 -0.1562 -0.2554 -0.1377 -0.1997 -0.2298
+H-5	-0.6710201501846313	t s ' i i t s ' t
+D-5	-0.6710201501846313	t s ' i i t s ' t
+P-5	-0.0831 -0.1285 -0.1457 -0.1408 -0.2408 -0.1781 -0.1562 -0.2554 -5.1997 -0.1819
+S-6	<S> _ <S> _ Y u k w _ d i m _ t ' a a h l
+W-6	0.084	seconds
+H-6	-0.1771133840084076	y u k w
+D-6	-0.1771133840084076	y u k w
+P-6	-0.1681 -0.1547 -0.1766 -0.1711 -0.2150
+H-6	-1.5541237592697144	y u k w s
+D-6	-1.5541237592697144	y u k w s
+P-6	-0.1681 -0.1547 -0.1766 -0.1711 -8.4688 -0.1854
+S-7	<S> _ Y u k w _ d i m _ t ' a a h l _ s i m
+W-7	0.398	seconds
+H-7	-0.2037436068058014	d i m
+D-7	-0.2037436068058014	d i m
+P-7	-0.1671 -0.2534 -0.1652 -0.2293
+H-7	-1.8027383089065552	= d i m
+D-7	-1.8027383089065552	= d i m
+P-7	-8.2611 -0.1805 -0.1764 -0.1717 -0.2239
+S-8	Y u k w _ d i m _ t ' a a h l _ s i m _ m a a ' y d i i t ,
+W-8	0.219	seconds
+H-8	-0.19949983060359955	t ' a a = h l
+D-8	-0.19949983060359955	t ' a a = h l
+P-8	-0.1953 -0.1648 -0.1870 -0.2377 -0.1664 -0.1906 -0.2209 -0.2334
+H-8	-1.1203662157058716	t ' a p = h l
+D-8	-1.1203662157058716	t ' a p = h l
+P-8	-0.1953 -0.1648 -0.1870 -7.6140 -0.1607 -0.1906 -0.2155 -0.2352
+S-9	d i m _ t ' a a h l _ s i m _ m a a ' y d i i t , _ <E>
+W-9	0.125	seconds
+H-9	-0.1813458651304245	s i m
+D-9	-0.1813458651304245	s i m
+P-9	-0.1530 -0.1942 -0.1576 -0.2207
+H-9	-1.8577438592910767	s i m m
+D-9	-1.8577438592910767	s i m m
+P-9	-0.1530 -0.1942 -0.1576 -8.5555 -0.2285
+S-10	t ' a a h l _ s i m _ m a a ' y d i i t , _ <E> _ <E>
+W-10	0.103	seconds
+H-10	-0.1973510980606079	m a a ' y - d i i t
+D-10	-0.1973510980606079	m a a ' y - d i i t
+P-10	-0.1487 -0.1467 -0.1663 -0.1552 -0.4217 -0.1269 -0.1568 -0.2451 -0.2101 -0.1505 -0.2430
+H-10	-0.7475523352622986	m a h a ' y - d i i t
+D-10	-0.7475523352622986	m a h a ' y - d i i t
+P-10	-0.1487 -0.1467 -6.6878 -0.1898 -0.4295 -0.3583 -0.0995 -0.1100 -0.2147 -0.1962 -0.1446 -0.2448
+S-11	<S> _ <S> _ s i n d o k ̲ d i i t h l _ h a ' a k s . _ <E>
+W-11	0.418	seconds
+H-11	-0.2557668685913086	s i - n d o k ̲ - d i i t = h l
+D-11	-0.2557668685913086	s i - n d o k ̲ - d i i t = h l
+P-11	-0.1031 -0.1365 -0.8215 -0.2091 -0.7656 -0.2261 -0.2022 -0.1652 -0.1304 -0.1262 -0.2592 -0.2196 -0.1616 -0.1864 -0.2181 -0.2049 -0.2125
+H-11	-0.28017953038215637	s i n - d o k ̲ - d i i t = h l
+D-11	-0.28017953038215637	s i n - d o k ̲ - d i i t = h l
+P-11	-0.1031 -0.1365 -1.6062 -0.0529 -0.4978 -0.2202 -0.2108 -0.1535 -0.1695 -0.1326 -0.2681 -0.2214 -0.1649 -0.1889 -0.2190 -0.2051 -0.2125
+S-12	<S> _ s i n d o k ̲ d i i t h l _ h a ' a k s . _ <E> _ <E>
+W-12	1.000	seconds
+H-12	-0.2307625114917755	h a ' a k s
+D-12	-0.2307625114917755	h a ' a k s
+P-12	-0.2537 -0.2312 -0.4255 -0.1856 -0.1480 -0.2122 -0.1592
+H-12	-0.7822771072387695	h a - a k s
+D-12	-0.7822771072387695	h a - a k s
+P-12	-0.2537 -0.2312 -4.2497 -0.2681 -0.1215 -0.1978 -0.1539
+S-13	<S> _ <S> _ T s ' i l i m _ ' n i d i i t . _ <E>
+W-13	0.459	seconds
+H-13	-0.2899547517299652	t s ' i l - m
+D-13	-0.2899547517299652	t s ' i l - m
+P-13	-0.1343 -0.1075 -0.1273 -0.1393 -0.2562 -1.1719 -0.1690 -0.2140
+H-13	-0.3408838212490082	t s ' i l i m
+D-13	-0.3408838212490082	t s ' i l i m
+P-13	-0.1343 -0.1075 -0.1273 -0.1393 -0.2562 -1.5843 -0.1442 -0.2339
+S-14	<S> _ T s ' i l i m _ ' n i d i i t . _ <E> _ <E>
+W-14	0.079	seconds
+H-14	-0.22741557657718658	' n i d i i t
+D-14	-0.22741557657718658	' n i d i i t
+P-14	-0.1138 -0.1219 -0.2958 -0.4854 -0.2492 -0.1713 -0.1324 -0.2495
+H-14	-0.6848537921905518	' n i t - i i t
+D-14	-0.6848537921905518	' n i t - i i t
+P-14	-0.1138 -0.1219 -0.2958 -3.1734 -0.3724 -1.2395 -0.3438 -0.2554 -0.2477
+S-15	<S> _ <S> _ G i n i s _ T s ' i i t s ' t _ <unk> m a a
+W-15	0.201	seconds
+H-15	-0.3220731019973755	g i n i s
+D-15	-0.3220731019973755	g i n i s
+P-15	-0.3054 -0.2661 -0.2022 -0.2767 -0.6757 -0.2064
+H-15	-0.5945487022399902	g i n i = s
+D-15	-0.5945487022399902	g i n i = s
+P-15	-0.3054 -0.2661 -0.2022 -0.2767 -2.8196 -0.1089 -0.1830
+S-16	<S> _ G i n i s _ T s ' i i t s ' t _ <unk> m a a _ a l o o h l
+W-16	0.603	seconds
+H-16	-0.22121265530586243	t s ' i i t s ' - t
+D-16	-0.22121265530586243	t s ' i i t s ' - t
+P-16	-0.4503 -0.1160 -0.1451 -0.1326 -0.2332 -0.1571 -0.1699 -0.2377 -0.2943 -0.2912 -0.2059
+H-16	-0.6299688816070557	t s ' i i t s ' t
+D-16	-0.6299688816070557	t s ' i i t s ' t
+P-16	-0.4503 -0.1160 -0.1451 -0.1326 -0.2332 -0.1571 -0.1699 -0.2377 -4.4910 -0.1668
+S-17	G i n i s _ T s ' i i t s ' t _ <unk> m a a _ a l o o h l _ a n a a y i m
+W-17	0.107	seconds
+H-17	-1.0653107166290283	t = m a a
+D-17	-1.0653107166290283	t = m a a
+P-17	-4.2791 -0.1582 -1.3747 -0.1944 -0.2382 -0.1473
+H-17	-1.1906769275665283	i m a a
+D-17	-1.1906769275665283	i m a a
+P-17	-5.1773 -0.2155 -0.1921 -0.2172 -0.1513
+S-18	T s ' i i t s ' t _ <unk> m a a _ a l o o h l _ a n a a y i m _ i s b a w d i s .
+W-18	0.190	seconds
+H-18	-0.17679743468761444	a - l o o = h l
+D-18	-0.17679743468761444	a - l o o = h l
+P-18	-0.1250 -0.1435 -0.1574 -0.1726 -0.1738 -0.1700 -0.1748 -0.2326 -0.2415
+H-18	-0.809057891368866	a l o o = h l
+D-18	-0.809057891368866	a l o o = h l
+P-18	-0.1250 -4.8314 -0.3689 -0.3107 -0.2020 -0.1564 -0.2363 -0.2417
+S-19	<unk> m a a _ a l o o h l _ a n a a y i m _ i s b a w d i s . _ <E>
+W-19	0.140	seconds
+H-19	-0.5576165318489075	a n a a y i m
+D-19	-0.5576165318489075	a n a a y i m
+P-19	-0.1277 -0.2033 -1.1326 -0.3286 -1.7215 -0.5190 -0.2123 -0.2161
+H-19	-0.6982488036155701	a n a a x - m
+D-19	-0.6982488036155701	a n a a x - m
+P-19	-0.1277 -0.2033 -1.1326 -0.3286 -1.7206 -0.6098 -1.2477 -0.2157
+S-20	a l o o h l _ a n a a y i m _ i s b a w d i s . _ <E> _ <E>
+W-20	0.134	seconds
+H-20	-0.7373221516609192	i s - b a w - i s
+D-20	-0.7373221516609192	i s - b a w - i s
+P-20	-0.4684 -0.2381 -1.5099 -0.2382 -0.1443 -1.0814 -1.3794 -0.7864 -1.2825 -0.2446
+H-20	-0.7458136677742004	i s - b a w - i = s
+D-20	-0.7458136677742004	i s - b a w - i = s
+P-20	-0.4684 -0.2381 -1.5099 -0.2382 -0.1443 -1.0814 -1.3794 -0.7864 -2.0630 -0.0880 -0.2068
+S-21	<S> _ <S> _ ' W a d i i t _ w i l _ ' w e e x s w
+W-21	0.095	seconds
+H-21	-0.20750033855438232	' w a - d i i t
+D-21	-0.20750033855438232	' w a - d i i t
+P-21	-0.1862 -0.3928 -0.2348 -0.0938 -0.1067 -0.2419 -0.2060 -0.1612 -0.2440
+H-21	-0.7721985578536987	' W a - d i i t
+D-21	-0.7721985578536987	' W a - d i i t
+P-21	-0.1862 -5.3205 -0.2649 -0.2078 -0.0977 -0.2542 -0.2135 -0.1605 -0.2444
+S-22	<S> _ ' W a d i i t _ w i l _ ' w e e x s w _ s i m
+W-22	0.133	seconds
+H-22	-0.36311104893684387	w i n
+D-22	-0.36311104893684387	w i n
+P-22	-0.1679 -0.2294 -0.8442 -0.2110
+H-22	-0.614093005657196	w i l
+D-22	-0.614093005657196	w i l
+P-22	-0.1679 -0.2294 -1.8675 -0.1916
+S-23	' W a d i i t _ w i l _ ' w e e x s w _ s i m _ m a a ' y .
+W-23	0.117	seconds
+H-23	-0.6090041995048523	' w e e x s w
+D-23	-0.6090041995048523	' w e e x s w
+P-23	-0.1712 -0.1124 -0.3065 -0.3975 -0.1743 -0.4731 -3.0222 -0.2149
+H-23	-0.7824039459228516	' w e e x s - w
+D-23	-0.7824039459228516	' w e e x s - w
+P-23	-0.1712 -0.1124 -0.3065 -0.3975 -0.1743 -0.4731 -1.7878 -3.3387 -0.2801
+S-24	w i l _ ' w e e x s w _ s i m _ m a a ' y . _ <E>
+W-24	0.110	seconds
+H-24	-0.21541540324687958	s i m
+D-24	-0.21541540324687958	s i m
+P-24	-0.1625 -0.3026 -0.1697 -0.2269
+H-24	-1.7858686447143555	s i = m
+D-24	-1.7858686447143555	s i = m
+P-24	-0.1625 -0.3026 -7.9115 -0.3327 -0.2201
+S-25	' w e e x s w _ s i m _ m a a ' y . _ <E> _ <E>
+W-25	0.211	seconds
+H-25	-0.21642449498176575	m a a ' y
+D-25	-0.21642449498176575	m a a ' y
+P-25	-0.1645 -0.1249 -0.1968 -0.3922 -0.2020 -0.2182
+H-25	-0.729871392250061	m a a - ' y
+D-25	-0.729871392250061	m a a - ' y
+P-25	-0.1645 -0.1249 -0.1968 -4.0919 -0.1825 -0.1054 -0.2431
+S-26	<S> _ <S> _ H e l t h l _ t ' a a h l x w s _ <unk> m a a .
+W-26	0.314	seconds
+H-26	-0.17214815318584442	h e l t = h l
+D-26	-0.17214815318584442	h e l t = h l
+P-26	-0.1866 -0.1633 -0.2183 -0.0766 -0.1301 -0.1724 -0.2094 -0.2206
+H-26	-1.008628249168396	H e l t = h l
+D-26	-1.008628249168396	H e l t = h l
+P-26	-6.7678 -0.2150 -0.1525 -0.1733 -0.1578 -0.1691 -0.2146 -0.2189
+S-27	<S> _ H e l t h l _ t ' a a h l x w s _ <unk> m a a . _ <E>
+W-27	0.302	seconds
+H-27	-0.3103139400482178	t ' a a h l - x w = s
+D-27	-0.3103139400482178	t ' a a h l - x w = s
+P-27	-0.0491 -0.1913 -0.1160 -0.1760 -0.7715 -0.1996 -1.1634 -0.1431 -0.1007 -0.5137 -0.1115 -0.1879
+H-27	-0.3493013083934784	t ' a a h l x w = s
+D-27	-0.3493013083934784	t ' a a h l x w = s
+P-27	-0.0491 -0.1913 -0.1160 -0.1760 -0.7715 -0.1996 -1.2668 -0.1116 -0.6753 -0.1003 -0.1848
+S-28	H e l t h l _ t ' a a h l x w s _ <unk> m a a . _ <E> _ <E>
+W-28	0.110	seconds
+H-28	-1.0329558849334717	t = a a
+D-28	-1.0329558849334717	t = a a
+P-28	-4.1423 -0.1132 -0.5793 -0.1640 -0.1660
+H-28	-1.117004156112671	i m a a
+D-28	-1.117004156112671	i m a a
+P-28	-4.8424 -0.1757 -0.2265 -0.1789 -0.1616
+S-29	<S> _ <S> _ I i t _ g y a ' a s _ <unk> m a a h l
+W-29	0.703	seconds
+H-29	-0.18175844848155975	i i = t
+D-29	-0.18175844848155975	i i = t
+P-29	-0.2009 -0.2116 -0.1129 -0.1301 -0.2533
+H-29	-1.5852938890457153	i i = t l
+D-29	-1.5852938890457153	i i = t l
+P-29	-0.2009 -0.2116 -0.1129 -0.1301 -8.6017 -0.2546
+S-30	<S> _ I i t _ g y a ' a s _ <unk> m a a h l _ l a l t .
+W-30	0.094	seconds
+H-30	-0.18221637606620789	g y a ' a = s
+D-30	-0.18221637606620789	g y a ' a = s
+P-30	-0.1126 -0.1480 -0.2066 -0.1411 -0.1998 -0.2457 -0.1909 -0.2131
+H-30	-0.8480197787284851	g y a ' a s
+D-30	-0.8480197787284851	g y a ' a s
+P-30	-0.1126 -0.1480 -0.2066 -0.1411 -0.1998 -4.9451 -0.1829
+S-31	I i t _ g y a ' a s _ <unk> m a a h l _ l a l t . _ <E>
+W-31	0.091	seconds
+H-31	-0.7979771494865417	i m a a = h l
+D-31	-0.7979771494865417	i m a a = h l
+P-31	-4.9904 -0.1681 -0.1577 -0.2465 -0.2219 -0.1563 -0.2209 -0.2221
+H-31	-0.8709020614624023	u m a a = h l
+D-31	-0.8709020614624023	u m a a = h l
+P-31	-5.5240 -0.1786 -0.1895 -0.2422 -0.2380 -0.1525 -0.2224 -0.2199
+S-32	g y a ' a s _ <unk> m a a h l _ l a l t . _ <E> _ <E>
+W-32	0.077	seconds
+H-32	-0.2180626094341278	l a l t
+D-32	-0.2180626094341278	l a l t
+P-32	-0.2409 -0.2178 -0.2458 -0.1641 -0.2217
+H-32	-1.3287843465805054	l a l - t
+D-32	-1.3287843465805054	l a l - t
+P-32	-0.2409 -0.2178 -0.2458 -6.9166 -0.1237 -0.2280
+S-33	<S> _ <S> _ B a a s x i s _ <unk> m a a h l _ l a l t .
+W-33	0.096	seconds
+H-33	-0.5549935698509216	b a a s x - i = s
+D-33	-0.5549935698509216	b a a s x - i = s
+P-33	-2.8314 -0.1065 -0.1609 -0.1563 -0.3823 -0.9962 -0.1557 -0.4744 -0.0993 -0.1867
+H-33	-0.8060435652732849	t a a s x - i = s
+D-33	-0.8060435652732849	t a a s x - i = s
+P-33	-4.8167 -0.2147 -0.1523 -0.1891 -0.4571 -1.2984 -0.1728 -0.4764 -0.0970 -0.1860
+S-34	<S> _ B a a s x i s _ <unk> m a a h l _ l a l t . _ <E>
+W-34	0.086	seconds
+H-34	-0.845167875289917	t = m a a = h l
+D-34	-0.845167875289917	t = m a a = h l
+P-34	-4.8878 -0.6511 -0.7296 -0.2236 -0.3473 -0.1875 -0.1500 -0.2226 -0.2069
+H-34	-0.879318118095398	u m a a = h l
+D-34	-0.879318118095398	u m a a = h l
+P-34	-5.4653 -0.1773 -0.1755 -0.2567 -0.3656 -0.1538 -0.2308 -0.2095
+S-35	B a a s x i s _ <unk> m a a h l _ l a l t . _ <E> _ <E>
+W-35	0.166	seconds
+H-35	-0.20882825553417206	l a l t
+D-35	-0.20882825553417206	l a l t
+P-35	-0.2189 -0.1923 -0.2319 -0.1852 -0.2159
+H-35	-1.2102975845336914	l a l - t
+D-35	-1.2102975845336914	l a l - t
+P-35	-0.2189 -0.1923 -0.2319 -6.2689 -0.1273 -0.2225
+S-36	<S> _ <S> _ K ' e e k ̲ x w t _ <unk> m a a . _ <E>
+W-36	0.216	seconds
+H-36	-0.2254822552204132	k ' e e k ̲ - x w - t
+D-36	-0.2254822552204132	k ' e e k ̲ - x w - t
+P-36	-0.1432 -0.1535 -0.3500 -0.3094 -0.2663 -0.2043 -0.4092 -0.0936 -0.0906 -0.2912 -0.1599 -0.2346
+H-36	-0.5087860822677612	k ' e e k ̲ x w - t
+D-36	-0.5087860822677612	k ' e e k ̲ x w - t
+P-36	-0.1432 -0.1535 -0.3500 -0.3094 -0.2663 -0.2043 -3.2705 -0.1595 -0.3567 -0.1451 -0.2382
+S-37	<S> _ K ' e e k ̲ x w t _ <unk> m a a . _ <E> _ <E>
+W-37	0.276	seconds
+H-37	-1.028862714767456	t = a a
+D-37	-1.028862714767456	t = a a
+P-37	-4.2766 -0.1529 -0.3533 -0.1633 -0.1981
+H-37	-1.103003740310669	i m a a
+D-37	-1.103003740310669	i m a a
+P-37	-4.8339 -0.1752 -0.1568 -0.1561 -0.1930
+S-38	<S> _ <S> _ A k s t _ l o ' o p _ w i l
+W-38	0.070	seconds
+H-38	-0.45787513256073	a k s - t
+D-38	-0.45787513256073	a k s - t
+P-38	-0.6185 -0.1871 -0.1618 -1.4033 -0.1487 -0.2278
+H-38	-0.4647006094455719	a k s = t
+D-38	-0.4647006094455719	a k s = t
+P-38	-0.6185 -0.1871 -0.1618 -1.4076 -0.1669 -0.2463
+S-39	<S> _ A k s t _ l o ' o p _ w i l _ ' w i h l
+W-39	0.095	seconds
+H-39	-0.1937187910079956	l o ' o p
+D-39	-0.1937187910079956	l o ' o p
+P-39	-0.1702 -0.1690 -0.2476 -0.1550 -0.2104 -0.2101
+H-39	-1.0479830503463745	l o ' o - p
+D-39	-1.0479830503463745	l o ' o - p
+P-39	-0.1702 -0.1690 -0.2476 -0.1550 -6.0904 -0.2948 -0.2089
+S-40	A k s t _ l o ' o p _ w i l _ ' w i h l _ w i l d i i t .
+W-40	0.152	seconds
+H-40	-0.2611168324947357	w i n
+D-40	-0.2611168324947357	w i n
+P-40	-0.2452 -0.2303 -0.3431 -0.2258
+H-40	-1.063788652420044	w i l
+D-40	-1.063788652420044	w i l
+P-40	-0.2452 -0.2303 -3.5689 -0.2107
+S-41	l o ' o p _ w i l _ ' w i h l _ w i l d i i t . _ <E>
+W-41	0.113	seconds
+H-41	-0.22438806295394897	' w i h l
+D-41	-0.22438806295394897	' w i h l
+P-41	-0.1757 -0.2141 -0.3330 -0.2082 -0.1956 -0.2197
+H-41	-1.0575603246688843	' w i t = h l
+D-41	-1.0575603246688843	' w i t = h l
+P-41	-0.1757 -0.2141 -0.3330 -6.9136 -0.2356 -0.1329 -0.2043 -0.2513
+S-42	w i l _ ' w i h l _ w i l d i i t . _ <E> _ <E>
+W-42	0.121	seconds
+H-42	-0.1683083325624466	w i l - d i i t
+D-42	-0.1683083325624466	w i l - d i i t
+P-42	-0.1978 -0.2289 -0.1412 -0.0719 -0.1047 -0.2010 -0.1872 -0.1307 -0.2514
+H-42	-0.9757688641548157	w i n - d i i t
+D-42	-0.9757688641548157	w i n - d i i t
+P-42	-0.1978 -0.2289 -7.4406 -0.0654 -0.0987 -0.1877 -0.1808 -0.1320 -0.2501
+S-43	<S> _ <S> _ H l i k s t _ <unk> m a a _ l a x ̲
+W-43	0.507	seconds
+H-43	-0.27789103984832764	h l i k s - t
+D-43	-0.27789103984832764	h l i k s - t
+P-43	-0.1343 -0.1712 -0.1206 -0.5689 -0.2702 -0.6132 -0.1253 -0.2193
+H-43	-0.5442841053009033	h l i k s = t
+D-43	-0.5442841053009033	h l i k s = t
+P-43	-0.1343 -0.1712 -0.1206 -0.5689 -0.2702 -2.6023 -0.2519 -0.2348
+S-44	<S> _ H l i k s t _ <unk> m a a _ l a x ̲ _ l o ' o p g i .
+W-44	0.152	seconds
+H-44	-1.0307071208953857	t = m a a
+D-44	-1.0307071208953857	t = m a a
+P-44	-3.4567 -0.3450 -1.7790 -0.1826 -0.2644 -0.1565
+H-44	-1.2453042268753052	i m a a
+D-44	-1.2453042268753052	i m a a
+P-44	-5.3141 -0.3637 -0.1748 -0.2156 -0.1583
+S-45	H l i k s t _ <unk> m a a _ l a x ̲ _ l o ' o p g i . _ <E>
+W-45	0.088	seconds
+H-45	-0.174543097615242	l a x ̲
+D-45	-0.174543097615242	l a x ̲
+P-45	-0.1371 -0.1315 -0.1762 -0.1976 -0.2303
+H-45	-1.573709487915039	l a x ̲ l
+D-45	-1.573709487915039	l a x ̲ l
+P-45	-0.1371 -0.1315 -0.1762 -0.1976 -8.5846 -0.2152
+S-46	<unk> m a a _ l a x ̲ _ l o ' o p g i . _ <E> _ <E>
+W-46	0.078	seconds
+H-46	-0.32678139209747314	l o ' o p = g i
+D-46	-0.32678139209747314	l o ' o p = g i
+P-46	-0.2296 -0.1651 -0.2222 -0.1410 -0.1925 -1.3295 -0.3091 -0.1389 -0.2132
+H-46	-0.3507600724697113	l o ' o p g i
+D-46	-0.3507600724697113	l o ' o p g i
+P-46	-0.2296 -0.1651 -0.2222 -0.1410 -0.1925 -1.3039 -0.2829 -0.2689
+S-47	<S> _ <S> _ M o o j i _ d e e x i t . _ <E>
+W-47	0.118	seconds
+H-47	-0.24729667603969574	m o o = j i
+D-47	-0.24729667603969574	m o o = j i
+P-47	-0.4435 -0.2172 -0.2371 -0.1558 -0.2733 -0.1841 -0.2201
+H-47	-0.8812906742095947	M o o = j i
+D-47	-0.8812906742095947	M o o = j i
+P-47	-4.7150 -0.1509 -0.2230 -0.3818 -0.2910 -0.1895 -0.2179
+S-48	<S> _ M o o j i _ d e e x i t . _ <E> _ <E>
+W-48	0.127	seconds
+H-48	-0.42321285605430603	d e e x - i t
+D-48	-0.42321285605430603	d e e x - i t
+P-48	-0.2416 -0.2217 -0.2980 -0.4319 -0.1821 -0.9647 -0.7913 -0.2544
+H-48	-0.5228096842765808	d e e x - i - t
+D-48	-0.5228096842765808	d e e x - i - t
+P-48	-0.2416 -0.2217 -0.2980 -0.4319 -0.1821 -0.9647 -2.0475 -0.0681 -0.2497
+S-49	<S> _ <S> _ T ' u g w a n d i n t h l _ g ̲ a l d i m _ t ' a a h l x w [ t ] .
+W-49	0.676	seconds
+H-49	-0.39775753021240234	t ' u k w - a n - i n - t = h l
+D-49	-0.39775753021240234	t ' u k w - a n - i n - t = h l
+P-49	-0.2466 -0.1805 -0.3469 -0.7931 -0.2621 -0.4286 -1.2286 -0.2034 -0.1145 -0.2714 -0.9402 -0.5671 -0.3364 -0.1962 -0.2102 -0.2119 -0.2240
+H-49	-0.4866865575313568	t ' u k w - T n - i n - t = h l
+D-49	-0.4866865575313568	t ' u k w - T n - i n - t = h l
+P-49	-0.2466 -0.1805 -0.3469 -0.7931 -0.2621 -0.4286 -2.8303 -0.3373 -0.0843 -0.1512 -0.9261 -0.5093 -0.3305 -0.2020 -0.2094 -0.2113 -0.2241
+S-50	<S> _ T ' u g w a n d i n t h l _ g ̲ a l d i m _ t ' a a h l x w [ t ] . _ <E>
+W-50	0.137	seconds
+H-50	-0.4046839475631714	g ̲ a l - d i m
+D-50	-0.4046839475631714	g ̲ a l - d i m
+P-50	-0.1064 -0.1520 -0.2273 -0.2289 -1.7374 -0.6095 -0.2201 -0.1350 -0.2254
+H-50	-0.46133384108543396	g ̲ a l d i m
+D-50	-0.46133384108543396	g ̲ a l d i m
+P-50	-0.1064 -0.1520 -0.2273 -0.2289 -1.9375 -0.6522 -0.1746 -0.2117
+S-51	T ' u g w a n d i n t h l _ g ̲ a l d i m _ t ' a a h l x w [ t ] . _ <E> _ <E>
+W-51	0.122	seconds
+H-51	-0.5311505794525146	t ' a a h l x w - T - t
+D-51	-0.5311505794525146	t ' a a h l x w - T - t
+P-51	-0.0815 -0.1738 -0.1079 -0.1753 -0.7859 -0.1549 -0.6358 -0.0975 -0.5270 -3.4825 -0.2996 -0.0975 -0.2859
+H-51	-0.5733246207237244	t ' a a h l x w - i t
+D-51	-0.5733246207237244	t ' a a h l x w - i t
+P-51	-0.0815 -0.1738 -0.1079 -0.1753 -0.7859 -0.1549 -0.6358 -0.0975 -0.5270 -3.4187 -0.0554 -0.6663
+S-52	<S> _ <S> _ I i _ l a k h l _ t ' a a h l x w s
+W-52	0.057	seconds
+H-52	-0.22019228339195251	i i
+D-52	-0.22019228339195251	i i
+P-52	-0.2188 -0.2186 -0.2232
+H-52	-2.4096388816833496	i i a
+D-52	-2.4096388816833496	i i a
+P-52	-0.2188 -0.2186 -8.9197 -0.2815
+S-53	<S> _ I i _ l a k h l _ t ' a a h l x w s _ <unk> m a a .
+W-53	0.084	seconds
+H-53	-0.6151585578918457	l a k = h l
+D-53	-0.6151585578918457	l a k = h l
+P-53	-0.2264 -0.2426 -0.4751 -2.7107 -0.2393 -0.1959 -0.2163
+H-53	-0.6652909517288208	l a k h l
+D-53	-0.6652909517288208	l a k h l
+P-53	-0.2264 -0.2426 -0.4751 -2.4364 -0.4342 -0.1772
+S-54	I i _ l a k h l _ t ' a a h l x w s _ <unk> m a a . _ <E>
+W-54	0.106	seconds
+H-54	-0.35313454270362854	t ' a a h l x w = s
+D-54	-0.35313454270362854	t ' a a h l x w = s
+P-54	-0.0860 -0.1679 -0.1086 -0.1561 -1.0893 -0.2004 -1.0545 -0.1131 -0.6194 -0.1028 -0.1865
+H-54	-0.5907890200614929	t ' a a h l x w s
+D-54	-0.5907890200614929	t ' a a h l x w s
+P-54	-0.0860 -0.1679 -0.1086 -0.1561 -1.0893 -0.2004 -1.0545 -0.1131 -2.7861 -0.1459
+S-55	l a k h l _ t ' a a h l x w s _ <unk> m a a . _ <E> _ <E>
+W-55	0.359	seconds
+H-55	-1.0245457887649536	i m a a
+D-55	-1.0245457887649536	i m a a
+P-55	-4.4248 -0.1648 -0.1948 -0.1679 -0.1704
+H-55	-1.1263017654418945	t = a a
+D-55	-1.1263017654418945	t = a a
+P-55	-4.6873 -0.1465 -0.4541 -0.1691 -0.1744
+S-56	<S> _ <S> _ I i _ h a t s ' i m _ h o o
+W-56	0.215	seconds
+H-56	-0.22484710812568665	i i
+D-56	-0.22484710812568665	i i
+P-56	-0.2217 -0.2308 -0.2221
+H-56	-2.4059762954711914	i i a
+D-56	-2.4059762954711914	i i a
+P-56	-0.2217 -0.2308 -8.8875 -0.2839
+S-57	<S> _ I i _ h a t s ' i m _ h o o _ s i t ' a a ' m a t .
+W-57	0.274	seconds
+H-57	-0.22882549464702606	h a t s ' i m
+D-57	-0.22882549464702606	h a t s ' i m
+P-57	-0.2238 -0.2571 -0.1454 -0.1042 -0.1972 -0.5281 -0.1596 -0.2152
+H-57	-0.5257020592689514	h a t s ' - m
+D-57	-0.5257020592689514	h a t s ' - m
+P-57	-0.2238 -0.2571 -0.1454 -0.1042 -0.1972 -2.7742 -0.2986 -0.2051
+S-58	I i _ h a t s ' i m _ h o o _ s i t ' a a ' m a t . _ <E>
+W-58	0.061	seconds
+H-58	-0.1999134123325348	h o o
+D-58	-0.1999134123325348	h o o
+P-58	-0.2002 -0.1846 -0.2334 -0.1814
+H-58	-1.9415876865386963	h o x
+D-58	-1.9415876865386963	h o x
+P-58	-0.2002 -0.1846 -6.9799 -0.4016
+S-59	h a t s ' i m _ h o o _ s i t ' a a ' m a t . _ <E> _ <E>
+W-59	0.320	seconds
+H-59	-0.2003730684518814	s i - t ' a a - ' m - t
+D-59	-0.2003730684518814	s i - t ' a a - ' m - t
+P-59	-0.2627 -0.2191 -0.0945 -0.1807 -0.1445 -0.1742 -0.2257 -0.0793 -0.2586 -0.1404 -0.0402 -0.5342 -0.2505
+H-59	-0.37826818227767944	s i - t ' a a - ' m - i t
+D-59	-0.37826818227767944	s i - t ' a a - ' m - i t
+P-59	-0.2627 -0.2191 -0.0945 -0.1807 -0.1445 -0.1742 -0.2257 -0.0793 -0.2586 -0.1404 -0.0402 -2.9748 -0.2211 -0.2798
+S-60	<S> _ <S> _ H a t s ' i m _ h o o _ m i d i n t h l
+W-60	0.133	seconds
+H-60	-0.18414892256259918	h a t s ' i m
+D-60	-0.18414892256259918	h a t s ' i m
+P-60	-0.2277 -0.2095 -0.2083 -0.0995 -0.1770 -0.1984 -0.1484 -0.2044
+H-60	-0.9527832865715027	h a t s ' - m
+D-60	-0.9527832865715027	h a t s ' - m
+P-60	-0.2277 -0.2095 -0.2083 -0.0995 -0.1770 -6.2580 -0.2477 -0.1947
+S-61	<S> _ H a t s ' i m _ h o o _ m i d i n t h l _ g ̲ a l d i m
+W-61	0.059	seconds
+H-61	-0.1937880516052246	h o o
+D-61	-0.1937880516052246	h o o
+P-61	-0.2213 -0.1400 -0.2430 -0.1709
+H-61	-1.9167486429214478	h o x
+D-61	-1.9167486429214478	h o x
+P-61	-0.2213 -0.1400 -6.9722 -0.3335
+S-62	H a t s ' i m _ h o o _ m i d i n t h l _ g ̲ a l d i m _ t ' a a h l x w t .
+W-62	0.369	seconds
+H-62	-0.25183603167533875	m i t - i n - t = h l
+D-62	-0.25183603167533875	m i t - i n - t = h l
+P-62	-0.1702 -0.1633 -0.8057 -0.4351 -0.1249 -0.1098 -0.1124 -0.2734 -0.1708 -0.2040 -0.2038 -0.2487
+H-62	-0.5381132364273071	m i d i n - t = h l
+D-62	-0.5381132364273071	m i d i n - t = h l
+P-62	-0.1702 -0.1633 -2.5952 -0.1609 -0.1431 -1.3627 -0.4477 -0.2199 -0.2053 -0.2059 -0.2450
+S-63	h o o _ m i d i n t h l _ g ̲ a l d i m _ t ' a a h l x w t . _ <E>
+W-63	0.365	seconds
+H-63	-0.34987717866897583	g ̲ a l - d i m
+D-63	-0.34987717866897583	g ̲ a l - d i m
+P-63	-0.1319 -0.1632 -0.2101 -0.2061 -1.1249 -0.7243 -0.2164 -0.1385 -0.2335
+H-63	-0.5197689533233643	g ̲ a l d i m
+D-63	-0.5197689533233643	g ̲ a l d i m
+P-63	-0.1319 -0.1632 -0.2101 -0.2061 -2.4340 -0.6214 -0.1756 -0.2158
+S-64	m i d i n t h l _ g ̲ a l d i m _ t ' a a h l x w t . _ <E> _ <E>
+W-64	0.139	seconds
+H-64	-0.29886287450790405	t ' a a h l x w - t
+D-64	-0.29886287450790405	t ' a a h l x w - t
+P-64	-0.1444 -0.1483 -0.1292 -0.1704 -1.0851 -0.1760 -0.8444 -0.1216 -0.1137 -0.0991 -0.2553
+H-64	-0.35128095746040344	t ' a a - h l x w - t
+D-64	-0.35128095746040344	t ' a a - h l x w - t
+P-64	-0.1444 -0.1483 -0.1292 -0.1704 -2.1773 -0.3393 -0.2478 -0.2175 -0.1203 -0.1576 -0.1091 -0.2542
+S-65	<S> _ <S> _ I i _ h a ' w d i i t . _ <E>
+W-65	0.151	seconds
+H-65	-0.2289990335702896	i i
+D-65	-0.2289990335702896	i i
+P-65	-0.2275 -0.2374 -0.2221
+H-65	-2.3959906101226807	= i i
+D-65	-2.3959906101226807	= i i
+P-65	-8.5736 -0.3537 -0.4431 -0.2136
+S-66	<S> _ I i _ h a ' w d i i t . _ <E> _ <E>
+W-66	0.226	seconds
+H-66	-0.2116074115037918	h a ' w - d i i t
+D-66	-0.2116074115037918	h a ' w - d i i t
+P-66	-0.2710 -0.2190 -0.4343 -0.1520 -0.0746 -0.1311 -0.2491 -0.1891 -0.1434 -0.2524
+H-66	-0.5796875953674316	h a - ' w - d i i t
+D-66	-0.5796875953674316	h a - ' w - d i i t
+P-66	-0.2710 -0.2190 -4.0530 -0.1256 -0.2354 -0.4526 -0.1075 -0.2859 -0.2045 -0.1713 -0.2509
+S-67	<S> _ <S> _ G i n i s _ <unk> m a a t _ Y e ' e ' t
+W-67	0.368	seconds
+H-67	-0.33649584650993347	g i n i s
+D-67	-0.33649584650993347	g i n i s
+P-67	-0.3137 -0.3273 -0.1917 -0.3148 -0.6648 -0.2067
+H-67	-0.5999467968940735	g i n i = s
+D-67	-0.5999467968940735	g i n i = s
+P-67	-0.3137 -0.3273 -0.1917 -0.3148 -2.7728 -0.0879 -0.1915
+S-68	<S> _ G i n i s _ <unk> m a a t _ Y e ' e ' t _ a h l
+W-68	0.110	seconds
+H-68	-1.0443757772445679	' m a a = t
+D-68	-1.0443757772445679	' m a a = t
+P-68	-4.5700 -0.1610 -0.1348 -0.3390 -1.6387 -0.2278 -0.2393
+H-68	-1.0592155456542969	g m a a = t
+D-68	-1.0592155456542969	g m a a = t
+P-68	-5.3870 -0.2149 -0.1069 -0.3453 -0.9248 -0.1998 -0.2358
+S-69	G i n i s _ <unk> m a a t _ Y e ' e ' t _ a h l _ s i m
+W-69	0.191	seconds
+H-69	-0.36746716499328613	y e ' e - ' t
+D-69	-0.36746716499328613	y e ' e - ' t
+P-69	-0.2532 -0.2398 -0.2385 -0.2789 -0.2501 -0.4073 -1.0238 -0.2482
+H-69	-0.7115544676780701	y e ' e - ' - t
+D-69	-0.7115544676780701	y e ' e - ' - t
+P-69	-0.2532 -0.2398 -0.2385 -0.2789 -0.2501 -0.4073 -4.2121 -0.2945 -0.2297
+S-70	<unk> m a a t _ Y e ' e ' t _ a h l _ s i m _ m a a ' y ,
+W-70	0.282	seconds
+H-70	-0.20452217757701874	a = h l
+D-70	-0.20452217757701874	a = h l
+P-70	-0.1938 -0.1649 -0.1825 -0.2313 -0.2502
+H-70	-1.6168112754821777	a = h l M
+D-70	-1.6168112754821777	a = h l M
+P-70	-0.1938 -0.1649 -0.1825 -0.2313 -8.6854 -0.2431
+S-71	Y e ' e ' t _ a h l _ s i m _ m a a ' y , _ t ' a a h l x w [ t ] ,
+W-71	0.173	seconds
+H-71	-0.17069178819656372	s i m
+D-71	-0.17069178819656372	s i m
+P-71	-0.1634 -0.1663 -0.1446 -0.2085
+H-71	-2.0771100521087646	d i m
+D-71	-2.0771100521087646	d i m
+P-71	-7.8101 -0.1697 -0.1345 -0.1941
+S-72	a h l _ s i m _ m a a ' y , _ t ' a a h l x w [ t ] , _ i i t
+W-72	0.116	seconds
+H-72	-0.2076675295829773	m a a ' y
+D-72	-0.2076675295829773	m a a ' y
+P-72	-0.1418 -0.1261 -0.2640 -0.2854 -0.2470 -0.1817
+H-72	-0.8694364428520203	m a a - ' y
+D-72	-0.8694364428520203	m a a - ' y
+P-72	-0.1418 -0.1261 -0.2640 -5.0745 -0.1599 -0.1162 -0.2035
+S-73	s i m _ m a a ' y , _ t ' a a h l x w [ t ] , _ i i t _ d a w d i n h l
+W-73	0.412	seconds
+H-73	-0.5949090719223022	t ' a a - h l x w - i t
+D-73	-0.5949090719223022	t ' a a - h l x w - i t
+P-73	-0.1123 -0.1711 -0.1385 -0.1885 -2.2920 -0.2155 -0.2261 -0.2168 -0.1114 -0.6302 -2.8898 -0.0704 -0.4710
+H-73	-0.6058107614517212	t ' a a h l x w - i t
+D-73	-0.6058107614517212	t ' a a h l x w - i t
+P-73	-0.1123 -0.1711 -0.1385 -0.1885 -0.8437 -0.1686 -0.9349 -0.1083 -0.5687 -3.3140 -0.0513 -0.6699
+S-74	m a a ' y , _ t ' a a h l x w [ t ] , _ i i t _ d a w d i n h l _ m a n i t .
+W-74	0.084	seconds
+H-74	-0.18478767573833466	i i = t
+D-74	-0.18478767573833466	i i = t
+P-74	-0.2403 -0.2304 -0.0756 -0.1333 -0.2443
+H-74	-1.5727715492248535	i i = t d
+D-74	-1.5727715492248535	i i = t d
+P-74	-0.2403 -0.2304 -0.0756 -0.1333 -8.4522 -0.3048
+S-75	t ' a a h l x w [ t ] , _ i i t _ d a w d i n h l _ m a n i t . _ <E>
+W-75	0.116	seconds
+H-75	-0.3835277557373047	d a w - i n = h l
+D-75	-0.3835277557373047	d a w - i n = h l
+P-75	-0.2567 -0.2548 -1.2166 -0.8424 -0.2743 -0.1568 -0.1803 -0.2067 -0.2167 -0.2299
+H-75	-0.5761846899986267	d a x w - i n = h l
+D-75	-0.5761846899986267	d a x w - i n = h l
+P-75	-0.2567 -0.2548 -4.1699 -0.2893 -0.0936 -0.1455 -0.2298 -0.2242 -0.2243 -0.2150 -0.2352
+S-76	i i t _ d a w d i n h l _ m a n i t . _ <E> _ <E>
+W-76	0.079	seconds
+H-76	-0.38315272331237793	m a n - i t
+D-76	-0.38315272331237793	m a n - i t
+P-76	-0.8203 -0.2367 -0.1971 -0.2892 -0.2177 -0.6751 -0.2461
+H-76	-0.5294311046600342	m a n - i - t
+D-76	-0.5294311046600342	m a n - i - t
+P-76	-0.8203 -0.2367 -0.1971 -0.2892 -0.2177 -2.1703 -0.0575 -0.2467
+S-77	<S> _ <S> _ " D i m _ i x s d a _ j i
+W-77	0.335	seconds
+H-77	-0.21544219553470612	d i m
+D-77	-0.21544219553470612	d i m
+P-77	-0.2118 -0.2789 -0.1545 -0.2165
+H-77	-1.9179408550262451	d i m i
+D-77	-1.9179408550262451	d i m i
+P-77	-0.2118 -0.2789 -0.1545 -8.6446 -0.2999
+S-78	<S> _ " D i m _ i x s d a _ j i _ h l a a
+W-78	0.094	seconds
+H-78	-0.3428080379962921	i x s d a
+D-78	-0.3428080379962921	i x s d a
+P-78	-0.2689 -0.1836 -0.1667 -1.0801 -0.1713 -0.1863
+H-78	-0.3918725252151489	i x s - d a
+D-78	-0.3918725252151489	i x s - d a
+P-78	-0.2689 -0.1836 -0.1667 -1.6059 -0.1671 -0.1542 -0.1967
+S-79	" D i m _ i x s d a _ j i _ h l a a _ m a a d i m , "
+W-79	0.069	seconds
+H-79	-0.19490796327590942	j i
+D-79	-0.19490796327590942	j i
+P-79	-0.1498 -0.2072 -0.2277
+H-79	-2.205275774002075	= j i
+D-79	-2.205275774002075	= j i
+P-79	-8.2902 -0.1956 -0.1376 -0.1977
+S-80	i x s d a _ j i _ h l a a _ m a a d i m , " _ d i y a t
+W-80	0.100	seconds
+H-80	-0.24310730397701263	h l a a
+D-80	-0.24310730397701263	h l a a
+P-80	-0.1646 -0.2263 -0.3633 -0.2416 -0.2197
+H-80	-1.160636305809021	h l i a
+D-80	-1.160636305809021	h l i a
+P-80	-0.1646 -0.2263 -4.8303 -0.3592 -0.2228
+S-81	j i _ h l a a _ m a a d i m , " _ d i y a t _ T s ' i i t s ' t .
+W-81	0.513	seconds
+H-81	-0.6053431034088135	m a a d i m
+D-81	-0.6053431034088135	m a a d i m
+P-81	-0.1373 -0.1857 -0.2793 -2.3800 -0.8641 -0.1727 -0.2182
+H-81	-0.6194894909858704	m a a t - m
+D-81	-0.6194894909858704	m a a t - m
+P-81	-0.1373 -0.1857 -0.2793 -3.1202 -0.1718 -0.2273 -0.2148
+S-82	h l a a _ m a a d i m , " _ d i y a t _ T s ' i i t s ' t . _ <E>
+W-82	0.078	seconds
+H-82	-0.34126460552215576	t = y a = t
+D-82	-0.34126460552215576	t = y a = t
+P-82	-0.7205 -0.1192 -0.2089 -0.2747 -0.6515 -0.1794 -0.2346
+H-82	-0.738097071647644	t = y a - t
+D-82	-0.738097071647644	t = y a - t
+P-82	-0.7205 -0.1192 -0.2089 -0.2747 -3.3349 -0.2926 -0.2158
+S-83	m a a d i m , " _ d i y a t _ T s ' i i t s ' t . _ <E> _ <E>
+W-83	0.132	seconds
+H-83	-0.2295643836259842	t s ' i i t s ' - t
+D-83	-0.2295643836259842	t s ' i i t s ' - t
+P-83	-0.6227 -0.1894 -0.1413 -0.1537 -0.2214 -0.2123 -0.1695 -0.2662 -0.1298 -0.1951 -0.2240
+H-83	-0.7174693942070007	T s ' i i t s ' - t
+D-83	-0.7174693942070007	T s ' i i t s ' - t
+P-83	-5.8307 -0.3086 -0.2479 -0.1391 -0.1719 -0.1896 -0.1625 -0.2372 -0.1939 -0.1878 -0.2228
