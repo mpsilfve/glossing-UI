@@ -383,7 +383,8 @@ def writeEafTier(eaf_file, data, model_type="segmentation", save_path='results.e
     with open(save_path, 'w') as outfile:
         outfile.write(xmlstr)
 
-    return root
+    #return root
+    return xmlstr
 
 
 # code below for debugging purposes

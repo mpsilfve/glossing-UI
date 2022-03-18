@@ -372,8 +372,11 @@ def convert_to_eaf():
 
     if model_type == 'gloss':
         root = writeEafTier(xml_doc, new_data, model_type='gloss', save_path=save_path)
-    else:
+    elif model_type == 'segmentation':
         root = writeEafTier(xml_doc, new_data, model_type="segmentation", save_path=save_path)
+    else:
+        root = writeEafTier(xml_doc, new_data, model_type='segmentation', save_path=save_path)
+        root = writeEafTier(root, new_data, model_type='gloss', save_path=save_path)
 
     return {'elan': xml_doc}
 
