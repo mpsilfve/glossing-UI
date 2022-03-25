@@ -2,7 +2,7 @@
 
 # install Fairseq
 pwd
-cd fairseq #&& pip install ./ && pip install --upgrade numpy
+cd fairseq && pip install ./ && pip install --upgrade numpy
 pwd
 cd ../pretrained_models
 

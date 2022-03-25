@@ -9,7 +9,7 @@ import json, re
 import os
 import subprocess
 import cProfile
-from time import sleep, time
+import time
 from pretrained_models.run_fairseq import *
 
 
@@ -27,6 +27,10 @@ class FairseqSubmitter:
         """
         Split the job into separate sentences, and send each of them to the background fairseq process
         """
+
+        savefile =  open('/backend_fairseq/times.txt', 'w')
+
+        savefile.write(f'START: {time.time()}\n')
 
         # model options
         jobid = data['id']
@@ -46,12 +50,11 @@ class FairseqSubmitter:
 
         for i in range(n_sentences):
             sentence = sentences[i]
-            print(sentence)
             n_tokens = len(sentence.split(' '))
             save_path = f'/data/results/sentence_{jobid}_{i}.std.out'
 
             self.last_example += n_tokens
-            submit_sentence(sentence, i, getSeg, getGloss, self.first_example, self.last_example, n_best, save_path)
+            submit_sentence(sentence, i, getSeg, getGloss, self.first_example, self.last_example, n_best, save_path, savefile)
             self.first_example += n_tokens
 
         # found_sentences = 0
@@ -139,12 +142,12 @@ class FairseqSubmitter:
         # process based on input type
         in_type = new_job_data['input_type']
         if in_type == 'text':
-            start = time()
+            start = time.time()
             
             self.process_text_sentence_batch(new_job_data)
 
             #cProfile.run('self.process_text_sentence_batch(new_job_data)')
-            end = time()
+            end = time.time()
             print('Time elapsed:', end-start)
         elif in_type == "eaf_file":
             self.process_elan_annotation_batch(new_job_data)
