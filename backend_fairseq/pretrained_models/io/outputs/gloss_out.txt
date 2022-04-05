@@ -1,0 +1,661 @@
+2022-04-05 20:18:28 | INFO | fairseq_cli.interactive | {'_name': None, 'common': {'_name': None, 'no_progress_bar': False, 'log_interval': 100, 'log_format': None, 'log_file': None, 'tensorboard_logdir': None, 'wandb_project': None, 'azureml_logging': False, 'seed': 1, 'cpu': False, 'tpu': False, 'bf16': False, 'memory_efficient_bf16': False, 'fp16': False, 'memory_efficient_fp16': False, 'fp16_no_flatten_grads': False, 'fp16_init_scale': 128, 'fp16_scale_window': None, 'fp16_scale_tolerance': 0.0, 'min_loss_scale': 0.0001, 'threshold_loss_scale': None, 'user_dir': None, 'empty_cache_freq': 0, 'all_gather_list_size': 16384, 'model_parallel_size': 1, 'quantization_config_path': None, 'profile': False, 'reset_logging': False, 'suppress_crashes': False, 'use_plasma_view': False, 'plasma_path': '/tmp/plasma'}, 'common_eval': {'_name': None, 'path': '/backend_fairseq/pretrained_models/data/gloss/checkpoint_best.pt', 'post_process': None, 'quiet': False, 'model_overrides': '{}', 'results_path': None}, 'distributed_training': {'_name': None, 'distributed_world_size': 1, 'distributed_rank': 0, 'distributed_backend': 'nccl', 'distributed_init_method': None, 'distributed_port': -1, 'device_id': 0, 'distributed_no_spawn': False, 'ddp_backend': 'pytorch_ddp', 'bucket_cap_mb': 25, 'fix_batches_to_gpus': False, 'find_unused_parameters': False, 'fast_stat_sync': False, 'heartbeat_timeout': -1, 'broadcast_buffers': False, 'slowmo_momentum': None, 'slowmo_algorithm': 'LocalSGD', 'localsgd_frequency': 3, 'nprocs_per_node': 1, 'pipeline_model_parallel': False, 'pipeline_balance': None, 'pipeline_devices': None, 'pipeline_chunks': 0, 'pipeline_encoder_balance': None, 'pipeline_encoder_devices': None, 'pipeline_decoder_balance': None, 'pipeline_decoder_devices': None, 'pipeline_checkpoint': 'never', 'zero_sharding': 'none', 'fp16': False, 'memory_efficient_fp16': False, 'tpu': False, 'no_reshard_after_forward': False, 'fp32_reduce_scatter': False, 'cpu_offload': False, 'distributed_num_procs': 0}, 'dataset': {'_name': None, 'num_workers': 1, 'skip_invalid_size_inputs_valid_test': False, 'max_tokens': None, 'batch_size': 1, 'required_batch_size_multiple': 8, 'required_seq_len_multiple': 1, 'dataset_impl': None, 'data_buffer_size': 10, 'train_subset': 'train', 'valid_subset': 'valid', 'validate_interval': 1, 'validate_interval_updates': 0, 'validate_after_updates': 0, 'fixed_validation_seed': None, 'disable_validation': False, 'max_tokens_valid': None, 'batch_size_valid': None, 'max_valid_steps': None, 'curriculum': 0, 'gen_subset': 'test', 'num_shards': 1, 'shard_id': 0}, 'optimization': {'_name': None, 'max_epoch': 0, 'max_update': 0, 'stop_time_hours': 0.0, 'clip_norm': 0.0, 'sentence_avg': False, 'update_freq': [1], 'lr': [0.25], 'stop_min_lr': -1.0, 'use_bmuf': False}, 'checkpoint': {'_name': None, 'save_dir': 'checkpoints', 'restore_file': 'checkpoint_last.pt', 'finetune_from_model': None, 'reset_dataloader': False, 'reset_lr_scheduler': False, 'reset_meters': False, 'reset_optimizer': False, 'optimizer_overrides': '{}', 'save_interval': 1, 'save_interval_updates': 0, 'keep_interval_updates': -1, 'keep_interval_updates_pattern': -1, 'keep_last_epochs': -1, 'keep_best_checkpoints': -1, 'no_save': False, 'no_epoch_checkpoints': False, 'no_last_checkpoints': False, 'no_save_optimizer_state': False, 'best_checkpoint_metric': 'loss', 'maximize_best_checkpoint_metric': False, 'patience': -1, 'checkpoint_suffix': '', 'checkpoint_shard_count': 1, 'load_checkpoint_on_all_dp_ranks': False, 'write_checkpoints_asynchronously': False, 'model_parallel_size': 1}, 'bmuf': {'_name': None, 'block_lr': 1.0, 'block_momentum': 0.875, 'global_sync_iter': 50, 'warmup_iterations': 500, 'use_nbm': False, 'average_sync': False, 'distributed_world_size': 1}, 'generation': {'_name': None, 'beam': 5, 'nbest': 1, 'max_len_a': 0.0, 'max_len_b': 200, 'min_len': 1, 'match_source_len': False, 'unnormalized': False, 'no_early_stop': False, 'no_beamable_mm': False, 'lenpen': 1.0, 'unkpen': 0.0, 'replace_unk': None, 'sacrebleu': False, 'score_reference': False, 'prefix_size': 0, 'no_repeat_ngram_size': 0, 'sampling': False, 'sampling_topk': -1, 'sampling_topp': -1.0, 'constraints': None, 'temperature': 1.0, 'diverse_beam_groups': -1, 'diverse_beam_strength': 0.5, 'diversity_rate': -1.0, 'print_alignment': None, 'print_step': False, 'lm_path': None, 'lm_weight': 0.0, 'iter_decode_eos_penalty': 0.0, 'iter_decode_max_iter': 10, 'iter_decode_force_max_iter': False, 'iter_decode_with_beam': 1, 'iter_decode_with_external_reranker': False, 'retain_iter_history': False, 'retain_dropout': False, 'retain_dropout_modules': None, 'decoding_format': None, 'no_seed_provided': False}, 'eval_lm': {'_name': None, 'output_word_probs': False, 'output_word_stats': False, 'context_window': 0, 'softmax_batch': 9223372036854775807}, 'interactive': {'_name': None, 'buffer_size': 1, 'input': '-'}, 'model': None, 'task': {'_name': 'translation', 'data': '/backend_fairseq/pretrained_models/data/gloss/gloss_preprocess', 'source_lang': 'src', 'target_lang': 'trg', 'load_alignments': False, 'left_pad_source': True, 'left_pad_target': False, 'max_source_positions': 1024, 'max_target_positions': 1024, 'upsample_primary': -1, 'truncate_source': False, 'num_batch_buckets': 0, 'train_subset': 'train', 'dataset_impl': None, 'required_seq_len_multiple': 1, 'eval_bleu': False, 'eval_bleu_args': '{}', 'eval_bleu_detok': 'space', 'eval_bleu_detok_args': '{}', 'eval_tokenized_bleu': False, 'eval_bleu_remove_bpe': None, 'eval_bleu_print_samples': False}, 'criterion': {'_name': 'cross_entropy', 'sentence_avg': True}, 'optimizer': None, 'lr_scheduler': {'_name': 'fixed', 'force_anneal': None, 'lr_shrink': 0.1, 'warmup_updates': 0, 'lr': [0.25]}, 'scoring': {'_name': 'bleu', 'pad': 1, 'eos': 2, 'unk': 3}, 'bpe': None, 'tokenizer': None}
+2022-04-05 20:18:28 | INFO | fairseq.tasks.translation | [src] dictionary: 224 types
+2022-04-05 20:18:28 | INFO | fairseq.tasks.translation | [trg] dictionary: 224 types
+2022-04-05 20:18:28 | INFO | fairseq_cli.interactive | loading model(s) from /backend_fairseq/pretrained_models/data/gloss/checkpoint_best.pt
+2022-04-05 20:18:31 | INFO | fairseq_cli.interactive | NOTE: hypothesis and token scores are output in base 2
+2022-04-05 20:18:31 | INFO | fairseq_cli.interactive | Type the input sentence and press return:
+S-0	<S> _ H e l t h l _ k ' u u h l
+W-0	0.047	seconds
+H-0	-0.13574445247650146	h e l t = CN
+D-0	-0.13574445247650146	h e l t = CN
+P-0	-0.1854 -0.1172 -0.1773 -0.0865 -0.0244 -0.0970 -0.2625
+S-1	H e l t h l _ k ' u u h l _ s i w a d i ' m
+W-1	0.050	seconds
+H-1	-0.2581441402435303	k ' u u h l
+D-1	-0.2581441402435303	k ' u u h l
+P-1	-0.3936 -0.2570 -0.1850 -0.1667 -0.3048 -0.1713 -0.3286
+S-2	k ' u u h l _ s i w a d i ' m _ a h l
+W-2	0.058	seconds
+H-2	-0.20586906373500824	CAUS1 - w e - T - 1PL .II
+D-2	-0.20586906373500824	CAUS1 - w e - T - 1PL .II
+P-2	-0.2513 -0.1602 -0.1638 -0.2009 -0.0729 -0.2518 -0.1708 -0.4548 -0.1380 -0.1943
+S-3	s i w a d i ' m _ a h l _ l a ' o o ' y
+W-3	0.037	seconds
+H-3	-0.21264220774173737	PREP [-3 .II] = CN
+D-3	-0.21264220774173737	PREP [-3 .II] = CN
+P-3	-0.2587 -0.2037 -0.1969 -0.2255 -0.1918 -0.1993
+S-4	a h l _ l a ' o o ' y _ γ o ' o h l
+W-4	0.044	seconds
+H-4	-0.19544140994548798	PL - o o ' y
+D-4	-0.19544140994548798	PL - o o ' y
+P-4	-0.3650 -0.2909 -0.1175 -0.1434 -0.1592 -0.1637 -0.1283
+S-5	l a ' o o ' y _ γ o ' o h l _ H l a
+W-5	0.041	seconds
+H-5	-0.1992640495300293	LOC [-3 .II] = CN
+D-5	-0.1992640495300293	LOC [-3 .II] = CN
+P-5	-0.1666 -0.1988 -0.1888 -0.2300 -0.1817 -0.2297
+S-6	γ o ' o h l _ H l a _ H e e n
+W-6	0.024	seconds
+H-6	-0.7946688532829285	H l a
+D-6	-0.7946688532829285	H l a
+P-6	-1.9735 -0.4103 -0.5812 -0.2137
+S-7	H l a _ H e e n _ <E>
+W-7	0.031	seconds
+H-7	-0.5534955263137817	h e - 2SG .II
+D-7	-0.5534955263137817	h e - 2SG .II
+P-7	-0.2110 -0.1024 -1.2672 -1.3561 -0.2161 -0.1681
+S-8	<S> _ K y ' u l h l _ к ' a y
+W-8	0.052	seconds
+H-8	-0.20666258037090302	k y ' u l = CN
+D-8	-0.20666258037090302	k y ' u l = CN
+P-8	-0.4430 -0.4289 -0.0895 -0.2529 -0.1455 -0.0161 -0.0853 -0.1920
+S-9	K y ' u l h l _ к ' a y _ ' m e s i m
+W-9	0.038	seconds
+H-9	-0.15113182365894318	к ' a y
+D-9	-0.15113182365894318	к ' a y
+P-9	-0.1179 -0.1692 -0.1714 -0.1369 -0.1603
+S-10	к ' a y _ ' m e s i m _ h a n a к '
+W-10	0.046	seconds
+H-10	-0.14970944821834564	' m a s - ATTR
+D-10	-0.14970944821834564	' m a s - ATTR
+P-10	-0.0877 -0.1373 -0.1123 -0.1421 -0.1742 -0.1437 -0.2507
+S-11	' m e s i m _ h a n a к ' _ w a t
+W-11	0.047	seconds
+H-11	-0.12408189475536346	h a n a к '
+D-11	-0.12408189475536346	h a n a к '
+P-11	-0.1047 -0.1937 -0.1202 -0.0996 -0.0917 -0.1009 -0.1576
+S-12	h a n a к ' _ w a t _ a s
+W-12	0.035	seconds
+H-12	-0.22069355845451355	w e - 3 .II
+D-12	-0.22069355845451355	w e - 3 .II
+P-12	-0.1743 -0.2838 -0.1244 -0.3860 -0.1632 -0.1924
+S-13	w a t _ a s _ W i l a d o o
+W-13	0.040	seconds
+H-13	-0.1380128562450409	PREP [-3 .II] = PN
+D-13	-0.1380128562450409	PREP [-3 .II] = PN
+P-13	-0.1729 -0.1218 -0.1546 -0.1140 -0.0863 -0.1784
+S-14	a s _ W i l a d o o _ a n t
+W-14	0.044	seconds
+H-14	-0.6092764139175415	w i l a d o o
+D-14	-0.6092764139175415	w i l a d o o
+P-14	-1.7186 -0.6851 -0.1549 -0.5495 -0.3919 -0.2330 -0.9995 -0.1416
+S-15	W i l a d o o _ a n t _ ' w a h l
+W-15	0.035	seconds
+H-15	-0.17026932537555695	AX = 3 .I
+D-15	-0.17026932537555695	AX = 3 .I
+P-15	-0.3191 -0.0793 -0.1062 -0.1211 -0.2256
+S-16	a n t _ ' w a h l _ k y ' e e g w i h l
+W-16	0.053	seconds
+H-16	-0.22101227939128876	' w a [-3 .II] = CN
+D-16	-0.22101227939128876	' w a [-3 .II] = CN
+P-16	-0.3240 -0.2610 -0.2459 -0.0820 -0.1974 -0.2402 -0.1627 -0.2548
+S-17	' w a h l _ k y ' e e g w i h l _ t ' a ' w i h l γ a n
+W-17	0.091	seconds
+H-17	-0.3455642759799957	k y ' e e k w - T [-3 .II] = CN
+D-17	-0.3455642759799957	k y ' e e k w - T [-3 .II] = CN
+P-17	-0.1723 -0.1683 -0.1764 -0.5946 -0.9363 -1.3721 -0.0852 -0.1052 -0.0942 -0.2327 -0.1789 -0.2159 -0.2273 -0.2785
+S-18	k y ' e e g w i h l _ t ' a ' w i h l γ a n _ <E>
+W-18	0.092	seconds
+H-18	-0.6959286332130432	t ' a ' w i h l γ a n
+D-18	-0.6959286332130432	t ' a ' w i h l γ a n
+P-18	-0.1293 -0.4840 -0.1318 -0.8671 -0.4990 -1.1391 -1.6483 -0.0539 -2.4215 -0.7411 -0.0685 -0.1674
+S-19	<S> _ I i _ s i i
+W-19	0.023	seconds
+H-19	-0.2128329575061798	CCNJ
+D-19	-0.2128329575061798	CCNJ
+P-19	-0.2199 -0.2058
+S-20	I i _ s i i _ h l g u u h l x w t
+W-20	0.031	seconds
+H-20	-0.23554247617721558	s i i
+D-20	-0.23554247617721558	s i i
+P-20	-0.2731 -0.3338 -0.1752 -0.1601
+S-21	s i i _ h l g u u h l x w t _ l o o t
+W-21	0.082	seconds
+H-21	-0.13764211535453796	h l g u u h l x w - 3 .II
+D-21	-0.13764211535453796	h l g u u h l x w - 3 .II
+P-21	-0.4393 -0.1116 -0.1077 -0.0625 -0.0891 -0.0798 -0.0472 -0.0943 -0.0150 -0.0981 -0.2577 -0.1513 -0.2357
+S-22	h l g u u h l x w t _ l o o t _ i i t
+W-22	0.038	seconds
+H-22	-0.1831933557987213	OBL - 3 .II
+D-22	-0.1831933557987213	OBL - 3 .II
+P-22	-0.1665 -0.2963 -0.1103 -0.1443 -0.1986
+S-23	l o o t _ i i t _ h a b o o ' l t
+W-23	0.040	seconds
+H-23	-0.170420840382576	CCNJ = 3 .I
+D-23	-0.170420840382576	CCNJ = 3 .I
+P-23	-0.1658 -0.2006 -0.1318 -0.1486 -0.2053
+S-24	i i t _ h a b o o ' l t _ <E>
+W-24	0.067	seconds
+H-24	-0.4530172646045685	h a b o o ' l - 3 .II
+D-24	-0.4530172646045685	h a b o o ' l - 3 .II
+P-24	-0.1620 -0.2037 -2.5147 -0.1522 -0.6889 -0.2176 -0.3238 -0.2383 -0.0729 -0.1306 -0.2785
+S-25	<S> _ N e e d i i _ s i m
+W-25	0.038	seconds
+H-25	-1.2220170497894287	NEG = 1 .I
+D-25	-1.2220170497894287	NEG = 1 .I
+P-25	-1.4119 -0.3787 -3.8114 -0.2906 -0.2175
+S-26	N e e d i i _ s i m _ γ a l
+W-26	0.029	seconds
+H-26	-0.3802303075790405	s i m
+D-26	-0.3802303075790405	s i m
+P-26	-0.8307 -0.2470 -0.2900 -0.1532
+S-27	s i m _ γ a l _ ' w u d i n
+W-27	0.035	seconds
+H-27	-1.3804426193237305	b a χ
+D-27	-1.3804426193237305	b a χ
+P-27	-4.2762 -0.2629 -0.7532 -0.2295
+S-28	γ a l _ ' w u d i n _ ' n e k w t
+W-28	0.049	seconds
+H-28	-0.27551737427711487	' w i d i n
+D-28	-0.27551737427711487	' w i d i n
+P-28	-0.0812 -0.2192 -0.7021 -0.3363 -0.2577 -0.1427 -0.1895
+S-29	' w u d i n _ ' n e k w t _ i i
+W-29	0.058	seconds
+H-29	-0.12025075405836105	' n a k w - 3 .II
+D-29	-0.12025075405836105	' n a k w - 3 .II
+P-29	-0.1006 -0.1963 -0.0933 -0.0572 -0.0835 -0.1073 -0.1231 -0.1395 -0.1816
+S-30	' n e k w t _ i i _ к ' a p
+W-30	0.038	seconds
+H-30	-0.23795373737812042	CCNJ
+D-30	-0.23795373737812042	CCNJ
+P-30	-0.2277 -0.2482
+S-31	i i _ к ' a p _ γ a l a ' y
+W-31	0.044	seconds
+H-31	-0.12834544479846954	VER
+D-31	-0.12834544479846954	VER
+P-31	-0.1597 -0.0969
+S-32	к ' a p _ γ a l a ' y _ t u s t h l
+W-32	0.058	seconds
+H-32	-0.40758997201919556	γ a l a ' y
+D-32	-0.40758997201919556	γ a l a ' y
+P-32	-1.4294 -0.1073 -0.6459 -0.1168 -0.1535 -0.1936 -0.2065
+S-33	γ a l a ' y _ t u s t h l _ b e n t
+W-33	0.052	seconds
+H-33	-0.2847016453742981	PN = DEM .DIST = CN
+D-33	-0.2847016453742981	PN = DEM .DIST = CN
+P-33	-0.4632 -0.2199 -0.1714 -0.7256 -0.0647 -0.0915 -0.2566
+S-34	t u s t h l _ b e n t _ <E>
+W-34	0.055	seconds
+H-34	-0.4861751198768616	b e n - 3 .II
+D-34	-0.4861751198768616	b e n - 3 .II
+P-34	-0.9831 -0.8411 -0.8403 -0.2755 -0.1456 -0.1122 -0.2054
+S-35	<S> _ I i _ s i l d i m
+W-35	0.066	seconds
+H-35	-0.20876799523830414	CCNJ
+D-35	-0.20876799523830414	CCNJ
+P-35	-0.2093 -0.2082
+S-36	I i _ s i l d i m _ w i l t x w s t
+W-36	0.058	seconds
+H-36	-0.44813111424446106	s i l d i m
+D-36	-0.44813111424446106	s i l d i m
+P-36	-0.2759 -0.0583 -0.2861 -1.5748 -0.6592 -0.1152 -0.1675
+S-37	s i l d i m _ w i l t x w s t _ <E>
+W-37	0.114	seconds
+H-37	-0.45175808668136597	w i l t x w - 3 .II
+D-37	-0.45175808668136597	w i l t x w - 3 .II
+P-37	-0.4338 -0.5082 -0.6458 -0.3098 -0.6637 -0.1658 -0.4507 -0.9445 -0.1063 -0.2889
+S-38	<S> _ H a ' o n d i i _ ' n e k w t
+W-38	0.067	seconds
+H-38	-0.6884136199951172	h a ' o n - 3PL .II
+D-38	-0.6884136199951172	h a ' o n - 3PL .II
+P-38	-0.9287 -0.3872 -0.3326 -0.0999 -0.4025 -2.3590 -0.8634 -0.4926 -0.3298
+S-39	H a ' o n d i i _ ' n e k w t _ d i i
+W-39	0.059	seconds
+H-39	-0.1370929479598999	' n a k w - 3 .II
+D-39	-0.1370929479598999	' n a k w - 3 .II
+P-39	-0.1131 -0.2739 -0.1232 -0.0479 -0.0927 -0.1073 -0.1713 -0.1403 -0.1640
+S-40	' n e k w t _ d i i _ s g y e t h l
+W-40	0.034	seconds
+H-40	-0.25455477833747864	FOC
+D-40	-0.25455477833747864	FOC
+P-40	-0.2492 -0.2599
+S-41	d i i _ s g y e t h l _ h l g u
+W-41	0.072	seconds
+H-41	-0.6004562973976135	s g y e - T [-3 .II] = CN
+D-41	-0.6004562973976135	s g y e - T [-3 .II] = CN
+P-41	-0.2774 -0.5194 -1.8017 -0.6122 -1.6583 -0.8123 -0.0843 -0.1923 -0.2309 -0.1674 -0.2489
+S-42	s g y e t h l _ h l g u _ t k ' i h l x w
+W-42	0.042	seconds
+H-42	-0.1372593492269516	h l g u
+D-42	-0.1372593492269516	h l g u
+P-42	-0.2004 -0.1357 -0.0969 -0.1323 -0.1211
+S-43	h l g u _ t k ' i h l x w _ h l g u u h l x w
+W-43	0.118	seconds
+H-43	-0.145664244890213	h l g u . t k ' i h l x w
+D-43	-0.145664244890213	h l g u . t k ' i h l x w
+P-43	-0.3318 -0.2268 -0.2036 -0.2376 -0.1631 -0.1299 -0.0306 -0.0814 -0.1063 -0.0793 -0.0897 -0.1402 -0.0506 -0.1684
+S-44	t k ' i h l x w _ h l g u u h l x w _ к ' a y
+W-44	0.057	seconds
+H-44	-0.09825891256332397	h l g u u h l x w
+D-44	-0.09825891256332397	h l g u u h l x w
+P-44	-0.0895 -0.1899 -0.0533 -0.0647 -0.1286 -0.1074 -0.0548 -0.0953 -0.0219 -0.1771
+S-45	h l g u u h l x w _ к ' a y _ ' m e s i m
+W-45	0.042	seconds
+H-45	-0.13585254549980164	к ' a y
+D-45	-0.13585254549980164	к ' a y
+P-45	-0.1561 -0.1807 -0.1365 -0.0742 -0.1318
+S-46	к ' a y _ ' m e s i m _ h a n a к ' s i ,
+W-46	0.051	seconds
+H-46	-0.15743179619312286	' m a s - ATTR
+D-46	-0.15743179619312286	' m a s - ATTR
+P-46	-0.0969 -0.1374 -0.1224 -0.1439 -0.1997 -0.1299 -0.2719
+S-47	' m e s i m _ h a n a к ' s i , _ <E>
+W-47	0.055	seconds
+H-47	-0.1585880070924759	h a n a к ' = PROX
+D-47	-0.1585880070924759	h a n a к ' = PROX
+P-47	-0.1639 -0.0986 -0.0996 -0.0856 -0.1040 -0.0583 -0.3543 -0.1994 -0.2637
+S-48	<S> _ i i _ a p
+W-48	0.027	seconds
+H-48	-0.20565952360630035	CCNJ
+D-48	-0.20565952360630035	CCNJ
+P-48	-0.2034 -0.2079
+S-49	i i _ a p _ g y a t t
+W-49	0.023	seconds
+H-49	-0.16519659757614136	VER
+D-49	-0.16519659757614136	VER
+P-49	-0.1547 -0.1757
+S-50	a p _ g y a t t _ w i l t
+W-50	0.074	seconds
+H-50	-0.7987632155418396	g y a t - 3 .II
+D-50	-0.7987632155418396	g y a t - 3 .II
+P-50	-0.6402 -0.9812 -1.7006 -2.3721 -0.1009 -0.1462 -0.1639 -0.2849
+S-51	g y a t t _ w i l t _ g y a ' a d i i t ,
+W-51	0.058	seconds
+H-51	-0.29163843393325806	COMP = 3 .I
+D-51	-0.29163843393325806	COMP = 3 .I
+P-51	-0.7939 -0.1273 -0.1176 -0.1380 -0.2813
+S-52	w i l t _ g y a ' a d i i t , _ к ' a p
+W-52	0.098	seconds
+H-52	-0.2832444906234741	g y a ' a - 3PL .II
+D-52	-0.2832444906234741	g y a ' a - 3PL .II
+P-52	-0.2369 -0.2668 -0.5133 -0.1633 -0.2011 -0.0760 -0.1537 -0.1046 -0.8336
+S-53	g y a ' a d i i t , _ к ' a p _ h o g y a γ a m
+W-53	0.055	seconds
+H-53	-0.8267207741737366	к ' a p
+D-53	-0.8267207741737366	к ' a p
+P-53	-3.3117 -0.3309 -0.0812 -0.2903 -0.1195
+S-54	к ' a p _ h o g y a γ a m _ d i d i l s
+W-54	0.060	seconds
+H-54	-0.3226695656776428	h u g w a χ - ATTR
+D-54	-0.3226695656776428	h u g w a χ - ATTR
+P-54	-0.0983 -0.9817 -0.1088 -0.7677 -0.0903 -0.2217 -0.1051 -0.3148 -0.2157
+S-55	h o g y a γ a m _ d i d i l s _ w i l t
+W-55	0.058	seconds
+H-55	-0.44039446115493774	DUR ~ d i l s
+D-55	-0.44039446115493774	DUR ~ d i l s
+P-55	-0.8505 -1.0218 -0.2203 -0.1701 -0.1937 -0.2569 -0.3695
+S-56	d i d i l s _ w i l t _ g y a ' a h l
+W-56	0.047	seconds
+H-56	-0.31062307953834534	COMP = 3 .I
+D-56	-0.31062307953834534	COMP = 3 .I
+P-56	-0.7105 -0.2918 -0.1368 -0.1612 -0.2528
+S-57	w i l t _ g y a ' a h l _ g y e t
+W-57	0.060	seconds
+H-57	-0.21773117780685425	g y a ' a [-3 .II] = CN
+D-57	-0.21773117780685425	g y a ' a [-3 .II] = CN
+P-57	-0.1561 -0.1884 -0.4326 -0.2236 -0.2529 -0.0910 -0.1954 -0.2276 -0.1607 -0.2489
+S-58	g y a ' a h l _ g y e t _ <E>
+W-58	0.034	seconds
+H-58	-0.7239315509796143	g y a t
+D-58	-0.7239315509796143	g y a t
+P-58	-0.3645 -0.5779 -0.9939 -1.4095 -0.2739
+S-59	<S> _ I i _ h e l t
+W-59	0.022	seconds
+H-59	-0.24375565350055695	CCNJ
+D-59	-0.24375565350055695	CCNJ
+P-59	-0.2573 -0.2302
+S-60	I i _ h e l t _ a n t
+W-60	0.037	seconds
+H-60	-0.18831004202365875	h e l t
+D-60	-0.18831004202365875	h e l t
+P-60	-0.1201 -0.0642 -0.2630 -0.3125 -0.1818
+S-61	h e l t _ a n t _ n e e d i i t
+W-61	0.032	seconds
+H-61	-0.17772366106510162	AX = 3 .I
+D-61	-0.17772366106510162	AX = 3 .I
+P-61	-0.2196 -0.0894 -0.2076 -0.1629 -0.2091
+S-62	a n t _ n e e d i i t _ w i l a a x t
+W-62	0.046	seconds
+H-62	-0.384211003780365	n e e - 3PL .II
+D-62	-0.384211003780365	n e e - 3PL .II
+P-62	-0.9648 -0.1846 -0.2578 -0.1733 -0.1155 -0.1123 -0.8810
+S-63	n e e d i i t _ w i l a a x t _ w i l
+W-63	0.061	seconds
+H-63	-0.33304721117019653	h a l a a x - 3 .II
+D-63	-0.33304721117019653	h a l a a x - 3 .II
+P-63	-0.3140 -1.0780 -0.3087 -0.1984 -0.1338 -0.1263 -0.4767 -0.3166 -0.1597 -0.2183
+S-64	w i l a a x t _ w i l _ ' n i t
+W-64	0.053	seconds
+H-64	-0.1911083310842514	COMP
+D-64	-0.1911083310842514	COMP
+P-64	-0.1928 -0.1894
+S-65	w i l _ ' n i t _ h l g u u h l x u m
+W-65	0.047	seconds
+H-65	-0.3034001588821411	3 .III
+D-65	-0.3034001588821411	3 .III
+P-65	-0.2599 -0.2080 -0.4422
+S-66	' n i t _ h l g u u h l x u m _ t ' a ' w i h l γ a n
+W-66	0.085	seconds
+H-66	-0.1414298117160797	h l g u u h l x w - ATTR
+D-66	-0.1414298117160797	h l g u u h l x w - ATTR
+P-66	-0.2204 -0.1549 -0.1297 -0.1303 -0.2636 -0.1096 -0.0511 -0.0883 -0.1041 -0.1100 -0.1000 -0.2352
+S-67	h l g u u h l x u m _ t ' a ' w i h l γ a n _ к ' a y
+W-67	0.103	seconds
+H-67	-0.900309145450592	t ' a ' w - T [-3 .II] = CN
+D-67	-0.900309145450592	t ' a ' w - T [-3 .II] = CN
+P-67	-0.4849 -0.8956 -0.1589 -1.3321 -0.6293 -2.3874 -1.4697 -1.8817 -0.2344 -0.0896 -1.0328 -0.2073
+S-68	t ' a ' w i h l γ a n _ к ' a y _ ' m e s i m
+W-68	0.048	seconds
+H-68	-0.15562932193279266	к ' a y
+D-68	-0.15562932193279266	к ' a y
+P-68	-0.1887 -0.1735 -0.1696 -0.1128 -0.1335
+S-69	к ' a y _ ' m e s i m _ h a n a к ' s i
+W-69	0.054	seconds
+H-69	-0.1609477549791336	' m a s - ATTR
+D-69	-0.1609477549791336	' m a s - ATTR
+P-69	-0.0918 -0.1334 -0.1326 -0.1446 -0.2384 -0.1320 -0.2538
+S-70	' m e s i m _ h a n a к ' s i _ <E>
+W-70	0.059	seconds
+H-70	-0.19642609357833862	h a n a к ' = PROX
+D-70	-0.19642609357833862	h a n a к ' = PROX
+P-70	-0.1521 -0.1077 -0.1034 -0.0904 -0.0997 -0.0531 -0.5486 -0.2225 -0.3903
+S-71	<S> _ I i _ l u k w ' i l
+W-71	0.033	seconds
+H-71	-0.23543767631053925	CCNJ
+D-71	-0.23543767631053925	CCNJ
+P-71	-0.2299 -0.2410
+S-72	I i _ l u k w ' i l _ k y ' a a
+W-72	0.061	seconds
+H-72	-0.1370123326778412	l u k w ' i l
+D-72	-0.1370123326778412	l u k w ' i l
+P-72	-0.0910 -0.1868 -0.2319 -0.0672 -0.1518 -0.1311 -0.1040 -0.1322
+S-73	l u k w ' i l _ k y ' a a _ ' w i i
+W-73	0.089	seconds
+H-73	-0.3573897182941437	k y ' a a
+D-73	-0.3573897182941437	k y ' a a
+P-73	-0.5010 -0.2637 -0.1313 -0.0901 -0.9108 -0.2475
+S-74	k y ' a a _ ' w i i _ ' n e k w t
+W-74	0.043	seconds
+H-74	-0.1475701779127121	' w i i
+D-74	-0.1475701779127121	' w i i
+P-74	-0.1270 -0.1975 -0.1372 -0.0912 -0.1850
+S-75	' w i i _ ' n e k w t _ <E>
+W-75	0.071	seconds
+H-75	-0.13306193053722382	' n a k w - 3 .II
+D-75	-0.13306193053722382	' n a k w - 3 .II
+P-75	-0.1174 -0.1478 -0.1679 -0.0789 -0.1088 -0.1337 -0.0675 -0.1485 -0.2271
+S-76	<S> _ Γ a s γ o o h l _ h l a
+W-76	0.061	seconds
+H-76	-0.12538065016269684	γ a s γ o o = CN
+D-76	-0.12538065016269684	γ a s γ o o = CN
+P-76	-0.1556 -0.1121 -0.1544 -0.0650 -0.0665 -0.1449 -0.0820 -0.1169 -0.2311
+S-77	Γ a s γ o o h l _ h l a _ ' w i i
+W-77	0.028	seconds
+H-77	-0.27977055311203003	PART
+D-77	-0.27977055311203003	PART
+P-77	-0.3934 -0.1661
+S-78	h l a _ ' w i i _ t ' i s h l
+W-78	0.037	seconds
+H-78	-0.12330187857151031	' w i i
+D-78	-0.12330187857151031	' w i i
+P-78	-0.1086 -0.0935 -0.1705 -0.1024 -0.1415
+S-79	' w i i _ t ' i s h l _ t ' a ' w i h l γ a n
+W-79	0.068	seconds
+H-79	-0.4853947162628174	y e t s [-3 .II] = CN
+D-79	-0.4853947162628174	y e t s [-3 .II] = CN
+P-79	-0.9596 -0.4915 -0.3411 -0.1470 -1.5424 -0.2072 -0.2179 -0.1729 -0.2891
+S-80	t ' i s h l _ t ' a ' w i h l γ a n _ t u n s i
+W-80	0.077	seconds
+H-80	-0.6924213767051697	t ' a ' w i h l γ a n
+D-80	-0.6924213767051697	t ' a ' w i h l γ a n
+P-80	-0.0585 -0.4241 -0.2805 -0.6042 -0.6121 -0.6441 -1.7253 -0.0491 -2.7177 -0.6382 -0.1026 -0.4527
+S-81	t ' a ' w i h l γ a n _ t u n s i _ <E>
+W-81	0.055	seconds
+H-81	-0.22685211896896362	PN = DEM .PROX = PROX
+D-81	-0.22685211896896362	PN = DEM .PROX = PROX
+P-81	-0.3360 -0.2542 -0.0939 -0.1364 -0.3296 -0.2306 -0.2073
+S-82	<S> _ I i _ b e l g i
+W-82	0.049	seconds
+H-82	-0.23583224415779114	CCNJ
+D-82	-0.23583224415779114	CCNJ
+P-82	-0.2088 -0.2629
+S-83	I i _ b e l g i _ g w i t k w ' o o t x w h l
+W-83	0.072	seconds
+H-83	-0.11992469429969788	b e l i g i
+D-83	-0.11992469429969788	b e l i g i
+P-83	-0.0691 -0.1437 -0.0807 -0.1727 -0.1476 -0.1146 -0.1110
+S-84	b e l g i _ g w i t k w ' o o t x w h l _ e n χ
+W-84	0.140	seconds
+H-84	-0.3804242014884949	PL ~ k w ' o o t - VAL [-3 .II] = CN
+D-84	-0.3804242014884949	PL ~ k w ' o o t - VAL [-3 .II] = CN
+P-84	-0.9155 -0.2846 -2.2756 -0.0929 -0.0536 -0.0809 -0.3934 -0.2956 -0.1349 -0.1293 -0.0538 -0.2095 -0.3554 -0.1627 -0.2687
+S-85	g w i t k w ' o o t x w h l _ e n χ _ γ a n h l
+W-85	0.042	seconds
+H-85	-1.090003252029419	n e χ
+D-85	-1.090003252029419	n e χ
+P-85	-2.4569 -0.9674 -0.7686 -0.1671
+S-86	e n χ _ γ a n h l _ γ a χ b i i s t
+W-86	0.039	seconds
+H-86	-0.16913321614265442	PCNJ = CN
+D-86	-0.16913321614265442	PCNJ = CN
+P-86	-0.1058 -0.2026 -0.1272 -0.2409
+S-87	γ a n h l _ γ a χ b i i s t _ γ a n h l
+W-87	0.062	seconds
+H-87	-0.6572659015655518	γ a χ b i s - 3 .II
+D-87	-0.6572659015655518	γ a χ b i s - 3 .II
+P-87	-0.6375 -0.1124 -1.0933 -0.2444 -0.1233 -2.6006 -0.8339 -0.6189 -0.1357 -0.1728
+S-88	γ a χ b i i s t _ γ a n h l _ h u w i l p
+W-88	0.041	seconds
+H-88	-0.17577923834323883	PCNJ = CN
+D-88	-0.17577923834323883	PCNJ = CN
+P-88	-0.2172 -0.1070 -0.1565 -0.2225
+S-89	γ a n h l _ h u w i l p _ <E>
+W-89	0.043	seconds
+H-89	-0.11602961272001266	PL ~ w i l p
+D-89	-0.11602961272001266	PL ~ w i l p
+P-89	-0.1481 -0.1357 -0.0970 -0.1005 -0.1254 -0.0516 -0.1538
+S-90	<S> _ W i h l _ a p
+W-90	0.043	seconds
+H-90	-0.20305705070495605	w i l = CN
+D-90	-0.20305705070495605	w i l = CN
+P-90	-0.1787 -0.1449 -0.4557 -0.0827 -0.1390 -0.2174
+S-91	W i h l _ a p _ g u p g u p x w i d i i h l
+W-91	0.033	seconds
+H-91	-0.6574802398681641	VER
+D-91	-0.6574802398681641	VER
+P-91	-1.1742 -0.1408
+S-92	a p _ g u p g u p x w i d i i h l _ w i l t ,
+W-92	0.135	seconds
+H-92	-0.8948805332183838	g u p - g u p - VAL - 3PL .II = CN
+D-92	-0.8948805332183838	g u p - g u p - VAL - 3PL .II = CN
+P-92	-2.2430 -2.0399 -0.9241 -0.6199 -1.9736 -0.5460 -2.1453 -0.5800 -0.4090 -0.5754 -0.6379 -0.2269 -0.1947 -0.1044 -0.2032
+S-93	g u p g u p x w i d i i h l _ w i l t , _ w i l t
+W-93	0.071	seconds
+H-93	-0.2484152466058731	w i l - 3 .II
+D-93	-0.2484152466058731	w i l - 3 .II
+P-93	-0.1744 -0.0899 -0.1936 -0.1374 -0.7804 -0.1838 -0.1795
+S-94	w i l t , _ w i l t _ g y a ' a h l
+W-94	0.052	seconds
+H-94	-0.38331109285354614	COMP = 3 .I
+D-94	-0.38331109285354614	COMP = 3 .I
+P-94	-1.1650 -0.1918 -0.1348 -0.1541 -0.2709
+S-95	w i l t _ g y a ' a h l _ h l i
+W-95	0.067	seconds
+H-95	-0.213406503200531	g y a ' a [-3 .II] = CN
+D-95	-0.213406503200531	g y a ' a [-3 .II] = CN
+P-95	-0.1262 -0.2115 -0.3491 -0.2269 -0.2447 -0.1505 -0.1920 -0.2085 -0.1655 -0.2592
+S-96	g y a ' a h l _ h l i _ g y e d i h l
+W-96	0.026	seconds
+H-96	-0.14911755919456482	PART
+D-96	-0.14911755919456482	PART
+P-96	-0.1087 -0.1896
+S-97	h l i _ g y e d i h l _ t s ' e p s i ,
+W-97	0.064	seconds
+H-97	-0.48089075088500977	g i t - T [-3 .II] = CN
+D-97	-0.48089075088500977	g i t - T [-3 .II] = CN
+P-97	-0.2659 -1.6618 -1.5606 -0.1579 -0.0921 -0.2263 -0.1670 -0.2256 -0.2007 -0.2510
+S-98	g y e d i h l _ t s ' e p s i , _ i i t
+W-98	0.059	seconds
+H-98	-0.3064006567001343	t s ' a p = PROX
+D-98	-0.3064006567001343	t s ' a p = PROX
+P-98	-0.2940 -0.2418 -0.0939 -0.4037 -0.0538 -0.9373 -0.2562 -0.1705
+S-99	t s ' e p s i , _ i i t _ l i k s g y e d i n h l
+W-99	0.035	seconds
+H-99	-0.20383912324905396	CCNJ = 3 .I
+D-99	-0.20383912324905396	CCNJ = 3 .I
+P-99	-0.2072 -0.2711 -0.1696 -0.1477 -0.2237
+S-100	i i t _ l i k s g y e d i n h l _ h l i
+W-100	0.110	seconds
+H-100	-0.6306450963020325	l i s - g y a t - CAUS2 [-3 .II] = CN
+D-100	-0.6306450963020325	l i s - g y a t - CAUS2 [-3 .II] = CN
+P-100	-0.1493 -0.0604 -3.0776 -0.7028 -0.7725 -0.7563 -0.5989 -0.6715 -0.2360 -1.3426 -0.3326 -0.1473 -0.1907 -0.1550 -0.2660
+S-101	l i k s g y e d i n h l _ h l i _ g y e d i h l
+W-101	0.028	seconds
+H-101	-0.16277460753917694	PART
+D-101	-0.16277460753917694	PART
+P-101	-0.1511 -0.1744
+S-102	h l i _ g y e d i h l _ γ a l t s ' e p s i
+W-102	0.063	seconds
+H-102	-0.5178648829460144	g i t - T [-3 .II] = CN
+D-102	-0.5178648829460144	g i t - T [-3 .II] = CN
+P-102	-0.2824 -1.8531 -1.6992 -0.1954 -0.1131 -0.2263 -0.1714 -0.2398 -0.1710 -0.2269
+S-103	g y e d i h l _ γ a l t s ' e p s i _ <E>
+W-103	0.115	seconds
+H-103	-0.6315082311630249	DISTR - l i t s ' e p = PROX
+D-103	-0.6315082311630249	DISTR - l i t s ' e p = PROX
+P-103	-1.0015 -0.5555 -0.7217 -2.3755 -0.3232 -0.1522 -0.0324 -0.1654 -0.0936 -1.6697 -0.2376 -0.2498
+S-104	<S> _ I i t _ s e e χ d i i t h l
+W-104	0.039	seconds
+H-104	-0.19562633335590363	CCNJ = 3 .I
+D-104	-0.19562633335590363	CCNJ = 3 .I
+P-104	-0.2076 -0.2256 -0.1563 -0.1365 -0.2522
+S-105	I i t _ s e e χ d i i t h l _ k ' i ' y h l
+W-105	0.070	seconds
+H-105	-0.680766761302948	s e e χ - 3PL .II = CN
+D-105	-0.680766761302948	s e e χ - 3PL .II = CN
+P-105	-1.7042 -1.8715 -0.8237 -0.9147 -0.6624 -0.1919 -0.1078 -0.1300 -0.1339 -0.2675
+S-106	s e e χ d i i t h l _ k ' i ' y h l _ w i l p
+W-106	0.060	seconds
+H-106	-0.13606345653533936	k ' i ' y = CN
+D-106	-0.13606345653533936	k ' i ' y = CN
+P-106	-0.1646 -0.1861 -0.1138 -0.1450 -0.0912 -0.0463 -0.1201 -0.2214
+S-107	k ' i ' y h l _ w i l p _ χ h l i p h e t x w i t
+W-107	0.042	seconds
+H-107	-0.18679895997047424	w i l p
+D-107	-0.18679895997047424	w i l p
+P-107	-0.1899 -0.2083 -0.1526 -0.0749 -0.3082
+S-108	w i l p _ χ h l i p h e t x w i t _ a h l
+W-108	0.095	seconds
+H-108	-0.9032860994338989	χ h l i p h e t x w - SX
+D-108	-0.9032860994338989	χ h l i p h e t x w - SX
+P-108	-0.9912 -2.9752 -0.9391 -0.5429 -0.4626 -2.7245 -0.3870 -1.6006 -0.1549 -0.0590 -0.1519 -0.4481 -0.3057
+S-109	χ h l i p h e t x w i t _ a h l _ h l a
+W-109	0.071	seconds
+H-109	-0.21894396841526031	PREP [-3 .II] = CN
+D-109	-0.21894396841526031	PREP [-3 .II] = CN
+P-109	-0.2547 -0.1757 -0.1855 -0.2768 -0.2015 -0.2195
+S-110	a h l _ h l a _ к ' a p h l
+W-110	0.027	seconds
+H-110	-0.24539147317409515	PART
+D-110	-0.24539147317409515	PART
+P-110	-0.3262 -0.1646
+S-111	h l a _ к ' a p h l _ t s ' e p s i
+W-111	0.071	seconds
+H-111	-0.17899593710899353	к ' a p [-3 .II] = CN
+D-111	-0.17899593710899353	к ' a p [-3 .II] = CN
+P-111	-0.2954 -0.1278 -0.1213 -0.1600 -0.1393 -0.1658 -0.1809 -0.1921 -0.2283
+S-112	к ' a p h l _ t s ' e p s i _ <E>
+W-112	0.059	seconds
+H-112	-0.4519261121749878	t s ' a p = PROX
+D-112	-0.4519261121749878	t s ' a p = PROX
+P-112	-0.1176 -0.1613 -0.0830 -0.2632 -0.0370 -2.3629 -0.3093 -0.2811
+S-113	<S> _ I i t _ d o к s
+W-113	0.033	seconds
+H-113	-0.16854333877563477	CCNJ = 3 .I
+D-113	-0.16854333877563477	CCNJ = 3 .I
+P-113	-0.1831 -0.1914 -0.1324 -0.1314 -0.2044
+S-114	I i t _ d o к s _ d i p u n h l
+W-114	0.063	seconds
+H-114	-0.4629010260105133	g u u . PL [-3 .II] = PN
+D-114	-0.4629010260105133	g u u . PL [-3 .II] = PN
+P-114	-1.8074 -0.6968 -0.7388 -0.6617 -0.0897 -0.0534 -0.1470 -0.1431 -0.1117 -0.1795
+S-115	d o к s _ d i p u n h l _ γ a χ b i i s t
+W-115	0.048	seconds
+H-115	-0.15104469656944275	ASSOC = DEM .PROX = CN
+D-115	-0.15104469656944275	ASSOC = DEM .PROX = CN
+P-115	-0.2245 -0.1609 -0.1240 -0.1521 -0.0764 -0.0844 -0.2351
+S-116	d i p u n h l _ γ a χ b i i s t _ i i t
+W-116	0.076	seconds
+H-116	-0.8235427737236023	γ a b b i s - 3 .II
+D-116	-0.8235427737236023	γ a b b i s - 3 .II
+P-116	-0.7046 -0.0824 -1.4906 -1.3157 -0.0556 -2.6488 -1.1430 -0.4453 -0.1326 -0.2169
+S-117	γ a χ b i i s t _ i i t _ l i i l u x w d i i t
+W-117	0.040	seconds
+H-117	-0.1941436529159546	CCNJ = 3 .I
+D-117	-0.1941436529159546	CCNJ = 3 .I
+P-117	-0.2388 -0.2059 -0.1627 -0.1608 -0.2025
+S-118	i i t _ l i i l u x w d i i t _ <E>
+W-118	0.109	seconds
+H-118	-0.36782827973365784	l i i l u x w - 3PL .II
+D-118	-0.36782827973365784	l i i l u x w - 3PL .II
+P-118	-0.3190 -0.1193 -2.2630 -0.0723 -0.4741 -0.0828 -0.0310 -0.1783 -0.1044 -0.1168 -0.2852
+S-119	<S> _ K ' i ' y h l _ s a
+W-119	0.082	seconds
+H-119	-0.1323155015707016	k ' i ' y = CN
+D-119	-0.1323155015707016	k ' i ' y = CN
+P-119	-0.1361 -0.1700 -0.1152 -0.1160 -0.0826 -0.0381 -0.1296 -0.2709
+S-120	K ' i ' y h l _ s a _ i i t
+W-120	0.031	seconds
+H-120	-0.17406754195690155	s a
+D-120	-0.17406754195690155	s a
+P-120	-0.2296 -0.1997 -0.0929
+S-121	s a _ i i t _ n a χ ' n i s
+W-121	0.036	seconds
+H-121	-0.23477484285831451	CCNJ = 3 .I
+D-121	-0.23477484285831451	CCNJ = 3 .I
+P-121	-0.2218 -0.1824 -0.3562 -0.1845 -0.2290
+S-122	i i t _ n a χ ' n i s _ d i p u n
+W-122	0.070	seconds
+H-122	-0.10420078039169312	n a χ ' n i [-3 .II] = PN
+D-122	-0.10420078039169312	n a χ ' n i [-3 .II] = PN
+P-122	-0.0154 -0.1412 -0.0525 -0.0626 -0.0858 -0.0489 -0.0705 -0.1547 -0.2119 -0.1016 -0.2011
+S-123	n a χ ' n i s _ d i p u n _ w i l
+W-123	0.043	seconds
+H-123	-0.16784697771072388	ASSOC = DEM .PROX
+D-123	-0.16784697771072388	ASSOC = DEM .PROX
+P-123	-0.1784 -0.1623 -0.1029 -0.1076 -0.2880
+S-124	d i p u n _ w i l _ y u k w h l
+W-124	0.026	seconds
+H-124	-0.21715156733989716	COMP
+D-124	-0.21715156733989716	COMP
+P-124	-0.2564 -0.1779
+S-125	w i l _ y u k w h l _ y o o к x w h l
+W-125	0.043	seconds
+H-125	-0.18782921135425568	PROG = CN
+D-125	-0.18782921135425568	PROG = CN
+P-125	-0.2703 -0.1200 -0.1096 -0.2513
+S-126	y u k w h l _ y o o к x w h l _ s i m i l o o ' o
+W-126	0.073	seconds
+H-126	-0.14682601392269135	y o o к - VAL [-3 .II] = CN
+D-126	-0.14682601392269135	y o o к - VAL [-3 .II] = CN
+P-126	-0.1239 -0.0367 -0.0725 -0.0319 -0.2163 -0.1280 -0.0851 -0.1871 -0.3021 -0.1800 -0.2515
+S-127	y o o к x w h l _ s i m i l o o ' o _ <E>
+W-127	0.062	seconds
+H-127	-0.24954460561275482	s i m i l o o ' o
+D-127	-0.24954460561275482	s i m i l o o ' o
+P-127	-0.1378 -0.1576 -0.1228 -1.0678 -0.1771 -0.1748 -0.2130 -0.0662 -0.2293 -0.1490
+S-128	<S> _ H e t s ' i m _ χ j a a χ x w h l
+W-128	0.070	seconds
+H-128	-0.1255805790424347	h e t s ' i m
+D-128	-0.1255805790424347	h e t s ' i m
+P-128	-0.1693 -0.1072 -0.0900 -0.0854 -0.0610 -0.1206 -0.1607 -0.2105
+S-129	H e t s ' i m _ χ j a a χ x w h l _ n a χ ' n i d i i t
+W-129	0.067	seconds
+H-129	-0.760001540184021	χ j a a χ x w [-3 .II] = CN
+D-129	-0.760001540184021	χ j a a χ x w [-3 .II] = CN
+P-129	-1.3394 -4.0989 -0.0576 -0.4685 -0.4067 -1.5128 -0.1130 -0.2206 -0.1727 -0.2321 -0.1832 -0.3146
+S-130	χ j a a χ x w h l _ n a χ ' n i d i i t _ <E>
+W-130	0.069	seconds
+H-130	-0.2670709490776062	n a χ ' n i - 3PL .II
+D-130	-0.2670709490776062	n a χ ' n i - 3PL .II
+P-130	-0.0509 -0.9448 -0.2173 -0.1027 -0.1362 -0.1139 -0.5464 -0.1628 -0.1080 -0.2877

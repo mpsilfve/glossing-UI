@@ -92,7 +92,18 @@
             <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
             <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
 
-            <!-- Load our React component. -->
+            <script>var exports = {};</script>
+
+            <!-- Load our React components. -->
+            <script type="text/babel" src="{{ url_for('static', filename='components/dropdown.js') }}"></script>
+            <script type="text/babel" src="{{ url_for('static', filename='components/cell.js') }}"></script>
+            <script type="text/babel" src="{{ url_for('static', filename='components/dynamicResultsTable.js') }}"></script>
+            <script type="text/babel" src="{{ url_for('static', filename='components/legend.js') }}"></script>
+            <script type="text/babel" src="{{ url_for('static', filename='components/pageTable.js') }}"></script>
+            <script type="text/babel" src="{{ url_for('static', filename='components/saveMenu.js') }}"></script>
+            <script type="text/babel" src="{{ url_for('static', filename='components/sideMenu.js') }}"></script>
+            <script type="text/babel" src="{{ url_for('static', filename='components/pageNav.js') }}"></script>
+            <script type="text/babel" src="{{ url_for('static', filename='components/resubmitSentenceButton.js') }}"></script>
             <script type="text/babel" src="{{ url_for('static',filename='ui.js') }}"></script>
 
             <script>
