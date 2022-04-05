@@ -387,13 +387,14 @@ class ResultsTable extends React.Component {
         let rows = [];
         const tokens_included = this.props.upper_bound - this.props.lower_bound + 1;
         const column_number = (tokens_included >= 8) ? 8 : tokens_included;
-        const row_number = Math.ceil(tokens_included/8);
+        const row_number = Math.ceil(tokens_included/10);
 
         let current_index = 0;
         // the outer loop will count up to (COL LENGTH = 8), and break if there is less
         // 
         for (let i = 0; i < row_number; i++) {
             let row = [];
+
             for (let j = 0; j < column_number; j++) {
                 const current_token = current_index + this.props.lower_bound;
                 if (current_token > this.props.upper_bound) {
@@ -445,6 +446,85 @@ class ResultsTable extends React.Component {
                         {rows}
                     </tbody>
                 </table>
+            </div>
+        )
+    }
+}
+
+class DynamicResultsTable extends React.Component {
+    render() {
+        let rows = [];
+
+        let current_index = this.props.lower_bound;
+        while (current_index < this.props.upper_bound) {
+            console.log('Current index');
+            console.log(current_index);
+            let row = [];
+            let total_chars = 0;
+            while (total_chars < 60 && row.length < 8) {
+
+                if (current_index >= this.props.upper_bound+1) {
+                    break;
+                }
+
+                // Color the cell blue or purple if it's in an even or odd sentence
+                let cell_sentence_class = 'odd';
+                if (this.props.data[current_index].sentence_id % 2 === 0) {
+                    cell_sentence_class = 'even';
+                }
+
+                // If it's the first token in a sentence, show a sentence label
+                let show_sentence_number = false;
+                if (current_index === 0 || this.props.data[current_index].sentence_id != this.props.data[current_index - 1].sentence_id) {
+                    show_sentence_number = true;
+                }
+
+                row.push(
+                    <div key={current_index} className={cell_sentence_class}>
+                        <Cell
+                            token={this.props.data[current_index]}
+                            show_sentence_number={show_sentence_number}
+                            hasSeg={this.props.hasSeg}
+                            hasGloss={this.props.hasGloss}
+                            index={current_index}
+                            updatePreferredSegmentation = {
+                                ( index, modelType, newPreferred, isCustom, update_mode) => 
+                                this.props.updatePreferredSegmentation(index, modelType, newPreferred, isCustom, update_mode)
+                            }
+                        />
+                    </div>
+                )
+
+                if (this.props.data[current_index].hasOwnProperty('preferred_gloss')) {
+                    total_chars += this.props.data[current_index].preferred_gloss.length; 
+                } else {
+                    total_chars += this.props.data[current_index].preferred_segmentation.length;
+                }
+                current_index++;
+            }
+
+            // if there are less than four elements in the row, don't stretch
+            const is_short_row = (row.length < 4);
+            let filler = [];
+            if (is_short_row) {
+                filler = Array(8 - row.length).fill().map( () =>
+                    {<div className="results_row_short_filler"></div>}
+                );
+            }
+
+            rows.push(
+                <div key={rows.length} className="results_flex_row">
+                    {row}
+                    {is_short_row && filler}
+                </div>
+            )
+        }
+
+        return (
+            <div className="results_wrapper">
+                <div id="results_grid">
+                    {rows}
+                </div>
             </div>
         )
     }
@@ -1391,7 +1471,7 @@ class ResultsSection extends React.Component {
                         onRetrieveSentence={(sentence_id) => {this.retrieveSentenceToModify(sentence_id)}}
                         handleSave={(filename, format, saveGloss, saveSeg) => this.handleSave(filename, format, saveGloss, saveSeg)}
                     />
-                    <ResultsTable 
+                    <DynamicResultsTable 
                         data={this.state.data} 
                         lower_bound={this.state.lower_bound} 
                         upper_bound={this.state.upper_bound}

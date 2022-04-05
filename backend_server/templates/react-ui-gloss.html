@@ -75,11 +75,14 @@
                 <div id="progress_message" style="display:none">
                     <p>0 sentences processed out of 0</p>
                 </div>
-                <div id = "completed_message" style = "display:none">
+                <div id="completed_message" style="display:none">
                     <!-- below is React -->
                     <div id="ui_container"></div>
                     <!-- above is React -->
                 </div>
+                <!-- <div id="shutdown">
+                    <button class="job_buttons" onclick="shutdown_container()">Shutdown</button>
+                </div> -->
             </div>
             
             <!-- Enable JSX -->
@@ -448,6 +451,14 @@
                     })
 
                 </script>
+
+                <!-- <script type="text/babel">
+                    // stop the image from within the gui
+                    async function shutdown_container() {
+                        const status = await requestData('api/shutdown');
+                        return status;
+                    }
+                </script> -->
         </article>
         <footer>
 

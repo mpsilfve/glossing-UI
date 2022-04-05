@@ -129,10 +129,12 @@ table {
 
 .odd {
   background-color: #c2cbf3a6;
+  flex: 1;
 }
 
 .even {
   background-color: #b3e5f1;
+  flex: 1;
 }
 
 .annotation {
@@ -234,6 +236,21 @@ table {
   border: 2px solid #5680e9;
 }
 
+#results_grid {
+  display: grid;
+  border: 2px solid #5680e9;
+  border-bottom: 0px;
+}
+
+.results_flex_row {
+  display: flex;
+  border-bottom: 1px solid #5680e9;
+}
+
+.results_short_row_filler {
+  flex: 1;
+}
+
 #custom_segmentation_input {
   width: 75px;
 }
@@ -269,7 +286,7 @@ table {
 
 .dd-wrapper {
   min-width: 1ch;
-  max-width: 15ch;
+  /*max-width: 15ch;*/
   border: 1px solid var(--select-border);
   border-radius: 0em;
   padding: 0.1em 0.2em;

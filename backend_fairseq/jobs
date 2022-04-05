@@ -1,1 +1,1 @@
-{"text": ["Yeet Emma g\u0332o'ohl sg\u0332a'nist"], "model": "fairseq", "nbest": 4, "getSeg": true, "getGloss": true, "input_type": "text", "id": 1648061756, "n_sentences": 1}
+{"model": "fairseq", "getSeg": false, "getGloss": true, "nbest": "1", "text": ["Helthl k'uuhl siwadi'm ahl la'oo'y g\u0332o'ohl Hla Heen"], "input_type": "text", "id": 1648844207, "n_sentences": 1}

@@ -8,6 +8,7 @@ from datetime import datetime
 from flask import request, jsonify
 import re
 import os
+import subprocess
 from os import path
 from glob import glob
 from copy import deepcopy
@@ -406,6 +407,11 @@ def get_new_eaf(job_id):
         return {'written_elan': xml_contents, 'status': True}
     else:
         return {'status': False}
+
+# @app.route('/api/shutdown')
+# def shutdown():
+#     subprocess.run(['kill', '-9', '1'])
+#     return {'shutdown': True}
     
 
 if __name__ == '__main__': # distinguish between running directly vs flask

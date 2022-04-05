@@ -28,10 +28,6 @@ class FairseqSubmitter:
         Split the job into separate sentences, and send each of them to the background fairseq process
         """
 
-        savefile =  open('/backend_fairseq/times.txt', 'w')
-
-        savefile.write(f'START: {time.time()}\n')
-
         # model options
         jobid = data['id']
         n_best = int(data['nbest'])
@@ -54,7 +50,7 @@ class FairseqSubmitter:
             save_path = f'/data/results/sentence_{jobid}_{i}.std.out'
 
             self.last_example += n_tokens
-            submit_sentence(sentence, i, getSeg, getGloss, self.first_example, self.last_example, n_best, save_path, savefile)
+            submit_sentence(sentence, i, getSeg, getGloss, self.first_example, self.last_example, n_best, save_path)
             self.first_example += n_tokens
 
         # found_sentences = 0
