@@ -179,6 +179,13 @@ table {
   margin-block-start: 0em;
 }
 
+@media (max-width: 1500px) {
+  .range_and_save {
+    position: static !important;
+    float: left !important;
+  }
+}
+
 #legend {
   border: 2px solid #5680e9 ;
 }

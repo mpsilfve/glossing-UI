@@ -4,35 +4,33 @@ class Cell extends React.Component {
     constructor(props){
         super(props);
 
-        this.state = {
-        //   location: this.initilizeList(),
-        }
+        this.state = {};
     }
 
-    // generate a list of gloss/seg predictions for rendering in a dropdown
-    static getListForDropdown(token, modelType) {
-        const prediction_list = token[modelType];
-        let dropdown_list = [];
-        for (let i = 0; i < prediction_list.length; i++) {
-            const option = {
-                id: i,
-                title: prediction_list[i],
-                selected: false,
-                key: 'location'
-            };
-            dropdown_list.push(option);
-        }
+    // // generate a list of gloss/seg predictions for rendering in a dropdown
+    // static getListForDropdown(token, modelType) {
+    //     const prediction_list = token[modelType];
+    //     let dropdown_list = [];
+    //     for (let i = 0; i < prediction_list.length; i++) {
+    //         const option = {
+    //             id: i,
+    //             title: prediction_list[i],
+    //             selected: false,
+    //             key: 'location'
+    //         };
+    //         dropdown_list.push(option);
+    //     }
 
-        const option = {
-            id: prediction_list.length,
-            title: "Custom",
-            selected: false,
-            key: 'location'
-        };
-        dropdown_list.push(option);
+    //     const option = {
+    //         id: prediction_list.length,
+    //         title: "Custom",
+    //         selected: false,
+    //         key: 'location'
+    //     };
+    //     dropdown_list.push(option);
 
-        return dropdown_list;
-    }
+    //     return dropdown_list;
+    // }
 
     // update the state when the token segmentation lists get updated
     static getDerivedStateFromProps(nextProps) {
@@ -87,30 +85,30 @@ class Cell extends React.Component {
         return { location: seg_dropdown, gloss_location: gloss_dropdown };
     }
 
-    // initilizeList() {
-    //     // console.log(`this: ${this} props: `, this.props);
-    //     const segmentation_list = this.props.token["segmentation"];
-    //     let dropdown_list = [];
-    //     for (let i = 0; i < segmentation_list.length; i++) {
-    //         const option = {
-    //             id: i,
-    //             title: segmentation_list[i],
-    //             selected: false,
-    //             key: 'location'
-    //         };
-    //         dropdown_list.push(option);
-    //     }
+    initilizeList() {
+        // console.log(`this: ${this} props: `, this.props);
+        const segmentation_list = this.props.token["segmentation"];
+        let dropdown_list = [];
+        for (let i = 0; i < segmentation_list.length; i++) {
+            const option = {
+                id: i,
+                title: segmentation_list[i],
+                selected: false,
+                key: 'location'
+            };
+            dropdown_list.push(option);
+        }
 
-    //     const option = {
-    //         id: segmentation_list.length,
-    //         title: "Custom",
-    //         selected: false,
-    //         key: 'location'
-    //     };
-    //     dropdown_list.push(option);
+        const option = {
+            id: segmentation_list.length,
+            title: "Custom",
+            selected: false,
+            key: 'location'
+        };
+        dropdown_list.push(option);
 
-    //     return dropdown_list;
-    // }
+        return dropdown_list;
+    }
 
     // update preferred segmentation
     changeList(modelType, newPreferred, isCustom, update_mode) {
@@ -128,7 +126,6 @@ class Cell extends React.Component {
         });
     }
 
-
     render() {
         let sentence_message = '';
         if (this.props.show_sentence_number) {
@@ -140,7 +137,7 @@ class Cell extends React.Component {
         }
 
         return (
-            <div className="cell">
+            <div className="cell" ref={this.cellWidth}>
                 {/* &nbsp non-breaking space - at this space words are not broken and also the browser does not cancel it.
                 Here, it is used for alignment. */}
                 <p className='annotation'>{sentence_message}&nbsp;</p>
