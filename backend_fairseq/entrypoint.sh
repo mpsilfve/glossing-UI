@@ -12,12 +12,21 @@ pwd
 cd pretrained_models
 
 # download the checkpoints
-cd data/gloss
-wget -O checkpoint_best.pt https://github.com/mpsilfve/glossing-UI/releases/download/v0.2/checkpoint_best_gloss.pt
+if [[ ! -f data/gloss/checkpoint_best.pt ]]
+then
+    cd data/gloss
+    wget -O checkpoint_best.pt https://github.com/mpsilfve/glossing-UI/releases/download/v0.2/checkpoint_best_gloss.pt
+    cd ../..
+fi
 
-cd ../morphseg/lstm
-wget -O checkpoint_best.pt https://github.com/mpsilfve/glossing-UI/releases/download/v0.2/checkpoint_best_seg.pt
-cd pretrained_models
+if [[ ! -f data/morphseg/lstm/checkpoint_best.pt ]]
+then
+    cd data/morphseg/lstm
+    wget -O checkpoint_best.pt https://github.com/mpsilfve/glossing-UI/releases/download/v0.2/checkpoint_best_seg.pt
+    cd ../../..
+fi
+
+pwd
 
 # create named pipes for the models
 PIPE_DIR=io/pipes
