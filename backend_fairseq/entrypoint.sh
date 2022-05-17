@@ -7,6 +7,7 @@ if [ -x "$(command -v fairseq)" ]; then
     cd fairseq && pip install ./ && pip install --upgrade numpy
     pwd
     cd ..
+fi
 pwd
 cd ../pretrained_models
 
