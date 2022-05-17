@@ -11,11 +11,11 @@ services:
      - backend_volume:/data
     ports:
       - 5000:5000
-  backend_coling:
-    build: ./backend_coling
-    volumes: 
-     - ./backend_coling:/backend_coling
-     - backend_volume:/data
+  # backend_coling:
+  #   build: ./backend_coling
+  #   volumes: 
+  #    - ./backend_coling:/backend_coling
+  #    - backend_volume:/data
     
   backend_fairseq:
     build: ./backend_fairseq

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Glossing UI</title>
+        <link href='{{ url_for('static',filename='styles/style_gloss.css') }}' rel='stylesheet' type="text/css">
+    </head>
+    <body>
+        <header>
+            <h1>Gitksan Glossing + Segmentation</h1>
+            <p>Silfverberg Lab</p>
+    
+        </header>
+        <article>
+            <div class="form">
+                <h2>Submit data</h2>
+                <form onsubmit="event.preventDefault()">
+                    <p>Choose input method:</p>
+                    <div id="input_buttons" class="form">
+                        <input type="radio" id="text_field_radio_button" 
+                        name="input_type" value="text_field" onchange="selectInputType(this)">
+                        <label for="text_field_radio_button" class="model_button">Use text field</label>
+                        <input type="radio" id="text_file_radio_button"
+                        name="input_type" value="text_file" onchange="selectInputType(this)" checked>
+                        <label for="text_file_radio_button" class="model_button">Upload a text file</label>
+                        <input type="radio" id="eaf_file_radio_button" 
+                        name="input_type" value="eaf_file" onchange="selectInputType(this)">
+                        <label for="eaf_file_radio_button" class="model_button">Upload an eaf file</label>
+                    </div>
+                    <div id=input_text_div style="display:none">
+                        <p>Please enter the text you wish to submit:</p>       
+                        <textarea id=input_text class=user_input></textarea>
+                    </div>
+                    <div id=eaf_text_div style="display:none">
+                        <input id='eaf_input' type=file />
+                    </div>
+                    <div id=text_file_div>
+                        <input id='text_file_input' type=file />
+                    </div>
+                    <p>Options:</p>
+                    <div id="model_options" class="form">
+                        <div id="task_buttons" class="form">
+                            <input type="checkbox" id="morphseg_task_checkbox" name="task_type" value="morphseg_task" checked>
+                            <label for="morphseg_task_button" class="model_button">Generate segmentation</label>
+                            <input type="checkbox" id="gloss_task_checkbox" name="task_type" value="gloss_task" checked>
+                            <label for="gloss_task_button" class="model_button">Generate gloss</label>
+                        </div>
+                        <div id="parameter_error" style="display:none">
+                            <p>Select at least one output task.</p>
+                        </div>
+                        <label for="n_best_select" class="model_button">Model predictions for each token:</label>
+                        <select name="n_best" id="n_best_select">
+                            <option value="1" selected>1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                    <button class=job_buttons onclick="submit_job()">Submit</button>  
+                </form>  
+            </div>
+        
+            <div class="form">
+                <!-- <h2>Get status of request</h2>
+                <p>Enter job id:</p> -->
+                <!-- <form id="input_job_id_form" class=form>
+                    <input type="number" id="input_job_id" class="user_input">
+                </form> -->
+                <!-- <button class=job_buttons onclick="checkBatchStatus(document.getElementById('input_job_id').value)">
+                    Request job status
+                </button> -->
+                <div id="running_message" style="display:none">
+                    <p>Your job is running. This will automatically update, when your job is complete.</p>
+                </div>
+                <div id="progress_message" style="display:none">
+                    <p>0 sentences processed out of 0</p>
+                </div>
+                <div id="completed_message" style="display:none">
+                    <!-- below is React -->
+                    <div id="ui_container"></div>
+                    <!-- above is React -->
+                </div>
+                <!-- <div id="shutdown">
+                    <button class="job_buttons" onclick="shutdown_container()">Shutdown</button>
+                </div> -->
+            </div>
+            
+            <!-- Enable JSX -->
+            <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+            <!-- Load React. -->
+            <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+            <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+            <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+
+            <script>var exports = {};</script>
+
+            <!-- Load our React components. -->
+            <script type="text/babel" src="{{ url_for('static', filename='components/dropdown.js') }}"></script>
+            <script type="text/babel" src="{{ url_for('static', filename='components/cell.js') }}"></script>
+            <script type="text/babel" src="{{ url_for('static', filename='components/dynamicResultsTable.js') }}"></script>
+            <script type="text/babel" src="{{ url_for('static', filename='components/legend.js') }}"></script>
+            <script type="text/babel" src="{{ url_for('static', filename='components/pageTable.js') }}"></script>
+            <script type="text/babel" src="{{ url_for('static', filename='components/saveMenu.js') }}"></script>
+            <script type="text/babel" src="{{ url_for('static', filename='components/sideMenu.js') }}"></script>
+            <script type="text/babel" src="{{ url_for('static', filename='components/pageNav.js') }}"></script>
+            <script type="text/babel" src="{{ url_for('static', filename='components/resubmitSentenceButton.js') }}"></script>
+            <script type="text/babel" src="{{ url_for('static',filename='ui.js') }}"></script>
+
+            <script>
+                /**
+                 * Submits a new job by making a POST request to the API
+                 * This will also prefill the job id in the get status form.
+                 **/
+                 async function submit_job() {
+                    const curr_result = document.getElementById('completed_message');
+                    const progress = document.getElementById('progress_message');
+                    if (curr_result.style.display !== 'none') {
+                        confirm('Any unsaved changes will be lost. Continue?');
+                        curr_result.style.display = 'none';
+                        progress.style.display = 'none';
+                    }
+
+                    let data = {};
+
+                    document.getElementById('parameter_error').style.display = 'none';
+
+                    try {
+                        data = gatherModelMetadata(data);
+                    } catch(e) {
+                        document.getElementById('parameter_error').style.display = 'block';
+                        return undefined;
+                    }
+                    
+                    const isEafFile = document.getElementById('eaf_file_radio_button').checked;
+                    const isTextFile = document.getElementById('text_file_radio_button').checked;
+
+                    let jobData;
+                    // perform different requests depending on the chosen input type
+                    if (isEafFile) {
+                        const selectedFile = document.getElementById('eaf_input').files[0];
+                        const text = await selectedFile.text();
+                        // TODO set up transcription id specification by user
+                        const tier_id = 'Transcription';
+                        data = {...data, eaf:text, tier_id:tier_id};
+                        console.log(data);
+                        jobData = await requestData('/api/job/eaf', data, 'POST');
+                    } else if (isTextFile) {
+                        const selectedFile = document.getElementById('text_file_input').files[0];
+                        const text = await selectedFile.text();
+                        data = {...data, text:text}
+                        console.log(data);
+                        jobData = await requestData('/api/job/batch', data, 'POST');
+                    } else {
+                        const inputText = document.getElementById("input_text").value;
+                        data.text = inputText;
+                        console.log(data);
+                        jobData = await requestData('/api/job/batch', data, 'POST');
+                    }
+                    // document.getElementById("input_job_id").value = jobData.job_id;
+                    // Todo: check status!
+
+                    // display the "submitted" text
+                    const running_message = document.getElementById('running_message');
+                    running_message.style.display = 'block';
+
+                    checkBatchStatus(jobData.job_id);
+                }
+
+                /**
+                 * Submits a job, sentence by sentence.
+                 * First, it splits the input into individual sentences. Then, it submits each sentence as its own job.
+                 * It maintains a queue of jobs, and whenever the next job is complete, it renders all the completed data so far into a ResultsWindow
+                 * */
+                // async function submit_batch_job() {
+                //     let metadata = {};
+
+                //     try {
+                //         medadata = gatherModelMetadata(metadata);
+                //     } catch(e) {
+                //         console.log('caught!');
+                //     }
+                    
+                //     const fileType = input_file_type();
+
+                //     // init the queue of running jobs
+                //     let jobs = [];
+                    
+                //     // get text
+                //     if (fileType === 0) {
+                //         // text entry
+                //         const inputText = document.getElementById("input_text").value;
+                //         // submit a batch job
+                //         let data = {...metadata, text:inputText};
+                //         jobData = await requestData('/api/job/by_sentence', data, 'POST');
+                //         console.log(jobData);
+                //     } else if (fileType === 1) {
+                //         // text file
+                //         const selectedFile = document.getElementById('text_file_input').files[0];
+                //         const inputText = await selectedFile.text();
+                        
+                //         // submit a batch job
+                //         let data = {...metadata, text:inputText};
+                //         jobData = await requestData('/api/job/by_sentence', data, 'POST');
+                //         console.log(jobData);
+                //     } else {
+                //         // ELAN (placeholder)
+                //         const inputText = 'test';
+                //     }
+
+                //     // submit each sentence as its own job
+                //     // for (const sent of sentences) {
+                //     //     let curr_job = {...metadata, text:sent};
+                //     //     jobData = await requestData('/api/job', curr_job, 'POST');
+                //     //     jobs.splice(0, 0, jobData);
+                //     //     //console.log(jobs);
+                //     // }
+
+                //     // console.log(jobs);
+                //     // batch_job_listen(jobs);
+                // }
+
+                /**
+                 * Listener for a batch job request. 
+                 * @param job_queue: a list of job IDs. Waits for the front of the queue to be processed, pushes the results, etc.
+                 * */
+                async function batch_job_listen(job_queue) {
+                    let results = [];
+
+                    while (job_queue.length > 0) {
+                        let front = job_queue.pop();
+                        const front_id = front['job_id'];
+
+                        // wait for results
+                        const result = await requestData(`/api/job/${front_id}/download`);
+                        if (result) {
+                            console.log(front_id);
+                        } else {
+                            console.log('waiting');
+                        }
+                    }
+                }
+
+                /**
+                 * Helper function: returns 0 if the file is a text entry, 1 if it's a text file , and 2 if it's an elan file
+                 * */
+                function input_file_type() {
+                    if (document.getElementById('eaf_file_radio_button').checked) {
+                        return 2;
+                    } else if (document.getElementById('text_file_radio_button').checked) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+
+                /**
+                 * Helper function to split the input data by sentence
+                 * @param: text - string instance
+                 * */
+                function get_sentences(text) {
+                    const seq = text.split(/([.!?]\s)|\n/);
+
+                    // filter falsy values and carriage returns
+                    let sentences = [];
+                    for (const s of seq) {
+                        if (s && s !== '.\r') {
+                            sentences.push(s);
+                        }
+                    }
+
+                    return sentences;
+                }
+
+                /**
+                 * Helper function to add metadata (model type chosen, model parameters)
+                 * and add
+                 * @param: {Object} data - data object, to which metadata keys and values will be added.
+                 * @returns: {Object} data - data object with metadata added to it
+                 * @todo: expand this function, as more parameters about the model can be set by the user.
+                 * */
+                function gatherModelMetadata(data) {
+                    // const isFairseqMorphSeg = document.getElementById("fairseq").checked;
+                    // const isFairseqGloss = document.getElementById("fairseq-gloss").checked;
+                    // if (isFairseqMorphSeg || isFairseqGloss) {
+                    //     data.model = 'fairseq';
+                    // } else {
+                    //     data.model = 'coling';
+                    // }
+
+                    // In this version: model options are gloss and morphseg
+                    data.model = 'fairseq';
+
+                    const getSeg = document.getElementById("morphseg_task_checkbox").checked;
+                    const getGloss = document.getElementById("gloss_task_checkbox").checked;
+
+                    if (!(getSeg || getGloss)) {
+                        throw new Error('Must select at least one task.');
+                    }
+
+                    data.getSeg = getSeg;
+                    data.getGloss = getGloss;
+
+                    const nBest = document.getElementById("n_best_select").value;
+                    data.nbest = nBest;
+                    return data;
+                }
+
+                /**
+                 * Onchange function that shows the text input field of eaf upload button
+                 * depending on what radio button is selected.
+                 * @param {Event} radio - An onchange event of a radio button
+                 * */
+                function selectInputType(radio) {
+                    const text_field = document.getElementById('input_text_div');
+                    const eaf_file = document.getElementById('eaf_text_div');
+                    const text_file = document.getElementById('text_file_div');
+
+                    if (radio.value === 'text_field') {
+                        text_field.style.display = 'block';
+                        eaf_file.style.display = 'none';
+                        text_file.style.display = 'none';
+                    } else if (radio.value === 'eaf_file') {
+                        text_field.style.display = 'none';
+                        eaf_file.style.display = 'block';
+                        text_file.style.display = 'none';
+                    } else if (radio.value === 'text_file') {
+                        text_field.style.display = 'none';
+                        eaf_file.style.display = 'none';
+                        text_file.style.display = 'block';
+                    }
+                }
+            
+                /**
+                 * Helper function for a REST API request.
+                 */ 
+                async function requestData(url = '', data = {}, method = 'GET') {
+                    // Default options are marked with *
+                    let response;
+                    try {
+                        response = await fetch(url, {
+                            method: method, // *GET, POST, PUT, DELETE, etc.
+                            credentials: 'include', // include, *same-origin, omit
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: method==='POST'? JSON.stringify(data) : undefined, 
+                            // body data type must match "Content-Type" header
+                        });
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                    } catch(err) {
+                        alert("Could not submit a request")
+                        throw err;
+                    }
+                    const job_data = await response.json();
+                    return job_data;
+                }
+            </script> 
+            <script type="text/babel">
+                // retrieve stored job id value from the browser. This makes it easy to see the result from the 
+                // last job the user ran.
+                document.getElementById("input_job_id").value = localStorage.getItem("last_job_id") || "";
+                
+                // This variable stores the timer that is used to automatically refresh the job status
+                // while it is running.
+                let timeout_result;
+            
+                /**
+                 * Checks the status of the job with jobId. If the job is complete, a table with 
+                 * results will appear. If the job is not complete, the function will check
+                 * again after a short interval.
+                 */
+                async function checkStatus(jobId) {
+                    localStorage.setItem("last_job_id", String(jobId));
+                    // if we are waiting for a different job, we do not need to keep waiting for the previous one
+                    clearTimeout(timeout_result);
+                    // const jobId = document.getElementById("input_job_id").value;
+                    const status = await requestData(`/api/job/${jobId}`);
+                    const running_message = document.getElementById("running_message");
+                    const completed_message = document.getElementById("completed_message");
+                    // const completed_job = document.getElementById("completed_job");
+            
+                    if (status.status) {
+                        running_message.style.display = "none";
+                        completed_message.style.display = "flex";
+                        const result = await requestData(`/api/job/${jobId}/download`);
+
+                        const domContainer = document.querySelector('#ui_container');
+                        // key attribute is required so that with new requests and thus with new jobId, the 
+                        // React components actually rerender.
+                        // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
+                        ReactDOM.render( <ResultsSection data={result} jobId={jobId} key={jobId}/>, domContainer);
+                        // scroll to the results
+                        completed_message.scrollIntoView(true);
+                    } else {
+                        // alert("The job has submitted, but not completed yet. It is running. Rest assured you will be notified when it will get processed.");
+                        completed_message.style.display = "none";
+                        running_message.style.display = "block";
+                        // wait 2 s and run checkStatus again
+                        timeout_result = setTimeout(checkStatus, 2000, jobId);
+                    }
+                }
+
+                /**
+                 * Checks the status of a batch job. If at least the first sentence is complete, it will display a new 
+                 * results window with the updated data, sentence by sentence. It will check for new updates after an interval.
+                 * In addition, it will keep track of the number of sentences completed so far, and display it above the results window.
+                 */
+                 async function checkBatchStatus(jobId) {
+                     //localStorage.setItem("last_job_id", String(jobId));
+                     // do not keep waiting for the previous job
+                     clearTimeout(timeout_result);
+
+                     const status = await requestData(`/api/job/${jobId}/batch`);
+                     console.log(status);
+                     const running_message = document.getElementById("running_message");
+                     const progress_message = document.getElementById("progress_message");
+                     const completed_message = document.getElementById("completed_message");
+
+                     // scroll into view only if we're rendering the results section for the first time
+                     const to_scroll_flag = (completed_message.style.display === "none");
+
+                     if (status.status) {
+                         running_message.style.display = "none";
+
+                         // update the progress message
+                         progress_message.style.display = "block";
+                         const n_completed = status.completed;
+                         const n_total = status.total;
+                         const progress = parseInt((n_completed / n_total) * 100);
+                         progress_message.innerHTML = `<p> ${n_completed} sentences completed out of ${n_total} (${progress}%) </p>`;
+                         // '<p>' + n_completed + ' sentences completed out of ' + n_total + '</p>';
+
+                         completed_message.style.display = "flex";
+                         const result = await requestData(`api/job/${jobId}/batch/download`);
+                         
+                         const domContainer = document.querySelector('#ui_container');
+                         const key = String(jobId) + String(result.length);
+                         console.log(result);
+                         ReactDOM.render( <ResultsSection data={result} jobId={jobId} key={key}/>, domContainer);
+                         if (to_scroll_flag){
+                            completed_message.scrollIntoView(true);
+                         }
+
+                         // if there are more sentences to display, wait half a second and run again
+                         if (n_completed < n_total) {
+                             timeout_result = setTimeout(checkBatchStatus, 500, jobId);
+                         }
+                     } else {
+                        // wait 2 seconds and run again
+                        timeout_result = setTimeout(checkBatchStatus, 2000, jobId);
+                     }
+                 }
+                </script>
+
+                <script type="text/babel">
+                    // listen for the user unloading, warn about unsaved progress
+                    window.addEventListener('beforeunload', (event) => {
+                        event.preventDefault();
+                        event.returnValue = '';
+                    })
+
+                </script>
+
+                <!-- <script type="text/babel">
+                    // stop the image from within the gui
+                    async function shutdown_container() {
+                        const status = await requestData('api/shutdown');
+                        return status;
+                    }
+                </script> -->
+        </article>
+        <footer>
+
+        </footer>
+  </body>
+</html>
+
