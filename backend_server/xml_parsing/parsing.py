@@ -36,6 +36,20 @@ REF_ANNOTATION = 'REF_ANNOTATION'
 class EafParseError(Exception):
     pass
 
+
+# return a list of tier id from an eaf string.
+# raise EafParseError if a tier does not have an id.
+def get_tier_ids(eaf_string):
+    root = ET.fromstring(eaf_string)
+    tier_list = []
+    for input_tier in root.findall(TIER):
+        tier_id = input_tier.attrib.get(TIER_ID)
+        if tier_id:
+            tier_list.append(tier_id)
+        else:
+            raise EafParseError("A tier does not have tier id.")
+    return tier_list
+        
 # TODO tiers can be nested - transcription tier can be such that audio information is not in its immideate parents
 # but higher up in hierarchy
 # # concatenates all the annotation values from tier with tier_id from xml_doc
@@ -46,7 +60,7 @@ def getInputText(tier_id, xml_doc):
 
     for child in root.findall('TIER'):
         child_attrib = child.attrib
-        if child_attrib.get('TIER_ID') == tier_id:
+        if child_attrib.get(TIER_ID) == tier_id:
             input_tier = child
 
     try:

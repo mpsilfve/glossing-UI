@@ -187,6 +187,23 @@ def api_job_from_eaf():
     
     return jsonify({"job_id":request_id})
 
+@app.route('/api/eaf/tier_list', methods=['POST'])
+def parse_and_get_tier_ids():
+    """parse n EAF file and if it's valid return tier ids
+    Parameters
+    ----------
+    eaf_string: string
+        eaf file string
+    Returns
+    -------
+    tier_list: JSON list
+        a list containing tier ids contained in the eaf file
+    """
+    data = request.json
+    eaf_string = data['eaf_text']
+    tier_list = get_tier_ids(eaf_string)
+    return jsonify(tier_list)
+
 
 # for status check requests
 @app.route('/api/job/<int:job_id>')
