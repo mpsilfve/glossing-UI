@@ -2,9 +2,21 @@
 
 # install Fairseq
 pwd
-cd fairseq && pip install ./ && pip install --upgrade numpy
+if [ -x "$(command -v fairseq)" ]; then
+    git clone https://github.com/mpsilfve/fairseq.git
+    cd fairseq && pip install ./ && pip install --upgrade numpy
+    pwd
+    cd ..
 pwd
 cd ../pretrained_models
+
+# download the checkpoints
+cd data/gloss
+wget -O checkpoint_best.pt https://github.com/mpsilfve/glossing-UI/releases/download/v0.2/checkpoint_best_gloss.pt
+
+cd ../morphseg/lstm
+wget -O checkpoint_best.pt https://github.com/mpsilfve/glossing-UI/releases/download/v0.2/checkpoint_best_seg.pt
+cd ../../..
 
 # create named pipes for the models
 PIPE_DIR=io/pipes
