@@ -2,7 +2,7 @@
 
 # install Fairseq
 pwd
-if [ -x "$(command -v fairseq)" ]; then
+if [ ! -x "$(command -v fairseq)" ]; then
     git clone https://github.com/mpsilfve/fairseq.git
     cd fairseq && pip install ./ && pip install --upgrade numpy
     pwd
