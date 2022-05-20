@@ -79,7 +79,7 @@ class ScreenAwareResultsTable extends React.Component {
     createRows(max_chars, max_cols) {
         let rows = [];
         let current_index = this.props.lower_bound;
-        while (current_index < this.props.upper_bound) {
+        while (current_index <= this.props.upper_bound) {
             let row = [];
             let total_chars = 0;
             while (total_chars < max_chars && row.length < max_cols) {
