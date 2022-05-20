@@ -5,7 +5,7 @@ class DynamicResultsTable extends React.Component {
         let rows = [];
 
         let current_index = this.props.lower_bound;
-        while (current_index < this.props.upper_bound) {
+        while (current_index <= this.props.upper_bound) {
             console.log('Current index');
             console.log(current_index);
             let row = [];
