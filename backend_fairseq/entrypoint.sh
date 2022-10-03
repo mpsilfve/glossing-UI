@@ -19,6 +19,17 @@ then
     cd ../..
 fi
 
+glossExpected="d7e2e048018175ae77f075420b976656  data/gloss/checkpoint_best.pt"
+glossActual=`md5sum data/gloss/checkpoint_best.pt`
+echo $glossActual
+if [ "$glossActual" = "$glossExpected" ]
+     then
+     printf "\nMD5 check for gloss/checkpoint_best.pt succeeded.\n"
+     else
+     printf "\nError: MD5 check for gloss/checkpoint_best.pt failed.\n"
+     exit 1
+fi
+
 if [[ ! -f data/morphseg/lstm/checkpoint_best.pt ]]
 then
     cd data/morphseg/lstm
