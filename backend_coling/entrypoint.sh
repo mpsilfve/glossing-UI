@@ -1,3 +1,15 @@
+# download the models
+pwd
+cd models_and_results
+if [[ ! -f Word.cls/f.model ]]
+then
+    cd Word.cls
+    gdown "https://drive.google.com/uc?id=1rbsl-bjOpNct5e2tYX8qXwIahoklj5KN"
+    cd ..
+fi
+pwd
+cd ..
+
 # compiles the c file in the coling model lib
 # and runs listen.py script
 pwd 
