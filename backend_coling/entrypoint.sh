@@ -1,9 +1,10 @@
 # download the models
 pwd
 cd models_and_results
-if [[ ! -f Word.cls/f.model ]]
+if [[ ! -f Word_cls/f.model ]]
 then
-    cd Word.cls
+    pip install gdown
+    cd Word_cls
     gdown "https://drive.google.com/uc?id=1rbsl-bjOpNct5e2tYX8qXwIahoklj5KN"
     cd ..
 fi
