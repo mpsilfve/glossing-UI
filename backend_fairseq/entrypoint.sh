@@ -28,6 +28,8 @@ then
     cd data/morphseg/lstm
     wget -O checkpoint_best.pt https://github.com/mpsilfve/glossing-UI/releases/download/v0.2/checkpoint_best_seg.pt
     cd ../../..
+    expectedMD52=`md5sum data/morphseg/lstm/checkpoint_best.pt`
+    python3 md5_check.py "lstm" $expectedMD52
 fi
 
 pwd

@@ -1,6 +1,6 @@
 Model,MD5,Revision Number,Version Number
 gloss,d7e2e048018175ae77f075420b976656,0ffaf86be201459e8e99dc2ae1bb137c1ec699f8,0.2
-lstm,,0ffaf86be201459e8e99dc2ae1bb137c1ec699f9,0.2
+lstm,44cd9d6e562350fa87c20727f87612bc,0ffaf86be201459e8e99dc2ae1bb137c1ec699f9,0.2
 Word_cls,,0ffaf86be201459e8e99dc2ae1bb137c1ec699f10,0.2
 Word_dumb,,0ffaf86be201459e8e99dc2ae1bb137c1ec699f11,0.2
 Word_smart,,0ffaf86be201459e8e99dc2ae1bb137c1ec699f12,0.2
