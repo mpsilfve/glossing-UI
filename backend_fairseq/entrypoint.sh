@@ -17,8 +17,8 @@ then
     cd data/gloss
     wget -O checkpoint_best.pt https://github.com/mpsilfve/glossing-UI/releases/download/v0.2/checkpoint_best_gloss.pt
     cd ../..
-    expectedMD5=`md5sum data/gloss/checkpoint_best.pt`
-    python3 md5_check.py "gloss" $expectedMD5
+    expectedMD5gloss=`md5sum data/gloss/checkpoint_best.pt`
+    python3 md5_check.py "fairseq_gloss" $expectedMD5gloss
 fi
 
 
@@ -28,8 +28,8 @@ then
     cd data/morphseg/lstm
     wget -O checkpoint_best.pt https://github.com/mpsilfve/glossing-UI/releases/download/v0.2/checkpoint_best_seg.pt
     cd ../../..
-    expectedMD52=`md5sum data/morphseg/lstm/checkpoint_best.pt`
-    python3 md5_check.py "lstm" $expectedMD52
+    expectedMD5seg=`md5sum data/morphseg/lstm/checkpoint_best.pt`
+    python3 md5_check.py "fairseq_seg" $expectedMD5seg
 fi
 
 pwd
