@@ -3,7 +3,6 @@ pwd
 cd models_and_results
 if [[ ! -f Word_cls/f.model ]]
 then
-    pip install gdown
     cd Word_cls
     gdown "https://drive.google.com/uc?id=1bmi6b5QkMQXOqwt7Qfi3cUT356Pm2HSm"
     cd ..
@@ -13,7 +12,6 @@ fi
 
 if [[ ! -f Word_dumb/f.model ]]
 then
-    pip install gdown
     cd Word_dumb
     gdown "https://drive.google.com/uc?id=1AVeR7Zqs7tKg6PFVMmlmlU6fAJRjjldp"
     cd ..
@@ -23,7 +21,6 @@ fi
 
 if [[ ! -f Word_smart/f.model ]]
 then
-    pip install gdown
     cd Word_smart
     gdown "https://drive.google.com/uc?id=1XU_bpSZMT16wN5z3axOsJ0ru__FIbph2"
     cd ..
