@@ -16,12 +16,14 @@ services:
   #   volumes: 
   #    - ./backend_coling:/backend_coling
   #    - backend_volume:/data
+  #    - ./config:/config
     
   backend_fairseq:
     build: ./backend_fairseq
     volumes:
      - ./backend_fairseq:/backend_fairseq
      - backend_volume:/data
+     - ./config:/config
 volumes: 
   backend_volume:
 

@@ -12,18 +12,29 @@ pwd
 cd pretrained_models
 
 # download the checkpoints
+delayWarning="md5 check is starting and may take a moment (<1min)"
 if [[ ! -f data/gloss/checkpoint_best.pt ]]
 then
     cd data/gloss
     wget -O checkpoint_best.pt https://github.com/mpsilfve/glossing-UI/releases/download/v0.2/checkpoint_best_gloss.pt
-    cd ../..
+    cd ../../../../config
+    pwd
+    echo $delayWarning
+    expectedMD5gloss=`md5sum ../backend_fairseq/pretrained_models/data/gloss/checkpoint_best.pt`
+    python3 md5_check.py "fairseq_gloss" $expectedMD5gloss
+    cd ../backend_fairseq/pretrained_models
 fi
 
 if [[ ! -f data/morphseg/lstm/checkpoint_best.pt ]]
 then
     cd data/morphseg/lstm
     wget -O checkpoint_best.pt https://github.com/mpsilfve/glossing-UI/releases/download/v0.2/checkpoint_best_seg.pt
-    cd ../../..
+    cd ../../../../../config
+    pwd
+    echo $delayWarning
+    expectedMD5seg=`md5sum ../backend_fairseq/pretrained_models/data/morphseg/lstm/checkpoint_best.pt`
+    python3 md5_check.py "fairseq_seg" $expectedMD5seg
+    cd ../backend_fairseq/pretrained_models
 fi
 
 pwd
