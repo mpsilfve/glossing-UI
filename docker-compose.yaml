@@ -22,6 +22,7 @@ services:
     volumes:
      - ./backend_fairseq:/backend_fairseq
      - backend_volume:/data
+     - ./config:/config
 volumes: 
   backend_volume:
 
